@@ -13,6 +13,7 @@ from swarm.control.base import Controller, StepContext
 from swarm.comms.network import CommsNetwork
 from swarm.control.factory import build_controller
 from swarm.mapping.occupancy import GroundTruth, OccupancyMaps
+from swarm.planning.planner import SwarmPlanner
 from swarm.metrics import Metrics, compute_metrics
 from swarm.sim.dynamics import integrate
 from swarm.sim.neighbors import NeighborPairs, neighbor_pairs
@@ -80,6 +81,23 @@ class Simulation:
         self.comms = (CommsNetwork(n, self.cfg.comms, self.cfg.sim.dt, comms_rng)
                       if self.cfg.comms.enabled else None)
         self._map_every = max(1, round(self.cfg.mapping.update_interval / self.cfg.sim.dt))
+        self.planner = None
+        if self.cfg.planning.enabled:
+            if self.maps is None:
+                raise ValueError("planning needs mapping.enabled = true (drones plan on their own maps)")
+            self.planner = SwarmPlanner(n, self.maps, self.cfg.planning, self.cfg.mapping,
+                                        self.cfg.drones, self.cfg.sim.dt,
+                                        self.cfg.avoidance.safety_margin)
+
+    def set_planning(self, enabled: bool) -> None:
+        """Switch path planning on/off on the fly (keeps the swarm and its maps)."""
+        self.cfg.planning.enabled = enabled
+        if enabled and self.maps is not None:
+            self.planner = SwarmPlanner(self.state.n, self.maps, self.cfg.planning, self.cfg.mapping,
+                                        self.cfg.drones, self.cfg.sim.dt,
+                                        self.cfg.avoidance.safety_margin)
+        else:
+            self.planner = None
 
     def set_avoidance(self, method: str) -> None:
         """Switch avoidance method on the fly (keeps the current swarm state)."""
@@ -115,8 +133,12 @@ class Simulation:
     # ------------------------------------------------------------------- loop
     def step(self) -> Metrics:
         d = self.cfg.drones
+        targets = None
+        if self.planner is not None:
+            targets = self.planner.update(self.step_count, self.state.pos, self.goal, self.maps,
+                                          self.cfg.scenario.goal_radius)
         ctx = StepContext(self.world, self.neighbors, self.goal, self.cfg.sim.dt,
-                          self.scan, self.detections)
+                          self.scan, self.detections, targets=targets)
         accel = self.controller.compute(self.state, ctx)
         _, hit = integrate(self.state, accel, self.cfg.sim.dt, d.max_speed, d.max_accel,
                            self.world, d.radius)

@@ -42,7 +42,7 @@ avoidance:
   safety_margin: 0.3
 
 scenario:
-  name: open              # open | forest | corridor | random | survey
+  name: open              # open | forest | corridor | random | survey | maze
   goal_radius: 15.0
   num_obstacles: 25       # random scenario only
 
@@ -64,6 +64,17 @@ comms:
   share_maps: true
   relay: true             # multi-hop forwarding
   max_cells_per_message: 300
+
+planning:
+  enabled: false          # true: each drone plans routes on its own map
+  algorithm: field        # field (backward Dijkstra, fast) | astar
+  replan_interval: 1.0    # min s between replans when the map changed
+  refresh_interval: 5.0   # full replan at least this often
+  unknown_cost: 0.3       # unknown cells cost a bit more (optimistic planning)
+  inflation_cost: 8.0
+  clearance_cost: 2.0
+  clearance_cells: 2.0
+  lookahead: 12.0         # m along the path for the steering target
 
 render:
   window_width: 1200

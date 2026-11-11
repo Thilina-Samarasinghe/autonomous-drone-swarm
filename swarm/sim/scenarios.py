@@ -14,7 +14,7 @@ import numpy as np
 
 from swarm.sim.obstacles import Obstacles
 
-SCENARIOS = ("open", "forest", "corridor", "random", "survey")
+SCENARIOS = ("open", "forest", "corridor", "random", "survey", "maze")
 
 
 @dataclass
@@ -49,6 +49,23 @@ def build_scenario(name: str, world_size: np.ndarray, rng: np.random.Generator,
         boxes = [(95.0, 0.0, 105.0, gap_lo), (95.0, gap_hi, 105.0, h)]
         circles = [(130.0, h / 2 + 12, 3.0), (130.0, h / 2 - 12, 3.0)]
         return Scenario(name, Obstacles(circles=circles, boxes=boxes), left_spawn, right_goal)
+
+    if name == "maze":
+        # S-shaped route: up through a top gap, down through a bottom gap,
+        # up again, then down to the goal. A shelf near the start is a trap
+        # for any drone that just flies toward the goal.
+        boxes = [
+            (48.0, 0.0, 52.0, h - 22.0),      # wall 1, gap at the top
+            (98.0, 22.0, 102.0, h),           # wall 2, gap at the bottom
+            (148.0, 0.0, 152.0, h - 22.0),    # wall 3, gap at the top
+            (26.0, 66.0, 48.0, 70.0),         # shelf: dead end above the spawn
+            (64.0, 44.0, 84.0, 62.0),         # island in the second section
+            (118.0, 70.0, 134.0, 74.0),       # ledge in the third section
+        ]
+        circles = [(125.0, 35.0, 3.0), (170.0, 70.0, 3.5)]
+        spawn = (8.0, 8.0, 44.0, 50.0)
+        goal = np.array([176.0, 20.0])
+        return Scenario(name, Obstacles(circles=circles, boxes=boxes), spawn, goal)
 
     if name in ("random", "survey"):
         if name == "survey":

@@ -14,8 +14,8 @@ so a learned policy is a drop-in replacement for a hand-written one.
 | 0 | Setup | Config, seeded fixed-dt engine, metrics, tests ✅ |
 | 1 | Boids | Flocking with 20–50 drones, 0 collisions, Pygame viewer ✅ |
 | 2 | Obstacles & avoidance | Circle/box obstacles, 36-beam lidar, APF, ORCA safety layer, hybrid; forest / corridor / random scenarios; benchmark script ✅ |
-| 3 | Communication | Radio (range, loss, latency, bandwidth), beacon tables, per-drone log-odds occupancy maps, multi-hop gossip sharing with anti-entropy, survey scenario, comms benchmark ✅ (built, awaiting review) |
-| 4 | Path planning | A* / Theta* on the occupancy grid, D* Lite replanning, path smoothing, maze scenario |
+| 3 | Communication | Radio (range, loss, latency, bandwidth), beacon tables, per-drone log-odds occupancy maps, multi-hop gossip sharing with anti-entropy, survey scenario, comms benchmark ✅ |
+| 4 | Path planning | Cost map from each drone's own map, A* + backward-Dijkstra cost field, optimistic replanning on obstacle changes, string-pulling path following, maze scenario, planning benchmark ✅ (built, awaiting review) |
 | 5 | Formation | Leader-follower + virtual structure, line/V/circle switching, squeezing through gaps |
 | 6 | Search & rescue | Voronoi / auction area split, frontier exploration, PSO on victim signal, CBBA task allocation |
 | 7 | Terrain & threats | Heightmap cost, threat zones, PSO multi-UAV path planner |

@@ -2,7 +2,8 @@
 
 Controls
   SPACE pause / resume     .  single step (while paused)
-  1-5  scenario: open/forest/corridor/random/survey
+  1-6  scenario: open/forest/corridor/random/survey/maze
+  K  path planning on/off (yellow = selected drone's path)
   M  cycle avoidance: none > apf > orca > hybrid
   L  links: radio > sensing > off
   G  map overlay: selected drone > team > off
@@ -39,6 +40,7 @@ RADIO = (70, 200, 140)
 DROP = (235, 70, 70)
 SELECT = (255, 255, 255)
 GHOST = (255, 255, 255)
+PATH = (250, 215, 70)
 OBSTACLE = (120, 128, 145)
 OBSTACLE_EDGE = (170, 178, 195)
 BEAM = (38, 44, 58)
@@ -62,7 +64,7 @@ class Viewer:
         self.sim = sim
         rc = sim.cfg.render
         pygame.init()
-        pygame.display.set_caption("Autonomous Drone Swarm - Phase 3: Communication & mapping")
+        pygame.display.set_caption("Autonomous Drone Swarm - Phase 4: Path planning")
         self.screen = pygame.display.set_mode((rc.window_width, rc.window_height))
         self.clock = pygame.time.Clock()
         self.font = pygame.font.SysFont("consolas", 15)
@@ -138,7 +140,9 @@ class Viewer:
         elif k == pygame.K_m:
             cur = self.sim.cfg.avoidance.method
             self.sim.set_avoidance(METHODS[(METHODS.index(cur) + 1) % len(METHODS)])
-        elif k in (pygame.K_1, pygame.K_2, pygame.K_3, pygame.K_4, pygame.K_5):
+        elif k == pygame.K_k:
+            self.sim.set_planning(not self.sim.cfg.planning.enabled)
+        elif k in (pygame.K_1, pygame.K_2, pygame.K_3, pygame.K_4, pygame.K_5, pygame.K_6):
             self.sim.cfg.scenario.name = SCENARIOS[k - pygame.K_1]
             self.sim.reset()
             self.trails.clear()
@@ -272,6 +276,17 @@ class Viewer:
             pygame.draw.circle(self.screen, GOAL, g, 8, 2)
             pygame.draw.circle(self.screen, GOAL, g, 3)
 
+        # selected drone: planned path + steering target
+        if sim.planner is not None and sim.state.n:
+            k = min(self.selected, sim.state.n - 1)
+            path = sim.planner.paths[k] if k < sim.planner.n else None
+            if path is not None and len(path) > 1:
+                pygame.draw.lines(self.screen, PATH, False, self.to_screen(path).tolist(), 2)
+            if sim.planner.carrots is not None and k < len(sim.planner.carrots):
+                c = self.to_screen(sim.planner.carrots[k])
+                pygame.draw.line(self.screen, PATH, pos_s[k], c, 1)
+                pygame.draw.circle(self.screen, PATH, c, 4)
+
         # selected drone: radio range + where it BELIEVES the others are
         if sim.state.n:
             k = min(self.selected, sim.state.n - 1)
@@ -293,21 +308,18 @@ class Viewer:
         x0 = self.screen.get_width() - HUD_W
         pygame.draw.rect(self.screen, (12, 15, 22), (x0, 0, HUD_W, self.screen.get_height()))
         lines = [
-            ("PHASE 3 - COMMS & MAPPING", None),
+            ("PHASE 4 - PATH PLANNING", None),
             ("", None),
             (f"scenario  {sim.cfg.scenario.name:>11s}", (150, 200, 255)),
             (f"avoidance {sim.cfg.avoidance.method:>11s}", (150, 200, 255)),
+            (f"planning  {(sim.cfg.planning.algorithm if sim.planner else 'off'):>11s}", (150, 200, 255)),
             ("", None),
-            (f"time         {m.time:8.1f} s", None),
-            (f"drones       {m.n:8d}", None),
-            (f"fps          {self.clock.get_fps():8.1f}", None),
-            (f"sim speed    {self.steps_per_frame:7d}x", None),
+            (f"time {m.time:7.1f} s   drones {m.n:3d}", None),
+            (f"fps  {self.clock.get_fps():7.1f}     speed {self.steps_per_frame:2d}x", None),
             ("", None),
             (f"min sep      {m.min_separation:8.2f} m", BAD if m.collisions else None),
-            (f"collisions   {m.collisions:8d}", BAD if m.collisions else None),
-            (f"total coll.  {sim.total_collisions:8d}", None),
-            (f"obst. hits   {m.obstacle_hits:8d}", BAD if m.obstacle_hits else None),
-            (f"total hits   {sim.total_obstacle_hits:8d}", None),
+            (f"collisions now/total {m.collisions:3d}/{sim.total_collisions:<4d}", BAD if m.collisions else None),
+            (f"obst. hits now/total {m.obstacle_hits:3d}/{sim.total_obstacle_hits:<4d}", BAD if m.obstacle_hits else None),
             (f"clearance    {m.min_clearance:8.2f} m", BAD if m.min_clearance < 0 else None),
             (f"arrived      {m.arrived:5d}/{m.n:<3d}", None),
             (f"mean speed   {m.mean_speed:8.2f} m/s", None),
@@ -335,6 +347,12 @@ class Viewer:
                 (f"map team     {im.map_coverage_team:8.0%}", None),
                 (f"map accuracy {im.map_accuracy:8.1%}", None),
                 (f"info age     {im.info_age:7.1f} s", None),
+            ]
+        if sim.planner is not None:
+            ps = sim.planner.stats
+            lines += [
+                (f"plans {ps.plans:6d}  {ps.mean_ms:5.1f} ms", None),
+                (f"blocked replans {ps.blocked_replans:6d}", None),
             ]
         lines += [
             ("", None),

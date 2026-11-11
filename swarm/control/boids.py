@@ -149,10 +149,12 @@ class BoidsController:
         # --- goal (arrive: slow down inside 10 m) ---
         goal = np.zeros((n, 2))
         if ctx.goal is not None:
-            to_goal = ctx.goal[None, :] - pos
-            dist = norms(to_goal)
+            # head for the planner's waypoint if there is one, else straight at the goal;
+            # slow down only when close to the real goal
+            aim = ctx.targets if ctx.targets is not None else ctx.goal[None, :]
+            dist = norms(ctx.goal[None, :] - pos)
             speed = self.d.cruise_speed * np.clip(dist / 10.0, 0.0, 1.0)
-            desired = safe_normalize(to_goal) * speed[:, None]
+            desired = safe_normalize(aim - pos) * speed[:, None]
             goal = clamp_norm(desired - vel, self.d.max_accel)
 
         obstacle = self._obstacle_term(state, ctx)

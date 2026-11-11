@@ -65,7 +65,7 @@ class AvoidanceConfig:
 
 @dataclass
 class ScenarioConfig:
-    name: str = "open"                # open | forest | corridor | random | survey
+    name: str = "open"                # open | forest | corridor | random | survey | maze
     goal_radius: float = 15.0         # drones inside this radius count as arrived
     num_obstacles: int = 25           # used by the random scenario
 
@@ -94,6 +94,19 @@ class CommsConfig:
 
 
 @dataclass
+class PlanningConfig:
+    enabled: bool = False
+    algorithm: str = "field"          # field (backward Dijkstra, fast) | astar
+    replan_interval: float = 1.0      # min seconds between replans when the map changed
+    refresh_interval: float = 5.0     # full replan at least this often (unknown space shrinks)
+    unknown_cost: float = 0.3         # extra cost for unknown cells (optimistic planning)
+    inflation_cost: float = 8.0       # cost of cells within the drone's body radius of an obstacle
+    clearance_cost: float = 2.0       # extra cost close to obstacles (keeps paths centred)
+    clearance_cells: float = 2.0      # how far that extra cost reaches (cells)
+    lookahead: float = 12.0           # metres along the path to look for the steering target
+
+
+@dataclass
 class RenderConfig:
     window_width: int = 1200
     window_height: int = 760
@@ -113,6 +126,7 @@ class Config:
     scenario: ScenarioConfig = field(default_factory=ScenarioConfig)
     mapping: MappingConfig = field(default_factory=MappingConfig)
     comms: CommsConfig = field(default_factory=CommsConfig)
+    planning: PlanningConfig = field(default_factory=PlanningConfig)
     render: RenderConfig = field(default_factory=RenderConfig)
 
     def to_dict(self) -> dict[str, Any]:

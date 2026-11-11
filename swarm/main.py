@@ -5,6 +5,7 @@
   python -m swarm.main --scenario forest --avoidance hybrid
   python -m swarm.main --scenario survey --packet-loss 0.3
   python -m swarm.main --headless --scenario survey --no-share --out outputs/noshare
+  python -m swarm.main --scenario maze --plan
   python -m swarm.main --headless --steps 3000 --out outputs/run1
 """
 
@@ -17,6 +18,7 @@ from pathlib import Path
 
 from swarm.config import load_config
 from swarm.control.factory import METHODS
+from swarm.planning.planner import ALGORITHMS
 from swarm.sim.scenarios import SCENARIOS
 from swarm.sim.engine import Recorder, Simulation
 
@@ -34,6 +36,8 @@ def parse_args(argv=None):
     p.add_argument("--comm-range", type=float, help="radio range in metres")
     p.add_argument("--no-share", action="store_true", help="drones do not share maps")
     p.add_argument("--no-relay", action="store_true", help="single-hop radio (no forwarding)")
+    p.add_argument("--plan", action="store_true", help="enable path planning on each drone's map")
+    p.add_argument("--planner", choices=ALGORITHMS, help="planning algorithm (implies --plan)")
     p.add_argument("--headless", action="store_true", help="run without a window")
     p.add_argument("--steps", type=int, help="steps for a headless run")
     p.add_argument("--out", default="outputs/latest", help="output folder for headless runs")
@@ -66,6 +70,10 @@ def main(argv=None) -> None:
         comms["relay"] = False
     if comms:
         overrides["comms"] = comms
+    if args.plan or args.planner:
+        overrides["planning"] = {"enabled": True}
+        if args.planner:
+            overrides["planning"]["algorithm"] = args.planner
     cfg = load_config(args.config, overrides)
     sim = Simulation(cfg)
 
@@ -134,6 +142,15 @@ def main(argv=None) -> None:
         "messages_dropped": last.dropped,
         "kbytes_sent": round(last.kbytes_sent, 1),
     })
+    if sim.planner is not None:
+        ps = sim.planner.stats
+        summary.update({
+            "planning": cfg.planning.algorithm,
+            "plans": ps.plans,
+            "plan_ms_mean": round(ps.mean_ms, 2),
+            "blocked_replans": ps.blocked_replans,
+            "failed_plans": ps.failed,
+        })
     (out / "summary.json").write_text(json.dumps(summary, indent=2))
     print(json.dumps(summary, indent=2))
     print(f"Plots written to {out.resolve()}")

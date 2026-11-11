@@ -37,6 +37,9 @@ class OccupancyMaps:
         self.L = np.zeros((n, self.num_cells), dtype=np.float32)
         self.dirty = np.zeros((n, self.num_cells), dtype=bool)
         self.own = np.zeros((n, self.num_cells), dtype=bool)   # observed with own lidar
+        # bumped whenever a cell flips between "occupied" and "not occupied":
+        # planners use it to know when an old route may no longer be valid
+        self.occ_revision = np.zeros(n, dtype=np.int64)
 
     @property
     def n(self) -> int:
@@ -92,6 +95,10 @@ class OccupancyMaps:
             before = flat[k]
             after = np.clip(before + delta, -lim, lim)
             flat[k] = after
+            thr = self.cfg.known_threshold
+            flipped = (before >= thr) != (after >= thr)
+            if flipped.any():
+                np.add.at(self.occ_revision, k[flipped] // c, 1)
             # share a cell once we're confident about it and it actually changed
             dirty[k[(after != before) & (np.abs(after) >= self.cfg.known_threshold)]] = True
 
@@ -137,6 +144,8 @@ class OccupancyMaps:
         if not better.any():
             return 0
         adopt = idx[better]
+        thr = self.cfg.known_threshold
+        self.occ_revision[k] += int(((mine[better] >= thr) != (vals[better] >= thr)).sum())
         self.L[k, adopt] = vals[better]
         if relay:
             self.dirty[k, adopt] = True

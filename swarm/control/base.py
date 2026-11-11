@@ -28,6 +28,7 @@ class StepContext:
     dt: float = 0.05
     scan: Scan | None = None            # each drone's lidar scan
     detections: Detections | None = None  # nearest obstacle points from the scan
+    targets: np.ndarray | None = None   # (N, 2) per-drone steering targets from the planner
     extras: dict = field(default_factory=dict)
 
 

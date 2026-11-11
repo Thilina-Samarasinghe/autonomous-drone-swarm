@@ -1,9 +1,10 @@
 # Autonomous Drone Swarm Simulation
 
-> 🚧 **Work in progress.** Phases 0–3 (simulation core, boids flocking,
+> 🚧 **Work in progress.** Phases 0–4 (simulation core, boids flocking,
 > obstacle avoidance with lidar + ORCA, radio communication with shared
-> mapping) are built. Path planning, formation flying, search-and-rescue and
-> reinforcement learning are **still being built**. See [Roadmap](#roadmap) below.
+> mapping, path planning on each drone's own map) are built. Formation flying,
+> search-and-rescue and reinforcement learning are **still being built**.
+> See [Roadmap](#roadmap) below.
 
 A 2D simulator for a swarm of **20–50 autonomous drones**. Every drone makes its
 own decisions using only what it can sense around itself, and cooperative
@@ -56,9 +57,9 @@ intelligence**, not one central AI controlling every drone.
 | 0 | Project setup: config system, seeded fixed-timestep engine, metrics, tests | ✅ Done |
 | 1 | Boids flocking + real-time 2D viewer + headless runner with plots | ✅ Done |
 | 2 | Obstacles, lidar sensing, APF + ORCA collision avoidance, scenarios, benchmark | ✅ Done |
-| 3 | Radio network, per-drone occupancy maps, multi-hop map sharing, benchmark | ✅ Done (under review) |
-| 4 | A* / D* Lite path planning | 🔜 Next |
-| 5 | Formation flying | 📋 Planned |
+| 3 | Radio network, per-drone occupancy maps, multi-hop map sharing, benchmark | ✅ Done |
+| 4 | Path planning (A* and cost field) on each drone's own map, replanning, maze, benchmark | ✅ Done (under review) |
+| 5 | Formation flying | 🔜 Next |
 | 6 | Cooperative search and rescue (PSO, coverage, task allocation) | 📋 Planned |
 | 7 | Terrain cost and threat zones, PSO multi-drone path planner | 📋 Planned |
 | 8 | Multi-agent reinforcement learning (MAPPO) for **all** behaviours | 📋 Planned |
@@ -106,6 +107,22 @@ intelligence**, not one central AI controlling every drone.
   start scattered and roam in several flocks, no goal.
 - **Communication benchmark** (Phase 3): no sharing vs single-hop vs
   multi-hop at 0/20/50/80% packet loss.
+- **Path planning on each drone's own map** (Phase 4): a cost map (blocked /
+  inflated / near-obstacle / unknown cells) and two planners:
+  - **A\*** with the octile heuristic (pure Python, the textbook algorithm)
+  - **cost field** (default): a backward Dijkstra search from the goal (SciPy, in C), the
+    quantity D\* Lite maintains. One search gives the best route from *every*
+    cell, so a drone that gets pushed off its path re-attaches with a lookup.
+    It finds paths exactly as short as A\* (verified by tests) and is about 5× faster.
+- **Optimistic replanning** (Phase 4): unknown space is assumed passable;
+  drones replan when a cell on their path turns out to be a wall, when their
+  map's obstacle layout changes, and every 5 s.
+- **Smooth path following** (Phase 4): each drone steers at the farthest point
+  on its path it can see within 12 m (online string pulling). ORCA stays on
+  as the safety layer.
+- **`maze` scenario** (Phase 4): an S-shaped maze with a dead-end trap where flying straight at the goal fails.
+- **Planning benchmark** (Phase 4): no planning vs own-map planning vs
+  shared-map planning vs A\*.
 - **Fast neighbour search**: KD-tree, roughly N log N cost.
 - **Real-time Pygame viewer**: neighbour links, trails, perception circles,
   live stats panel, behaviour weights tunable while running, add or remove drones.
@@ -116,8 +133,8 @@ intelligence**, not one central AI controlling every drone.
 
 ### 🚧 Still being built / planned
 
-- Maze scenario; moving (dynamic) obstacles
-- A*, Theta*, D* Lite path planning on each drone's *own* shared map, with path smoothing
+- Moving (dynamic) obstacles
+- Incremental D\* Lite (re-using the previous search instead of a full recompute)
 - Leader-follower and virtual-structure formations with shape switching
 - Search and rescue: Voronoi area split, frontier exploration, PSO victim search,
   CBBA/auction task allocation, battery and return-to-base
@@ -168,6 +185,14 @@ python -m swarm.main --scenario survey --packet-loss 0.5
 python -m swarm.main --headless --scenario survey --no-share --out outputs/noshare
 python -m swarm.main --headless --scenario survey --no-relay --out outputs/singlehop
 
+# Path planning (Phase 4)
+python -m swarm.main --scenario maze --plan
+python -m swarm.main --scenario maze --planner astar
+python -m swarm.main --headless --scenario maze --plan --no-share --out outputs/maze_ownmap
+
+# Benchmark planning settings in the maze (writes outputs/benchmarks/planning.*)
+python -m experiments.benchmark_planning                        # 30 drones x 3 seeds
+
 # Benchmark communication settings (writes outputs/benchmarks/comms.*)
 python -m experiments.benchmark_comms                           # 50 drones x 3 seeds
 
@@ -184,12 +209,14 @@ python -m swarm.main --config configs/my_experiment.yaml
 | `--config` | `configs/default.yaml` | YAML configuration file |
 | `--drones` | from config (30) | Number of drones |
 | `--seed` | from config (42) | Random seed |
-| `--scenario` | from config (`open`) | `open`, `forest`, `corridor`, `random`, `survey` |
+| `--scenario` | from config (`open`) | `open`, `forest`, `corridor`, `random`, `survey`, `maze` |
 | `--avoidance` | from config (`orca`) | `none`, `apf`, `orca`, `hybrid` |
 | `--packet-loss` | from config (0) | Radio packet loss probability, 0–1 |
 | `--comm-range` | from config (30) | Radio range in metres |
 | `--no-share` | off | Drones don't share maps |
 | `--no-relay` | off | Single-hop radio: no forwarding of others' information |
+| `--plan` | off | Each drone plans routes on its own map |
+| `--planner` | from config (`field`) | `field` or `astar` (implies `--plan`) |
 | `--headless` | off | Run without a window |
 | `--steps` | from config (3000) | Steps for a headless run (1 step = 0.05 s) |
 | `--out` | `outputs/latest` | Output folder for headless results |
@@ -201,7 +228,7 @@ A headless run writes:
 | `trajectories.png` | Every drone's path (■ start, ● end) |
 | `metrics.png` | Min separation, polarization, mean speed and groups over time |
 | `comms_mapping.png` | Map coverage (team / average / worst drone), accuracy, radio groups and info age over time |
-| `summary.json` | Collisions, obstacle hits, clearance, arrivals, alignment, map coverage and accuracy, time to 50% coverage, messages delivered / dropped, traffic, run speed |
+| `summary.json` | Collisions, obstacle hits, clearance, arrivals, alignment, map coverage and accuracy, time to 50% coverage, messages delivered / dropped, traffic, plans / ms per plan / blocked replans, run speed |
 
 ---
 
@@ -211,7 +238,8 @@ A headless run writes:
 |---|---|
 | `SPACE` | Pause / resume |
 | `.` | Single step (while paused) |
-| `1` `2` `3` `4` `5` | Scenario: open / forest / corridor / random / survey |
+| `1` … `6` | Scenario: open / forest / corridor / random / survey / maze |
+| `K` | Path planning on / off (yellow line = selected drone's path, dot = its steering target) |
 | `M` | Cycle avoidance method: none → apf → orca → hybrid |
 | `V` | Toggle lidar beams (red = hit) |
 | Left click | Set a shared goal point |
@@ -291,6 +319,14 @@ metres and seconds. Unknown keys raise an error, so typos are caught early.
 | | `share_maps` | true | Include map cells in messages |
 | | `relay` | true | Multi-hop forwarding |
 | | `max_cells_per_message` | 300 | Bandwidth cap |
+| `planning` | `enabled` | false | Plan routes on each drone's map |
+| | `algorithm` | field | `field` (backward Dijkstra) or `astar` |
+| | `replan_interval` | 1.0 | Min seconds between replans when the map changed |
+| | `refresh_interval` | 5.0 | Full replan at least this often |
+| | `unknown_cost` | 0.3 | Extra cost of unknown cells (optimistic planning) |
+| | `inflation_cost` | 8.0 | Cost of cells within body radius of an obstacle |
+| | `clearance_cost` / `clearance_cells` | 2.0 / 2.0 | Extra cost near obstacles (keeps paths centred) |
+| | `lookahead` | 12 | Metres along the path to look for the steering target |
 | `render` | `window_width` × `window_height` | 1200 × 760 | |
 | | `fps` | 60 | |
 | | `trail_length` | 40 | Frames of trail per drone |
@@ -312,6 +348,7 @@ each step (dt = 0.05 s):
   6. metrics     = separation, collisions, hits, clearance, arrivals, alignment
   7. mapping     = every 0.1 s each drone folds its lidar scan into its own map
   8. radio       = every 0.25 s each drone broadcasts; deliveries arrive after latency
+  (planning, if on, runs before step 3 and turns the goal into per-drone waypoints)
 ```
 
 ### Controller interface
@@ -398,6 +435,40 @@ double-counted. Adopted cells are re-broadcast (relay), which is how
 knowledge travels **multi-hop** between flocks that are out of direct range.
 With `relay` off, drones forward nothing they learned from others.
 
+### Path planning (Phase 4)
+
+```
+ own map (Phase 3) --> cost map --> planner (cost field or A*) --> path
+                                                                   |
+ drone position --> farthest visible point on path (<= 12 m) --> boids goal term --> ORCA --> dynamics
+```
+
+**Cost map.** Built from the drone's own log-odds map: known obstacles are
+blocked; cells within the drone's body radius of an obstacle are expensive
+(×8); cells close to obstacles cost a little extra (keeps paths centred in
+corridors); unknown cells cost slightly more than known-free ones. Diagonal
+moves may not cut between two blocked cells.
+
+**Planners.**
+- **A\*** searches from the drone to the goal with the octile-distance
+  heuristic, which never overestimates, so the path is optimal. It's written in
+  plain Python to show the algorithm, at ~35 ms per plan.
+- **Cost field** (default) runs Dijkstra backwards from the goal using SciPy's
+  C implementation, at ~7 ms per plan. The result is the cost-to-go from *every*
+  cell. That's the quantity D\* Lite maintains, and it means a drone pushed off
+  course just looks up the new best direction. Paths are exactly as short as
+  A\*'s.
+
+**Replanning.** The planner assumes unknown space is free ("optimistic").
+When the drone, or a teammate via radio, discovers a wall, the map's
+obstacle revision counter changes and the drone replans (at most once per
+second, staggered across drones). A wall appearing *on* the current path
+triggers an immediate replan.
+
+**Path following.** The drone steers at the farthest waypoint within 12 m that it
+can see in a straight line on its own map. This turns the staircase grid
+path into smooth flight without a separate smoothing step.
+
 Lessons from development (found by tests and benchmarks):
 
 - Drones spawned at full speed in random directions collided before they
@@ -423,6 +494,14 @@ Lessons from development (found by tests and benchmarks):
 - *Phase 3:* merging each delivered message separately was slow when a
   tight flock exchanged ~2,500 messages per broadcast. Messages are now
   grouped per receiver and merged in one vectorised pass.
+- *Phase 4:* the first planner ran at 22 steps/s with 30 drones. Profiling
+  showed the time spread across graph building, path extraction and steering
+  point selection. Four fixes (replan only when the obstacle layout changed, a
+  fixed neighbour table, vectorised path extraction, building the sparse
+  graph directly) doubled it, with identical results.
+- *Phase 4:* the first path-extraction code could step diagonally between two
+  blocked cells, which the search itself forbids. Extraction now uses exactly
+  the search's edges; a test checks every step of every path.
 
 ---
 
@@ -445,6 +524,7 @@ Lessons from development (found by tests and benchmarks):
 | `comm_links` / `comm_groups` | Radio links in range / connected radio groups | 1 group = everyone reachable |
 | `teammates_known` / `info_age` | How many teammates each drone knows about, and how old that information is (s) | |
 | `delivered` / `dropped` / `kbytes_sent` | Radio traffic | |
+| `plans` / `plan_ms_mean` / `blocked_replans` | Planner activity and cost | |
 
 Planned metrics for later phases: victims found, time to find,
 messages sent, path length, formation error, energy use.
@@ -528,6 +608,28 @@ What the numbers show:
   within reach of common low-power drone radios. "No sharing" still sends
   beacon tables, which is why it isn't zero.
 
+### Phase 4: planning benchmark
+
+`maze` scenario, 30 drones, 3 seeds per row, 200 s simulated.
+Reproduce with `python -m experiments.benchmark_planning`.
+
+| Setting | Arrived | Time for 90% to arrive | Drone collisions | Obstacle hits | ms per plan | Sim speed |
+|---|---|---|---|---|---|---|
+| no planning (straight at goal) | **0%** | never | 0 | 0 | n/a | 74 steps/s |
+| plan, own map only | 100% | 148 s | 0 | 0 | 7.0 | 57 steps/s |
+| **plan + shared maps** | **100%** | **107 s** | 0 | 0 | 7.1 | 44 steps/s |
+| A\* + shared maps | 100% | 107 s | 0 | 0 | 34.2 | 27 steps/s |
+
+What the numbers show:
+- **Without planning the swarm never escapes the first wall.** Boids + ORCA
+  head straight for the goal and get trapped in the local minimum.
+- **Planning solves the maze every time**, with no collisions or hits, even
+  though every drone starts knowing nothing about the maze.
+- **Shared maps make the swarm 28% faster** (107 s vs 148 s): when the front
+  drones discover a wall, the drones behind replan before they reach it.
+- **A\* and the cost field give the same result** (same arrival time; tests
+  prove equal path costs), but the cost field is about 5× cheaper per plan.
+
 ---
 
 ## Project structure
@@ -550,10 +652,13 @@ autonomous-drone-swarm/
 │   │   └── occupancy.py      per-drone log-odds grids, merging, ground truth
 │   ├── comms/
 │   │   └── network.py        radio model, beacon tables, message delivery
+│   ├── planning/
+│   │   ├── grid.py           cost map, A*, backward-Dijkstra cost field, path extraction
+│   │   └── planner.py        per-drone replanning and string-pulling path following
 │   ├── sim/
 │   │   ├── world.py          arena, walls, obstacles
 │   │   ├── obstacles.py      circle/box geometry: distance, raycast, collision
-│   │   ├── scenarios.py      open / forest / corridor / random / survey layouts
+│   │   ├── scenarios.py      open / forest / corridor / random / survey / maze layouts
 │   │   ├── dynamics.py       point-mass integration with limits
 │   │   ├── neighbors.py      KD-tree neighbour queries
 │   │   └── engine.py         simulation loop, recorder
@@ -567,23 +672,25 @@ autonomous-drone-swarm/
 │       └── plots.py          Matplotlib trajectory and metric plots
 ├── experiments/
 │   ├── benchmark_avoidance.py   method x scenario x seed comparison
-│   └── benchmark_comms.py       sharing / relay / packet-loss comparison
+│   ├── benchmark_comms.py       sharing / relay / packet-loss comparison
+│   └── benchmark_planning.py    planning on/off, own vs shared map, A* vs field
 ├── tests/
 │   ├── test_core.py          Phase 0-1 tests
 │   ├── test_phase2.py        Phase 2 tests
-│   └── test_phase3.py        Phase 3 tests
+│   ├── test_phase3.py        Phase 3 tests
+│   └── test_phase4.py        Phase 4 tests
 ├── requirements.txt
 └── pytest.ini
 ```
 
-Planned additions: `swarm/planning/`, `swarm/missions/` and `swarm/rl/`.
+Planned additions: `swarm/formation/`, `swarm/missions/` and `swarm/rl/`.
 
 ---
 
 ## Testing
 
 ```bash
-python -m pytest            # 58 tests, ~60 s
+python -m pytest            # 79 tests, ~1.5 min
 python -m pytest -v         # verbose
 ```
 
@@ -617,6 +724,15 @@ The tests cover:
 - *Phase 3:* end to end: sharing raises every drone's coverage by > 30 points;
   radio randomness never changes how drones fly; adding or removing drones
   resizes maps and radio; config, CLI and viewer keys all work
+- *Phase 4:* cost map layers; A\* goes straight in open space, around walls,
+  returns nothing when unreachable and never cuts corners
+- *Phase 4:* the cost field is 0 at the goal and infinite inside a closed box;
+  on 6 random maps it finds paths **exactly** as cheap as A\*
+- *Phase 4:* the obstacle revision counter changes only when the obstacle
+  layout changes; a wall appearing on a drone's path triggers a replan
+  that avoids it; steering targets never cross a known obstacle
+- *Phase 4:* end to end, in the maze 15 drones without planning all get stuck,
+  while with planning ≥ 14 arrive, with 0 collisions and 0 hits; CLI and viewer work
 
 ---
 
@@ -630,8 +746,8 @@ Full details are in [docs/PLAN.md](docs/PLAN.md).
 | 1 | Boids | Flocking with 20–50 drones, viewer, plots | ✅ |
 | 2 | Obstacles and avoidance | Obstacles, lidar, APF, ORCA safety layer, hybrid, forest / corridor / random scenarios, benchmark | ✅ |
 | 3 | Communication | Radio with range / loss / latency / bandwidth, beacon tables, per-drone occupancy maps, multi-hop sharing, benchmark | ✅ |
-| 4 | Path planning | A*, Theta*, D* Lite replanning on each drone's shared map, path smoothing, maze scenario | 🔜 |
-| 5 | Formation flying | Leader-follower, virtual structure, line / V / circle switching, passing through gaps | 📋 |
+| 4 | Path planning | Cost map, A\*, backward-Dijkstra cost field, optimistic replanning, string-pulling path following, maze, benchmark | ✅ |
+| 5 | Formation flying | Leader-follower, virtual structure, line / V / circle switching, passing through gaps | 🔜 |
 | 6 | Search and rescue | Area partitioning, frontier exploration, PSO victim search, CBBA task allocation, battery | 📋 |
 | 7 | Terrain and threats | Heightmap cost, threat zones, PSO multi-drone route planner | 📋 |
 | 8 | Reinforcement learning | PettingZoo env, shared-parameter MAPPO, curriculum learning; policies for avoidance, flocking, formation and search | 📋 |
@@ -651,7 +767,10 @@ Full details are in [docs/PLAN.md](docs/PLAN.md).
 | ORCA / velocity obstacles + 2D linear programming | Drone–drone and drone–obstacle collision prevention | ✅ |
 | Log-odds occupancy-grid mapping | Each drone's own map | ✅ |
 | Gossip / epidemic dissemination with anti-entropy | Multi-hop map and position sharing | ✅ |
-| A*, Theta*, D* Lite | Path planning and replanning | 📋 Phase 4 |
+| A\* (octile heuristic) | Path planning, reference implementation | ✅ |
+| Backward Dijkstra cost-to-go field (the quantity D\* Lite maintains) | Fast per-drone planning and re-attachment | ✅ |
+| Line-of-sight string pulling | Smooth path following | ✅ |
+| Incremental D\* Lite | Re-using previous searches | 📋 |
 | Leader-follower, virtual structure, consensus | Formation control | 📋 Phase 5 |
 | Frontier exploration, Voronoi coverage | Area search | 📋 Phase 6 |
 | Particle Swarm Optimization | Victim search, multi-drone route planning | 📋 Phases 6–7 |
@@ -699,6 +818,8 @@ Full details are in [docs/PLAN.md](docs/PLAN.md).
 - O. Khatib, *Real-Time Obstacle Avoidance for Manipulators and Mobile Robots* (potential fields), IJRR 1986
 - J. van den Berg et al., *Reciprocal n-Body Collision Avoidance (ORCA)*, ISRR 2011
 - RVO2 Library (reference ORCA implementation), UNC Chapel Hill
+- P. Hart, N. Nilsson, B. Raphael, *A Formal Basis for the Heuristic Determination of Minimum Cost Paths* (A\*), IEEE TSSC 1968
+- E. Dijkstra, *A Note on Two Problems in Connexion with Graphs*, Numerische Mathematik 1959
 - S. Koenig & M. Likhachev, *D\* Lite*, AAAI 2002
 - W. Ren & R. Beard, *Distributed Consensus in Multi-Vehicle Cooperative Control*, 2008
 - J. Kennedy & R. Eberhart, *Particle Swarm Optimization*, ICNN 1995
