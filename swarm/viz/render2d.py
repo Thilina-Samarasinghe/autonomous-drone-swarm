@@ -80,7 +80,7 @@ class Viewer:
         self.sim = sim
         rc = sim.cfg.render
         pygame.init()
-        pygame.display.set_caption("Autonomous Drone Swarm - Phase 7: Terrain and threats")
+        pygame.display.set_caption("Autonomous Drone Swarm - Phase 8: Learned policies")
         self.screen = pygame.display.set_mode((rc.window_width, rc.window_height))
         self.clock = pygame.time.Clock()
         self.font = pygame.font.SysFont("consolas", 15)
@@ -426,10 +426,12 @@ class Viewer:
         x0 = self.screen.get_width() - HUD_W
         pygame.draw.rect(self.screen, (12, 15, 22), (x0, 0, HUD_W, self.screen.get_height()))
         lines = [
-            ("PHASE 7 - TERRAIN & THREATS", None),
+            ("PHASE 8 - LEARNED POLICIES", None),
             ("", None),
             (f"scenario  {sim.cfg.scenario.name:>11s}", (150, 200, 255)),
             (f"avoidance {sim.cfg.avoidance.method:>11s}", (150, 200, 255)),
+            (f"policy {(('RL:' + getattr(sim.controller, 'task', '?') + ('+ORCA' if sim.cfg.rl.orca else '')) if sim.cfg.rl.policy else 'hand-written'):>14s}",
+             (255, 200, 120) if sim.cfg.rl.policy else (150, 200, 255)),
             (f"planning  {(sim.cfg.planning.algorithm if sim.planner else 'off'):>11s}", (150, 200, 255)),
             (f"formation {(sim.formation.active_shape if sim.formation else 'off'):>11s}", (150, 200, 255)),
             ("", None),

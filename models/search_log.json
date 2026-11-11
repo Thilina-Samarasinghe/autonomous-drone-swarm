@@ -1,0 +1,5817 @@
+{
+ "meta": {
+  "task": "search",
+  "drones": 20,
+  "samples": 800000,
+  "seed": 0,
+  "train_seconds": 1197.2660141001688,
+  "stages": [
+   {
+    "drones": 8,
+    "samples": 1000000
+   },
+   {
+    "drones": 20,
+    "samples": 800000
+   }
+  ]
+ },
+ "log": [
+  {
+   "update": 1,
+   "samples": 2048,
+   "return": NaN,
+   "seconds": 2.2979946999112144,
+   "collisions": 0.0,
+   "coverage": 0.058726662013610195,
+   "drones": 8
+  },
+  {
+   "update": 2,
+   "samples": 4096,
+   "return": NaN,
+   "seconds": 4.540026300004683,
+   "collisions": 0.0,
+   "coverage": 0.06952102599895307,
+   "drones": 8
+  },
+  {
+   "update": 3,
+   "samples": 6144,
+   "return": -60.15176818138108,
+   "seconds": 6.635182500001974,
+   "collisions": 0.0,
+   "coverage": 0.07067940534990912,
+   "drones": 8
+  },
+  {
+   "update": 4,
+   "samples": 8192,
+   "return": -60.15176818138108,
+   "seconds": 8.957369999960065,
+   "collisions": 0.0,
+   "coverage": 0.07200879472203828,
+   "drones": 8
+  },
+  {
+   "update": 5,
+   "samples": 10240,
+   "return": -36.94780605281905,
+   "seconds": 11.25361139990855,
+   "collisions": 0.0,
+   "coverage": 0.07612849073658175,
+   "drones": 8
+  },
+  {
+   "update": 6,
+   "samples": 12288,
+   "return": -36.94780605281905,
+   "seconds": 13.484437300008722,
+   "collisions": 0.0,
+   "coverage": 0.07551548932405515,
+   "drones": 8
+  },
+  {
+   "update": 7,
+   "samples": 14336,
+   "return": -36.94780605281905,
+   "seconds": 15.534383299993351,
+   "collisions": 0.0,
+   "coverage": 0.07920359989481052,
+   "drones": 8
+  },
+  {
+   "update": 8,
+   "samples": 16384,
+   "return": -31.092350266168456,
+   "seconds": 17.638131799991243,
+   "collisions": 0.0,
+   "coverage": 0.0797353380330014,
+   "drones": 8
+  },
+  {
+   "update": 9,
+   "samples": 18432,
+   "return": -31.092350266168456,
+   "seconds": 19.90787629992701,
+   "collisions": 0.0,
+   "coverage": 0.08210054038954513,
+   "drones": 8
+  },
+  {
+   "update": 10,
+   "samples": 20480,
+   "return": -22.010761683392392,
+   "seconds": 21.733730799984187,
+   "collisions": 0.0,
+   "coverage": 0.08289194371571867,
+   "drones": 8
+  },
+  {
+   "update": 11,
+   "samples": 22528,
+   "return": -22.010761683392392,
+   "seconds": 23.437565799918957,
+   "collisions": 0.0,
+   "coverage": 0.08283675098841341,
+   "drones": 8
+  },
+  {
+   "update": 12,
+   "samples": 24576,
+   "return": -20.820201119010918,
+   "seconds": 25.242178799933754,
+   "collisions": 0.0,
+   "coverage": 0.08427951831382353,
+   "drones": 8
+  },
+  {
+   "update": 13,
+   "samples": 26624,
+   "return": -20.820201119010918,
+   "seconds": 26.769494500011206,
+   "collisions": 0.0,
+   "coverage": 0.08201846162500703,
+   "drones": 8
+  },
+  {
+   "update": 14,
+   "samples": 28672,
+   "return": -20.820201119010918,
+   "seconds": 28.210614799987525,
+   "collisions": 0.0,
+   "coverage": 0.08134046431911691,
+   "drones": 8
+  },
+  {
+   "update": 15,
+   "samples": 30720,
+   "return": -8.721695363107667,
+   "seconds": 29.71590979991015,
+   "collisions": 0.24,
+   "coverage": 0.08002581438027032,
+   "drones": 8
+  },
+  {
+   "update": 16,
+   "samples": 32768,
+   "return": -8.721695363107667,
+   "seconds": 31.136645499966107,
+   "collisions": 0.16,
+   "coverage": 0.07989474116649789,
+   "drones": 8
+  },
+  {
+   "update": 17,
+   "samples": 34816,
+   "return": -13.902814834303541,
+   "seconds": 32.55112650000956,
+   "collisions": 0.0,
+   "coverage": 0.07985634372368926,
+   "drones": 8
+  },
+  {
+   "update": 18,
+   "samples": 36864,
+   "return": -13.902814834303541,
+   "seconds": 33.911003999994136,
+   "collisions": 0.0,
+   "coverage": 0.08001963338489525,
+   "drones": 8
+  },
+  {
+   "update": 19,
+   "samples": 38912,
+   "return": -10.824801062126607,
+   "seconds": 35.264576399931684,
+   "collisions": 0.01,
+   "coverage": 0.08099277456837424,
+   "drones": 8
+  },
+  {
+   "update": 20,
+   "samples": 40960,
+   "return": -10.824801062126607,
+   "seconds": 36.636066999984905,
+   "collisions": 0.12,
+   "coverage": 0.08095281620324397,
+   "drones": 8
+  },
+  {
+   "update": 21,
+   "samples": 43008,
+   "return": -10.824801062126607,
+   "seconds": 38.20369759993628,
+   "collisions": 0.17,
+   "coverage": 0.08197860175883764,
+   "drones": 8
+  },
+  {
+   "update": 22,
+   "samples": 45056,
+   "return": -27.89834212939229,
+   "seconds": 39.66620739991777,
+   "collisions": 0.0,
+   "coverage": 0.08209224952461151,
+   "drones": 8
+  },
+  {
+   "update": 23,
+   "samples": 47104,
+   "return": -27.89834212939229,
+   "seconds": 41.03787279990502,
+   "collisions": 0.0,
+   "coverage": 0.08238803696076122,
+   "drones": 8
+  },
+  {
+   "update": 24,
+   "samples": 49152,
+   "return": -25.419701010119716,
+   "seconds": 42.47142580000218,
+   "collisions": 0.0,
+   "coverage": 0.083018151018432,
+   "drones": 8
+  },
+  {
+   "update": 25,
+   "samples": 51200,
+   "return": -25.419701010119716,
+   "seconds": 43.989085999899544,
+   "collisions": 0.0,
+   "coverage": 0.08288964837728063,
+   "drones": 8
+  },
+  {
+   "update": 26,
+   "samples": 53248,
+   "return": -24.465561900106422,
+   "seconds": 45.59013159992173,
+   "collisions": 0.0,
+   "coverage": 0.08335388989313329,
+   "drones": 8
+  },
+  {
+   "update": 27,
+   "samples": 55296,
+   "return": -24.465561900106422,
+   "seconds": 47.31106189999264,
+   "collisions": 0.0,
+   "coverage": 0.08295959959867119,
+   "drones": 8
+  },
+  {
+   "update": 28,
+   "samples": 57344,
+   "return": -24.465561900106422,
+   "seconds": 49.01284089998808,
+   "collisions": 0.0,
+   "coverage": 0.08368308187723351,
+   "drones": 8
+  },
+  {
+   "update": 29,
+   "samples": 59392,
+   "return": -17.96126902629821,
+   "seconds": 50.4626010999782,
+   "collisions": 0.0,
+   "coverage": 0.08396979580649999,
+   "drones": 8
+  },
+  {
+   "update": 30,
+   "samples": 61440,
+   "return": -17.96126902629821,
+   "seconds": 52.21586649992969,
+   "collisions": 0.0,
+   "coverage": 0.08463893010340783,
+   "drones": 8
+  },
+  {
+   "update": 31,
+   "samples": 63488,
+   "return": -16.791820322910116,
+   "seconds": 53.936378499958664,
+   "collisions": 0.0,
+   "coverage": 0.0856209464738527,
+   "drones": 8
+  },
+  {
+   "update": 32,
+   "samples": 65536,
+   "return": -16.791820322910116,
+   "seconds": 55.68579019990284,
+   "collisions": 0.23,
+   "coverage": 0.08544634330083649,
+   "drones": 8
+  },
+  {
+   "update": 33,
+   "samples": 67584,
+   "return": -7.0818130284729905,
+   "seconds": 57.28998649993446,
+   "collisions": 0.0,
+   "coverage": 0.08613618478158894,
+   "drones": 8
+  },
+  {
+   "update": 34,
+   "samples": 69632,
+   "return": -7.0818130284729905,
+   "seconds": 59.323523099999875,
+   "collisions": 0.0,
+   "coverage": 0.08532667581284109,
+   "drones": 8
+  },
+  {
+   "update": 35,
+   "samples": 71680,
+   "return": -7.0818130284729905,
+   "seconds": 61.09683679998852,
+   "collisions": 0.0,
+   "coverage": 0.08534537962490696,
+   "drones": 8
+  },
+  {
+   "update": 36,
+   "samples": 73728,
+   "return": -4.391797329513556,
+   "seconds": 62.71584369998891,
+   "collisions": 0.0,
+   "coverage": 0.0850153797358855,
+   "drones": 8
+  },
+  {
+   "update": 37,
+   "samples": 75776,
+   "return": -4.391797329513556,
+   "seconds": 64.3283448999282,
+   "collisions": 0.0,
+   "coverage": 0.08519333768954167,
+   "drones": 8
+  },
+  {
+   "update": 38,
+   "samples": 77824,
+   "return": -4.308373924636495,
+   "seconds": 66.13926789991092,
+   "collisions": 0.0,
+   "coverage": 0.08555090416989997,
+   "drones": 8
+  },
+  {
+   "update": 39,
+   "samples": 79872,
+   "return": -4.308373924636495,
+   "seconds": 67.91612269997131,
+   "collisions": 0.0,
+   "coverage": 0.08540762550849838,
+   "drones": 8
+  },
+  {
+   "update": 40,
+   "samples": 81920,
+   "return": -1.0326350024720987,
+   "seconds": 69.63434099999722,
+   "collisions": 0.0,
+   "coverage": 0.0861030579234361,
+   "drones": 8
+  },
+  {
+   "update": 41,
+   "samples": 83968,
+   "return": -1.0326350024720987,
+   "seconds": 71.34640319994651,
+   "collisions": 0.0,
+   "coverage": 0.08559366018752046,
+   "drones": 8
+  },
+  {
+   "update": 42,
+   "samples": 86016,
+   "return": -1.0326350024720987,
+   "seconds": 73.05848239990883,
+   "collisions": 0.0,
+   "coverage": 0.0856026110218153,
+   "drones": 8
+  },
+  {
+   "update": 43,
+   "samples": 88064,
+   "return": 0.45388130647706293,
+   "seconds": 74.74797909997869,
+   "collisions": 0.0,
+   "coverage": 0.08551817207997782,
+   "drones": 8
+  },
+  {
+   "update": 44,
+   "samples": 90112,
+   "return": 0.45388130647706293,
+   "seconds": 76.44061649998184,
+   "collisions": 0.0,
+   "coverage": 0.08571675543694783,
+   "drones": 8
+  },
+  {
+   "update": 45,
+   "samples": 92160,
+   "return": 8.404657206605348,
+   "seconds": 78.04845349991228,
+   "collisions": 0.0,
+   "coverage": 0.0860016442030704,
+   "drones": 8
+  },
+  {
+   "update": 46,
+   "samples": 94208,
+   "return": 8.404657206605348,
+   "seconds": 80.02553589991294,
+   "collisions": 0.0,
+   "coverage": 0.08597888767249284,
+   "drones": 8
+  },
+  {
+   "update": 47,
+   "samples": 96256,
+   "return": 8.621756017864241,
+   "seconds": 81.71104099997319,
+   "collisions": 0.0,
+   "coverage": 0.08669427131139788,
+   "drones": 8
+  },
+  {
+   "update": 48,
+   "samples": 98304,
+   "return": 8.621756017864241,
+   "seconds": 83.20449179993011,
+   "collisions": 0.0,
+   "coverage": 0.08638417600747887,
+   "drones": 8
+  },
+  {
+   "update": 49,
+   "samples": 100352,
+   "return": 8.621756017864241,
+   "seconds": 84.73170100001153,
+   "collisions": 0.0,
+   "coverage": 0.08679775417462653,
+   "drones": 8
+  },
+  {
+   "update": 50,
+   "samples": 102400,
+   "return": 9.511702620291793,
+   "seconds": 86.36197139997967,
+   "collisions": 0.0,
+   "coverage": 0.08689245053828022,
+   "drones": 8
+  },
+  {
+   "update": 51,
+   "samples": 104448,
+   "return": 9.511702620291793,
+   "seconds": 88.03444429999217,
+   "collisions": 0.0,
+   "coverage": 0.08731077427280129,
+   "drones": 8
+  },
+  {
+   "update": 52,
+   "samples": 106496,
+   "return": 9.86764369013557,
+   "seconds": 89.81812660000287,
+   "collisions": 0.0,
+   "coverage": 0.08815510014660129,
+   "drones": 8
+  },
+  {
+   "update": 53,
+   "samples": 108544,
+   "return": 9.86764369013557,
+   "seconds": 91.37307669990696,
+   "collisions": 0.0,
+   "coverage": 0.08828763115282516,
+   "drones": 8
+  },
+  {
+   "update": 54,
+   "samples": 110592,
+   "return": 8.312766521517391,
+   "seconds": 93.06724979996216,
+   "collisions": 0.0,
+   "coverage": 0.08911799692914264,
+   "drones": 8
+  },
+  {
+   "update": 55,
+   "samples": 112640,
+   "return": 8.312766521517391,
+   "seconds": 94.7182324999012,
+   "collisions": 0.0,
+   "coverage": 0.08890236574005309,
+   "drones": 8
+  },
+  {
+   "update": 56,
+   "samples": 114688,
+   "return": 8.312766521517391,
+   "seconds": 96.41045769990887,
+   "collisions": 0.0,
+   "coverage": 0.08927302911177674,
+   "drones": 8
+  },
+  {
+   "update": 57,
+   "samples": 116736,
+   "return": 3.166454354213515,
+   "seconds": 98.11325789999682,
+   "collisions": 0.08,
+   "coverage": 0.08934730483279035,
+   "drones": 8
+  },
+  {
+   "update": 58,
+   "samples": 118784,
+   "return": 3.166454354213515,
+   "seconds": 100.01190019992646,
+   "collisions": 0.0,
+   "coverage": 0.08948516160364613,
+   "drones": 8
+  },
+  {
+   "update": 59,
+   "samples": 120832,
+   "return": 0.474115945563743,
+   "seconds": 101.70371079992037,
+   "collisions": 0.0,
+   "coverage": 0.08973519710500855,
+   "drones": 8
+  },
+  {
+   "update": 60,
+   "samples": 122880,
+   "return": 0.474115945563743,
+   "seconds": 103.49870180001017,
+   "collisions": 0.05,
+   "coverage": 0.08976975602818744,
+   "drones": 8
+  },
+  {
+   "update": 61,
+   "samples": 124928,
+   "return": -9.068207513554842,
+   "seconds": 105.06860579992644,
+   "collisions": 0.13,
+   "coverage": 0.09055104502339653,
+   "drones": 8
+  },
+  {
+   "update": 62,
+   "samples": 126976,
+   "return": -9.068207513554842,
+   "seconds": 106.80466919997707,
+   "collisions": 0.0,
+   "coverage": 0.09022138219479969,
+   "drones": 8
+  },
+  {
+   "update": 63,
+   "samples": 129024,
+   "return": -9.068207513554842,
+   "seconds": 108.48784909991082,
+   "collisions": 0.03,
+   "coverage": 0.09018777889528869,
+   "drones": 8
+  },
+  {
+   "update": 64,
+   "samples": 131072,
+   "return": -11.10632570049868,
+   "seconds": 110.26548910001293,
+   "collisions": 0.0,
+   "coverage": 0.0901034955394184,
+   "drones": 8
+  },
+  {
+   "update": 65,
+   "samples": 133120,
+   "return": -11.10632570049868,
+   "seconds": 111.92441099998541,
+   "collisions": 0.22,
+   "coverage": 0.09015179600223017,
+   "drones": 8
+  },
+  {
+   "update": 66,
+   "samples": 135168,
+   "return": -13.807905792082204,
+   "seconds": 113.67282959993463,
+   "collisions": 0.05,
+   "coverage": 0.0905777490743547,
+   "drones": 8
+  },
+  {
+   "update": 67,
+   "samples": 137216,
+   "return": -13.807905792082204,
+   "seconds": 115.39073230000213,
+   "collisions": 0.39,
+   "coverage": 0.09037165521626647,
+   "drones": 8
+  },
+  {
+   "update": 68,
+   "samples": 139264,
+   "return": -23.63132525232616,
+   "seconds": 116.88721670000814,
+   "collisions": 0.43,
+   "coverage": 0.09060305137837696,
+   "drones": 8
+  },
+  {
+   "update": 69,
+   "samples": 141312,
+   "return": -23.63132525232616,
+   "seconds": 118.53779979993124,
+   "collisions": 0.0,
+   "coverage": 0.09034716036537106,
+   "drones": 8
+  },
+  {
+   "update": 70,
+   "samples": 143360,
+   "return": -23.63132525232616,
+   "seconds": 119.97355140000582,
+   "collisions": 0.0,
+   "coverage": 0.09044495723309583,
+   "drones": 8
+  },
+  {
+   "update": 71,
+   "samples": 145408,
+   "return": -21.39902998797633,
+   "seconds": 121.71440799999982,
+   "collisions": 0.0,
+   "coverage": 0.09036086210906638,
+   "drones": 8
+  },
+  {
+   "update": 72,
+   "samples": 147456,
+   "return": -21.39902998797633,
+   "seconds": 123.43970619991887,
+   "collisions": 0.0,
+   "coverage": 0.09048187274505196,
+   "drones": 8
+  },
+  {
+   "update": 73,
+   "samples": 149504,
+   "return": -10.935712620854698,
+   "seconds": 125.14771930000279,
+   "collisions": 0.0,
+   "coverage": 0.09092462720917008,
+   "drones": 8
+  },
+  {
+   "update": 74,
+   "samples": 151552,
+   "return": -10.935712620854698,
+   "seconds": 126.6103627999546,
+   "collisions": 0.0,
+   "coverage": 0.09089616807301978,
+   "drones": 8
+  },
+  {
+   "update": 75,
+   "samples": 153600,
+   "return": -8.58367798944544,
+   "seconds": 128.22083209990524,
+   "collisions": 0.0,
+   "coverage": 0.0917163182732192,
+   "drones": 8
+  },
+  {
+   "update": 76,
+   "samples": 155648,
+   "return": -8.58367798944544,
+   "seconds": 129.94006739999168,
+   "collisions": 0.0,
+   "coverage": 0.09154373666791497,
+   "drones": 8
+  },
+  {
+   "update": 77,
+   "samples": 157696,
+   "return": -8.58367798944544,
+   "seconds": 131.66082869993988,
+   "collisions": 0.0,
+   "coverage": 0.09207301684117514,
+   "drones": 8
+  },
+  {
+   "update": 78,
+   "samples": 159744,
+   "return": -3.684737918725162,
+   "seconds": 133.24660389998462,
+   "collisions": 0.0,
+   "coverage": 0.09223900740146662,
+   "drones": 8
+  },
+  {
+   "update": 79,
+   "samples": 161792,
+   "return": -3.684737918725162,
+   "seconds": 134.92466359992977,
+   "collisions": 0.0,
+   "coverage": 0.0928279496576705,
+   "drones": 8
+  },
+  {
+   "update": 80,
+   "samples": 163840,
+   "return": 9.907823367229142,
+   "seconds": 136.57112290000077,
+   "collisions": 0.0,
+   "coverage": 0.09366054671050915,
+   "drones": 8
+  },
+  {
+   "update": 81,
+   "samples": 165888,
+   "return": 9.907823367229142,
+   "seconds": 138.20276889996603,
+   "collisions": 0.0,
+   "coverage": 0.09400406560657223,
+   "drones": 8
+  },
+  {
+   "update": 82,
+   "samples": 167936,
+   "return": 9.907823367229142,
+   "seconds": 140.01037349994294,
+   "collisions": 0.82,
+   "coverage": 0.0949387114857235,
+   "drones": 8
+  },
+  {
+   "update": 83,
+   "samples": 169984,
+   "return": -4.353732796279118,
+   "seconds": 141.70825199992396,
+   "collisions": 0.0,
+   "coverage": 0.09534536985267415,
+   "drones": 8
+  },
+  {
+   "update": 84,
+   "samples": 172032,
+   "return": -4.353732796279118,
+   "seconds": 143.26410819997545,
+   "collisions": 0.01,
+   "coverage": 0.09648459079560552,
+   "drones": 8
+  },
+  {
+   "update": 85,
+   "samples": 174080,
+   "return": -7.843631852667679,
+   "seconds": 145.01208319992293,
+   "collisions": 0.04,
+   "coverage": 0.09670370080256115,
+   "drones": 8
+  },
+  {
+   "update": 86,
+   "samples": 176128,
+   "return": -7.843631852667679,
+   "seconds": 146.74240270000882,
+   "collisions": 0.0,
+   "coverage": 0.09709679450621231,
+   "drones": 8
+  },
+  {
+   "update": 87,
+   "samples": 178176,
+   "return": -8.019562699685205,
+   "seconds": 148.35651999991387,
+   "collisions": 0.1,
+   "coverage": 0.09786037120948496,
+   "drones": 8
+  },
+  {
+   "update": 88,
+   "samples": 180224,
+   "return": -8.019562699685205,
+   "seconds": 149.77691849996336,
+   "collisions": 0.0,
+   "coverage": 0.09787463542695164,
+   "drones": 8
+  },
+  {
+   "update": 89,
+   "samples": 182272,
+   "return": -8.019562699685205,
+   "seconds": 151.27827529993374,
+   "collisions": 0.1,
+   "coverage": 0.09871924418711162,
+   "drones": 8
+  },
+  {
+   "update": 90,
+   "samples": 184320,
+   "return": -10.208192273356158,
+   "seconds": 153.42039979994297,
+   "collisions": 0.0,
+   "coverage": 0.0989372933429516,
+   "drones": 8
+  },
+  {
+   "update": 91,
+   "samples": 186368,
+   "return": -10.208192273356158,
+   "seconds": 155.60309659992345,
+   "collisions": 0.0,
+   "coverage": 0.09956081189045751,
+   "drones": 8
+  },
+  {
+   "update": 92,
+   "samples": 188416,
+   "return": -8.936508778530966,
+   "seconds": 158.19554929994047,
+   "collisions": 0.08,
+   "coverage": 0.10041221460747937,
+   "drones": 8
+  },
+  {
+   "update": 93,
+   "samples": 190464,
+   "return": -8.936508778530966,
+   "seconds": 160.28690840001218,
+   "collisions": 0.0,
+   "coverage": 0.10123174304744978,
+   "drones": 8
+  },
+  {
+   "update": 94,
+   "samples": 192512,
+   "return": 8.015438914765552,
+   "seconds": 162.1247555000009,
+   "collisions": 0.0,
+   "coverage": 0.10226290425023432,
+   "drones": 8
+  },
+  {
+   "update": 95,
+   "samples": 194560,
+   "return": 8.015438914765552,
+   "seconds": 164.2947629999835,
+   "collisions": 0.0,
+   "coverage": 0.10265185802496336,
+   "drones": 8
+  },
+  {
+   "update": 96,
+   "samples": 196608,
+   "return": 8.015438914765552,
+   "seconds": 166.8465599999763,
+   "collisions": 0.14,
+   "coverage": 0.10357409945507814,
+   "drones": 8
+  },
+  {
+   "update": 97,
+   "samples": 198656,
+   "return": 8.63332945026016,
+   "seconds": 169.26693189993966,
+   "collisions": 0.0,
+   "coverage": 0.10395866392819936,
+   "drones": 8
+  },
+  {
+   "update": 98,
+   "samples": 200704,
+   "return": 8.63332945026016,
+   "seconds": 171.37861969997175,
+   "collisions": 0.0,
+   "coverage": 0.1047411033483831,
+   "drones": 8
+  },
+  {
+   "update": 99,
+   "samples": 202752,
+   "return": 10.089065424849236,
+   "seconds": 173.38808009994682,
+   "collisions": 0.0,
+   "coverage": 0.10561379693696833,
+   "drones": 8
+  },
+  {
+   "update": 100,
+   "samples": 204800,
+   "return": 10.089065424849236,
+   "seconds": 175.4953260999173,
+   "collisions": 0.0,
+   "coverage": 0.10645056533086646,
+   "drones": 8
+  },
+  {
+   "update": 101,
+   "samples": 206848,
+   "return": 11.984863302770817,
+   "seconds": 177.7828175999457,
+   "collisions": 0.1,
+   "coverage": 0.10765009158536401,
+   "drones": 8
+  },
+  {
+   "update": 102,
+   "samples": 208896,
+   "return": 11.984863302770817,
+   "seconds": 179.89461399998982,
+   "collisions": 0.0,
+   "coverage": 0.10768830245957922,
+   "drones": 8
+  },
+  {
+   "update": 103,
+   "samples": 210944,
+   "return": 11.984863302770817,
+   "seconds": 182.0716347999405,
+   "collisions": 0.43,
+   "coverage": 0.1084927788560303,
+   "drones": 8
+  },
+  {
+   "update": 104,
+   "samples": 212992,
+   "return": 5.184131744329667,
+   "seconds": 184.25942189991474,
+   "collisions": 0.0,
+   "coverage": 0.10882539954586605,
+   "drones": 8
+  },
+  {
+   "update": 105,
+   "samples": 215040,
+   "return": 5.184131744329667,
+   "seconds": 186.26897609990556,
+   "collisions": 0.07,
+   "coverage": 0.10955393790700912,
+   "drones": 8
+  },
+  {
+   "update": 106,
+   "samples": 217088,
+   "return": -0.0185144547438739,
+   "seconds": 188.48079149995465,
+   "collisions": 0.05,
+   "coverage": 0.11006305493041138,
+   "drones": 8
+  },
+  {
+   "update": 107,
+   "samples": 219136,
+   "return": -0.0185144547438739,
+   "seconds": 190.4995370999677,
+   "collisions": 0.0,
+   "coverage": 0.11024589879784974,
+   "drones": 8
+  },
+  {
+   "update": 108,
+   "samples": 221184,
+   "return": 4.471036397120274,
+   "seconds": 192.58890679990873,
+   "collisions": 0.0,
+   "coverage": 0.11142162018635528,
+   "drones": 8
+  },
+  {
+   "update": 109,
+   "samples": 223232,
+   "return": 4.471036397120274,
+   "seconds": 194.56598700000905,
+   "collisions": 0.09,
+   "coverage": 0.11124119396428261,
+   "drones": 8
+  },
+  {
+   "update": 110,
+   "samples": 225280,
+   "return": 4.471036397120274,
+   "seconds": 196.42377100000158,
+   "collisions": 0.0,
+   "coverage": 0.11218395490349678,
+   "drones": 8
+  },
+  {
+   "update": 111,
+   "samples": 227328,
+   "return": 3.9559463395374324,
+   "seconds": 198.75027509999927,
+   "collisions": 0.0,
+   "coverage": 0.11261633683562111,
+   "drones": 8
+  },
+  {
+   "update": 112,
+   "samples": 229376,
+   "return": 3.9559463395374324,
+   "seconds": 201.11866319994442,
+   "collisions": 0.02,
+   "coverage": 0.1135390571594223,
+   "drones": 8
+  },
+  {
+   "update": 113,
+   "samples": 231424,
+   "return": 5.2229428134788165,
+   "seconds": 203.22061269998085,
+   "collisions": 0.0,
+   "coverage": 0.11458102970719829,
+   "drones": 8
+  },
+  {
+   "update": 114,
+   "samples": 233472,
+   "return": 5.2229428134788165,
+   "seconds": 205.24775459989905,
+   "collisions": 0.0,
+   "coverage": 0.11489836845716908,
+   "drones": 8
+  },
+  {
+   "update": 115,
+   "samples": 235520,
+   "return": 13.286271343865673,
+   "seconds": 207.5969519999344,
+   "collisions": 0.03,
+   "coverage": 0.11612297067340399,
+   "drones": 8
+  },
+  {
+   "update": 116,
+   "samples": 237568,
+   "return": 13.286271343865673,
+   "seconds": 210.39217209990602,
+   "collisions": 0.0,
+   "coverage": 0.11580019479989785,
+   "drones": 8
+  },
+  {
+   "update": 117,
+   "samples": 239616,
+   "return": 13.286271343865673,
+   "seconds": 212.67500960000325,
+   "collisions": 0.06,
+   "coverage": 0.11696812114783375,
+   "drones": 8
+  },
+  {
+   "update": 118,
+   "samples": 241664,
+   "return": 16.721615939464392,
+   "seconds": 215.03726419992745,
+   "collisions": 0.0,
+   "coverage": 0.11705681746869961,
+   "drones": 8
+  },
+  {
+   "update": 119,
+   "samples": 243712,
+   "return": 16.721615939464392,
+   "seconds": 216.87336759991013,
+   "collisions": 0.0,
+   "coverage": 0.11771523654892219,
+   "drones": 8
+  },
+  {
+   "update": 120,
+   "samples": 245760,
+   "return": 15.026289644210152,
+   "seconds": 218.52375329995994,
+   "collisions": 0.0,
+   "coverage": 0.11835738968258064,
+   "drones": 8
+  },
+  {
+   "update": 121,
+   "samples": 247808,
+   "return": 15.026289644210152,
+   "seconds": 220.44513719994575,
+   "collisions": 0.0,
+   "coverage": 0.118636493348931,
+   "drones": 8
+  },
+  {
+   "update": 122,
+   "samples": 249856,
+   "return": 13.400026867403165,
+   "seconds": 222.15133059991058,
+   "collisions": 0.04,
+   "coverage": 0.11957060568808657,
+   "drones": 8
+  },
+  {
+   "update": 123,
+   "samples": 251904,
+   "return": 13.400026867403165,
+   "seconds": 223.69935309991706,
+   "collisions": 0.0,
+   "coverage": 0.11917576273009838,
+   "drones": 8
+  },
+  {
+   "update": 124,
+   "samples": 253952,
+   "return": 13.400026867403165,
+   "seconds": 225.34266379999463,
+   "collisions": 0.05,
+   "coverage": 0.12002098359246519,
+   "drones": 8
+  },
+  {
+   "update": 125,
+   "samples": 256000,
+   "return": 12.597574972130923,
+   "seconds": 226.88422179990448,
+   "collisions": 0.0,
+   "coverage": 0.12005266861813006,
+   "drones": 8
+  },
+  {
+   "update": 126,
+   "samples": 258048,
+   "return": 12.597574972130923,
+   "seconds": 228.56000129994936,
+   "collisions": 0.0,
+   "coverage": 0.12085822174131515,
+   "drones": 8
+  },
+  {
+   "update": 127,
+   "samples": 260096,
+   "return": 14.771549738915535,
+   "seconds": 230.3272023999598,
+   "collisions": 0.0,
+   "coverage": 0.12173293512913536,
+   "drones": 8
+  },
+  {
+   "update": 128,
+   "samples": 262144,
+   "return": 14.771549738915535,
+   "seconds": 231.74181899998803,
+   "collisions": 0.0,
+   "coverage": 0.12200107596434513,
+   "drones": 8
+  },
+  {
+   "update": 129,
+   "samples": 264192,
+   "return": 17.191055195156245,
+   "seconds": 233.19105729996227,
+   "collisions": 0.0,
+   "coverage": 0.12355278148606529,
+   "drones": 8
+  },
+  {
+   "update": 130,
+   "samples": 266240,
+   "return": 17.191055195156245,
+   "seconds": 234.58244919998106,
+   "collisions": 0.0,
+   "coverage": 0.12293159188396284,
+   "drones": 8
+  },
+  {
+   "update": 131,
+   "samples": 268288,
+   "return": 17.191055195156245,
+   "seconds": 236.06012249994092,
+   "collisions": 0.0,
+   "coverage": 0.12433749777031686,
+   "drones": 8
+  },
+  {
+   "update": 132,
+   "samples": 270336,
+   "return": 18.932406170918416,
+   "seconds": 237.64284909993876,
+   "collisions": 0.0,
+   "coverage": 0.12458420152325847,
+   "drones": 8
+  },
+  {
+   "update": 133,
+   "samples": 272384,
+   "return": 18.932406170918416,
+   "seconds": 239.400012099999,
+   "collisions": 0.03,
+   "coverage": 0.1250643103716042,
+   "drones": 8
+  },
+  {
+   "update": 134,
+   "samples": 274432,
+   "return": 20.434752485981825,
+   "seconds": 241.14716339996085,
+   "collisions": 0.0,
+   "coverage": 0.12556356531697874,
+   "drones": 8
+  },
+  {
+   "update": 135,
+   "samples": 276480,
+   "return": 20.434752485981825,
+   "seconds": 242.92018249991816,
+   "collisions": 0.0,
+   "coverage": 0.12597648530228142,
+   "drones": 8
+  },
+  {
+   "update": 136,
+   "samples": 278528,
+   "return": 20.29785889320447,
+   "seconds": 244.46881180000491,
+   "collisions": 0.05,
+   "coverage": 0.12752135245429186,
+   "drones": 8
+  },
+  {
+   "update": 137,
+   "samples": 280576,
+   "return": 20.29785889320447,
+   "seconds": 245.8520193999866,
+   "collisions": 0.0,
+   "coverage": 0.12729394467079153,
+   "drones": 8
+  },
+  {
+   "update": 138,
+   "samples": 282624,
+   "return": 20.29785889320447,
+   "seconds": 247.28577259997837,
+   "collisions": 0.0,
+   "coverage": 0.1288688296692476,
+   "drones": 8
+  },
+  {
+   "update": 139,
+   "samples": 284672,
+   "return": 20.704149960582395,
+   "seconds": 248.8698207999114,
+   "collisions": 0.0,
+   "coverage": 0.12923509318473475,
+   "drones": 8
+  },
+  {
+   "update": 140,
+   "samples": 286720,
+   "return": 20.704149960582395,
+   "seconds": 250.46222290000878,
+   "collisions": 0.0,
+   "coverage": 0.1299565492890098,
+   "drones": 8
+  },
+  {
+   "update": 141,
+   "samples": 288768,
+   "return": 19.499008363363316,
+   "seconds": 252.04050549992826,
+   "collisions": 0.0,
+   "coverage": 0.13106051946305627,
+   "drones": 8
+  },
+  {
+   "update": 142,
+   "samples": 290816,
+   "return": 19.499008363363316,
+   "seconds": 253.756224899902,
+   "collisions": 0.04,
+   "coverage": 0.13127097335806107,
+   "drones": 8
+  },
+  {
+   "update": 143,
+   "samples": 292864,
+   "return": 17.72157887733441,
+   "seconds": 255.29717469995376,
+   "collisions": 0.03,
+   "coverage": 0.1326054070456648,
+   "drones": 8
+  },
+  {
+   "update": 144,
+   "samples": 294912,
+   "return": 17.72157887733441,
+   "seconds": 256.6467523999745,
+   "collisions": 0.0,
+   "coverage": 0.1321780768142535,
+   "drones": 8
+  },
+  {
+   "update": 145,
+   "samples": 296960,
+   "return": 17.72157887733441,
+   "seconds": 258.12359029997606,
+   "collisions": 0.0,
+   "coverage": 0.13318917343542339,
+   "drones": 8
+  },
+  {
+   "update": 146,
+   "samples": 299008,
+   "return": 18.544196343642263,
+   "seconds": 259.73593729990534,
+   "collisions": 0.0,
+   "coverage": 0.13336587403946787,
+   "drones": 8
+  },
+  {
+   "update": 147,
+   "samples": 301056,
+   "return": 18.544196343642263,
+   "seconds": 261.1933658999624,
+   "collisions": 0.0,
+   "coverage": 0.13383593333020902,
+   "drones": 8
+  },
+  {
+   "update": 148,
+   "samples": 303104,
+   "return": 19.72646083573221,
+   "seconds": 262.7864456999814,
+   "collisions": 0.05,
+   "coverage": 0.13448887333686904,
+   "drones": 8
+  },
+  {
+   "update": 149,
+   "samples": 305152,
+   "return": 19.72646083573221,
+   "seconds": 264.60849979997147,
+   "collisions": 0.0,
+   "coverage": 0.13461250416738182,
+   "drones": 8
+  },
+  {
+   "update": 150,
+   "samples": 307200,
+   "return": 18.071883760142672,
+   "seconds": 266.38465289992746,
+   "collisions": 0.0,
+   "coverage": 0.13579856355221526,
+   "drones": 8
+  },
+  {
+   "update": 151,
+   "samples": 309248,
+   "return": 18.071883760142672,
+   "seconds": 267.83947080001235,
+   "collisions": 0.0,
+   "coverage": 0.13537216764929222,
+   "drones": 8
+  },
+  {
+   "update": 152,
+   "samples": 311296,
+   "return": 18.071883760142672,
+   "seconds": 269.2221458000131,
+   "collisions": 0.0,
+   "coverage": 0.1363144951182034,
+   "drones": 8
+  },
+  {
+   "update": 153,
+   "samples": 313344,
+   "return": 17.36935443710613,
+   "seconds": 270.71383219992276,
+   "collisions": 0.03,
+   "coverage": 0.13623086886989333,
+   "drones": 8
+  },
+  {
+   "update": 154,
+   "samples": 315392,
+   "return": 17.36935443710613,
+   "seconds": 272.24939029989764,
+   "collisions": 0.0,
+   "coverage": 0.136534897523522,
+   "drones": 8
+  },
+  {
+   "update": 155,
+   "samples": 317440,
+   "return": 17.078105476237297,
+   "seconds": 273.77220070001204,
+   "collisions": 0.03,
+   "coverage": 0.13684001016538272,
+   "drones": 8
+  },
+  {
+   "update": 156,
+   "samples": 319488,
+   "return": 17.078105476237297,
+   "seconds": 275.23355959996115,
+   "collisions": 0.0,
+   "coverage": 0.13641204677754906,
+   "drones": 8
+  },
+  {
+   "update": 157,
+   "samples": 321536,
+   "return": 17.078105476237297,
+   "seconds": 276.8662345999619,
+   "collisions": 0.0,
+   "coverage": 0.13670829553628636,
+   "drones": 8
+  },
+  {
+   "update": 158,
+   "samples": 323584,
+   "return": 16.113759192079694,
+   "seconds": 278.71528389991727,
+   "collisions": 0.0,
+   "coverage": 0.13606598506811202,
+   "drones": 8
+  },
+  {
+   "update": 159,
+   "samples": 325632,
+   "return": 16.113759192079694,
+   "seconds": 280.3266538999742,
+   "collisions": 0.0,
+   "coverage": 0.13641896254324754,
+   "drones": 8
+  },
+  {
+   "update": 160,
+   "samples": 327680,
+   "return": 15.071511874913526,
+   "seconds": 281.80725700000767,
+   "collisions": 0.0,
+   "coverage": 0.13580097678941602,
+   "drones": 8
+  },
+  {
+   "update": 161,
+   "samples": 329728,
+   "return": 15.071511874913526,
+   "seconds": 283.2313506999053,
+   "collisions": 0.0,
+   "coverage": 0.13568831445270857,
+   "drones": 8
+  },
+  {
+   "update": 162,
+   "samples": 331776,
+   "return": 14.790868332463669,
+   "seconds": 284.6739742999198,
+   "collisions": 0.0,
+   "coverage": 0.13578904937494496,
+   "drones": 8
+  },
+  {
+   "update": 163,
+   "samples": 333824,
+   "return": 14.790868332463669,
+   "seconds": 286.251178800012,
+   "collisions": 0.0,
+   "coverage": 0.13498380501753976,
+   "drones": 8
+  },
+  {
+   "update": 164,
+   "samples": 335872,
+   "return": 14.790868332463669,
+   "seconds": 288.01727969991043,
+   "collisions": 0.02,
+   "coverage": 0.13533002218643997,
+   "drones": 8
+  },
+  {
+   "update": 165,
+   "samples": 337920,
+   "return": 13.359355598607086,
+   "seconds": 289.5435252999887,
+   "collisions": 0.0,
+   "coverage": 0.13463911958072022,
+   "drones": 8
+  },
+  {
+   "update": 166,
+   "samples": 339968,
+   "return": 13.359355598607086,
+   "seconds": 290.99470759998076,
+   "collisions": 0.03,
+   "coverage": 0.13517353830702586,
+   "drones": 8
+  },
+  {
+   "update": 167,
+   "samples": 342016,
+   "return": 11.062024791937187,
+   "seconds": 292.49688919994514,
+   "collisions": 0.0,
+   "coverage": 0.1349664817205777,
+   "drones": 8
+  },
+  {
+   "update": 168,
+   "samples": 344064,
+   "return": 11.062024791937187,
+   "seconds": 294.0904276999645,
+   "collisions": 0.04,
+   "coverage": 0.13528114478005868,
+   "drones": 8
+  },
+  {
+   "update": 169,
+   "samples": 346112,
+   "return": 8.535037315627692,
+   "seconds": 295.70440219994634,
+   "collisions": 0.0,
+   "coverage": 0.13571680957694313,
+   "drones": 8
+  },
+  {
+   "update": 170,
+   "samples": 348160,
+   "return": 8.535037315627692,
+   "seconds": 297.17956959991716,
+   "collisions": 0.0,
+   "coverage": 0.13528352368510202,
+   "drones": 8
+  },
+  {
+   "update": 171,
+   "samples": 350208,
+   "return": 8.535037315627692,
+   "seconds": 298.5850664000027,
+   "collisions": 0.0,
+   "coverage": 0.1357165939183359,
+   "drones": 8
+  },
+  {
+   "update": 172,
+   "samples": 352256,
+   "return": 2.100928649994316,
+   "seconds": 300.10464089992456,
+   "collisions": 0.0,
+   "coverage": 0.13491171549401135,
+   "drones": 8
+  },
+  {
+   "update": 173,
+   "samples": 354304,
+   "return": 2.100928649994316,
+   "seconds": 301.49370549991727,
+   "collisions": 0.02,
+   "coverage": 0.13530771909176592,
+   "drones": 8
+  },
+  {
+   "update": 174,
+   "samples": 356352,
+   "return": -2.6336547436716793,
+   "seconds": 302.86949549999554,
+   "collisions": 0.0,
+   "coverage": 0.13475833491263506,
+   "drones": 8
+  },
+  {
+   "update": 175,
+   "samples": 358400,
+   "return": -2.6336547436716793,
+   "seconds": 304.4715702999383,
+   "collisions": 0.03,
+   "coverage": 0.1345636957745585,
+   "drones": 8
+  },
+  {
+   "update": 176,
+   "samples": 360448,
+   "return": -4.024530876960074,
+   "seconds": 306.11131319997367,
+   "collisions": 0.04,
+   "coverage": 0.13462533304125093,
+   "drones": 8
+  },
+  {
+   "update": 177,
+   "samples": 362496,
+   "return": -4.024530876960074,
+   "seconds": 307.700144500006,
+   "collisions": 0.0,
+   "coverage": 0.13368969104300216,
+   "drones": 8
+  },
+  {
+   "update": 178,
+   "samples": 364544,
+   "return": -4.024530876960074,
+   "seconds": 309.29148349992465,
+   "collisions": 0.0,
+   "coverage": 0.13392200084481995,
+   "drones": 8
+  },
+  {
+   "update": 179,
+   "samples": 366592,
+   "return": -2.6345516718714266,
+   "seconds": 310.8801048999885,
+   "collisions": 0.02,
+   "coverage": 0.13270609732363936,
+   "drones": 8
+  },
+  {
+   "update": 180,
+   "samples": 368640,
+   "return": -2.6345516718714266,
+   "seconds": 312.43633249995764,
+   "collisions": 0.03,
+   "coverage": 0.1333723147089891,
+   "drones": 8
+  },
+  {
+   "update": 181,
+   "samples": 370688,
+   "return": -10.96790662045023,
+   "seconds": 314.09029869991355,
+   "collisions": 0.29,
+   "coverage": 0.13323768667422317,
+   "drones": 8
+  },
+  {
+   "update": 182,
+   "samples": 372736,
+   "return": -10.96790662045023,
+   "seconds": 315.64374039997347,
+   "collisions": 0.0,
+   "coverage": 0.1331456940452142,
+   "drones": 8
+  },
+  {
+   "update": 183,
+   "samples": 374784,
+   "return": -11.729041943093156,
+   "seconds": 317.26865869993344,
+   "collisions": 0.24,
+   "coverage": 0.13354353311352982,
+   "drones": 8
+  },
+  {
+   "update": 184,
+   "samples": 376832,
+   "return": -11.729041943093156,
+   "seconds": 318.83728199999314,
+   "collisions": 0.03,
+   "coverage": 0.1330214344129492,
+   "drones": 8
+  },
+  {
+   "update": 185,
+   "samples": 378880,
+   "return": -11.729041943093156,
+   "seconds": 320.5823845999548,
+   "collisions": 0.0,
+   "coverage": 0.13337526159341714,
+   "drones": 8
+  },
+  {
+   "update": 186,
+   "samples": 380928,
+   "return": -10.733079748346857,
+   "seconds": 322.1935213999823,
+   "collisions": 0.0,
+   "coverage": 0.1324004324223125,
+   "drones": 8
+  },
+  {
+   "update": 187,
+   "samples": 382976,
+   "return": -10.733079748346857,
+   "seconds": 323.8586918999208,
+   "collisions": 0.0,
+   "coverage": 0.13294464587970586,
+   "drones": 8
+  },
+  {
+   "update": 188,
+   "samples": 385024,
+   "return": -9.89891968280418,
+   "seconds": 325.56301839998923,
+   "collisions": 0.03,
+   "coverage": 0.13275544797847105,
+   "drones": 8
+  },
+  {
+   "update": 189,
+   "samples": 387072,
+   "return": -9.89891968280418,
+   "seconds": 327.2531946999952,
+   "collisions": 0.02,
+   "coverage": 0.13253062408872507,
+   "drones": 8
+  },
+  {
+   "update": 190,
+   "samples": 389120,
+   "return": -13.392976574076801,
+   "seconds": 328.7151426000055,
+   "collisions": 0.0,
+   "coverage": 0.13300917665122594,
+   "drones": 8
+  },
+  {
+   "update": 191,
+   "samples": 391168,
+   "return": -13.392976574076801,
+   "seconds": 330.40510480001103,
+   "collisions": 0.0,
+   "coverage": 0.13198361325051056,
+   "drones": 8
+  },
+  {
+   "update": 192,
+   "samples": 393216,
+   "return": -13.392976574076801,
+   "seconds": 332.0175250999164,
+   "collisions": 0.0,
+   "coverage": 0.13302066607471158,
+   "drones": 8
+  },
+  {
+   "update": 193,
+   "samples": 395264,
+   "return": -4.1537456513390705,
+   "seconds": 333.6545130999293,
+   "collisions": 0.0,
+   "coverage": 0.13241316059342137,
+   "drones": 8
+  },
+  {
+   "update": 194,
+   "samples": 397312,
+   "return": -4.1537456513390705,
+   "seconds": 335.16641679999884,
+   "collisions": 0.0,
+   "coverage": 0.13291918075987114,
+   "drones": 8
+  },
+  {
+   "update": 195,
+   "samples": 399360,
+   "return": 1.2487731530210422,
+   "seconds": 336.59837869997136,
+   "collisions": 0.0,
+   "coverage": 0.13275242083161745,
+   "drones": 8
+  },
+  {
+   "update": 196,
+   "samples": 401408,
+   "return": 1.2487731530210422,
+   "seconds": 338.18837429990526,
+   "collisions": 0.02,
+   "coverage": 0.13247650588328252,
+   "drones": 8
+  },
+  {
+   "update": 197,
+   "samples": 403456,
+   "return": 0.38693650280679587,
+   "seconds": 340.01044539990835,
+   "collisions": 0.0,
+   "coverage": 0.13276065936842074,
+   "drones": 8
+  },
+  {
+   "update": 198,
+   "samples": 405504,
+   "return": 0.38693650280679587,
+   "seconds": 341.598230100004,
+   "collisions": 0.0,
+   "coverage": 0.13214783254915546,
+   "drones": 8
+  },
+  {
+   "update": 199,
+   "samples": 407552,
+   "return": 0.38693650280679587,
+   "seconds": 343.18087389995344,
+   "collisions": 0.0,
+   "coverage": 0.13282366294327858,
+   "drones": 8
+  },
+  {
+   "update": 200,
+   "samples": 409600,
+   "return": 1.260950085156551,
+   "seconds": 344.7990885999752,
+   "collisions": 0.0,
+   "coverage": 0.1324396264444146,
+   "drones": 8
+  },
+  {
+   "update": 201,
+   "samples": 411648,
+   "return": 1.260950085156551,
+   "seconds": 346.40734119992703,
+   "collisions": 0.03,
+   "coverage": 0.13331114625696297,
+   "drones": 8
+  },
+  {
+   "update": 202,
+   "samples": 413696,
+   "return": 4.089593903549432,
+   "seconds": 347.89888519991655,
+   "collisions": 0.0,
+   "coverage": 0.13361917106466545,
+   "drones": 8
+  },
+  {
+   "update": 203,
+   "samples": 415744,
+   "return": 4.089593903549432,
+   "seconds": 349.56668970000464,
+   "collisions": 0.0,
+   "coverage": 0.13372638256225985,
+   "drones": 8
+  },
+  {
+   "update": 204,
+   "samples": 417792,
+   "return": 5.868264412961791,
+   "seconds": 351.26578889996745,
+   "collisions": 0.0,
+   "coverage": 0.13439768451583883,
+   "drones": 8
+  },
+  {
+   "update": 205,
+   "samples": 419840,
+   "return": 5.868264412961791,
+   "seconds": 353.03619179991074,
+   "collisions": 0.0,
+   "coverage": 0.13327620271092402,
+   "drones": 8
+  },
+  {
+   "update": 206,
+   "samples": 421888,
+   "return": 5.868264412961791,
+   "seconds": 354.5776408999227,
+   "collisions": 0.0,
+   "coverage": 0.13405146505268067,
+   "drones": 8
+  },
+  {
+   "update": 207,
+   "samples": 423936,
+   "return": 7.0499514806231804,
+   "seconds": 356.2656541999895,
+   "collisions": 0.0,
+   "coverage": 0.13349080265877095,
+   "drones": 8
+  },
+  {
+   "update": 208,
+   "samples": 425984,
+   "return": 7.0499514806231804,
+   "seconds": 357.78626109997276,
+   "collisions": 0.0,
+   "coverage": 0.1336662602433147,
+   "drones": 8
+  },
+  {
+   "update": 209,
+   "samples": 428032,
+   "return": 12.544812636763352,
+   "seconds": 359.8097940000007,
+   "collisions": 0.0,
+   "coverage": 0.13341780071895562,
+   "drones": 8
+  },
+  {
+   "update": 210,
+   "samples": 430080,
+   "return": 12.544812636763352,
+   "seconds": 361.4651088999817,
+   "collisions": 0.0,
+   "coverage": 0.13311755360051808,
+   "drones": 8
+  },
+  {
+   "update": 211,
+   "samples": 432128,
+   "return": 12.709237721161191,
+   "seconds": 362.9235212999629,
+   "collisions": 0.0,
+   "coverage": 0.1337311817916418,
+   "drones": 8
+  },
+  {
+   "update": 212,
+   "samples": 434176,
+   "return": 12.709237721161191,
+   "seconds": 364.34359389997553,
+   "collisions": 0.02,
+   "coverage": 0.13288635353434647,
+   "drones": 8
+  },
+  {
+   "update": 213,
+   "samples": 436224,
+   "return": 12.709237721161191,
+   "seconds": 365.740579699981,
+   "collisions": 0.01,
+   "coverage": 0.13306926596898966,
+   "drones": 8
+  },
+  {
+   "update": 214,
+   "samples": 438272,
+   "return": 10.834398235647175,
+   "seconds": 367.4152939999476,
+   "collisions": 0.0,
+   "coverage": 0.13230299451497196,
+   "drones": 8
+  },
+  {
+   "update": 215,
+   "samples": 440320,
+   "return": 10.834398235647175,
+   "seconds": 369.007043599966,
+   "collisions": 0.02,
+   "coverage": 0.13260416160583158,
+   "drones": 8
+  },
+  {
+   "update": 216,
+   "samples": 442368,
+   "return": 12.817817468151508,
+   "seconds": 370.4481422000099,
+   "collisions": 0.0,
+   "coverage": 0.1332984207041261,
+   "drones": 8
+  },
+  {
+   "update": 217,
+   "samples": 444416,
+   "return": 12.817817468151508,
+   "seconds": 371.9840561999008,
+   "collisions": 0.0,
+   "coverage": 0.1322874437709946,
+   "drones": 8
+  },
+  {
+   "update": 218,
+   "samples": 446464,
+   "return": 14.971850302454095,
+   "seconds": 373.51732409989927,
+   "collisions": 0.0,
+   "coverage": 0.133278649021752,
+   "drones": 8
+  },
+  {
+   "update": 219,
+   "samples": 448512,
+   "return": 14.971850302454095,
+   "seconds": 375.1353980000131,
+   "collisions": 0.0,
+   "coverage": 0.1323389767582765,
+   "drones": 8
+  },
+  {
+   "update": 220,
+   "samples": 450560,
+   "return": 14.971850302454095,
+   "seconds": 376.4972126999637,
+   "collisions": 0.04,
+   "coverage": 0.13351107168413573,
+   "drones": 8
+  },
+  {
+   "update": 221,
+   "samples": 452608,
+   "return": 13.375338916868355,
+   "seconds": 377.98810489999596,
+   "collisions": 0.0,
+   "coverage": 0.13333769455878833,
+   "drones": 8
+  },
+  {
+   "update": 222,
+   "samples": 454656,
+   "return": 13.375338916868355,
+   "seconds": 379.4142539999448,
+   "collisions": 0.0,
+   "coverage": 0.1337918280789319,
+   "drones": 8
+  },
+  {
+   "update": 223,
+   "samples": 456704,
+   "return": 15.806640300032944,
+   "seconds": 381.01045319996774,
+   "collisions": 0.02,
+   "coverage": 0.13477477660041262,
+   "drones": 8
+  },
+  {
+   "update": 224,
+   "samples": 458752,
+   "return": 15.806640300032944,
+   "seconds": 382.4682412999682,
+   "collisions": 0.0,
+   "coverage": 0.13442543956261566,
+   "drones": 8
+  },
+  {
+   "update": 225,
+   "samples": 460800,
+   "return": 21.705790542396795,
+   "seconds": 383.9163312999299,
+   "collisions": 0.0,
+   "coverage": 0.13566506507852083,
+   "drones": 8
+  },
+  {
+   "update": 226,
+   "samples": 462848,
+   "return": 21.705790542396795,
+   "seconds": 385.4795509999385,
+   "collisions": 0.0,
+   "coverage": 0.13507876821179182,
+   "drones": 8
+  },
+  {
+   "update": 227,
+   "samples": 464896,
+   "return": 21.705790542396795,
+   "seconds": 387.11046979995444,
+   "collisions": 0.11,
+   "coverage": 0.1365791631925304,
+   "drones": 8
+  },
+  {
+   "update": 228,
+   "samples": 466944,
+   "return": 19.467822838331735,
+   "seconds": 388.70036919997074,
+   "collisions": 0.0,
+   "coverage": 0.13656579817700665,
+   "drones": 8
+  },
+  {
+   "update": 229,
+   "samples": 468992,
+   "return": 19.467822838331735,
+   "seconds": 390.31842419994064,
+   "collisions": 0.1,
+   "coverage": 0.1366631168998051,
+   "drones": 8
+  },
+  {
+   "update": 230,
+   "samples": 471040,
+   "return": 15.16331642295215,
+   "seconds": 391.9046028999146,
+   "collisions": 0.02,
+   "coverage": 0.13700817534405513,
+   "drones": 8
+  },
+  {
+   "update": 231,
+   "samples": 473088,
+   "return": 15.16331642295215,
+   "seconds": 393.60462959995493,
+   "collisions": 0.0,
+   "coverage": 0.13661355526594746,
+   "drones": 8
+  },
+  {
+   "update": 232,
+   "samples": 475136,
+   "return": 15.16331642295215,
+   "seconds": 395.2033446999267,
+   "collisions": 0.0,
+   "coverage": 0.13744913166977377,
+   "drones": 8
+  },
+  {
+   "update": 233,
+   "samples": 477184,
+   "return": 16.38735936015591,
+   "seconds": 396.5150021999143,
+   "collisions": 0.01,
+   "coverage": 0.13745119653014015,
+   "drones": 8
+  },
+  {
+   "update": 234,
+   "samples": 479232,
+   "return": 16.38735936015591,
+   "seconds": 398.030449999962,
+   "collisions": 0.01,
+   "coverage": 0.13839537783339284,
+   "drones": 8
+  },
+  {
+   "update": 235,
+   "samples": 481280,
+   "return": 12.477608207165586,
+   "seconds": 399.7244844000088,
+   "collisions": 0.0,
+   "coverage": 0.13836932014050438,
+   "drones": 8
+  },
+  {
+   "update": 236,
+   "samples": 483328,
+   "return": 12.477608207165586,
+   "seconds": 402.6812261999585,
+   "collisions": 0.0,
+   "coverage": 0.1390175405792113,
+   "drones": 8
+  },
+  {
+   "update": 237,
+   "samples": 485376,
+   "return": 9.48708052041377,
+   "seconds": 405.5377806999022,
+   "collisions": 0.0,
+   "coverage": 0.13982706186868238,
+   "drones": 8
+  },
+  {
+   "update": 238,
+   "samples": 487424,
+   "return": 9.48708052041377,
+   "seconds": 407.70420869998634,
+   "collisions": 0.0,
+   "coverage": 0.14000198707858566,
+   "drones": 8
+  },
+  {
+   "update": 239,
+   "samples": 489472,
+   "return": 9.48708052041377,
+   "seconds": 409.69024159992114,
+   "collisions": 0.01,
+   "coverage": 0.1409974321406427,
+   "drones": 8
+  },
+  {
+   "update": 240,
+   "samples": 491520,
+   "return": 10.334757156458593,
+   "seconds": 411.7604768999154,
+   "collisions": 0.0,
+   "coverage": 0.14095468631238803,
+   "drones": 8
+  },
+  {
+   "update": 241,
+   "samples": 493568,
+   "return": 10.334757156458593,
+   "seconds": 413.7410894999048,
+   "collisions": 0.0,
+   "coverage": 0.14185245881209885,
+   "drones": 8
+  },
+  {
+   "update": 242,
+   "samples": 495616,
+   "return": 14.087235459216458,
+   "seconds": 415.709108299925,
+   "collisions": 0.02,
+   "coverage": 0.14246866283707463,
+   "drones": 8
+  },
+  {
+   "update": 243,
+   "samples": 497664,
+   "return": 14.087235459216458,
+   "seconds": 416.922639299999,
+   "collisions": 0.07,
+   "coverage": 0.14309730938533863,
+   "drones": 8
+  },
+  {
+   "update": 244,
+   "samples": 499712,
+   "return": 10.118249886573523,
+   "seconds": 418.3156514998991,
+   "collisions": 0.04,
+   "coverage": 0.14378601646457764,
+   "drones": 8
+  },
+  {
+   "update": 245,
+   "samples": 501760,
+   "return": 10.118249886573523,
+   "seconds": 419.88719159993343,
+   "collisions": 0.0,
+   "coverage": 0.14355531984114767,
+   "drones": 8
+  },
+  {
+   "update": 246,
+   "samples": 503808,
+   "return": 10.118249886573523,
+   "seconds": 421.45490849995986,
+   "collisions": 0.06,
+   "coverage": 0.14419290771159202,
+   "drones": 8
+  },
+  {
+   "update": 247,
+   "samples": 505856,
+   "return": 11.797564757224821,
+   "seconds": 423.12789729994256,
+   "collisions": 0.0,
+   "coverage": 0.1438394035595745,
+   "drones": 8
+  },
+  {
+   "update": 248,
+   "samples": 507904,
+   "return": 11.797564757224821,
+   "seconds": 424.8846825999208,
+   "collisions": 0.02,
+   "coverage": 0.14451575592326157,
+   "drones": 8
+  },
+  {
+   "update": 249,
+   "samples": 509952,
+   "return": 13.606429974353883,
+   "seconds": 426.5343850000063,
+   "collisions": 0.06,
+   "coverage": 0.14484097711102314,
+   "drones": 8
+  },
+  {
+   "update": 250,
+   "samples": 512000,
+   "return": 13.606429974353883,
+   "seconds": 428.1855949999299,
+   "collisions": 0.0,
+   "coverage": 0.14532455062797114,
+   "drones": 8
+  },
+  {
+   "update": 251,
+   "samples": 514048,
+   "return": 13.47171592443911,
+   "seconds": 429.7847944999812,
+   "collisions": 0.03,
+   "coverage": 0.14627349714955856,
+   "drones": 8
+  },
+  {
+   "update": 252,
+   "samples": 516096,
+   "return": 13.47171592443911,
+   "seconds": 431.4479253999889,
+   "collisions": 0.03,
+   "coverage": 0.14624817636508616,
+   "drones": 8
+  },
+  {
+   "update": 253,
+   "samples": 518144,
+   "return": 13.47171592443911,
+   "seconds": 433.35055719991215,
+   "collisions": 0.0,
+   "coverage": 0.1472391142555064,
+   "drones": 8
+  },
+  {
+   "update": 254,
+   "samples": 520192,
+   "return": 14.269664558268733,
+   "seconds": 435.5296549999621,
+   "collisions": 0.05,
+   "coverage": 0.1472853480798844,
+   "drones": 8
+  },
+  {
+   "update": 255,
+   "samples": 522240,
+   "return": 14.269664558268733,
+   "seconds": 437.6954483999871,
+   "collisions": 0.0,
+   "coverage": 0.1482796922544373,
+   "drones": 8
+  },
+  {
+   "update": 256,
+   "samples": 524288,
+   "return": 18.58038499451349,
+   "seconds": 439.9222281000111,
+   "collisions": 0.0,
+   "coverage": 0.1490706671281285,
+   "drones": 8
+  },
+  {
+   "update": 257,
+   "samples": 526336,
+   "return": 18.58038499451349,
+   "seconds": 442.0284992000088,
+   "collisions": 0.0,
+   "coverage": 0.14931388107923158,
+   "drones": 8
+  },
+  {
+   "update": 258,
+   "samples": 528384,
+   "return": 17.256894842716772,
+   "seconds": 444.05019689991605,
+   "collisions": 0.195,
+   "coverage": 0.1507663668804738,
+   "drones": 8
+  },
+  {
+   "update": 259,
+   "samples": 530432,
+   "return": 17.256894842716772,
+   "seconds": 446.0836149000097,
+   "collisions": 0.0,
+   "coverage": 0.15043425857436385,
+   "drones": 8
+  },
+  {
+   "update": 260,
+   "samples": 532480,
+   "return": 17.256894842716772,
+   "seconds": 448.06109759991523,
+   "collisions": 0.0,
+   "coverage": 0.1511423429852159,
+   "drones": 8
+  },
+  {
+   "update": 261,
+   "samples": 534528,
+   "return": 16.388226051929223,
+   "seconds": 450.1816506999312,
+   "collisions": 0.0,
+   "coverage": 0.1508700858687466,
+   "drones": 8
+  },
+  {
+   "update": 262,
+   "samples": 536576,
+   "return": 16.388226051929223,
+   "seconds": 452.2273993999697,
+   "collisions": 0.04,
+   "coverage": 0.1515667658513387,
+   "drones": 8
+  },
+  {
+   "update": 263,
+   "samples": 538624,
+   "return": 16.30193508841851,
+   "seconds": 454.3822951999027,
+   "collisions": 0.0,
+   "coverage": 0.15211144657946657,
+   "drones": 8
+  },
+  {
+   "update": 264,
+   "samples": 540672,
+   "return": 16.30193508841851,
+   "seconds": 456.4026549999835,
+   "collisions": 0.0,
+   "coverage": 0.15219049870615906,
+   "drones": 8
+  },
+  {
+   "update": 265,
+   "samples": 542720,
+   "return": 15.76411989648482,
+   "seconds": 458.42003999999724,
+   "collisions": 0.0,
+   "coverage": 0.15334930390936155,
+   "drones": 8
+  },
+  {
+   "update": 266,
+   "samples": 544768,
+   "return": 15.76411989648482,
+   "seconds": 460.5968587999232,
+   "collisions": 0.0,
+   "coverage": 0.15257746611060077,
+   "drones": 8
+  },
+  {
+   "update": 267,
+   "samples": 546816,
+   "return": 15.76411989648482,
+   "seconds": 462.60084129997995,
+   "collisions": 0.0,
+   "coverage": 0.1535914870438449,
+   "drones": 8
+  },
+  {
+   "update": 268,
+   "samples": 548864,
+   "return": 15.553606805406167,
+   "seconds": 464.6716208999278,
+   "collisions": 0.0,
+   "coverage": 0.15317450477376263,
+   "drones": 8
+  },
+  {
+   "update": 269,
+   "samples": 550912,
+   "return": 15.553606805406167,
+   "seconds": 466.61947919998784,
+   "collisions": 0.02,
+   "coverage": 0.15406946621790452,
+   "drones": 8
+  },
+  {
+   "update": 270,
+   "samples": 552960,
+   "return": 19.34996941194428,
+   "seconds": 468.11969439999666,
+   "collisions": 0.0,
+   "coverage": 0.15429029677473466,
+   "drones": 8
+  },
+  {
+   "update": 271,
+   "samples": 555008,
+   "return": 19.34996941194428,
+   "seconds": 469.2779555999441,
+   "collisions": 0.0,
+   "coverage": 0.1542209933938893,
+   "drones": 8
+  },
+  {
+   "update": 272,
+   "samples": 557056,
+   "return": 19.61289867841699,
+   "seconds": 470.52908299991395,
+   "collisions": 0.01,
+   "coverage": 0.15533958308436385,
+   "drones": 8
+  },
+  {
+   "update": 273,
+   "samples": 559104,
+   "return": 19.61289867841699,
+   "seconds": 472.0735830999911,
+   "collisions": 0.0,
+   "coverage": 0.15463666936999293,
+   "drones": 8
+  },
+  {
+   "update": 274,
+   "samples": 561152,
+   "return": 19.61289867841699,
+   "seconds": 473.9185200999491,
+   "collisions": 0.0,
+   "coverage": 0.15610815540950201,
+   "drones": 8
+  },
+  {
+   "update": 275,
+   "samples": 563200,
+   "return": 17.73189113011916,
+   "seconds": 476.0073278999189,
+   "collisions": 0.0,
+   "coverage": 0.1561435978978898,
+   "drones": 8
+  },
+  {
+   "update": 276,
+   "samples": 565248,
+   "return": 17.73189113011916,
+   "seconds": 477.98425579990726,
+   "collisions": 0.02,
+   "coverage": 0.15667245744756997,
+   "drones": 8
+  },
+  {
+   "update": 277,
+   "samples": 567296,
+   "return": 12.307863950852603,
+   "seconds": 479.9709415999241,
+   "collisions": 0.06,
+   "coverage": 0.15684562859920198,
+   "drones": 8
+  },
+  {
+   "update": 278,
+   "samples": 569344,
+   "return": 12.307863950852603,
+   "seconds": 481.7897012999747,
+   "collisions": 0.0,
+   "coverage": 0.15707177651218304,
+   "drones": 8
+  },
+  {
+   "update": 279,
+   "samples": 571392,
+   "return": 11.046104303473694,
+   "seconds": 483.80165349994786,
+   "collisions": 0.05,
+   "coverage": 0.15813373056535948,
+   "drones": 8
+  },
+  {
+   "update": 280,
+   "samples": 573440,
+   "return": 11.046104303473694,
+   "seconds": 485.7046951999655,
+   "collisions": 0.0,
+   "coverage": 0.15722612043221867,
+   "drones": 8
+  },
+  {
+   "update": 281,
+   "samples": 575488,
+   "return": 11.046104303473694,
+   "seconds": 487.579215799924,
+   "collisions": 0.03,
+   "coverage": 0.15812719412560353,
+   "drones": 8
+  },
+  {
+   "update": 282,
+   "samples": 577536,
+   "return": 7.898467390339057,
+   "seconds": 489.6409669999266,
+   "collisions": 0.0,
+   "coverage": 0.1578624699365986,
+   "drones": 8
+  },
+  {
+   "update": 283,
+   "samples": 579584,
+   "return": 7.898467390339057,
+   "seconds": 491.57858179998584,
+   "collisions": 0.0,
+   "coverage": 0.15834126663557488,
+   "drones": 8
+  },
+  {
+   "update": 284,
+   "samples": 581632,
+   "return": 7.787730593246122,
+   "seconds": 493.65460409992374,
+   "collisions": 0.04,
+   "coverage": 0.15866923230645777,
+   "drones": 8
+  },
+  {
+   "update": 285,
+   "samples": 583680,
+   "return": 7.787730593246122,
+   "seconds": 495.52927159995306,
+   "collisions": 0.0,
+   "coverage": 0.15877996690224444,
+   "drones": 8
+  },
+  {
+   "update": 286,
+   "samples": 585728,
+   "return": 5.325430215139358,
+   "seconds": 497.60106589994393,
+   "collisions": 0.28,
+   "coverage": 0.15994713598929927,
+   "drones": 8
+  },
+  {
+   "update": 287,
+   "samples": 587776,
+   "return": 5.325430215139358,
+   "seconds": 499.5939426999539,
+   "collisions": 0.05,
+   "coverage": 0.15882914398360104,
+   "drones": 8
+  },
+  {
+   "update": 288,
+   "samples": 589824,
+   "return": 5.325430215139358,
+   "seconds": 501.7182867999654,
+   "collisions": 0.0,
+   "coverage": 0.15975411072803233,
+   "drones": 8
+  },
+  {
+   "update": 289,
+   "samples": 591872,
+   "return": 9.231827793928659,
+   "seconds": 504.01260969997384,
+   "collisions": 0.0,
+   "coverage": 0.15951523117652638,
+   "drones": 8
+  },
+  {
+   "update": 290,
+   "samples": 593920,
+   "return": 9.231827793928659,
+   "seconds": 505.80430319998413,
+   "collisions": 0.0,
+   "coverage": 0.16031073005506408,
+   "drones": 8
+  },
+  {
+   "update": 291,
+   "samples": 595968,
+   "return": 10.754864595335796,
+   "seconds": 506.92430219997186,
+   "collisions": 0.03,
+   "coverage": 0.16152609255070716,
+   "drones": 8
+  },
+  {
+   "update": 292,
+   "samples": 598016,
+   "return": 10.754864595335796,
+   "seconds": 508.0145227999892,
+   "collisions": 0.06,
+   "coverage": 0.16148456291617724,
+   "drones": 8
+  },
+  {
+   "update": 293,
+   "samples": 600064,
+   "return": 12.49806569937613,
+   "seconds": 509.2154770999914,
+   "collisions": 0.0,
+   "coverage": 0.1622529409224226,
+   "drones": 8
+  },
+  {
+   "update": 294,
+   "samples": 602112,
+   "return": 12.49806569937613,
+   "seconds": 510.59492109995335,
+   "collisions": 0.0,
+   "coverage": 0.1608754848627401,
+   "drones": 8
+  },
+  {
+   "update": 295,
+   "samples": 604160,
+   "return": 12.49806569937613,
+   "seconds": 512.1739584999159,
+   "collisions": 0.0,
+   "coverage": 0.16215168697320884,
+   "drones": 8
+  },
+  {
+   "update": 296,
+   "samples": 606208,
+   "return": 13.543603272231355,
+   "seconds": 513.7105004999321,
+   "collisions": 0.0,
+   "coverage": 0.16190614049049373,
+   "drones": 8
+  },
+  {
+   "update": 297,
+   "samples": 608256,
+   "return": 13.543603272231355,
+   "seconds": 515.4079160999972,
+   "collisions": 0.01,
+   "coverage": 0.16175749110228055,
+   "drones": 8
+  },
+  {
+   "update": 298,
+   "samples": 610304,
+   "return": 16.409100348068378,
+   "seconds": 516.9844212000025,
+   "collisions": 0.06,
+   "coverage": 0.16199752431587633,
+   "drones": 8
+  },
+  {
+   "update": 299,
+   "samples": 612352,
+   "return": 16.409100348068378,
+   "seconds": 518.4861265999498,
+   "collisions": 0.05,
+   "coverage": 0.16112677480444318,
+   "drones": 8
+  },
+  {
+   "update": 300,
+   "samples": 614400,
+   "return": 17.20120397673236,
+   "seconds": 520.3100890999194,
+   "collisions": 0.0,
+   "coverage": 0.1618106399090821,
+   "drones": 8
+  },
+  {
+   "update": 301,
+   "samples": 616448,
+   "return": 17.20120397673236,
+   "seconds": 522.0437651999528,
+   "collisions": 0.0,
+   "coverage": 0.16042023143517314,
+   "drones": 8
+  },
+  {
+   "update": 302,
+   "samples": 618496,
+   "return": 17.20120397673236,
+   "seconds": 523.5666820999468,
+   "collisions": 0.0,
+   "coverage": 0.16119174007741457,
+   "drones": 8
+  },
+  {
+   "update": 303,
+   "samples": 620544,
+   "return": 5.4314354818068775,
+   "seconds": 525.0219344999641,
+   "collisions": 0.21,
+   "coverage": 0.16070651758135684,
+   "drones": 8
+  },
+  {
+   "update": 304,
+   "samples": 622592,
+   "return": 5.4314354818068775,
+   "seconds": 526.7112191999331,
+   "collisions": 0.09,
+   "coverage": 0.16079189653675705,
+   "drones": 8
+  },
+  {
+   "update": 305,
+   "samples": 624640,
+   "return": 4.188738770428081,
+   "seconds": 528.1982071999228,
+   "collisions": 0.0,
+   "coverage": 0.16102578447132296,
+   "drones": 8
+  },
+  {
+   "update": 306,
+   "samples": 626688,
+   "return": 4.188738770428081,
+   "seconds": 529.6048197000055,
+   "collisions": 0.0,
+   "coverage": 0.15990290127155915,
+   "drones": 8
+  },
+  {
+   "update": 307,
+   "samples": 628736,
+   "return": 4.188738770428081,
+   "seconds": 531.0807373999851,
+   "collisions": 0.02,
+   "coverage": 0.16028283893660641,
+   "drones": 8
+  },
+  {
+   "update": 308,
+   "samples": 630784,
+   "return": 2.9676227440544096,
+   "seconds": 532.6166115999222,
+   "collisions": 0.0,
+   "coverage": 0.1596114689587479,
+   "drones": 8
+  },
+  {
+   "update": 309,
+   "samples": 632832,
+   "return": 2.9676227440544096,
+   "seconds": 534.1028252999531,
+   "collisions": 0.03,
+   "coverage": 0.16080127575311784,
+   "drones": 8
+  },
+  {
+   "update": 310,
+   "samples": 634880,
+   "return": 2.4172357598679355,
+   "seconds": 535.5196914999979,
+   "collisions": 0.08,
+   "coverage": 0.16045587576316628,
+   "drones": 8
+  },
+  {
+   "update": 311,
+   "samples": 636928,
+   "return": 2.4172357598679355,
+   "seconds": 537.217872899957,
+   "collisions": 0.0,
+   "coverage": 0.16079506160307067,
+   "drones": 8
+  },
+  {
+   "update": 312,
+   "samples": 638976,
+   "return": 4.255751031653334,
+   "seconds": 539.0166225999128,
+   "collisions": 0.03,
+   "coverage": 0.16172576217782875,
+   "drones": 8
+  },
+  {
+   "update": 313,
+   "samples": 641024,
+   "return": 4.255751031653334,
+   "seconds": 540.7680126999039,
+   "collisions": 0.0,
+   "coverage": 0.16138460753022618,
+   "drones": 8
+  },
+  {
+   "update": 314,
+   "samples": 643072,
+   "return": 4.255751031653334,
+   "seconds": 542.5651748999953,
+   "collisions": 0.25,
+   "coverage": 0.16203045882765138,
+   "drones": 8
+  },
+  {
+   "update": 315,
+   "samples": 645120,
+   "return": 10.675343491024035,
+   "seconds": 544.2043775999919,
+   "collisions": 0.0,
+   "coverage": 0.1613861924087986,
+   "drones": 8
+  },
+  {
+   "update": 316,
+   "samples": 647168,
+   "return": 10.675343491024035,
+   "seconds": 545.8415112999501,
+   "collisions": 0.0,
+   "coverage": 0.16209432933332926,
+   "drones": 8
+  },
+  {
+   "update": 317,
+   "samples": 649216,
+   "return": 12.881881827960763,
+   "seconds": 547.2774209999479,
+   "collisions": 0.0,
+   "coverage": 0.16189537496667827,
+   "drones": 8
+  },
+  {
+   "update": 318,
+   "samples": 651264,
+   "return": 12.881881827960763,
+   "seconds": 548.6312925999518,
+   "collisions": 0.0,
+   "coverage": 0.16203329718991646,
+   "drones": 8
+  },
+  {
+   "update": 319,
+   "samples": 653312,
+   "return": 12.42062486474918,
+   "seconds": 550.1957652999554,
+   "collisions": 0.0,
+   "coverage": 0.16227310695752561,
+   "drones": 8
+  },
+  {
+   "update": 320,
+   "samples": 655360,
+   "return": 12.42062486474918,
+   "seconds": 551.725796099985,
+   "collisions": 0.02,
+   "coverage": 0.16152633151746784,
+   "drones": 8
+  },
+  {
+   "update": 321,
+   "samples": 657408,
+   "return": 12.42062486474918,
+   "seconds": 553.1977197999367,
+   "collisions": 0.02,
+   "coverage": 0.16213999457419462,
+   "drones": 8
+  },
+  {
+   "update": 322,
+   "samples": 659456,
+   "return": 14.028501328396136,
+   "seconds": 554.9035494999262,
+   "collisions": 0.0,
+   "coverage": 0.16147134690784704,
+   "drones": 8
+  },
+  {
+   "update": 323,
+   "samples": 661504,
+   "return": 14.028501328396136,
+   "seconds": 556.2976235999959,
+   "collisions": 0.01,
+   "coverage": 0.16237449596973044,
+   "drones": 8
+  },
+  {
+   "update": 324,
+   "samples": 663552,
+   "return": 14.00701991378306,
+   "seconds": 557.6938472999027,
+   "collisions": 0.0,
+   "coverage": 0.1626098409574494,
+   "drones": 8
+  },
+  {
+   "update": 325,
+   "samples": 665600,
+   "return": 14.00701991378306,
+   "seconds": 559.346365800011,
+   "collisions": 0.0,
+   "coverage": 0.16274583183582006,
+   "drones": 8
+  },
+  {
+   "update": 326,
+   "samples": 667648,
+   "return": 19.40427053499829,
+   "seconds": 560.930866300012,
+   "collisions": 0.02,
+   "coverage": 0.16334323197990272,
+   "drones": 8
+  },
+  {
+   "update": 327,
+   "samples": 669696,
+   "return": 19.40427053499829,
+   "seconds": 562.5611812999705,
+   "collisions": 0.0,
+   "coverage": 0.16286935763591667,
+   "drones": 8
+  },
+  {
+   "update": 328,
+   "samples": 671744,
+   "return": 19.40427053499829,
+   "seconds": 563.9065370999742,
+   "collisions": 0.0,
+   "coverage": 0.1638114467311467,
+   "drones": 8
+  },
+  {
+   "update": 329,
+   "samples": 673792,
+   "return": 19.5797495174675,
+   "seconds": 565.4533856000053,
+   "collisions": 0.05,
+   "coverage": 0.16300846064237984,
+   "drones": 8
+  },
+  {
+   "update": 330,
+   "samples": 675840,
+   "return": 19.5797495174675,
+   "seconds": 567.0076152000111,
+   "collisions": 0.0,
+   "coverage": 0.16364667373440767,
+   "drones": 8
+  },
+  {
+   "update": 331,
+   "samples": 677888,
+   "return": 20.740497830969904,
+   "seconds": 568.7195013999008,
+   "collisions": 0.0,
+   "coverage": 0.1633978971206055,
+   "drones": 8
+  },
+  {
+   "update": 332,
+   "samples": 679936,
+   "return": 20.740497830969904,
+   "seconds": 570.1634344999911,
+   "collisions": 0.04,
+   "coverage": 0.1632163122796924,
+   "drones": 8
+  },
+  {
+   "update": 333,
+   "samples": 681984,
+   "return": 21.396293595830723,
+   "seconds": 571.8367628999986,
+   "collisions": 0.05,
+   "coverage": 0.16417146139438507,
+   "drones": 8
+  },
+  {
+   "update": 334,
+   "samples": 684032,
+   "return": 21.396293595830723,
+   "seconds": 573.3365485999966,
+   "collisions": 0.02,
+   "coverage": 0.1630833318455947,
+   "drones": 8
+  },
+  {
+   "update": 335,
+   "samples": 686080,
+   "return": 21.396293595830723,
+   "seconds": 574.9285653999541,
+   "collisions": 0.0,
+   "coverage": 0.16371442451012647,
+   "drones": 8
+  },
+  {
+   "update": 336,
+   "samples": 688128,
+   "return": 19.404197063569,
+   "seconds": 576.6729015999008,
+   "collisions": 0.0,
+   "coverage": 0.16240103254666738,
+   "drones": 8
+  },
+  {
+   "update": 337,
+   "samples": 690176,
+   "return": 19.404197063569,
+   "seconds": 578.1828194999835,
+   "collisions": 0.06,
+   "coverage": 0.16307747418712232,
+   "drones": 8
+  },
+  {
+   "update": 338,
+   "samples": 692224,
+   "return": 17.85354285058903,
+   "seconds": 579.9637251999229,
+   "collisions": 0.0,
+   "coverage": 0.16296656264292522,
+   "drones": 8
+  },
+  {
+   "update": 339,
+   "samples": 694272,
+   "return": 17.85354285058903,
+   "seconds": 581.8132970998995,
+   "collisions": 0.0,
+   "coverage": 0.16292691380888477,
+   "drones": 8
+  },
+  {
+   "update": 340,
+   "samples": 696320,
+   "return": 15.768614252945065,
+   "seconds": 583.5422571999952,
+   "collisions": 0.12,
+   "coverage": 0.16392585221221015,
+   "drones": 8
+  },
+  {
+   "update": 341,
+   "samples": 698368,
+   "return": 15.768614252945065,
+   "seconds": 584.9628460999811,
+   "collisions": 0.05,
+   "coverage": 0.16260609913277402,
+   "drones": 8
+  },
+  {
+   "update": 342,
+   "samples": 700416,
+   "return": 15.768614252945065,
+   "seconds": 586.7439873999683,
+   "collisions": 0.0,
+   "coverage": 0.16356167949445888,
+   "drones": 8
+  },
+  {
+   "update": 343,
+   "samples": 702464,
+   "return": 16.39934443469526,
+   "seconds": 588.2393168999115,
+   "collisions": 0.0,
+   "coverage": 0.16272099691801348,
+   "drones": 8
+  },
+  {
+   "update": 344,
+   "samples": 704512,
+   "return": 16.39934443469526,
+   "seconds": 589.693806199939,
+   "collisions": 0.0,
+   "coverage": 0.1635682309002281,
+   "drones": 8
+  },
+  {
+   "update": 345,
+   "samples": 706560,
+   "return": 18.031813815049784,
+   "seconds": 591.2974325999385,
+   "collisions": 0.0,
+   "coverage": 0.16377427810475034,
+   "drones": 8
+  },
+  {
+   "update": 346,
+   "samples": 708608,
+   "return": 18.031813815049784,
+   "seconds": 592.6968451999128,
+   "collisions": 0.0,
+   "coverage": 0.16369660105461598,
+   "drones": 8
+  },
+  {
+   "update": 347,
+   "samples": 710656,
+   "return": 18.749029075299678,
+   "seconds": 594.2928230999969,
+   "collisions": 0.04,
+   "coverage": 0.16458842923691036,
+   "drones": 8
+  },
+  {
+   "update": 348,
+   "samples": 712704,
+   "return": 18.749029075299678,
+   "seconds": 595.9248352999566,
+   "collisions": 0.05,
+   "coverage": 0.1633158742393839,
+   "drones": 8
+  },
+  {
+   "update": 349,
+   "samples": 714752,
+   "return": 18.749029075299678,
+   "seconds": 597.3689251999604,
+   "collisions": 0.02,
+   "coverage": 0.16439157500567006,
+   "drones": 8
+  },
+  {
+   "update": 350,
+   "samples": 716800,
+   "return": 19.374687146832432,
+   "seconds": 599.0898241999093,
+   "collisions": 0.0,
+   "coverage": 0.1636115817769494,
+   "drones": 8
+  },
+  {
+   "update": 351,
+   "samples": 718848,
+   "return": 19.374687146832432,
+   "seconds": 600.5832780000055,
+   "collisions": 0.0,
+   "coverage": 0.1643371414131858,
+   "drones": 8
+  },
+  {
+   "update": 352,
+   "samples": 720896,
+   "return": 21.050749847307646,
+   "seconds": 602.2652389999712,
+   "collisions": 0.02,
+   "coverage": 0.16411960990840146,
+   "drones": 8
+  },
+  {
+   "update": 353,
+   "samples": 722944,
+   "return": 21.050749847307646,
+   "seconds": 603.7063182999846,
+   "collisions": 0.0,
+   "coverage": 0.16404867887312746,
+   "drones": 8
+  },
+  {
+   "update": 354,
+   "samples": 724992,
+   "return": 20.293970346217108,
+   "seconds": 605.3945377999917,
+   "collisions": 0.0,
+   "coverage": 0.1654601027920563,
+   "drones": 8
+  },
+  {
+   "update": 355,
+   "samples": 727040,
+   "return": 20.293970346217108,
+   "seconds": 607.0328053999692,
+   "collisions": 0.05,
+   "coverage": 0.16458158737864906,
+   "drones": 8
+  },
+  {
+   "update": 356,
+   "samples": 729088,
+   "return": 20.293970346217108,
+   "seconds": 608.5164585999446,
+   "collisions": 0.02,
+   "coverage": 0.16548853764644378,
+   "drones": 8
+  },
+  {
+   "update": 357,
+   "samples": 731136,
+   "return": 18.693846637001627,
+   "seconds": 609.9430182999931,
+   "collisions": 0.0,
+   "coverage": 0.16492750330209788,
+   "drones": 8
+  },
+  {
+   "update": 358,
+   "samples": 733184,
+   "return": 18.693846637001627,
+   "seconds": 611.3709403999383,
+   "collisions": 0.03,
+   "coverage": 0.16498379920411843,
+   "drones": 8
+  },
+  {
+   "update": 359,
+   "samples": 735232,
+   "return": 16.76235605634887,
+   "seconds": 612.8200233000098,
+   "collisions": 0.0,
+   "coverage": 0.16492781987691374,
+   "drones": 8
+  },
+  {
+   "update": 360,
+   "samples": 737280,
+   "return": 16.76235605634887,
+   "seconds": 614.4812567000045,
+   "collisions": 0.0,
+   "coverage": 0.16493563555792726,
+   "drones": 8
+  },
+  {
+   "update": 361,
+   "samples": 739328,
+   "return": 18.9357488740524,
+   "seconds": 616.3101782999001,
+   "collisions": 0.0,
+   "coverage": 0.1662583593503423,
+   "drones": 8
+  },
+  {
+   "update": 362,
+   "samples": 741376,
+   "return": 18.9357488740524,
+   "seconds": 618.4347233999288,
+   "collisions": 0.0,
+   "coverage": 0.1649819595136436,
+   "drones": 8
+  },
+  {
+   "update": 363,
+   "samples": 743424,
+   "return": 18.9357488740524,
+   "seconds": 620.5789166999748,
+   "collisions": 0.02,
+   "coverage": 0.1658516233996709,
+   "drones": 8
+  },
+  {
+   "update": 364,
+   "samples": 745472,
+   "return": 18.861403012881333,
+   "seconds": 622.7417300000088,
+   "collisions": 0.0,
+   "coverage": 0.16521400429960373,
+   "drones": 8
+  },
+  {
+   "update": 365,
+   "samples": 747520,
+   "return": 18.861403012881333,
+   "seconds": 624.7248886999441,
+   "collisions": 0.02,
+   "coverage": 0.16544101808877834,
+   "drones": 8
+  },
+  {
+   "update": 366,
+   "samples": 749568,
+   "return": 19.46879695128141,
+   "seconds": 626.8696926999837,
+   "collisions": 0.04,
+   "coverage": 0.16628406807321167,
+   "drones": 8
+  },
+  {
+   "update": 367,
+   "samples": 751616,
+   "return": 19.46879695128141,
+   "seconds": 628.7344712999184,
+   "collisions": 0.0,
+   "coverage": 0.16578961737896272,
+   "drones": 8
+  },
+  {
+   "update": 368,
+   "samples": 753664,
+   "return": 18.569562935532694,
+   "seconds": 630.7826459999196,
+   "collisions": 0.02,
+   "coverage": 0.16648918667865403,
+   "drones": 8
+  },
+  {
+   "update": 369,
+   "samples": 755712,
+   "return": 18.569562935532694,
+   "seconds": 632.8924794999184,
+   "collisions": 0.0,
+   "coverage": 0.16512301645638733,
+   "drones": 8
+  },
+  {
+   "update": 370,
+   "samples": 757760,
+   "return": 18.569562935532694,
+   "seconds": 634.9929838000098,
+   "collisions": 0.0,
+   "coverage": 0.16674098055928205,
+   "drones": 8
+  },
+  {
+   "update": 371,
+   "samples": 759808,
+   "return": 21.54080863219901,
+   "seconds": 636.9694832999958,
+   "collisions": 0.0,
+   "coverage": 0.16659195208693853,
+   "drones": 8
+  },
+  {
+   "update": 372,
+   "samples": 761856,
+   "return": 21.54080863219901,
+   "seconds": 638.6781089999713,
+   "collisions": 0.0,
+   "coverage": 0.16659374000825777,
+   "drones": 8
+  },
+  {
+   "update": 373,
+   "samples": 763904,
+   "return": 20.242421265797685,
+   "seconds": 640.5611993999919,
+   "collisions": 0.0,
+   "coverage": 0.16697394764390394,
+   "drones": 8
+  },
+  {
+   "update": 374,
+   "samples": 765952,
+   "return": 20.242421265797685,
+   "seconds": 642.3679418999236,
+   "collisions": 0.02,
+   "coverage": 0.1661394167466625,
+   "drones": 8
+  },
+  {
+   "update": 375,
+   "samples": 768000,
+   "return": 21.21871928995976,
+   "seconds": 644.2717412000056,
+   "collisions": 0.04,
+   "coverage": 0.16791108897989207,
+   "drones": 8
+  },
+  {
+   "update": 376,
+   "samples": 770048,
+   "return": 21.21871928995976,
+   "seconds": 645.9966920999577,
+   "collisions": 0.0,
+   "coverage": 0.16709700885931894,
+   "drones": 8
+  },
+  {
+   "update": 377,
+   "samples": 772096,
+   "return": 21.21871928995976,
+   "seconds": 647.234314500005,
+   "collisions": 0.06,
+   "coverage": 0.16863846797197674,
+   "drones": 8
+  },
+  {
+   "update": 378,
+   "samples": 774144,
+   "return": 18.35265746135609,
+   "seconds": 648.1044295999454,
+   "collisions": 0.08,
+   "coverage": 0.16854119437257029,
+   "drones": 8
+  },
+  {
+   "update": 379,
+   "samples": 776192,
+   "return": 18.35265746135609,
+   "seconds": 649.0101886999328,
+   "collisions": 0.0,
+   "coverage": 0.16891861488692114,
+   "drones": 8
+  },
+  {
+   "update": 380,
+   "samples": 778240,
+   "return": 14.59936427372376,
+   "seconds": 649.9110623999732,
+   "collisions": 0.01,
+   "coverage": 0.16983809027816213,
+   "drones": 8
+  },
+  {
+   "update": 381,
+   "samples": 780288,
+   "return": 14.59936427372376,
+   "seconds": 650.7842106999597,
+   "collisions": 0.0,
+   "coverage": 0.16945505460534163,
+   "drones": 8
+  },
+  {
+   "update": 382,
+   "samples": 782336,
+   "return": 14.59936427372376,
+   "seconds": 651.7500003000023,
+   "collisions": 0.07,
+   "coverage": 0.17034399185248383,
+   "drones": 8
+  },
+  {
+   "update": 383,
+   "samples": 784384,
+   "return": 13.124501133986517,
+   "seconds": 652.7977797999047,
+   "collisions": 0.15,
+   "coverage": 0.16977824079774645,
+   "drones": 8
+  },
+  {
+   "update": 384,
+   "samples": 786432,
+   "return": 13.124501133986517,
+   "seconds": 653.8168087999802,
+   "collisions": 0.0,
+   "coverage": 0.17114261159460728,
+   "drones": 8
+  },
+  {
+   "update": 385,
+   "samples": 788480,
+   "return": 10.406007540513066,
+   "seconds": 654.9291276999284,
+   "collisions": 0.05,
+   "coverage": 0.17122190519297134,
+   "drones": 8
+  },
+  {
+   "update": 386,
+   "samples": 790528,
+   "return": 10.406007540513066,
+   "seconds": 656.1552121000132,
+   "collisions": 0.09,
+   "coverage": 0.17161743806345214,
+   "drones": 8
+  },
+  {
+   "update": 387,
+   "samples": 792576,
+   "return": 6.72617334475994,
+   "seconds": 657.4503916999092,
+   "collisions": 0.0,
+   "coverage": 0.17206804301422798,
+   "drones": 8
+  },
+  {
+   "update": 388,
+   "samples": 794624,
+   "return": 6.72617334475994,
+   "seconds": 658.6487094999757,
+   "collisions": 0.01,
+   "coverage": 0.17111002500206482,
+   "drones": 8
+  },
+  {
+   "update": 389,
+   "samples": 796672,
+   "return": 6.72617334475994,
+   "seconds": 659.7466727999272,
+   "collisions": 0.04,
+   "coverage": 0.17163190080671475,
+   "drones": 8
+  },
+  {
+   "update": 390,
+   "samples": 798720,
+   "return": 6.427399615646553,
+   "seconds": 660.9566588999005,
+   "collisions": 0.0,
+   "coverage": 0.17046080691706444,
+   "drones": 8
+  },
+  {
+   "update": 391,
+   "samples": 800768,
+   "return": 6.427399615646553,
+   "seconds": 662.1508359999862,
+   "collisions": 0.0,
+   "coverage": 0.1713400222811049,
+   "drones": 8
+  },
+  {
+   "update": 392,
+   "samples": 802816,
+   "return": 12.200787543102924,
+   "seconds": 663.4157953999238,
+   "collisions": 0.04,
+   "coverage": 0.1714621330887561,
+   "drones": 8
+  },
+  {
+   "update": 393,
+   "samples": 804864,
+   "return": 12.200787543102924,
+   "seconds": 664.4702147999778,
+   "collisions": 0.09,
+   "coverage": 0.17132866522773113,
+   "drones": 8
+  },
+  {
+   "update": 394,
+   "samples": 806912,
+   "return": 7.8316478213881755,
+   "seconds": 665.5007909999695,
+   "collisions": 0.07,
+   "coverage": 0.17136518992514496,
+   "drones": 8
+  },
+  {
+   "update": 395,
+   "samples": 808960,
+   "return": 7.8316478213881755,
+   "seconds": 666.5222290999955,
+   "collisions": 0.0,
+   "coverage": 0.17061774909469118,
+   "drones": 8
+  },
+  {
+   "update": 396,
+   "samples": 811008,
+   "return": 7.8316478213881755,
+   "seconds": 667.55781379994,
+   "collisions": 0.02,
+   "coverage": 0.17141619516597253,
+   "drones": 8
+  },
+  {
+   "update": 397,
+   "samples": 813056,
+   "return": 10.941926653429627,
+   "seconds": 668.7148707999149,
+   "collisions": 0.0,
+   "coverage": 0.17096783186933254,
+   "drones": 8
+  },
+  {
+   "update": 398,
+   "samples": 815104,
+   "return": 10.941926653429627,
+   "seconds": 669.9239714998985,
+   "collisions": 0.0,
+   "coverage": 0.17188823387951083,
+   "drones": 8
+  },
+  {
+   "update": 399,
+   "samples": 817152,
+   "return": 12.899478532636504,
+   "seconds": 671.2324058999075,
+   "collisions": 0.0,
+   "coverage": 0.1719247422460331,
+   "drones": 8
+  },
+  {
+   "update": 400,
+   "samples": 819200,
+   "return": 12.899478532636504,
+   "seconds": 672.4647714999737,
+   "collisions": 0.0,
+   "coverage": 0.17181880098302338,
+   "drones": 8
+  },
+  {
+   "update": 401,
+   "samples": 821248,
+   "return": 16.41853510235541,
+   "seconds": 673.5707329999423,
+   "collisions": 0.0,
+   "coverage": 0.17205701161987208,
+   "drones": 8
+  },
+  {
+   "update": 402,
+   "samples": 823296,
+   "return": 16.41853510235541,
+   "seconds": 674.5948094999185,
+   "collisions": 0.0,
+   "coverage": 0.1708532071816822,
+   "drones": 8
+  },
+  {
+   "update": 403,
+   "samples": 825344,
+   "return": 16.41853510235541,
+   "seconds": 675.5875207999488,
+   "collisions": 0.0,
+   "coverage": 0.17158303027603644,
+   "drones": 8
+  },
+  {
+   "update": 404,
+   "samples": 827392,
+   "return": 16.579006649814083,
+   "seconds": 676.5941047999077,
+   "collisions": 0.0,
+   "coverage": 0.17091162805254373,
+   "drones": 8
+  },
+  {
+   "update": 405,
+   "samples": 829440,
+   "return": 16.579006649814083,
+   "seconds": 677.6882747999625,
+   "collisions": 0.0,
+   "coverage": 0.17165879445862572,
+   "drones": 8
+  },
+  {
+   "update": 406,
+   "samples": 831488,
+   "return": 21.839950723543005,
+   "seconds": 678.9253243999556,
+   "collisions": 0.0,
+   "coverage": 0.1713365264123413,
+   "drones": 8
+  },
+  {
+   "update": 407,
+   "samples": 833536,
+   "return": 21.839950723543005,
+   "seconds": 679.983264499926,
+   "collisions": 0.0,
+   "coverage": 0.17110499570860654,
+   "drones": 8
+  },
+  {
+   "update": 408,
+   "samples": 835584,
+   "return": 21.582904324389396,
+   "seconds": 681.1279064000119,
+   "collisions": 0.0,
+   "coverage": 0.17234958520551685,
+   "drones": 8
+  },
+  {
+   "update": 409,
+   "samples": 837632,
+   "return": 21.582904324389396,
+   "seconds": 682.4209529999644,
+   "collisions": 0.05,
+   "coverage": 0.17152356110818093,
+   "drones": 8
+  },
+  {
+   "update": 410,
+   "samples": 839680,
+   "return": 21.582904324389396,
+   "seconds": 683.4821518999524,
+   "collisions": 0.0,
+   "coverage": 0.1720802606811386,
+   "drones": 8
+  },
+  {
+   "update": 411,
+   "samples": 841728,
+   "return": 22.335190378711435,
+   "seconds": 684.5302666999632,
+   "collisions": 0.03,
+   "coverage": 0.1708434331446584,
+   "drones": 8
+  },
+  {
+   "update": 412,
+   "samples": 843776,
+   "return": 22.335190378711435,
+   "seconds": 685.5833268999122,
+   "collisions": 0.0,
+   "coverage": 0.1716389519430489,
+   "drones": 8
+  },
+  {
+   "update": 413,
+   "samples": 845824,
+   "return": 21.78957438289819,
+   "seconds": 686.6265965999337,
+   "collisions": 0.0,
+   "coverage": 0.17151158748700118,
+   "drones": 8
+  },
+  {
+   "update": 414,
+   "samples": 847872,
+   "return": 21.78957438289819,
+   "seconds": 687.6475296999561,
+   "collisions": 0.0,
+   "coverage": 0.17121697943571143,
+   "drones": 8
+  },
+  {
+   "update": 415,
+   "samples": 849920,
+   "return": 19.43472783889395,
+   "seconds": 688.6674522999674,
+   "collisions": 0.0,
+   "coverage": 0.17206453593910684,
+   "drones": 8
+  },
+  {
+   "update": 416,
+   "samples": 851968,
+   "return": 19.43472783889395,
+   "seconds": 689.660254699993,
+   "collisions": 0.0,
+   "coverage": 0.17108750436414735,
+   "drones": 8
+  },
+  {
+   "update": 417,
+   "samples": 854016,
+   "return": 19.43472783889395,
+   "seconds": 690.641662399983,
+   "collisions": 0.0,
+   "coverage": 0.17242290733962343,
+   "drones": 8
+  },
+  {
+   "update": 418,
+   "samples": 856064,
+   "return": 19.900843278743963,
+   "seconds": 691.6931816999568,
+   "collisions": 0.0,
+   "coverage": 0.17175660345285432,
+   "drones": 8
+  },
+  {
+   "update": 419,
+   "samples": 858112,
+   "return": 19.900843278743963,
+   "seconds": 692.6654609999387,
+   "collisions": 0.0,
+   "coverage": 0.17261027261792322,
+   "drones": 8
+  },
+  {
+   "update": 420,
+   "samples": 860160,
+   "return": 20.32057486672512,
+   "seconds": 693.6920954999514,
+   "collisions": 0.0,
+   "coverage": 0.17276751463436985,
+   "drones": 8
+  },
+  {
+   "update": 421,
+   "samples": 862208,
+   "return": 20.32057486672512,
+   "seconds": 694.7574644999113,
+   "collisions": 0.05,
+   "coverage": 0.17253579246435066,
+   "drones": 8
+  },
+  {
+   "update": 422,
+   "samples": 864256,
+   "return": 19.272906242332173,
+   "seconds": 695.9494079999859,
+   "collisions": 0.0,
+   "coverage": 0.1731939232982866,
+   "drones": 8
+  },
+  {
+   "update": 423,
+   "samples": 866304,
+   "return": 19.272906242332173,
+   "seconds": 697.0219761999324,
+   "collisions": 0.0,
+   "coverage": 0.17174312561938224,
+   "drones": 8
+  },
+  {
+   "update": 424,
+   "samples": 868352,
+   "return": 19.272906242332173,
+   "seconds": 698.0117508999538,
+   "collisions": 0.1,
+   "coverage": 0.1728537365077606,
+   "drones": 8
+  },
+  {
+   "update": 425,
+   "samples": 870400,
+   "return": 18.14111142453653,
+   "seconds": 699.0513467999408,
+   "collisions": 0.0,
+   "coverage": 0.1717565225546974,
+   "drones": 8
+  },
+  {
+   "update": 426,
+   "samples": 872448,
+   "return": 18.14111142453653,
+   "seconds": 700.2380587999942,
+   "collisions": 0.0,
+   "coverage": 0.17244342449159994,
+   "drones": 8
+  },
+  {
+   "update": 427,
+   "samples": 874496,
+   "return": 19.625111134087813,
+   "seconds": 701.4090162999928,
+   "collisions": 0.0,
+   "coverage": 0.1723730926791463,
+   "drones": 8
+  },
+  {
+   "update": 428,
+   "samples": 876544,
+   "return": 19.625111134087813,
+   "seconds": 702.5299862999236,
+   "collisions": 0.06,
+   "coverage": 0.17207679403512846,
+   "drones": 8
+  },
+  {
+   "update": 429,
+   "samples": 878592,
+   "return": 16.139326003936354,
+   "seconds": 703.5966771999374,
+   "collisions": 0.0,
+   "coverage": 0.17249308716270323,
+   "drones": 8
+  },
+  {
+   "update": 430,
+   "samples": 880640,
+   "return": 16.139326003936354,
+   "seconds": 704.6122827999061,
+   "collisions": 0.0,
+   "coverage": 0.17127290941571688,
+   "drones": 8
+  },
+  {
+   "update": 431,
+   "samples": 882688,
+   "return": 16.139326003936354,
+   "seconds": 705.6298227999359,
+   "collisions": 0.0,
+   "coverage": 0.17236983678370568,
+   "drones": 8
+  },
+  {
+   "update": 432,
+   "samples": 884736,
+   "return": 14.310328755304155,
+   "seconds": 706.8601406000089,
+   "collisions": 0.0,
+   "coverage": 0.17188315769091644,
+   "drones": 8
+  },
+  {
+   "update": 433,
+   "samples": 886784,
+   "return": 14.310328755304155,
+   "seconds": 708.1464952999959,
+   "collisions": 0.0,
+   "coverage": 0.17196438882981296,
+   "drones": 8
+  },
+  {
+   "update": 434,
+   "samples": 888832,
+   "return": 14.987222665766684,
+   "seconds": 709.3247868999606,
+   "collisions": 0.0,
+   "coverage": 0.17176954052735957,
+   "drones": 8
+  },
+  {
+   "update": 435,
+   "samples": 890880,
+   "return": 14.987222665766684,
+   "seconds": 710.437077099923,
+   "collisions": 0.0,
+   "coverage": 0.17167057689690776,
+   "drones": 8
+  },
+  {
+   "update": 436,
+   "samples": 892928,
+   "return": 16.675815959398374,
+   "seconds": 711.5356631999603,
+   "collisions": 0.12,
+   "coverage": 0.1731622814984919,
+   "drones": 8
+  },
+  {
+   "update": 437,
+   "samples": 894976,
+   "return": 16.675815959398374,
+   "seconds": 712.7617986999685,
+   "collisions": 0.0,
+   "coverage": 0.17195476831349266,
+   "drones": 8
+  },
+  {
+   "update": 438,
+   "samples": 897024,
+   "return": 16.675815959398374,
+   "seconds": 714.014194099931,
+   "collisions": 0.02,
+   "coverage": 0.17301047740870013,
+   "drones": 8
+  },
+  {
+   "update": 439,
+   "samples": 899072,
+   "return": 17.156652443401686,
+   "seconds": 715.2807320998982,
+   "collisions": 0.0,
+   "coverage": 0.17237346445113771,
+   "drones": 8
+  },
+  {
+   "update": 440,
+   "samples": 901120,
+   "return": 17.156652443401686,
+   "seconds": 716.4992677000118,
+   "collisions": 0.0,
+   "coverage": 0.17242670946341904,
+   "drones": 8
+  },
+  {
+   "update": 441,
+   "samples": 903168,
+   "return": 21.427516489704438,
+   "seconds": 717.6991096999263,
+   "collisions": 0.0,
+   "coverage": 0.17309489155757773,
+   "drones": 8
+  },
+  {
+   "update": 442,
+   "samples": 905216,
+   "return": 21.427516489704438,
+   "seconds": 718.7605756999692,
+   "collisions": 0.0,
+   "coverage": 0.17235252837936585,
+   "drones": 8
+  },
+  {
+   "update": 443,
+   "samples": 907264,
+   "return": 22.231361253078706,
+   "seconds": 720.0740176999243,
+   "collisions": 0.0,
+   "coverage": 0.17329372542369226,
+   "drones": 8
+  },
+  {
+   "update": 444,
+   "samples": 909312,
+   "return": 22.231361253078706,
+   "seconds": 721.2709016998997,
+   "collisions": 0.03,
+   "coverage": 0.17180260812702094,
+   "drones": 8
+  },
+  {
+   "update": 445,
+   "samples": 911360,
+   "return": 22.231361253078706,
+   "seconds": 722.5511057999684,
+   "collisions": 0.1,
+   "coverage": 0.1726175313468498,
+   "drones": 8
+  },
+  {
+   "update": 446,
+   "samples": 913408,
+   "return": 17.80460610627106,
+   "seconds": 723.7280671999324,
+   "collisions": 0.0,
+   "coverage": 0.17202807788187768,
+   "drones": 8
+  },
+  {
+   "update": 447,
+   "samples": 915456,
+   "return": 17.80460610627106,
+   "seconds": 724.8270311999368,
+   "collisions": 0.0,
+   "coverage": 0.17217358539329033,
+   "drones": 8
+  },
+  {
+   "update": 448,
+   "samples": 917504,
+   "return": 17.67578068567476,
+   "seconds": 726.0338307999773,
+   "collisions": 0.0,
+   "coverage": 0.17237434007465333,
+   "drones": 8
+  },
+  {
+   "update": 449,
+   "samples": 919552,
+   "return": 17.67578068567476,
+   "seconds": 727.0630760999629,
+   "collisions": 0.12,
+   "coverage": 0.17092028220389288,
+   "drones": 8
+  },
+  {
+   "update": 450,
+   "samples": 921600,
+   "return": 13.041744812312425,
+   "seconds": 728.0662555999588,
+   "collisions": 0.0,
+   "coverage": 0.17169409437109295,
+   "drones": 8
+  },
+  {
+   "update": 451,
+   "samples": 923648,
+   "return": 13.041744812312425,
+   "seconds": 729.0800305999583,
+   "collisions": 0.0,
+   "coverage": 0.1706125450301637,
+   "drones": 8
+  },
+  {
+   "update": 452,
+   "samples": 925696,
+   "return": 13.041744812312425,
+   "seconds": 730.2261138999602,
+   "collisions": 0.0,
+   "coverage": 0.17188126932162093,
+   "drones": 8
+  },
+  {
+   "update": 453,
+   "samples": 927744,
+   "return": 13.83870110520355,
+   "seconds": 731.3267837999156,
+   "collisions": 0.0,
+   "coverage": 0.17126936572013307,
+   "drones": 8
+  },
+  {
+   "update": 454,
+   "samples": 929792,
+   "return": 13.83870110520355,
+   "seconds": 732.3254654000048,
+   "collisions": 0.0,
+   "coverage": 0.17103558605473437,
+   "drones": 8
+  },
+  {
+   "update": 455,
+   "samples": 931840,
+   "return": 14.95202202062922,
+   "seconds": 733.3867012999253,
+   "collisions": 0.0,
+   "coverage": 0.17140233237772626,
+   "drones": 8
+  },
+  {
+   "update": 456,
+   "samples": 933888,
+   "return": 14.95202202062922,
+   "seconds": 734.4138047999004,
+   "collisions": 0.0,
+   "coverage": 0.16999347741309087,
+   "drones": 8
+  },
+  {
+   "update": 457,
+   "samples": 935936,
+   "return": 14.95202202062922,
+   "seconds": 735.5057840999216,
+   "collisions": 0.02,
+   "coverage": 0.17021822993709876,
+   "drones": 8
+  },
+  {
+   "update": 458,
+   "samples": 937984,
+   "return": 18.661209992526164,
+   "seconds": 736.72190949996,
+   "collisions": 0.0,
+   "coverage": 0.16871630346806185,
+   "drones": 8
+  },
+  {
+   "update": 459,
+   "samples": 940032,
+   "return": 18.661209992526164,
+   "seconds": 737.872052499908,
+   "collisions": 0.05,
+   "coverage": 0.1696583568391751,
+   "drones": 8
+  },
+  {
+   "update": 460,
+   "samples": 942080,
+   "return": 17.541989469403234,
+   "seconds": 739.0576878999127,
+   "collisions": 0.0,
+   "coverage": 0.16913878428226145,
+   "drones": 8
+  },
+  {
+   "update": 461,
+   "samples": 944128,
+   "return": 17.541989469403234,
+   "seconds": 740.2042485999409,
+   "collisions": 0.05,
+   "coverage": 0.16921673574275561,
+   "drones": 8
+  },
+  {
+   "update": 462,
+   "samples": 946176,
+   "return": 21.324688427101687,
+   "seconds": 741.3179482999258,
+   "collisions": 0.0,
+   "coverage": 0.16978913572114165,
+   "drones": 8
+  },
+  {
+   "update": 463,
+   "samples": 948224,
+   "return": 21.324688427101687,
+   "seconds": 742.5326376999728,
+   "collisions": 0.0,
+   "coverage": 0.1687119953595574,
+   "drones": 8
+  },
+  {
+   "update": 464,
+   "samples": 950272,
+   "return": 21.324688427101687,
+   "seconds": 743.783873999957,
+   "collisions": 0.0,
+   "coverage": 0.16919760269410503,
+   "drones": 8
+  },
+  {
+   "update": 465,
+   "samples": 952320,
+   "return": 19.622375860983123,
+   "seconds": 744.9565203000093,
+   "collisions": 0.0,
+   "coverage": 0.16799329447733213,
+   "drones": 8
+  },
+  {
+   "update": 466,
+   "samples": 954368,
+   "return": 19.622375860983123,
+   "seconds": 745.979917199933,
+   "collisions": 0.0,
+   "coverage": 0.16855548786714575,
+   "drones": 8
+  },
+  {
+   "update": 467,
+   "samples": 956416,
+   "return": 19.522656489808284,
+   "seconds": 747.1574488999322,
+   "collisions": 0.0,
+   "coverage": 0.16822537706066193,
+   "drones": 8
+  },
+  {
+   "update": 468,
+   "samples": 958464,
+   "return": 19.522656489808284,
+   "seconds": 748.3654111999786,
+   "collisions": 0.04,
+   "coverage": 0.16825586059078645,
+   "drones": 8
+  },
+  {
+   "update": 469,
+   "samples": 960512,
+   "return": 20.7755664248997,
+   "seconds": 749.5683158999309,
+   "collisions": 0.03,
+   "coverage": 0.1686303576166787,
+   "drones": 8
+  },
+  {
+   "update": 470,
+   "samples": 962560,
+   "return": 20.7755664248997,
+   "seconds": 750.6559470999055,
+   "collisions": 0.0,
+   "coverage": 0.16763889734046558,
+   "drones": 8
+  },
+  {
+   "update": 471,
+   "samples": 964608,
+   "return": 20.7755664248997,
+   "seconds": 751.8098429999081,
+   "collisions": 0.06,
+   "coverage": 0.1684458465802111,
+   "drones": 8
+  },
+  {
+   "update": 472,
+   "samples": 966656,
+   "return": 21.201841439255332,
+   "seconds": 752.9833314999705,
+   "collisions": 0.0,
+   "coverage": 0.16803873269322492,
+   "drones": 8
+  },
+  {
+   "update": 473,
+   "samples": 968704,
+   "return": 21.201841439255332,
+   "seconds": 753.9920819000108,
+   "collisions": 0.0,
+   "coverage": 0.1685066237814705,
+   "drones": 8
+  },
+  {
+   "update": 474,
+   "samples": 970752,
+   "return": 19.71402855872915,
+   "seconds": 755.0737682000035,
+   "collisions": 0.0,
+   "coverage": 0.1677392809871837,
+   "drones": 8
+  },
+  {
+   "update": 475,
+   "samples": 972800,
+   "return": 19.71402855872915,
+   "seconds": 756.1784340000013,
+   "collisions": 0.0,
+   "coverage": 0.16754786677821074,
+   "drones": 8
+  },
+  {
+   "update": 476,
+   "samples": 974848,
+   "return": 17.490543410079585,
+   "seconds": 757.3753080999013,
+   "collisions": 0.12,
+   "coverage": 0.16789359590844313,
+   "drones": 8
+  },
+  {
+   "update": 477,
+   "samples": 976896,
+   "return": 17.490543410079585,
+   "seconds": 758.4184398999205,
+   "collisions": 0.0,
+   "coverage": 0.1667796758853364,
+   "drones": 8
+  },
+  {
+   "update": 478,
+   "samples": 978944,
+   "return": 17.490543410079585,
+   "seconds": 759.5178077999735,
+   "collisions": 0.0,
+   "coverage": 0.16720975040211786,
+   "drones": 8
+  },
+  {
+   "update": 479,
+   "samples": 980992,
+   "return": 16.4964047742637,
+   "seconds": 760.7784446999431,
+   "collisions": 0.0,
+   "coverage": 0.16604842812892184,
+   "drones": 8
+  },
+  {
+   "update": 480,
+   "samples": 983040,
+   "return": 16.4964047742637,
+   "seconds": 762.0713497999823,
+   "collisions": 0.0,
+   "coverage": 0.16668793229688894,
+   "drones": 8
+  },
+  {
+   "update": 481,
+   "samples": 985088,
+   "return": 16.389066214108347,
+   "seconds": 763.2839509999612,
+   "collisions": 0.03,
+   "coverage": 0.1666103887981726,
+   "drones": 8
+  },
+  {
+   "update": 482,
+   "samples": 987136,
+   "return": 16.389066214108347,
+   "seconds": 764.3325638999231,
+   "collisions": 0.0,
+   "coverage": 0.1663582108119153,
+   "drones": 8
+  },
+  {
+   "update": 483,
+   "samples": 989184,
+   "return": 15.242803248409231,
+   "seconds": 765.3687925999984,
+   "collisions": 0.0,
+   "coverage": 0.16695037521307568,
+   "drones": 8
+  },
+  {
+   "update": 484,
+   "samples": 991232,
+   "return": 15.242803248409231,
+   "seconds": 766.3760098000057,
+   "collisions": 0.02,
+   "coverage": 0.16620869219111192,
+   "drones": 8
+  },
+  {
+   "update": 485,
+   "samples": 993280,
+   "return": 15.242803248409231,
+   "seconds": 767.519769800012,
+   "collisions": 0.0,
+   "coverage": 0.16691985731749376,
+   "drones": 8
+  },
+  {
+   "update": 486,
+   "samples": 995328,
+   "return": 17.689479090012675,
+   "seconds": 768.731479799957,
+   "collisions": 0.0,
+   "coverage": 0.16564107724833682,
+   "drones": 8
+  },
+  {
+   "update": 487,
+   "samples": 997376,
+   "return": 17.689479090012675,
+   "seconds": 769.9798296999652,
+   "collisions": 0.0,
+   "coverage": 0.16620036300305321,
+   "drones": 8
+  },
+  {
+   "update": 488,
+   "samples": 999424,
+   "return": 17.104174741235756,
+   "seconds": 771.0273682000116,
+   "collisions": 0.03,
+   "coverage": 0.1657935276024995,
+   "drones": 8
+  },
+  {
+   "update": 1,
+   "samples": 1004544,
+   "return": NaN,
+   "seconds": 2.917525800061412,
+   "collisions": 0.08,
+   "coverage": 0.09177470217238962,
+   "drones": 20
+  },
+  {
+   "update": 2,
+   "samples": 1009664,
+   "return": NaN,
+   "seconds": 8.01208440004848,
+   "collisions": 0.07,
+   "coverage": 0.14179747722494745,
+   "drones": 20
+  },
+  {
+   "update": 3,
+   "samples": 1014784,
+   "return": 12.778781620520874,
+   "seconds": 13.898978500044905,
+   "collisions": 0.04,
+   "coverage": 0.14491877873292064,
+   "drones": 20
+  },
+  {
+   "update": 4,
+   "samples": 1019904,
+   "return": 12.778781620520874,
+   "seconds": 20.272190800053068,
+   "collisions": 0.07,
+   "coverage": 0.14710693973235162,
+   "drones": 20
+  },
+  {
+   "update": 5,
+   "samples": 1025024,
+   "return": 14.077103323844536,
+   "seconds": 26.52796830004081,
+   "collisions": 0.07,
+   "coverage": 0.15986492090995305,
+   "drones": 20
+  },
+  {
+   "update": 6,
+   "samples": 1030144,
+   "return": 14.077103323844536,
+   "seconds": 30.168445700081065,
+   "collisions": 0.26,
+   "coverage": 0.15137904425295806,
+   "drones": 20
+  },
+  {
+   "update": 7,
+   "samples": 1035264,
+   "return": 14.077103323844536,
+   "seconds": 33.079074800014496,
+   "collisions": 1.33,
+   "coverage": 0.15729726435291755,
+   "drones": 20
+  },
+  {
+   "update": 8,
+   "samples": 1040384,
+   "return": -3.8716001919091787,
+   "seconds": 43.80769520008471,
+   "collisions": 0.07,
+   "coverage": 0.1559114148973364,
+   "drones": 20
+  },
+  {
+   "update": 9,
+   "samples": 1045504,
+   "return": -3.8716001919091787,
+   "seconds": 49.24287930002902,
+   "collisions": 0.04,
+   "coverage": 0.1602280161140512,
+   "drones": 20
+  },
+  {
+   "update": 10,
+   "samples": 1050624,
+   "return": 0.3416841975728806,
+   "seconds": 55.22529580001719,
+   "collisions": 0.02,
+   "coverage": 0.16045239325387958,
+   "drones": 20
+  },
+  {
+   "update": 11,
+   "samples": 1055744,
+   "return": 0.3416841975728806,
+   "seconds": 58.60612350003794,
+   "collisions": 0.13,
+   "coverage": 0.16049540896661782,
+   "drones": 20
+  },
+  {
+   "update": 12,
+   "samples": 1060864,
+   "return": 1.7781305397904685,
+   "seconds": 69.2186349000549,
+   "collisions": 0.13,
+   "coverage": 0.16550903663175412,
+   "drones": 20
+  },
+  {
+   "update": 13,
+   "samples": 1065984,
+   "return": 1.7781305397904685,
+   "seconds": 74.67849200009368,
+   "collisions": 0.17,
+   "coverage": 0.16012540490293153,
+   "drones": 20
+  },
+  {
+   "update": 14,
+   "samples": 1071104,
+   "return": 1.7781305397904685,
+   "seconds": 77.92022080009338,
+   "collisions": 0.0,
+   "coverage": 0.16045134679655726,
+   "drones": 20
+  },
+  {
+   "update": 15,
+   "samples": 1076224,
+   "return": -0.14196834352898638,
+   "seconds": 80.76048380008433,
+   "collisions": 0.07,
+   "coverage": 0.15827347702248948,
+   "drones": 20
+  },
+  {
+   "update": 16,
+   "samples": 1081344,
+   "return": -0.14196834352898638,
+   "seconds": 83.45460649998859,
+   "collisions": 0.16,
+   "coverage": 0.15904722659163456,
+   "drones": 20
+  },
+  {
+   "update": 17,
+   "samples": 1086464,
+   "return": -1.7997905219888175,
+   "seconds": 86.27501800004393,
+   "collisions": 0.07,
+   "coverage": 0.15992853307210134,
+   "drones": 20
+  },
+  {
+   "update": 18,
+   "samples": 1091584,
+   "return": -1.7997905219888175,
+   "seconds": 91.35685880004894,
+   "collisions": 0.09,
+   "coverage": 0.159565939309019,
+   "drones": 20
+  },
+  {
+   "update": 19,
+   "samples": 1096704,
+   "return": 6.244289974578938,
+   "seconds": 96.64086959999986,
+   "collisions": 0.175,
+   "coverage": 0.16175355911149225,
+   "drones": 20
+  },
+  {
+   "update": 20,
+   "samples": 1101824,
+   "return": 6.244289974578938,
+   "seconds": 100.53954680007882,
+   "collisions": 0.04,
+   "coverage": 0.1595598740181944,
+   "drones": 20
+  },
+  {
+   "update": 21,
+   "samples": 1106944,
+   "return": 6.244289974578938,
+   "seconds": 105.0129084000364,
+   "collisions": 0.26,
+   "coverage": 0.16122672682539058,
+   "drones": 20
+  },
+  {
+   "update": 22,
+   "samples": 1112064,
+   "return": 4.4779893574560505,
+   "seconds": 112.12597350007854,
+   "collisions": 0.11,
+   "coverage": 0.16055274777229814,
+   "drones": 20
+  },
+  {
+   "update": 23,
+   "samples": 1117184,
+   "return": 4.4779893574560505,
+   "seconds": 115.46493520005606,
+   "collisions": 0.1,
+   "coverage": 0.16079060714172075,
+   "drones": 20
+  },
+  {
+   "update": 24,
+   "samples": 1122304,
+   "return": 4.085098289870678,
+   "seconds": 118.35326010000426,
+   "collisions": 0.03,
+   "coverage": 0.16108604178536373,
+   "drones": 20
+  },
+  {
+   "update": 25,
+   "samples": 1127424,
+   "return": 4.085098289870678,
+   "seconds": 121.1298593999818,
+   "collisions": 0.0,
+   "coverage": 0.1609892820482905,
+   "drones": 20
+  },
+  {
+   "update": 26,
+   "samples": 1132544,
+   "return": 5.74436157078744,
+   "seconds": 124.19103580003139,
+   "collisions": 0.06,
+   "coverage": 0.16298047622732206,
+   "drones": 20
+  },
+  {
+   "update": 27,
+   "samples": 1137664,
+   "return": 5.74436157078744,
+   "seconds": 130.56744280003477,
+   "collisions": 0.05,
+   "coverage": 0.16100697114572463,
+   "drones": 20
+  },
+  {
+   "update": 28,
+   "samples": 1142784,
+   "return": 5.74436157078744,
+   "seconds": 135.14143499999773,
+   "collisions": 0.09,
+   "coverage": 0.162348708649897,
+   "drones": 20
+  },
+  {
+   "update": 29,
+   "samples": 1147904,
+   "return": 6.415519441701184,
+   "seconds": 138.4254660999868,
+   "collisions": 0.01,
+   "coverage": 0.16182992092303505,
+   "drones": 20
+  },
+  {
+   "update": 30,
+   "samples": 1153024,
+   "return": 6.415519441701184,
+   "seconds": 141.25416670006234,
+   "collisions": 0.11,
+   "coverage": 0.161833297695782,
+   "drones": 20
+  },
+  {
+   "update": 31,
+   "samples": 1158144,
+   "return": 8.571432246104855,
+   "seconds": 145.3271001999965,
+   "collisions": 0.0,
+   "coverage": 0.16181578789369236,
+   "drones": 20
+  },
+  {
+   "update": 32,
+   "samples": 1163264,
+   "return": 8.571432246104855,
+   "seconds": 152.50956879998557,
+   "collisions": 0.03,
+   "coverage": 0.1610265550653301,
+   "drones": 20
+  },
+  {
+   "update": 33,
+   "samples": 1168384,
+   "return": 9.630600836216317,
+   "seconds": 157.6973184000235,
+   "collisions": 0.05,
+   "coverage": 0.16270032533039483,
+   "drones": 20
+  },
+  {
+   "update": 34,
+   "samples": 1173504,
+   "return": 9.630600836216317,
+   "seconds": 160.8775736000389,
+   "collisions": 0.07,
+   "coverage": 0.1608197020668383,
+   "drones": 20
+  },
+  {
+   "update": 35,
+   "samples": 1178624,
+   "return": 9.630600836216317,
+   "seconds": 164.36762700008694,
+   "collisions": 0.06,
+   "coverage": 0.16141743562514477,
+   "drones": 20
+  },
+  {
+   "update": 36,
+   "samples": 1183744,
+   "return": 10.528283997574903,
+   "seconds": 167.57517610001378,
+   "collisions": 0.0,
+   "coverage": 0.16092906682674246,
+   "drones": 20
+  },
+  {
+   "update": 37,
+   "samples": 1188864,
+   "return": 10.528283997574903,
+   "seconds": 170.5411999000935,
+   "collisions": 0.06,
+   "coverage": 0.1612485889405763,
+   "drones": 20
+  },
+  {
+   "update": 38,
+   "samples": 1193984,
+   "return": 12.23192963019385,
+   "seconds": 175.16160840005614,
+   "collisions": 0.03,
+   "coverage": 0.1619634082652969,
+   "drones": 20
+  },
+  {
+   "update": 39,
+   "samples": 1199104,
+   "return": 12.23192963019385,
+   "seconds": 178.857940100017,
+   "collisions": 0.0,
+   "coverage": 0.16145213906355632,
+   "drones": 20
+  },
+  {
+   "update": 40,
+   "samples": 1204224,
+   "return": 12.707288043364485,
+   "seconds": 181.94036820007022,
+   "collisions": 0.13,
+   "coverage": 0.1627599647551369,
+   "drones": 20
+  },
+  {
+   "update": 41,
+   "samples": 1209344,
+   "return": 12.707288043364485,
+   "seconds": 185.66863299999386,
+   "collisions": 0.27,
+   "coverage": 0.1615237271590015,
+   "drones": 20
+  },
+  {
+   "update": 42,
+   "samples": 1214464,
+   "return": 12.707288043364485,
+   "seconds": 189.0739282000577,
+   "collisions": 0.02,
+   "coverage": 0.16196278642228262,
+   "drones": 20
+  },
+  {
+   "update": 43,
+   "samples": 1219584,
+   "return": 11.960057834812163,
+   "seconds": 192.57675360003486,
+   "collisions": 0.0,
+   "coverage": 0.16153454510009815,
+   "drones": 20
+  },
+  {
+   "update": 44,
+   "samples": 1224704,
+   "return": 11.960057834812163,
+   "seconds": 195.98435660009272,
+   "collisions": 0.23,
+   "coverage": 0.16181516413051117,
+   "drones": 20
+  },
+  {
+   "update": 45,
+   "samples": 1229824,
+   "return": 11.47129744944299,
+   "seconds": 199.1206371000735,
+   "collisions": 0.1,
+   "coverage": 0.16243642386821064,
+   "drones": 20
+  },
+  {
+   "update": 46,
+   "samples": 1234944,
+   "return": 11.47129744944299,
+   "seconds": 201.89944040006958,
+   "collisions": 0.0,
+   "coverage": 0.16186001909976136,
+   "drones": 20
+  },
+  {
+   "update": 47,
+   "samples": 1240064,
+   "return": 13.898412898350955,
+   "seconds": 204.76175280008465,
+   "collisions": 0.0,
+   "coverage": 0.16321257965513117,
+   "drones": 20
+  },
+  {
+   "update": 48,
+   "samples": 1245184,
+   "return": 13.898412898350955,
+   "seconds": 207.4176257000072,
+   "collisions": 0.04,
+   "coverage": 0.16208484322001257,
+   "drones": 20
+  },
+  {
+   "update": 49,
+   "samples": 1250304,
+   "return": 13.898412898350955,
+   "seconds": 210.21979990007821,
+   "collisions": 0.16,
+   "coverage": 0.1621609726590692,
+   "drones": 20
+  },
+  {
+   "update": 50,
+   "samples": 1255424,
+   "return": 9.768506168342297,
+   "seconds": 212.86475230008364,
+   "collisions": 0.04,
+   "coverage": 0.1616037228039282,
+   "drones": 20
+  },
+  {
+   "update": 51,
+   "samples": 1260544,
+   "return": 9.768506168342297,
+   "seconds": 215.5042082000291,
+   "collisions": 0.05,
+   "coverage": 0.1617861984980187,
+   "drones": 20
+  },
+  {
+   "update": 52,
+   "samples": 1265664,
+   "return": 10.462682721111372,
+   "seconds": 218.0630612000823,
+   "collisions": 0.03,
+   "coverage": 0.162113602155968,
+   "drones": 20
+  },
+  {
+   "update": 53,
+   "samples": 1270784,
+   "return": 10.462682721111372,
+   "seconds": 221.05263739998918,
+   "collisions": 0.0,
+   "coverage": 0.16186082487037956,
+   "drones": 20
+  },
+  {
+   "update": 54,
+   "samples": 1275904,
+   "return": 13.57790483000224,
+   "seconds": 224.08425690000877,
+   "collisions": 0.03,
+   "coverage": 0.1633471230809156,
+   "drones": 20
+  },
+  {
+   "update": 55,
+   "samples": 1281024,
+   "return": 13.57790483000224,
+   "seconds": 226.82352860004175,
+   "collisions": 0.04,
+   "coverage": 0.16243134929042363,
+   "drones": 20
+  },
+  {
+   "update": 56,
+   "samples": 1286144,
+   "return": 13.57790483000224,
+   "seconds": 229.61789049999788,
+   "collisions": 0.09,
+   "coverage": 0.1631909398155039,
+   "drones": 20
+  },
+  {
+   "update": 57,
+   "samples": 1291264,
+   "return": 14.229900451767687,
+   "seconds": 232.51952500001062,
+   "collisions": 0.03,
+   "coverage": 0.16327217836158572,
+   "drones": 20
+  },
+  {
+   "update": 58,
+   "samples": 1296384,
+   "return": 14.229900451767687,
+   "seconds": 235.2277889000252,
+   "collisions": 0.12,
+   "coverage": 0.16331105804541382,
+   "drones": 20
+  },
+  {
+   "update": 59,
+   "samples": 1301504,
+   "return": 11.659625069041649,
+   "seconds": 238.01876120001543,
+   "collisions": 0.0,
+   "coverage": 0.16373860301361506,
+   "drones": 20
+  },
+  {
+   "update": 60,
+   "samples": 1306624,
+   "return": 11.659625069041649,
+   "seconds": 241.0475318999961,
+   "collisions": 0.06,
+   "coverage": 0.16347009904115423,
+   "drones": 20
+  },
+  {
+   "update": 61,
+   "samples": 1311744,
+   "return": 14.80201738221344,
+   "seconds": 243.91671640006825,
+   "collisions": 0.13,
+   "coverage": 0.1646681888988738,
+   "drones": 20
+  },
+  {
+   "update": 62,
+   "samples": 1316864,
+   "return": 14.80201738221344,
+   "seconds": 246.45281200006139,
+   "collisions": 0.04,
+   "coverage": 0.1638594189582371,
+   "drones": 20
+  },
+  {
+   "update": 63,
+   "samples": 1321984,
+   "return": 14.80201738221344,
+   "seconds": 249.24302569997963,
+   "collisions": 0.09,
+   "coverage": 0.164287533160384,
+   "drones": 20
+  },
+  {
+   "update": 64,
+   "samples": 1327104,
+   "return": 13.626380134752106,
+   "seconds": 252.9417861000402,
+   "collisions": 0.03,
+   "coverage": 0.16425487792714236,
+   "drones": 20
+  },
+  {
+   "update": 65,
+   "samples": 1332224,
+   "return": 13.626380134752106,
+   "seconds": 255.92194929998368,
+   "collisions": 0.11,
+   "coverage": 0.16404259890309442,
+   "drones": 20
+  },
+  {
+   "update": 66,
+   "samples": 1337344,
+   "return": 11.878193779678046,
+   "seconds": 258.88770850002766,
+   "collisions": 0.03,
+   "coverage": 0.16490393387855887,
+   "drones": 20
+  },
+  {
+   "update": 67,
+   "samples": 1342464,
+   "return": 11.878193779678046,
+   "seconds": 262.0437842999818,
+   "collisions": 0.03,
+   "coverage": 0.1641272771951451,
+   "drones": 20
+  },
+  {
+   "update": 68,
+   "samples": 1347584,
+   "return": 14.903783303149334,
+   "seconds": 264.7422959000105,
+   "collisions": 0.03,
+   "coverage": 0.1653004709438475,
+   "drones": 20
+  },
+  {
+   "update": 69,
+   "samples": 1352704,
+   "return": 14.903783303149334,
+   "seconds": 267.42977689998224,
+   "collisions": 0.05,
+   "coverage": 0.16447378781972358,
+   "drones": 20
+  },
+  {
+   "update": 70,
+   "samples": 1357824,
+   "return": 14.903783303149334,
+   "seconds": 270.11823390005156,
+   "collisions": 0.05,
+   "coverage": 0.16466751054475107,
+   "drones": 20
+  },
+  {
+   "update": 71,
+   "samples": 1362944,
+   "return": 14.172374626327263,
+   "seconds": 272.7628721999936,
+   "collisions": 0.05,
+   "coverage": 0.16447163482486227,
+   "drones": 20
+  },
+  {
+   "update": 72,
+   "samples": 1368064,
+   "return": 14.172374626327263,
+   "seconds": 275.43569529999513,
+   "collisions": 0.03,
+   "coverage": 0.1642923025132233,
+   "drones": 20
+  },
+  {
+   "update": 73,
+   "samples": 1373184,
+   "return": 12.847806081884872,
+   "seconds": 278.1389133000048,
+   "collisions": 0.05,
+   "coverage": 0.16486364359638955,
+   "drones": 20
+  },
+  {
+   "update": 74,
+   "samples": 1378304,
+   "return": 12.847806081884872,
+   "seconds": 280.815166400047,
+   "collisions": 0.02,
+   "coverage": 0.1640952436190798,
+   "drones": 20
+  },
+  {
+   "update": 75,
+   "samples": 1383424,
+   "return": 14.776877691324398,
+   "seconds": 283.4708032000344,
+   "collisions": 0.0,
+   "coverage": 0.1649322525885288,
+   "drones": 20
+  },
+  {
+   "update": 76,
+   "samples": 1388544,
+   "return": 14.776877691324398,
+   "seconds": 286.35110960004386,
+   "collisions": 0.03,
+   "coverage": 0.16428480286730304,
+   "drones": 20
+  },
+  {
+   "update": 77,
+   "samples": 1393664,
+   "return": 14.776877691324398,
+   "seconds": 289.6292039999971,
+   "collisions": 0.2,
+   "coverage": 0.16475944051242714,
+   "drones": 20
+  },
+  {
+   "update": 78,
+   "samples": 1398784,
+   "return": 14.418748411049515,
+   "seconds": 292.78620219998993,
+   "collisions": 0.0,
+   "coverage": 0.16482671942657506,
+   "drones": 20
+  },
+  {
+   "update": 79,
+   "samples": 1403904,
+   "return": 14.418748411049515,
+   "seconds": 295.3428108000662,
+   "collisions": 0.04,
+   "coverage": 0.1654119354106907,
+   "drones": 20
+  },
+  {
+   "update": 80,
+   "samples": 1409024,
+   "return": 11.663368199735284,
+   "seconds": 298.24934970005415,
+   "collisions": 0.07,
+   "coverage": 0.16615142307305703,
+   "drones": 20
+  },
+  {
+   "update": 81,
+   "samples": 1414144,
+   "return": 11.663368199735284,
+   "seconds": 300.60191120009404,
+   "collisions": 0.04,
+   "coverage": 0.1653960675870495,
+   "drones": 20
+  },
+  {
+   "update": 82,
+   "samples": 1419264,
+   "return": 11.663368199735284,
+   "seconds": 302.6783189000562,
+   "collisions": 0.04,
+   "coverage": 0.16618156364021053,
+   "drones": 20
+  },
+  {
+   "update": 83,
+   "samples": 1424384,
+   "return": 13.51466382086294,
+   "seconds": 304.91715940006543,
+   "collisions": 0.0,
+   "coverage": 0.1652516463143337,
+   "drones": 20
+  },
+  {
+   "update": 84,
+   "samples": 1429504,
+   "return": 13.51466382086294,
+   "seconds": 306.9906496000476,
+   "collisions": 0.0,
+   "coverage": 0.16627128128632898,
+   "drones": 20
+  },
+  {
+   "update": 85,
+   "samples": 1434624,
+   "return": 15.808945423034825,
+   "seconds": 309.19238900009077,
+   "collisions": 0.0,
+   "coverage": 0.16587434968350145,
+   "drones": 20
+  },
+  {
+   "update": 86,
+   "samples": 1439744,
+   "return": 15.808945423034825,
+   "seconds": 311.5562009999994,
+   "collisions": 0.0,
+   "coverage": 0.16588204834174378,
+   "drones": 20
+  },
+  {
+   "update": 87,
+   "samples": 1444864,
+   "return": 15.422309169361887,
+   "seconds": 313.74363110004924,
+   "collisions": 0.02,
+   "coverage": 0.16634534352919392,
+   "drones": 20
+  },
+  {
+   "update": 88,
+   "samples": 1449984,
+   "return": 15.422309169361887,
+   "seconds": 315.7979236000683,
+   "collisions": 0.0,
+   "coverage": 0.16530688384987463,
+   "drones": 20
+  },
+  {
+   "update": 89,
+   "samples": 1455104,
+   "return": 15.422309169361887,
+   "seconds": 317.92201119998936,
+   "collisions": 0.06,
+   "coverage": 0.16577117789617213,
+   "drones": 20
+  },
+  {
+   "update": 90,
+   "samples": 1460224,
+   "return": 15.610583199807294,
+   "seconds": 320.20797420002054,
+   "collisions": 0.0,
+   "coverage": 0.1645273136644778,
+   "drones": 20
+  },
+  {
+   "update": 91,
+   "samples": 1465344,
+   "return": 15.610583199807294,
+   "seconds": 322.16947190009523,
+   "collisions": 0.11,
+   "coverage": 0.16525649388663816,
+   "drones": 20
+  },
+  {
+   "update": 92,
+   "samples": 1470464,
+   "return": 15.34997193402648,
+   "seconds": 324.37192439998034,
+   "collisions": 0.08,
+   "coverage": 0.16543893377739685,
+   "drones": 20
+  },
+  {
+   "update": 93,
+   "samples": 1475584,
+   "return": 15.34997193402648,
+   "seconds": 326.42051159997936,
+   "collisions": 0.02,
+   "coverage": 0.16598979085351873,
+   "drones": 20
+  },
+  {
+   "update": 94,
+   "samples": 1480704,
+   "return": 15.352833410608259,
+   "seconds": 328.64991270005703,
+   "collisions": 0.09,
+   "coverage": 0.16668485210122333,
+   "drones": 20
+  },
+  {
+   "update": 95,
+   "samples": 1485824,
+   "return": 15.352833410608259,
+   "seconds": 330.62397449999116,
+   "collisions": 0.0,
+   "coverage": 0.16574645691637926,
+   "drones": 20
+  },
+  {
+   "update": 96,
+   "samples": 1490944,
+   "return": 15.352833410608259,
+   "seconds": 332.51852700009476,
+   "collisions": 0.15,
+   "coverage": 0.16618527369147917,
+   "drones": 20
+  },
+  {
+   "update": 97,
+   "samples": 1496064,
+   "return": 13.425981276709582,
+   "seconds": 334.4127332000062,
+   "collisions": 0.03,
+   "coverage": 0.16520396628530265,
+   "drones": 20
+  },
+  {
+   "update": 98,
+   "samples": 1501184,
+   "return": 13.425981276709582,
+   "seconds": 336.080730900052,
+   "collisions": 0.02,
+   "coverage": 0.16579094671269437,
+   "drones": 20
+  },
+  {
+   "update": 99,
+   "samples": 1506304,
+   "return": 12.035543100143519,
+   "seconds": 338.0029262000462,
+   "collisions": 0.03,
+   "coverage": 0.16544878667990484,
+   "drones": 20
+  },
+  {
+   "update": 100,
+   "samples": 1511424,
+   "return": 12.035543100143519,
+   "seconds": 339.823089200072,
+   "collisions": 0.03,
+   "coverage": 0.16540053745600464,
+   "drones": 20
+  },
+  {
+   "update": 101,
+   "samples": 1516544,
+   "return": 13.741261619199346,
+   "seconds": 341.6185290000867,
+   "collisions": 0.14,
+   "coverage": 0.16596019859087696,
+   "drones": 20
+  },
+  {
+   "update": 102,
+   "samples": 1521664,
+   "return": 13.741261619199346,
+   "seconds": 343.42965629999526,
+   "collisions": 0.06,
+   "coverage": 0.1652039359328705,
+   "drones": 20
+  },
+  {
+   "update": 103,
+   "samples": 1526784,
+   "return": 13.741261619199346,
+   "seconds": 345.25030080007855,
+   "collisions": 0.08,
+   "coverage": 0.1656762707723444,
+   "drones": 20
+  },
+  {
+   "update": 104,
+   "samples": 1531904,
+   "return": 12.224583624801154,
+   "seconds": 346.8736598000396,
+   "collisions": 0.06,
+   "coverage": 0.1646087264001119,
+   "drones": 20
+  },
+  {
+   "update": 105,
+   "samples": 1537024,
+   "return": 12.224583624801154,
+   "seconds": 348.3344397000037,
+   "collisions": 0.0,
+   "coverage": 0.16538054577941902,
+   "drones": 20
+  },
+  {
+   "update": 106,
+   "samples": 1542144,
+   "return": 13.307770913110451,
+   "seconds": 350.0078527000733,
+   "collisions": 0.05,
+   "coverage": 0.16516383380343558,
+   "drones": 20
+  },
+  {
+   "update": 107,
+   "samples": 1547264,
+   "return": 13.307770913110451,
+   "seconds": 351.53217560006306,
+   "collisions": 0.0,
+   "coverage": 0.1649407247235881,
+   "drones": 20
+  },
+  {
+   "update": 108,
+   "samples": 1552384,
+   "return": 14.019153616947381,
+   "seconds": 353.10140759998467,
+   "collisions": 0.08,
+   "coverage": 0.16593585496043822,
+   "drones": 20
+  },
+  {
+   "update": 109,
+   "samples": 1557504,
+   "return": 14.019153616947381,
+   "seconds": 354.64367550006136,
+   "collisions": 0.41,
+   "coverage": 0.1652493162801859,
+   "drones": 20
+  },
+  {
+   "update": 110,
+   "samples": 1562624,
+   "return": 14.019153616947381,
+   "seconds": 356.13589380006306,
+   "collisions": 0.41,
+   "coverage": 0.16584798251925711,
+   "drones": 20
+  },
+  {
+   "update": 111,
+   "samples": 1567744,
+   "return": 8.615064882000073,
+   "seconds": 357.66772440006025,
+   "collisions": 0.06,
+   "coverage": 0.16479313410815222,
+   "drones": 20
+  },
+  {
+   "update": 112,
+   "samples": 1572864,
+   "return": 8.615064882000073,
+   "seconds": 359.18821910000406,
+   "collisions": 0.07,
+   "coverage": 0.16538673426770778,
+   "drones": 20
+  },
+  {
+   "update": 113,
+   "samples": 1577984,
+   "return": 3.578833172988918,
+   "seconds": 360.700176000013,
+   "collisions": 0.3,
+   "coverage": 0.16517055457457416,
+   "drones": 20
+  },
+  {
+   "update": 114,
+   "samples": 1583104,
+   "return": 3.578833172988918,
+   "seconds": 362.19940899999347,
+   "collisions": 0.0,
+   "coverage": 0.16490330964668956,
+   "drones": 20
+  },
+  {
+   "update": 115,
+   "samples": 1588224,
+   "return": 6.695316606813603,
+   "seconds": 363.70710640004836,
+   "collisions": 0.0,
+   "coverage": 0.16563120200881762,
+   "drones": 20
+  },
+  {
+   "update": 116,
+   "samples": 1593344,
+   "return": 6.695316606813603,
+   "seconds": 365.2276292000897,
+   "collisions": 0.1,
+   "coverage": 0.1642231771638859,
+   "drones": 20
+  },
+  {
+   "update": 117,
+   "samples": 1598464,
+   "return": 6.695316606813603,
+   "seconds": 366.8336915000109,
+   "collisions": 0.07,
+   "coverage": 0.16499277694545533,
+   "drones": 20
+  },
+  {
+   "update": 118,
+   "samples": 1603584,
+   "return": 4.561021349001349,
+   "seconds": 368.385193800088,
+   "collisions": 0.0,
+   "coverage": 0.16392090686672126,
+   "drones": 20
+  },
+  {
+   "update": 119,
+   "samples": 1608704,
+   "return": 4.561021349001349,
+   "seconds": 369.8853723000502,
+   "collisions": 0.08,
+   "coverage": 0.16460495343769962,
+   "drones": 20
+  },
+  {
+   "update": 120,
+   "samples": 1613824,
+   "return": 5.313560371103021,
+   "seconds": 371.3989218000788,
+   "collisions": 0.04,
+   "coverage": 0.16452098283114988,
+   "drones": 20
+  },
+  {
+   "update": 121,
+   "samples": 1618944,
+   "return": 5.313560371103021,
+   "seconds": 372.9627499000635,
+   "collisions": 0.04,
+   "coverage": 0.16437454377260097,
+   "drones": 20
+  },
+  {
+   "update": 122,
+   "samples": 1624064,
+   "return": 11.479825607194801,
+   "seconds": 374.5986556999851,
+   "collisions": 0.11,
+   "coverage": 0.1655025474301329,
+   "drones": 20
+  },
+  {
+   "update": 123,
+   "samples": 1629184,
+   "return": 11.479825607194801,
+   "seconds": 376.06591840006877,
+   "collisions": 0.02,
+   "coverage": 0.16411001382681037,
+   "drones": 20
+  },
+  {
+   "update": 124,
+   "samples": 1634304,
+   "return": 11.479825607194801,
+   "seconds": 377.5266964000184,
+   "collisions": 0.11,
+   "coverage": 0.16542586532069678,
+   "drones": 20
+  },
+  {
+   "update": 125,
+   "samples": 1639424,
+   "return": 15.517518407672828,
+   "seconds": 379.0244499000255,
+   "collisions": 0.03,
+   "coverage": 0.16445008090345004,
+   "drones": 20
+  },
+  {
+   "update": 126,
+   "samples": 1644544,
+   "return": 15.517518407672828,
+   "seconds": 380.4923555999994,
+   "collisions": 0.09,
+   "coverage": 0.1652074009159322,
+   "drones": 20
+  },
+  {
+   "update": 127,
+   "samples": 1649664,
+   "return": 15.254731227395212,
+   "seconds": 382.1559951000381,
+   "collisions": 0.02,
+   "coverage": 0.16545539827282021,
+   "drones": 20
+  },
+  {
+   "update": 128,
+   "samples": 1654784,
+   "return": 15.254731227395212,
+   "seconds": 383.3951993000228,
+   "collisions": 0.0,
+   "coverage": 0.16536365929592287,
+   "drones": 20
+  },
+  {
+   "update": 129,
+   "samples": 1659904,
+   "return": 16.339780220924546,
+   "seconds": 384.67510480002966,
+   "collisions": 0.08,
+   "coverage": 0.16633958217066025,
+   "drones": 20
+  },
+  {
+   "update": 130,
+   "samples": 1665024,
+   "return": 16.339780220924546,
+   "seconds": 385.8382927000057,
+   "collisions": 0.02,
+   "coverage": 0.16513011559757726,
+   "drones": 20
+  },
+  {
+   "update": 131,
+   "samples": 1670144,
+   "return": 16.339780220924546,
+   "seconds": 387.0785274000373,
+   "collisions": 0.04,
+   "coverage": 0.16601718995696266,
+   "drones": 20
+  },
+  {
+   "update": 132,
+   "samples": 1675264,
+   "return": 16.50990671008707,
+   "seconds": 388.3706859999802,
+   "collisions": 0.0,
+   "coverage": 0.16551174653304038,
+   "drones": 20
+  },
+  {
+   "update": 133,
+   "samples": 1680384,
+   "return": 16.50990671008707,
+   "seconds": 389.549584900029,
+   "collisions": 0.115,
+   "coverage": 0.16576799311132662,
+   "drones": 20
+  },
+  {
+   "update": 134,
+   "samples": 1685504,
+   "return": 16.88751807344642,
+   "seconds": 390.77491470007226,
+   "collisions": 0.06,
+   "coverage": 0.16569522872333042,
+   "drones": 20
+  },
+  {
+   "update": 135,
+   "samples": 1690624,
+   "return": 16.88751807344642,
+   "seconds": 391.9652483999962,
+   "collisions": 0.0,
+   "coverage": 0.16535717303374184,
+   "drones": 20
+  },
+  {
+   "update": 136,
+   "samples": 1695744,
+   "return": 18.028082819737016,
+   "seconds": 393.3501527000917,
+   "collisions": 0.08,
+   "coverage": 0.16617459978239324,
+   "drones": 20
+  },
+  {
+   "update": 137,
+   "samples": 1700864,
+   "return": 18.028082819737016,
+   "seconds": 394.55794339999557,
+   "collisions": 0.05,
+   "coverage": 0.1648027906661902,
+   "drones": 20
+  },
+  {
+   "update": 138,
+   "samples": 1705984,
+   "return": 18.028082819737016,
+   "seconds": 395.8285278000403,
+   "collisions": 0.13,
+   "coverage": 0.16583180873174685,
+   "drones": 20
+  },
+  {
+   "update": 139,
+   "samples": 1711104,
+   "return": 16.89411801939167,
+   "seconds": 397.0502992999973,
+   "collisions": 0.04,
+   "coverage": 0.16534684132149013,
+   "drones": 20
+  },
+  {
+   "update": 140,
+   "samples": 1716224,
+   "return": 16.89411801939167,
+   "seconds": 398.2152233000379,
+   "collisions": 0.09,
+   "coverage": 0.16536388864613574,
+   "drones": 20
+  },
+  {
+   "update": 141,
+   "samples": 1721344,
+   "return": 15.899697621789233,
+   "seconds": 399.4095180000877,
+   "collisions": 0.05,
+   "coverage": 0.16593624559994183,
+   "drones": 20
+  },
+  {
+   "update": 142,
+   "samples": 1726464,
+   "return": 15.899697621789233,
+   "seconds": 400.58327250008006,
+   "collisions": 0.2,
+   "coverage": 0.1650115052424871,
+   "drones": 20
+  },
+  {
+   "update": 143,
+   "samples": 1731584,
+   "return": 13.874983330235747,
+   "seconds": 401.8673696999904,
+   "collisions": 0.14,
+   "coverage": 0.16598516398612034,
+   "drones": 20
+  },
+  {
+   "update": 144,
+   "samples": 1736704,
+   "return": 13.874983330235747,
+   "seconds": 403.0548435000237,
+   "collisions": 0.06,
+   "coverage": 0.16466490593808764,
+   "drones": 20
+  },
+  {
+   "update": 145,
+   "samples": 1741824,
+   "return": 13.874983330235747,
+   "seconds": 404.3034270000644,
+   "collisions": 0.06,
+   "coverage": 0.16574261100171758,
+   "drones": 20
+  },
+  {
+   "update": 146,
+   "samples": 1746944,
+   "return": 13.23772137166172,
+   "seconds": 405.5215781000443,
+   "collisions": 0.08,
+   "coverage": 0.16522548711523186,
+   "drones": 20
+  },
+  {
+   "update": 147,
+   "samples": 1752064,
+   "return": 13.23772137166172,
+   "seconds": 406.7037255000323,
+   "collisions": 0.06,
+   "coverage": 0.1653893154493616,
+   "drones": 20
+  },
+  {
+   "update": 148,
+   "samples": 1757184,
+   "return": 11.56603054614061,
+   "seconds": 407.9090259000659,
+   "collisions": 0.2,
+   "coverage": 0.16612341168036715,
+   "drones": 20
+  },
+  {
+   "update": 149,
+   "samples": 1762304,
+   "return": 11.56603054614061,
+   "seconds": 409.094649799983,
+   "collisions": 0.06,
+   "coverage": 0.1653499453942339,
+   "drones": 20
+  },
+  {
+   "update": 150,
+   "samples": 1767424,
+   "return": 11.374597239560703,
+   "seconds": 410.2765361000784,
+   "collisions": 0.08,
+   "coverage": 0.16639382732683544,
+   "drones": 20
+  },
+  {
+   "update": 151,
+   "samples": 1772544,
+   "return": 11.374597239560703,
+   "seconds": 411.5109020000091,
+   "collisions": 0.0,
+   "coverage": 0.1652242815038074,
+   "drones": 20
+  },
+  {
+   "update": 152,
+   "samples": 1777664,
+   "return": 11.374597239560703,
+   "seconds": 412.7312305000378,
+   "collisions": 0.1,
+   "coverage": 0.16621630997277628,
+   "drones": 20
+  },
+  {
+   "update": 153,
+   "samples": 1782784,
+   "return": 12.125540150815748,
+   "seconds": 414.0767828000244,
+   "collisions": 0.04,
+   "coverage": 0.16575620717234935,
+   "drones": 20
+  },
+  {
+   "update": 154,
+   "samples": 1787904,
+   "return": 12.125540150815748,
+   "seconds": 415.2713227000786,
+   "collisions": 0.14,
+   "coverage": 0.16581931032439776,
+   "drones": 20
+  },
+  {
+   "update": 155,
+   "samples": 1793024,
+   "return": 12.956810099982956,
+   "seconds": 416.4643266000785,
+   "collisions": 0.05,
+   "coverage": 0.16636538422235134,
+   "drones": 20
+  },
+  {
+   "update": 156,
+   "samples": 1798144,
+   "return": 12.956810099982956,
+   "seconds": 417.95002660003956,
+   "collisions": 0.0,
+   "coverage": 0.16527755416476858,
+   "drones": 20
+  }
+ ]
+}

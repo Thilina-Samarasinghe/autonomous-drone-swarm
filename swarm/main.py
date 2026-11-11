@@ -9,6 +9,7 @@
   python -m swarm.main --scenario corridor --formation v
   python -m swarm.main --scenario rescue --drones 20
   python -m swarm.main --scenario terrain --drones 12 --route-planner hybrid
+  python -m swarm.main --scenario random --policy models/navigate.pt
   python -m swarm.main --headless --steps 3000 --out outputs/run1
 """
 
@@ -48,6 +49,8 @@ def parse_args(argv=None):
     p.add_argument("--no-radio", action="store_true", help="switch the radio off entirely")
     p.add_argument("--route-planner", choices=("hybrid", "pso", "grid", "straight"),
                    help="terrain: route planner")
+    p.add_argument("--policy", help="fly a trained policy, e.g. models/navigate.pt")
+    p.add_argument("--rl-orca", action="store_true", help="wrap the trained policy in the ORCA safety layer")
     p.add_argument("--plan", action="store_true", help="enable path planning on each drone's map")
     p.add_argument("--planner", choices=ALGORITHMS, help="planning algorithm (implies --plan)")
     p.add_argument("--headless", action="store_true", help="run without a window")
@@ -91,6 +94,8 @@ def main(argv=None) -> None:
         mission["victims"] = args.victims
     if mission:
         overrides["mission"] = mission
+    if args.policy:
+        overrides["rl"] = {"policy": args.policy, "orca": bool(args.rl_orca)}
     if args.route_planner:
         overrides["terrain"] = {"planner": args.route_planner}
     if args.no_radio:
@@ -139,6 +144,8 @@ def main(argv=None) -> None:
     summary = {
         "scenario": cfg.scenario.name,
         "avoidance": cfg.avoidance.method,
+        "policy": cfg.rl.policy or None,
+        "policy_with_orca": cfg.rl.orca if cfg.rl.policy else None,
         "drones": cfg.drones.count,
         "steps": cfg.sim.steps,
         "sim_time_s": round(sim.time, 2),

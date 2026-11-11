@@ -1,0 +1,6690 @@
+{
+ "meta": {
+  "task": "flock",
+  "drones": 20,
+  "samples": 800000,
+  "seed": 0,
+  "train_seconds": 970.6217281999998,
+  "stages": [
+   {
+    "drones": 8,
+    "samples": 1200000
+   },
+   {
+    "drones": 20,
+    "samples": 800000
+   }
+  ]
+ },
+ "log": [
+  {
+   "update": 1,
+   "samples": 2048,
+   "return": NaN,
+   "seconds": 1.5827984000789002,
+   "alignment": 0.4299190660871086,
+   "collisions": 0.41,
+   "drones": 8
+  },
+  {
+   "update": 2,
+   "samples": 4096,
+   "return": -85.72411839292431,
+   "seconds": 3.1483363000443205,
+   "alignment": 0.3672254293829167,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 3,
+   "samples": 6144,
+   "return": -85.72411839292431,
+   "seconds": 4.597049500094727,
+   "alignment": 0.7528807772961568,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 4,
+   "samples": 8192,
+   "return": -47.79035785526946,
+   "seconds": 6.036312700016424,
+   "alignment": 0.34961244193027724,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 5,
+   "samples": 10240,
+   "return": -50.15537386379393,
+   "seconds": 7.428985200007446,
+   "alignment": 0.4203672974910866,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 6,
+   "samples": 12288,
+   "return": -50.15537386379393,
+   "seconds": 8.97606390004512,
+   "alignment": 0.5920452389177051,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 7,
+   "samples": 14336,
+   "return": -40.82430374549193,
+   "seconds": 10.368679500068538,
+   "alignment": 0.3303016640778654,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 8,
+   "samples": 16384,
+   "return": -42.17458290198024,
+   "seconds": 11.71677759999875,
+   "alignment": 0.3766055994951165,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 9,
+   "samples": 18432,
+   "return": -42.17458290198024,
+   "seconds": 13.099259000038728,
+   "alignment": 0.1168463148132978,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 10,
+   "samples": 20480,
+   "return": -42.121935716434656,
+   "seconds": 14.600347900064662,
+   "alignment": 0.2011189187850271,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 11,
+   "samples": 22528,
+   "return": -49.662069972674814,
+   "seconds": 15.73955759999808,
+   "alignment": 0.4478741724973071,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 12,
+   "samples": 24576,
+   "return": -49.662069972674814,
+   "seconds": 17.07291610003449,
+   "alignment": 0.7314270654633066,
+   "collisions": 0.52,
+   "drones": 8
+  },
+  {
+   "update": 13,
+   "samples": 26624,
+   "return": -53.34669317185294,
+   "seconds": 18.453506600111723,
+   "alignment": 0.6799239841502966,
+   "collisions": 0.25,
+   "drones": 8
+  },
+  {
+   "update": 14,
+   "samples": 28672,
+   "return": -53.34669317185294,
+   "seconds": 20.033146400004625,
+   "alignment": 0.5217816045134605,
+   "collisions": 0.23,
+   "drones": 8
+  },
+  {
+   "update": 15,
+   "samples": 30720,
+   "return": -62.93419457813311,
+   "seconds": 21.19624900002964,
+   "alignment": 0.726949707310987,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 16,
+   "samples": 32768,
+   "return": -59.734177483877374,
+   "seconds": 22.25792750006076,
+   "alignment": 0.45825540810383686,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 17,
+   "samples": 34816,
+   "return": -59.734177483877374,
+   "seconds": 23.49008890008554,
+   "alignment": 0.3403677773047906,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 18,
+   "samples": 36864,
+   "return": -53.145949565802404,
+   "seconds": 24.52008890011348,
+   "alignment": 0.642548681103555,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 19,
+   "samples": 38912,
+   "return": -45.390062504693745,
+   "seconds": 25.504680100013502,
+   "alignment": 0.6960884652422464,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 20,
+   "samples": 40960,
+   "return": -45.390062504693745,
+   "seconds": 26.54213970003184,
+   "alignment": 0.5676045394490314,
+   "collisions": 0.41,
+   "drones": 8
+  },
+  {
+   "update": 21,
+   "samples": 43008,
+   "return": -47.68298888894556,
+   "seconds": 27.417140800040215,
+   "alignment": 0.46037334468852337,
+   "collisions": 0.01,
+   "drones": 8
+  },
+  {
+   "update": 22,
+   "samples": 45056,
+   "return": -46.86738153839565,
+   "seconds": 28.38990870001726,
+   "alignment": 0.44448725324557836,
+   "collisions": 0.2,
+   "drones": 8
+  },
+  {
+   "update": 23,
+   "samples": 47104,
+   "return": -46.86738153839565,
+   "seconds": 29.311912600067444,
+   "alignment": 0.46210639870973425,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 24,
+   "samples": 49152,
+   "return": -48.0682905264548,
+   "seconds": 30.153394000022672,
+   "alignment": 0.4959069415569813,
+   "collisions": 0.22,
+   "drones": 8
+  },
+  {
+   "update": 25,
+   "samples": 51200,
+   "return": -53.350261759604834,
+   "seconds": 31.032801900058985,
+   "alignment": 0.7000006994600614,
+   "collisions": 0.36,
+   "drones": 8
+  },
+  {
+   "update": 26,
+   "samples": 53248,
+   "return": -53.350261759604834,
+   "seconds": 31.89516320009716,
+   "alignment": 0.6254054799033073,
+   "collisions": 0.19,
+   "drones": 8
+  },
+  {
+   "update": 27,
+   "samples": 55296,
+   "return": -64.35857891733431,
+   "seconds": 32.78844730008859,
+   "alignment": 0.6011145409779374,
+   "collisions": 0.32,
+   "drones": 8
+  },
+  {
+   "update": 28,
+   "samples": 57344,
+   "return": -64.35857891733431,
+   "seconds": 33.700807800050825,
+   "alignment": 0.5969649650716733,
+   "collisions": 0.62,
+   "drones": 8
+  },
+  {
+   "update": 29,
+   "samples": 59392,
+   "return": -73.53740210509969,
+   "seconds": 34.588127100025304,
+   "alignment": 0.2606409201467679,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 30,
+   "samples": 61440,
+   "return": -76.55653423520126,
+   "seconds": 35.50678000005428,
+   "alignment": 0.4295213339171454,
+   "collisions": 0.34,
+   "drones": 8
+  },
+  {
+   "update": 31,
+   "samples": 63488,
+   "return": -76.55653423520126,
+   "seconds": 36.36639850004576,
+   "alignment": 0.45256332232750623,
+   "collisions": 0.62,
+   "drones": 8
+  },
+  {
+   "update": 32,
+   "samples": 65536,
+   "return": -94.55920563607978,
+   "seconds": 37.39254560007248,
+   "alignment": 0.700969285066979,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 33,
+   "samples": 67584,
+   "return": -81.84179085564901,
+   "seconds": 38.25129929999821,
+   "alignment": 0.6098685571535127,
+   "collisions": 0.04,
+   "drones": 8
+  },
+  {
+   "update": 34,
+   "samples": 69632,
+   "return": -81.84179085564901,
+   "seconds": 39.276528500020504,
+   "alignment": 0.7260400024722512,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 35,
+   "samples": 71680,
+   "return": -71.76788640508748,
+   "seconds": 40.21185320010409,
+   "alignment": 0.4008561695759238,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 36,
+   "samples": 73728,
+   "return": -70.14732910553285,
+   "seconds": 41.098970900056884,
+   "alignment": 0.35950964123514717,
+   "collisions": 0.77,
+   "drones": 8
+  },
+  {
+   "update": 37,
+   "samples": 75776,
+   "return": -70.14732910553285,
+   "seconds": 42.019137200084515,
+   "alignment": 0.4811416425175927,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 38,
+   "samples": 77824,
+   "return": -63.26555763205179,
+   "seconds": 42.986106500029564,
+   "alignment": 0.39412066474017626,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 39,
+   "samples": 79872,
+   "return": -63.26555763205179,
+   "seconds": 43.927322300034575,
+   "alignment": 0.45835437834585363,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 40,
+   "samples": 81920,
+   "return": -48.58425607025784,
+   "seconds": 44.892891100025736,
+   "alignment": 0.5957103633767653,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 41,
+   "samples": 83968,
+   "return": -78.27344626504782,
+   "seconds": 45.99630380002782,
+   "alignment": 0.6017173509835904,
+   "collisions": 1.255,
+   "drones": 8
+  },
+  {
+   "update": 42,
+   "samples": 86016,
+   "return": -78.27344626504782,
+   "seconds": 47.103559000068344,
+   "alignment": 0.5877640569657775,
+   "collisions": 0.9,
+   "drones": 8
+  },
+  {
+   "update": 43,
+   "samples": 88064,
+   "return": -110.8493817200775,
+   "seconds": 48.188493599998765,
+   "alignment": 0.40343579754288966,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 44,
+   "samples": 90112,
+   "return": -100.19095108103072,
+   "seconds": 49.11435980000533,
+   "alignment": 0.6453339288875825,
+   "collisions": 0.24,
+   "drones": 8
+  },
+  {
+   "update": 45,
+   "samples": 92160,
+   "return": -100.19095108103072,
+   "seconds": 49.95180780009832,
+   "alignment": 0.42522492396112727,
+   "collisions": 0.05,
+   "drones": 8
+  },
+  {
+   "update": 46,
+   "samples": 94208,
+   "return": -110.46145493574701,
+   "seconds": 50.87555430002976,
+   "alignment": 0.4098796654561103,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 47,
+   "samples": 96256,
+   "return": -133.23010654713477,
+   "seconds": 52.01550350000616,
+   "alignment": 0.7062652666526721,
+   "collisions": 1.31,
+   "drones": 8
+  },
+  {
+   "update": 48,
+   "samples": 98304,
+   "return": -133.23010654713477,
+   "seconds": 53.03052730008494,
+   "alignment": 0.5282034369885877,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 49,
+   "samples": 100352,
+   "return": -108.6725788800334,
+   "seconds": 54.04264020000119,
+   "alignment": 0.5023087804084522,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 50,
+   "samples": 102400,
+   "return": -121.22330305490621,
+   "seconds": 55.13711080001667,
+   "alignment": 0.5288381657287057,
+   "collisions": 2.05,
+   "drones": 8
+  },
+  {
+   "update": 51,
+   "samples": 104448,
+   "return": -121.22330305490621,
+   "seconds": 56.14255950006191,
+   "alignment": 0.4099162293932342,
+   "collisions": 0.34,
+   "drones": 8
+  },
+  {
+   "update": 52,
+   "samples": 106496,
+   "return": -148.4747369630095,
+   "seconds": 57.14063760009594,
+   "alignment": 0.6238235199008777,
+   "collisions": 1.4,
+   "drones": 8
+  },
+  {
+   "update": 53,
+   "samples": 108544,
+   "return": -148.4747369630095,
+   "seconds": 58.305331200012006,
+   "alignment": 0.756246102613905,
+   "collisions": 0.18,
+   "drones": 8
+  },
+  {
+   "update": 54,
+   "samples": 110592,
+   "return": -151.72970516440145,
+   "seconds": 59.68380940007046,
+   "alignment": 0.4926903862167233,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 55,
+   "samples": 112640,
+   "return": -146.49808380871437,
+   "seconds": 60.71535930002574,
+   "alignment": 0.5736365615650455,
+   "collisions": 1.11,
+   "drones": 8
+  },
+  {
+   "update": 56,
+   "samples": 114688,
+   "return": -146.49808380871437,
+   "seconds": 61.7182261000853,
+   "alignment": 0.4348318582572434,
+   "collisions": 0.78,
+   "drones": 8
+  },
+  {
+   "update": 57,
+   "samples": 116736,
+   "return": -178.11975154993743,
+   "seconds": 62.85454110009596,
+   "alignment": 0.5547943711255904,
+   "collisions": 0.08,
+   "drones": 8
+  },
+  {
+   "update": 58,
+   "samples": 118784,
+   "return": -142.88828819402988,
+   "seconds": 64.00205330003519,
+   "alignment": 0.6873679956855528,
+   "collisions": 0.43,
+   "drones": 8
+  },
+  {
+   "update": 59,
+   "samples": 120832,
+   "return": -142.88828819402988,
+   "seconds": 65.0756317001069,
+   "alignment": 0.2449409899812575,
+   "collisions": 0.76,
+   "drones": 8
+  },
+  {
+   "update": 60,
+   "samples": 122880,
+   "return": -146.67895250043222,
+   "seconds": 66.1772309000371,
+   "alignment": 0.5245941444668848,
+   "collisions": 0.4,
+   "drones": 8
+  },
+  {
+   "update": 61,
+   "samples": 124928,
+   "return": -166.6634557594436,
+   "seconds": 67.2936368000228,
+   "alignment": 0.3861810134839553,
+   "collisions": 1.65,
+   "drones": 8
+  },
+  {
+   "update": 62,
+   "samples": 126976,
+   "return": -166.6634557594436,
+   "seconds": 68.41705490008462,
+   "alignment": 0.45352240953607703,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 63,
+   "samples": 129024,
+   "return": -150.5184076459387,
+   "seconds": 69.57800050009973,
+   "alignment": 0.6386772331610366,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 64,
+   "samples": 131072,
+   "return": -150.5184076459387,
+   "seconds": 70.53998610004783,
+   "alignment": 0.6721303011841819,
+   "collisions": 0.56,
+   "drones": 8
+  },
+  {
+   "update": 65,
+   "samples": 133120,
+   "return": -131.48481794220933,
+   "seconds": 71.75751960009802,
+   "alignment": 0.6746790478512565,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 66,
+   "samples": 135168,
+   "return": -126.8555780696006,
+   "seconds": 72.65970519999973,
+   "alignment": 0.34587598982072776,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 67,
+   "samples": 137216,
+   "return": -126.8555780696006,
+   "seconds": 73.72045930009335,
+   "alignment": 0.3327914859080773,
+   "collisions": 1.28,
+   "drones": 8
+  },
+  {
+   "update": 68,
+   "samples": 139264,
+   "return": -129.30182285671253,
+   "seconds": 74.68896670010872,
+   "alignment": 0.5680387438065101,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 69,
+   "samples": 141312,
+   "return": -116.22790021055512,
+   "seconds": 75.6183469000971,
+   "alignment": 0.629142707006701,
+   "collisions": 0.96,
+   "drones": 8
+  },
+  {
+   "update": 70,
+   "samples": 143360,
+   "return": -116.22790021055512,
+   "seconds": 76.58549580001272,
+   "alignment": 0.39081154954175856,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 71,
+   "samples": 145408,
+   "return": -117.87391022269472,
+   "seconds": 77.76830300001893,
+   "alignment": 0.7594192676796938,
+   "collisions": 0.36,
+   "drones": 8
+  },
+  {
+   "update": 72,
+   "samples": 147456,
+   "return": -134.0951066822024,
+   "seconds": 78.85439110000152,
+   "alignment": 0.32148200840388613,
+   "collisions": 1.74,
+   "drones": 8
+  },
+  {
+   "update": 73,
+   "samples": 149504,
+   "return": -134.0951066822024,
+   "seconds": 79.99635260005016,
+   "alignment": 0.15987040364720176,
+   "collisions": 0.22,
+   "drones": 8
+  },
+  {
+   "update": 74,
+   "samples": 151552,
+   "return": -163.25507481542667,
+   "seconds": 81.02852350007743,
+   "alignment": 0.4143714177334376,
+   "collisions": 1.105,
+   "drones": 8
+  },
+  {
+   "update": 75,
+   "samples": 153600,
+   "return": -130.4336142391018,
+   "seconds": 81.93340720003471,
+   "alignment": 0.2641265804173337,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 76,
+   "samples": 155648,
+   "return": -130.4336142391018,
+   "seconds": 82.90477640007157,
+   "alignment": 0.48806704825171066,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 77,
+   "samples": 157696,
+   "return": -113.09453000497788,
+   "seconds": 83.82177720009349,
+   "alignment": 0.04996971207319963,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 78,
+   "samples": 159744,
+   "return": -113.09453000497788,
+   "seconds": 84.73537440004293,
+   "alignment": 0.35211133961001406,
+   "collisions": 0.17,
+   "drones": 8
+  },
+  {
+   "update": 79,
+   "samples": 161792,
+   "return": -120.6268309655873,
+   "seconds": 85.75375920010265,
+   "alignment": 0.4657342510196745,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 80,
+   "samples": 163840,
+   "return": -90.09334167933348,
+   "seconds": 86.82528150000144,
+   "alignment": 0.38279330699406167,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 81,
+   "samples": 165888,
+   "return": -90.09334167933348,
+   "seconds": 87.89922050002497,
+   "alignment": 0.1034249341141617,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 82,
+   "samples": 167936,
+   "return": -67.37667562773932,
+   "seconds": 88.82077430002391,
+   "alignment": 0.6960295913889273,
+   "collisions": 0.25,
+   "drones": 8
+  },
+  {
+   "update": 83,
+   "samples": 169984,
+   "return": -63.485910518389574,
+   "seconds": 89.84301330009475,
+   "alignment": 0.4871498458928559,
+   "collisions": 0.25,
+   "drones": 8
+  },
+  {
+   "update": 84,
+   "samples": 172032,
+   "return": -63.485910518389574,
+   "seconds": 90.88784490001854,
+   "alignment": 0.4396422873827783,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 85,
+   "samples": 174080,
+   "return": -59.7050164267006,
+   "seconds": 91.99214570003096,
+   "alignment": 0.44994887300653447,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 86,
+   "samples": 176128,
+   "return": -46.71338028350037,
+   "seconds": 93.08672090002801,
+   "alignment": 0.43259680385726007,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 87,
+   "samples": 178176,
+   "return": -46.71338028350037,
+   "seconds": 94.14693570008967,
+   "alignment": 0.4115823577069638,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 88,
+   "samples": 180224,
+   "return": -48.79962401696721,
+   "seconds": 95.21985550003592,
+   "alignment": 0.40289559230957833,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 89,
+   "samples": 182272,
+   "return": -48.79962401696721,
+   "seconds": 96.32285520003643,
+   "alignment": 0.4546471501681092,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 90,
+   "samples": 184320,
+   "return": -40.770837547116024,
+   "seconds": 97.33134910010267,
+   "alignment": 0.4620236755106133,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 91,
+   "samples": 186368,
+   "return": -36.96932942135718,
+   "seconds": 98.44616770010907,
+   "alignment": 0.5268249575407323,
+   "collisions": 0.09,
+   "drones": 8
+  },
+  {
+   "update": 92,
+   "samples": 188416,
+   "return": -36.96932942135718,
+   "seconds": 99.5762058000546,
+   "alignment": 0.505935824301719,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 93,
+   "samples": 190464,
+   "return": -36.31960418414401,
+   "seconds": 100.56254730001092,
+   "alignment": 0.4820223704321014,
+   "collisions": 0.21,
+   "drones": 8
+  },
+  {
+   "update": 94,
+   "samples": 192512,
+   "return": -46.31864141847673,
+   "seconds": 101.58263870002702,
+   "alignment": 0.4682155683870778,
+   "collisions": 0.41,
+   "drones": 8
+  },
+  {
+   "update": 95,
+   "samples": 194560,
+   "return": -46.31864141847673,
+   "seconds": 102.80258320004214,
+   "alignment": 0.5132242479537114,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 96,
+   "samples": 196608,
+   "return": -46.99310064057554,
+   "seconds": 103.89924210007302,
+   "alignment": 0.2622587143733377,
+   "collisions": 0.15,
+   "drones": 8
+  },
+  {
+   "update": 97,
+   "samples": 198656,
+   "return": -53.23841665613295,
+   "seconds": 104.81471150007565,
+   "alignment": 0.387150031361435,
+   "collisions": 0.14,
+   "drones": 8
+  },
+  {
+   "update": 98,
+   "samples": 200704,
+   "return": -53.23841665613295,
+   "seconds": 105.93358820001595,
+   "alignment": 0.25801207141125104,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 99,
+   "samples": 202752,
+   "return": -60.398981859054814,
+   "seconds": 107.06070540007204,
+   "alignment": 0.5694615493904454,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 100,
+   "samples": 204800,
+   "return": -58.32439845169888,
+   "seconds": 108.15661140007433,
+   "alignment": 0.4418096507806408,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 101,
+   "samples": 206848,
+   "return": -58.32439845169888,
+   "seconds": 109.19649780006148,
+   "alignment": 0.24529260150777663,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 102,
+   "samples": 208896,
+   "return": -61.22376076972237,
+   "seconds": 110.3542235000059,
+   "alignment": 0.34953066073458444,
+   "collisions": 0.42,
+   "drones": 8
+  },
+  {
+   "update": 103,
+   "samples": 210944,
+   "return": -61.22376076972237,
+   "seconds": 111.44708690000698,
+   "alignment": 0.4724887670229249,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 104,
+   "samples": 212992,
+   "return": -58.737077636080265,
+   "seconds": 112.41986150003504,
+   "alignment": 0.4691020387151098,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 105,
+   "samples": 215040,
+   "return": -64.45565567368126,
+   "seconds": 113.44163720007055,
+   "alignment": 0.4097813154228496,
+   "collisions": 0.5,
+   "drones": 8
+  },
+  {
+   "update": 106,
+   "samples": 217088,
+   "return": -64.45565567368126,
+   "seconds": 114.51232830004301,
+   "alignment": 0.1482981347584031,
+   "collisions": 0.32,
+   "drones": 8
+  },
+  {
+   "update": 107,
+   "samples": 219136,
+   "return": -74.16855468921354,
+   "seconds": 115.63443880004343,
+   "alignment": 0.3584076458228626,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 108,
+   "samples": 221184,
+   "return": -79.90250915143046,
+   "seconds": 116.76423840003554,
+   "alignment": 0.3507963943520885,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 109,
+   "samples": 223232,
+   "return": -79.90250915143046,
+   "seconds": 117.84151880000718,
+   "alignment": 0.6601238949813444,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 110,
+   "samples": 225280,
+   "return": -62.23878456947864,
+   "seconds": 118.71740950003732,
+   "alignment": 0.39592055783402375,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 111,
+   "samples": 227328,
+   "return": -77.920631171704,
+   "seconds": 119.68669560004491,
+   "alignment": 0.15003077080756788,
+   "collisions": 0.69,
+   "drones": 8
+  },
+  {
+   "update": 112,
+   "samples": 229376,
+   "return": -77.920631171704,
+   "seconds": 120.75652300007641,
+   "alignment": 0.5908621866756271,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 113,
+   "samples": 231424,
+   "return": -78.21785668010071,
+   "seconds": 121.76415280008223,
+   "alignment": 0.49766655970193363,
+   "collisions": 0.72,
+   "drones": 8
+  },
+  {
+   "update": 114,
+   "samples": 233472,
+   "return": -78.21785668010071,
+   "seconds": 122.79984430002514,
+   "alignment": 0.40685572931013175,
+   "collisions": 0.5,
+   "drones": 8
+  },
+  {
+   "update": 115,
+   "samples": 235520,
+   "return": -66.80719916997441,
+   "seconds": 123.87830300000496,
+   "alignment": 0.6787311643226732,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 116,
+   "samples": 237568,
+   "return": -66.19310330204098,
+   "seconds": 124.93785620003473,
+   "alignment": 0.27364831869067857,
+   "collisions": 0.14,
+   "drones": 8
+  },
+  {
+   "update": 117,
+   "samples": 239616,
+   "return": -66.19310330204098,
+   "seconds": 125.90677920007147,
+   "alignment": 0.49252794028550445,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 118,
+   "samples": 241664,
+   "return": -67.89751438764651,
+   "seconds": 126.86482450005133,
+   "alignment": 0.6245371934154842,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 119,
+   "samples": 243712,
+   "return": -49.975142245817736,
+   "seconds": 127.85948320000898,
+   "alignment": 0.379991395854514,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 120,
+   "samples": 245760,
+   "return": -49.975142245817736,
+   "seconds": 128.9435506000882,
+   "alignment": 0.5841157199424026,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 121,
+   "samples": 247808,
+   "return": -38.70778421962841,
+   "seconds": 130.02772320003714,
+   "alignment": 0.0028049321247680626,
+   "collisions": 0.05,
+   "drones": 8
+  },
+  {
+   "update": 122,
+   "samples": 249856,
+   "return": -42.35673709859884,
+   "seconds": 131.01762040005997,
+   "alignment": 0.1436951934025128,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 123,
+   "samples": 251904,
+   "return": -42.35673709859884,
+   "seconds": 131.91673690010794,
+   "alignment": 0.3917642295499069,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 124,
+   "samples": 253952,
+   "return": -43.25231735700845,
+   "seconds": 132.815674600075,
+   "alignment": 0.2266355531718983,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 125,
+   "samples": 256000,
+   "return": -47.919331896691894,
+   "seconds": 133.8097725000698,
+   "alignment": 0.39653589708592674,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 126,
+   "samples": 258048,
+   "return": -47.919331896691894,
+   "seconds": 134.86448610003572,
+   "alignment": 0.30868825280686485,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 127,
+   "samples": 260096,
+   "return": -53.53929693652308,
+   "seconds": 136.03323070006445,
+   "alignment": 0.4575587276491852,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 128,
+   "samples": 262144,
+   "return": -53.53929693652308,
+   "seconds": 137.02213450009003,
+   "alignment": 0.5399298626671701,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 129,
+   "samples": 264192,
+   "return": -50.89725673179928,
+   "seconds": 138.0006140000187,
+   "alignment": 0.44323882483596305,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 130,
+   "samples": 266240,
+   "return": -42.975088941268496,
+   "seconds": 139.0520423001144,
+   "alignment": 0.4558171081713397,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 131,
+   "samples": 268288,
+   "return": -42.975088941268496,
+   "seconds": 140.2918524000561,
+   "alignment": 0.7255545695791835,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 132,
+   "samples": 270336,
+   "return": -34.05729653792232,
+   "seconds": 141.33814760006499,
+   "alignment": 0.429191234705989,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 133,
+   "samples": 272384,
+   "return": -35.72602045766153,
+   "seconds": 142.4182254000334,
+   "alignment": 0.4699726952175732,
+   "collisions": 0.25,
+   "drones": 8
+  },
+  {
+   "update": 134,
+   "samples": 274432,
+   "return": -35.72602045766153,
+   "seconds": 143.4876991000492,
+   "alignment": 0.4592578127017699,
+   "collisions": 0.32,
+   "drones": 8
+  },
+  {
+   "update": 135,
+   "samples": 276480,
+   "return": -37.55822101434505,
+   "seconds": 144.54413990001194,
+   "alignment": 0.41573468285964166,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 136,
+   "samples": 278528,
+   "return": -39.02605603695956,
+   "seconds": 145.57733780005947,
+   "alignment": 0.5221596256557849,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 137,
+   "samples": 280576,
+   "return": -39.02605603695956,
+   "seconds": 146.70960270008072,
+   "alignment": 0.5765685066234653,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 138,
+   "samples": 282624,
+   "return": -38.8246082920301,
+   "seconds": 147.76144730008673,
+   "alignment": 0.41780009114972055,
+   "collisions": 0.06,
+   "drones": 8
+  },
+  {
+   "update": 139,
+   "samples": 284672,
+   "return": -38.8246082920301,
+   "seconds": 148.7471657000715,
+   "alignment": 0.43644405664081587,
+   "collisions": 0.24,
+   "drones": 8
+  },
+  {
+   "update": 140,
+   "samples": 286720,
+   "return": -52.786897569756185,
+   "seconds": 149.5356442000484,
+   "alignment": 0.8451329632831482,
+   "collisions": 0.69,
+   "drones": 8
+  },
+  {
+   "update": 141,
+   "samples": 288768,
+   "return": -49.832033660649174,
+   "seconds": 150.40979540010449,
+   "alignment": 0.5267768107941506,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 142,
+   "samples": 290816,
+   "return": -49.832033660649174,
+   "seconds": 151.36925440002233,
+   "alignment": 0.3951552222338988,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 143,
+   "samples": 292864,
+   "return": -49.41461927358978,
+   "seconds": 152.45556570007466,
+   "alignment": 0.6035140095818348,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 144,
+   "samples": 294912,
+   "return": -63.241361747231714,
+   "seconds": 153.9398974000942,
+   "alignment": 0.5472157372115027,
+   "collisions": 0.79,
+   "drones": 8
+  },
+  {
+   "update": 145,
+   "samples": 296960,
+   "return": -63.241361747231714,
+   "seconds": 155.18026200006716,
+   "alignment": 0.5995219187291667,
+   "collisions": 0.25,
+   "drones": 8
+  },
+  {
+   "update": 146,
+   "samples": 299008,
+   "return": -66.85482781315673,
+   "seconds": 156.85499120003078,
+   "alignment": 0.5750043028670757,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 147,
+   "samples": 301056,
+   "return": -56.80551626578277,
+   "seconds": 158.50557960011065,
+   "alignment": 0.5353849378806217,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 148,
+   "samples": 303104,
+   "return": -56.80551626578277,
+   "seconds": 159.91127030004282,
+   "alignment": 0.24618253037288468,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 149,
+   "samples": 305152,
+   "return": -63.35477911664681,
+   "seconds": 161.1923131000949,
+   "alignment": 0.27516503273746334,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 150,
+   "samples": 307200,
+   "return": -75.90267499448133,
+   "seconds": 162.32013730006292,
+   "alignment": 0.5461996571199986,
+   "collisions": 0.78,
+   "drones": 8
+  },
+  {
+   "update": 151,
+   "samples": 309248,
+   "return": -75.90267499448133,
+   "seconds": 163.52851050009485,
+   "alignment": 0.7919330292013745,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 152,
+   "samples": 311296,
+   "return": -81.97500104473372,
+   "seconds": 165.02922270004638,
+   "alignment": 0.4076790403446568,
+   "collisions": 1.295,
+   "drones": 8
+  },
+  {
+   "update": 153,
+   "samples": 313344,
+   "return": -81.97500104473372,
+   "seconds": 166.58300580002833,
+   "alignment": 0.3822084555285467,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 154,
+   "samples": 315392,
+   "return": -84.53959202144733,
+   "seconds": 168.22730700008105,
+   "alignment": 0.4167294507779091,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 155,
+   "samples": 317440,
+   "return": -105.21191338447643,
+   "seconds": 169.69393750000745,
+   "alignment": 0.4627967334405747,
+   "collisions": 1.02,
+   "drones": 8
+  },
+  {
+   "update": 156,
+   "samples": 319488,
+   "return": -105.21191338447643,
+   "seconds": 171.0621440000832,
+   "alignment": 0.3212060949412471,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 157,
+   "samples": 321536,
+   "return": -98.52294748215058,
+   "seconds": 172.32924950006418,
+   "alignment": 0.3818024056885739,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 158,
+   "samples": 323584,
+   "return": -93.75047942150991,
+   "seconds": 173.6513658000622,
+   "alignment": 0.2178017161889929,
+   "collisions": 0.53,
+   "drones": 8
+  },
+  {
+   "update": 159,
+   "samples": 325632,
+   "return": -93.75047942150991,
+   "seconds": 175.04874720005319,
+   "alignment": 0.27766204715025,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 160,
+   "samples": 327680,
+   "return": -84.919878242617,
+   "seconds": 176.56395710003562,
+   "alignment": 0.7088366039581073,
+   "collisions": 0.13,
+   "drones": 8
+  },
+  {
+   "update": 161,
+   "samples": 329728,
+   "return": -71.54590588065017,
+   "seconds": 177.82173200009856,
+   "alignment": 0.561351862367684,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 162,
+   "samples": 331776,
+   "return": -71.54590588065017,
+   "seconds": 179.19631290005054,
+   "alignment": 0.5260638506748746,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 163,
+   "samples": 333824,
+   "return": -79.46800109638639,
+   "seconds": 180.5799589001108,
+   "alignment": 0.45183840394668223,
+   "collisions": 1.08,
+   "drones": 8
+  },
+  {
+   "update": 164,
+   "samples": 335872,
+   "return": -79.46800109638639,
+   "seconds": 181.92470970004797,
+   "alignment": 0.46773865104649537,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 165,
+   "samples": 337920,
+   "return": -77.78745870975581,
+   "seconds": 183.29343479999807,
+   "alignment": 0.5536024028110309,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 166,
+   "samples": 339968,
+   "return": -72.45034466678808,
+   "seconds": 184.62817260005977,
+   "alignment": 0.5128536378044671,
+   "collisions": 0.53,
+   "drones": 8
+  },
+  {
+   "update": 167,
+   "samples": 342016,
+   "return": -72.45034466678808,
+   "seconds": 185.95677790010814,
+   "alignment": 0.6041498766668916,
+   "collisions": 0.51,
+   "drones": 8
+  },
+  {
+   "update": 168,
+   "samples": 344064,
+   "return": -76.05613213618781,
+   "seconds": 187.17830960010178,
+   "alignment": 0.45795700691654523,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 169,
+   "samples": 346112,
+   "return": -89.82495032839324,
+   "seconds": 188.6105975001119,
+   "alignment": 0.5034328501126659,
+   "collisions": 0.27,
+   "drones": 8
+  },
+  {
+   "update": 170,
+   "samples": 348160,
+   "return": -89.82495032839324,
+   "seconds": 189.8920915001072,
+   "alignment": 0.6019595634081544,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 171,
+   "samples": 350208,
+   "return": -59.8915727127147,
+   "seconds": 191.1082493000431,
+   "alignment": 0.31936235505756183,
+   "collisions": 0.13,
+   "drones": 8
+  },
+  {
+   "update": 172,
+   "samples": 352256,
+   "return": -64.88318098626132,
+   "seconds": 192.37301000009757,
+   "alignment": 0.4407895871025319,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 173,
+   "samples": 354304,
+   "return": -64.88318098626132,
+   "seconds": 193.68194210005458,
+   "alignment": 0.41962097337697246,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 174,
+   "samples": 356352,
+   "return": -57.97997137486091,
+   "seconds": 194.89994760008994,
+   "alignment": 0.5944339634542515,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 175,
+   "samples": 358400,
+   "return": -40.68717561187837,
+   "seconds": 196.04122220003046,
+   "alignment": 0.5965701135633037,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 176,
+   "samples": 360448,
+   "return": -40.68717561187837,
+   "seconds": 197.30555050005205,
+   "alignment": 0.29265793136689466,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 177,
+   "samples": 362496,
+   "return": -36.53931941280075,
+   "seconds": 198.71160620008595,
+   "alignment": 0.32383996483502275,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 178,
+   "samples": 364544,
+   "return": -36.53931941280075,
+   "seconds": 200.13430760009214,
+   "alignment": 0.44215977098963954,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 179,
+   "samples": 366592,
+   "return": -41.98668819214195,
+   "seconds": 201.77964070008602,
+   "alignment": 0.05147708703062921,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 180,
+   "samples": 368640,
+   "return": -43.743359027703036,
+   "seconds": 203.120919900015,
+   "alignment": -0.021536199208609264,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 181,
+   "samples": 370688,
+   "return": -43.743359027703036,
+   "seconds": 204.58271520002745,
+   "alignment": 0.46300408174690305,
+   "collisions": 0.06,
+   "drones": 8
+  },
+  {
+   "update": 182,
+   "samples": 372736,
+   "return": -45.69141547246322,
+   "seconds": 205.77302060008515,
+   "alignment": 0.11921859892161005,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 183,
+   "samples": 374784,
+   "return": -54.28289357295434,
+   "seconds": 207.11149600008503,
+   "alignment": 0.32321008339768975,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 184,
+   "samples": 376832,
+   "return": -54.28289357295434,
+   "seconds": 209.19177010003477,
+   "alignment": 0.5025234419564871,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 185,
+   "samples": 378880,
+   "return": -51.51773631621144,
+   "seconds": 210.81609850004315,
+   "alignment": 0.23933996298498314,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 186,
+   "samples": 380928,
+   "return": -57.3754724261791,
+   "seconds": 212.32151940010954,
+   "alignment": 0.2189393686183973,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 187,
+   "samples": 382976,
+   "return": -57.3754724261791,
+   "seconds": 213.64539600000717,
+   "alignment": 0.15918229972053052,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 188,
+   "samples": 385024,
+   "return": -60.854109234552915,
+   "seconds": 215.1907672000816,
+   "alignment": 0.47910622791627644,
+   "collisions": 0.15,
+   "drones": 8
+  },
+  {
+   "update": 189,
+   "samples": 387072,
+   "return": -60.854109234552915,
+   "seconds": 216.52883280010428,
+   "alignment": 0.5321014751968494,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 190,
+   "samples": 389120,
+   "return": -55.607288429502105,
+   "seconds": 217.60187020001467,
+   "alignment": 0.5231455349253092,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 191,
+   "samples": 391168,
+   "return": -49.621085917477636,
+   "seconds": 218.58292530011386,
+   "alignment": 0.5721913161756742,
+   "collisions": 0.06,
+   "drones": 8
+  },
+  {
+   "update": 192,
+   "samples": 393216,
+   "return": -49.621085917477636,
+   "seconds": 219.64269710006192,
+   "alignment": 0.5607046959521831,
+   "collisions": 0.21,
+   "drones": 8
+  },
+  {
+   "update": 193,
+   "samples": 395264,
+   "return": -55.454648329500195,
+   "seconds": 220.81760790001135,
+   "alignment": 0.4838702979580522,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 194,
+   "samples": 397312,
+   "return": -45.76787733253841,
+   "seconds": 222.02440160000697,
+   "alignment": 0.5091577530353102,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 195,
+   "samples": 399360,
+   "return": -45.76787733253841,
+   "seconds": 222.96331020002253,
+   "alignment": 0.8060743816132816,
+   "collisions": 1.13,
+   "drones": 8
+  },
+  {
+   "update": 196,
+   "samples": 401408,
+   "return": -57.59753722973765,
+   "seconds": 223.98407350003254,
+   "alignment": 0.8136024159903775,
+   "collisions": 0.24,
+   "drones": 8
+  },
+  {
+   "update": 197,
+   "samples": 403456,
+   "return": -59.2611893728008,
+   "seconds": 225.01641410007142,
+   "alignment": 0.587085247187157,
+   "collisions": 0.17,
+   "drones": 8
+  },
+  {
+   "update": 198,
+   "samples": 405504,
+   "return": -59.2611893728008,
+   "seconds": 226.08057690004352,
+   "alignment": 0.6983996443986985,
+   "collisions": 0.12,
+   "drones": 8
+  },
+  {
+   "update": 199,
+   "samples": 407552,
+   "return": -60.15563632319572,
+   "seconds": 227.00788180006202,
+   "alignment": 0.7723433725372683,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 200,
+   "samples": 409600,
+   "return": -68.30380167293806,
+   "seconds": 228.03326880000532,
+   "alignment": 0.7509175992750883,
+   "collisions": 1.25,
+   "drones": 8
+  },
+  {
+   "update": 201,
+   "samples": 411648,
+   "return": -68.30380167293806,
+   "seconds": 229.19743450009264,
+   "alignment": 0.6947943647252706,
+   "collisions": 0.08,
+   "drones": 8
+  },
+  {
+   "update": 202,
+   "samples": 413696,
+   "return": -88.15312810901669,
+   "seconds": 230.44706960010808,
+   "alignment": 0.7965031627411275,
+   "collisions": 0.78,
+   "drones": 8
+  },
+  {
+   "update": 203,
+   "samples": 415744,
+   "return": -88.15312810901669,
+   "seconds": 231.33029050007463,
+   "alignment": 0.6232280097658911,
+   "collisions": 0.06,
+   "drones": 8
+  },
+  {
+   "update": 204,
+   "samples": 417792,
+   "return": -71.75767116824572,
+   "seconds": 232.28719980001915,
+   "alignment": 0.4512409699383174,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 205,
+   "samples": 419840,
+   "return": -76.62487495133064,
+   "seconds": 233.1773520000279,
+   "alignment": 0.5511369607521261,
+   "collisions": 0.13,
+   "drones": 8
+  },
+  {
+   "update": 206,
+   "samples": 421888,
+   "return": -76.62487495133064,
+   "seconds": 234.02109130006284,
+   "alignment": 0.49995472800954877,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 207,
+   "samples": 423936,
+   "return": -75.16286384451178,
+   "seconds": 234.96053220005706,
+   "alignment": 0.6357732717992812,
+   "collisions": 0.01,
+   "drones": 8
+  },
+  {
+   "update": 208,
+   "samples": 425984,
+   "return": -77.38590966524225,
+   "seconds": 235.90945650008507,
+   "alignment": 0.6191435783686373,
+   "collisions": 1.22,
+   "drones": 8
+  },
+  {
+   "update": 209,
+   "samples": 428032,
+   "return": -77.38590966524225,
+   "seconds": 236.8277059000684,
+   "alignment": 0.35155910846565575,
+   "collisions": 0.26,
+   "drones": 8
+  },
+  {
+   "update": 210,
+   "samples": 430080,
+   "return": -76.62134468940367,
+   "seconds": 237.76679310004693,
+   "alignment": 0.4743061983514407,
+   "collisions": 0.38,
+   "drones": 8
+  },
+  {
+   "update": 211,
+   "samples": 432128,
+   "return": -87.81575143480568,
+   "seconds": 238.92754770000465,
+   "alignment": 0.4582205707351211,
+   "collisions": 0.99,
+   "drones": 8
+  },
+  {
+   "update": 212,
+   "samples": 434176,
+   "return": -87.81575143480568,
+   "seconds": 240.1061324001057,
+   "alignment": 0.48177875456110647,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 213,
+   "samples": 436224,
+   "return": -87.05579876261527,
+   "seconds": 241.1679012000095,
+   "alignment": 0.5950547791450426,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 214,
+   "samples": 438272,
+   "return": -87.05579876261527,
+   "seconds": 242.15297410008498,
+   "alignment": 0.800060945976484,
+   "collisions": 1.27,
+   "drones": 8
+  },
+  {
+   "update": 215,
+   "samples": 440320,
+   "return": -112.00777887107252,
+   "seconds": 243.10015420010313,
+   "alignment": 0.47741672195934837,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 216,
+   "samples": 442368,
+   "return": -132.01097212604654,
+   "seconds": 244.13765899999999,
+   "alignment": 0.18181551050168918,
+   "collisions": 1.89,
+   "drones": 8
+  },
+  {
+   "update": 217,
+   "samples": 444416,
+   "return": -132.01097212604654,
+   "seconds": 245.14854730002116,
+   "alignment": 0.4963546160181906,
+   "collisions": 0.44,
+   "drones": 8
+  },
+  {
+   "update": 218,
+   "samples": 446464,
+   "return": -126.87676635735261,
+   "seconds": 246.0949862000998,
+   "alignment": 0.4862627203829996,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 219,
+   "samples": 448512,
+   "return": -129.97612683515544,
+   "seconds": 247.0042669000104,
+   "alignment": 0.4433175000174654,
+   "collisions": 0.865,
+   "drones": 8
+  },
+  {
+   "update": 220,
+   "samples": 450560,
+   "return": -129.97612683515544,
+   "seconds": 247.86175630008802,
+   "alignment": 0.5974583424708614,
+   "collisions": 0.3,
+   "drones": 8
+  },
+  {
+   "update": 221,
+   "samples": 452608,
+   "return": -139.14903448689148,
+   "seconds": 248.83443680009805,
+   "alignment": 0.5955797703068066,
+   "collisions": 0.01,
+   "drones": 8
+  },
+  {
+   "update": 222,
+   "samples": 454656,
+   "return": -131.95835061086729,
+   "seconds": 249.82693370000925,
+   "alignment": 0.5845965258930045,
+   "collisions": 1.01,
+   "drones": 8
+  },
+  {
+   "update": 223,
+   "samples": 456704,
+   "return": -131.95835061086729,
+   "seconds": 250.82800750003662,
+   "alignment": 0.616696470863757,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 224,
+   "samples": 458752,
+   "return": -107.03182388568275,
+   "seconds": 251.94123480003327,
+   "alignment": 0.4724659054777187,
+   "collisions": 0.77,
+   "drones": 8
+  },
+  {
+   "update": 225,
+   "samples": 460800,
+   "return": -126.8072439411455,
+   "seconds": 252.93935540004168,
+   "alignment": 0.4877744279728787,
+   "collisions": 1.795,
+   "drones": 8
+  },
+  {
+   "update": 226,
+   "samples": 462848,
+   "return": -126.8072439411455,
+   "seconds": 254.11350800003856,
+   "alignment": 0.49131592704522276,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 227,
+   "samples": 464896,
+   "return": -107.12916018186698,
+   "seconds": 255.06022420001682,
+   "alignment": 0.621113274845736,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 228,
+   "samples": 466944,
+   "return": -107.12916018186698,
+   "seconds": 256.0199603000656,
+   "alignment": 0.8104739717424055,
+   "collisions": 0.94,
+   "drones": 8
+  },
+  {
+   "update": 229,
+   "samples": 468992,
+   "return": -112.4737066127058,
+   "seconds": 257.04600880004,
+   "alignment": 0.6720208861771695,
+   "collisions": 0.11,
+   "drones": 8
+  },
+  {
+   "update": 230,
+   "samples": 471040,
+   "return": -130.23758413240358,
+   "seconds": 257.94998470006976,
+   "alignment": 0.576636782599565,
+   "collisions": 1.845,
+   "drones": 8
+  },
+  {
+   "update": 231,
+   "samples": 473088,
+   "return": -130.23758413240358,
+   "seconds": 258.83254210010637,
+   "alignment": 0.7294912739169029,
+   "collisions": 1.31,
+   "drones": 8
+  },
+  {
+   "update": 232,
+   "samples": 475136,
+   "return": -157.45767879048654,
+   "seconds": 259.8020741000073,
+   "alignment": 0.5832320842637239,
+   "collisions": 0.11,
+   "drones": 8
+  },
+  {
+   "update": 233,
+   "samples": 477184,
+   "return": -141.88100316696074,
+   "seconds": 260.7307769000763,
+   "alignment": 0.5512829122404324,
+   "collisions": 1.16,
+   "drones": 8
+  },
+  {
+   "update": 234,
+   "samples": 479232,
+   "return": -141.88100316696074,
+   "seconds": 261.5807904000394,
+   "alignment": 0.17711896914677458,
+   "collisions": 0.02,
+   "drones": 8
+  },
+  {
+   "update": 235,
+   "samples": 481280,
+   "return": -156.30889795271506,
+   "seconds": 262.63141120004,
+   "alignment": 0.5983188121781253,
+   "collisions": 0.37,
+   "drones": 8
+  },
+  {
+   "update": 236,
+   "samples": 483328,
+   "return": -156.7797816325721,
+   "seconds": 263.68962280009873,
+   "alignment": 0.7364452304509622,
+   "collisions": 1.285,
+   "drones": 8
+  },
+  {
+   "update": 237,
+   "samples": 485376,
+   "return": -156.7797816325721,
+   "seconds": 264.81500150007196,
+   "alignment": 0.8972454392188357,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 238,
+   "samples": 487424,
+   "return": -124.63485419420977,
+   "seconds": 265.91670430009253,
+   "alignment": 0.646396741277234,
+   "collisions": 0.63,
+   "drones": 8
+  },
+  {
+   "update": 239,
+   "samples": 489472,
+   "return": -124.63485419420977,
+   "seconds": 266.8758854001062,
+   "alignment": 0.5297064636539117,
+   "collisions": 0.03,
+   "drones": 8
+  },
+  {
+   "update": 240,
+   "samples": 491520,
+   "return": -88.06707435560456,
+   "seconds": 267.79071870003827,
+   "alignment": 0.48130974613607663,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 241,
+   "samples": 493568,
+   "return": -73.46714083478928,
+   "seconds": 268.7781466000015,
+   "alignment": 0.46378215747198986,
+   "collisions": 0.19,
+   "drones": 8
+  },
+  {
+   "update": 242,
+   "samples": 495616,
+   "return": -73.46714083478928,
+   "seconds": 269.63450160005596,
+   "alignment": 0.5593507763648912,
+   "collisions": 1.49,
+   "drones": 8
+  },
+  {
+   "update": 243,
+   "samples": 497664,
+   "return": -100.59787485300531,
+   "seconds": 270.5788448000094,
+   "alignment": 0.3718749370747069,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 244,
+   "samples": 499712,
+   "return": -86.71519682387061,
+   "seconds": 271.54272780008614,
+   "alignment": 0.5692930896836353,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 245,
+   "samples": 501760,
+   "return": -86.71519682387061,
+   "seconds": 272.5553385000676,
+   "alignment": 0.4964110659296258,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 246,
+   "samples": 503808,
+   "return": -84.60858792700364,
+   "seconds": 273.6158735000063,
+   "alignment": 0.5652925015080336,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 247,
+   "samples": 505856,
+   "return": -86.69117618341015,
+   "seconds": 274.5266123000765,
+   "alignment": 0.676077089384917,
+   "collisions": 0.42,
+   "drones": 8
+  },
+  {
+   "update": 248,
+   "samples": 507904,
+   "return": -86.69117618341015,
+   "seconds": 275.4873806000687,
+   "alignment": 0.6823099198303143,
+   "collisions": 0.28,
+   "drones": 8
+  },
+  {
+   "update": 249,
+   "samples": 509952,
+   "return": -116.6503263520869,
+   "seconds": 276.51124440005515,
+   "alignment": 0.5731694787106827,
+   "collisions": 1.125,
+   "drones": 8
+  },
+  {
+   "update": 250,
+   "samples": 512000,
+   "return": -98.58455242217124,
+   "seconds": 277.57572650001384,
+   "alignment": 0.5583429854922983,
+   "collisions": 1.55,
+   "drones": 8
+  },
+  {
+   "update": 251,
+   "samples": 514048,
+   "return": -98.58455242217124,
+   "seconds": 278.77075540006626,
+   "alignment": 0.8396370267171827,
+   "collisions": 0.15,
+   "drones": 8
+  },
+  {
+   "update": 252,
+   "samples": 516096,
+   "return": -122.10040268364928,
+   "seconds": 279.93069740000647,
+   "alignment": 0.42686796208915295,
+   "collisions": 1.515,
+   "drones": 8
+  },
+  {
+   "update": 253,
+   "samples": 518144,
+   "return": -122.10040268364928,
+   "seconds": 280.9277297001099,
+   "alignment": 0.6216130717634127,
+   "collisions": 0.4,
+   "drones": 8
+  },
+  {
+   "update": 254,
+   "samples": 520192,
+   "return": -136.38021520206013,
+   "seconds": 281.75563160004094,
+   "alignment": 0.609485249590816,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 255,
+   "samples": 522240,
+   "return": -150.63612755088906,
+   "seconds": 282.71065120003186,
+   "alignment": 0.19480046189480382,
+   "collisions": 1.045,
+   "drones": 8
+  },
+  {
+   "update": 256,
+   "samples": 524288,
+   "return": -150.63612755088906,
+   "seconds": 283.5772766000591,
+   "alignment": 0.37067048148472664,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 257,
+   "samples": 526336,
+   "return": -122.76810663015422,
+   "seconds": 284.5283590001054,
+   "alignment": 0.5525846364775274,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 258,
+   "samples": 528384,
+   "return": -117.01279958346022,
+   "seconds": 285.4057250000769,
+   "alignment": 0.2529653273357134,
+   "collisions": 0.955,
+   "drones": 8
+  },
+  {
+   "update": 259,
+   "samples": 530432,
+   "return": -117.01279958346022,
+   "seconds": 286.4355019000359,
+   "alignment": 0.8705169003330997,
+   "collisions": 0.02,
+   "drones": 8
+  },
+  {
+   "update": 260,
+   "samples": 532480,
+   "return": -94.04389387560298,
+   "seconds": 287.34496170002967,
+   "alignment": 0.46732916239960914,
+   "collisions": 0.45,
+   "drones": 8
+  },
+  {
+   "update": 261,
+   "samples": 534528,
+   "return": -82.57282424254556,
+   "seconds": 288.4364820000483,
+   "alignment": 0.4459186189969577,
+   "collisions": 0.09,
+   "drones": 8
+  },
+  {
+   "update": 262,
+   "samples": 536576,
+   "return": -82.57282424254556,
+   "seconds": 289.36192930000834,
+   "alignment": 0.6038952168592583,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 263,
+   "samples": 538624,
+   "return": -70.45748286647833,
+   "seconds": 290.18281440006103,
+   "alignment": 0.4357804189768029,
+   "collisions": 0.5,
+   "drones": 8
+  },
+  {
+   "update": 264,
+   "samples": 540672,
+   "return": -70.45748286647833,
+   "seconds": 290.9882531000767,
+   "alignment": 0.23183913801645226,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 265,
+   "samples": 542720,
+   "return": -75.06940278326621,
+   "seconds": 291.93881060008425,
+   "alignment": 0.7220381135921135,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 266,
+   "samples": 544768,
+   "return": -64.43382665442735,
+   "seconds": 293.092871400062,
+   "alignment": 0.34370318293013796,
+   "collisions": 0.64,
+   "drones": 8
+  },
+  {
+   "update": 267,
+   "samples": 546816,
+   "return": -64.43382665442735,
+   "seconds": 294.22679520002566,
+   "alignment": 0.2885156738867867,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 268,
+   "samples": 548864,
+   "return": -66.3925741559082,
+   "seconds": 295.3068029000424,
+   "alignment": 0.593156009613943,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 269,
+   "samples": 550912,
+   "return": -73.09441635099195,
+   "seconds": 296.33428470010404,
+   "alignment": 0.50544121794545,
+   "collisions": 0.59,
+   "drones": 8
+  },
+  {
+   "update": 270,
+   "samples": 552960,
+   "return": -73.09441635099195,
+   "seconds": 297.3093400000362,
+   "alignment": 0.12341262030306835,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 271,
+   "samples": 555008,
+   "return": -74.8693866216374,
+   "seconds": 298.30059620004613,
+   "alignment": 0.6045597801900913,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 272,
+   "samples": 557056,
+   "return": -68.12857976266753,
+   "seconds": 299.2044826000929,
+   "alignment": 0.6295836511568494,
+   "collisions": 0.35,
+   "drones": 8
+  },
+  {
+   "update": 273,
+   "samples": 559104,
+   "return": -68.12857976266753,
+   "seconds": 300.2169506000355,
+   "alignment": 0.8571362856234345,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 274,
+   "samples": 561152,
+   "return": -75.25520197789959,
+   "seconds": 301.1496357000433,
+   "alignment": 0.38388631204669266,
+   "collisions": 0.79,
+   "drones": 8
+  },
+  {
+   "update": 275,
+   "samples": 563200,
+   "return": -75.73138480097131,
+   "seconds": 302.0330974000972,
+   "alignment": 0.2324338712784396,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 276,
+   "samples": 565248,
+   "return": -75.73138480097131,
+   "seconds": 302.8724221000448,
+   "alignment": 0.7273533776679991,
+   "collisions": 0.15,
+   "drones": 8
+  },
+  {
+   "update": 277,
+   "samples": 567296,
+   "return": -63.0861843652945,
+   "seconds": 303.76492890005466,
+   "alignment": 0.5279694687013854,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 278,
+   "samples": 569344,
+   "return": -63.0861843652945,
+   "seconds": 304.8099495000206,
+   "alignment": 0.4590340228852598,
+   "collisions": 0.14,
+   "drones": 8
+  },
+  {
+   "update": 279,
+   "samples": 571392,
+   "return": -59.77207950681695,
+   "seconds": 305.79084580007475,
+   "alignment": 0.531887863665564,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 280,
+   "samples": 573440,
+   "return": -56.24920907598498,
+   "seconds": 306.8460281000007,
+   "alignment": 0.673883957337592,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 281,
+   "samples": 575488,
+   "return": -56.24920907598498,
+   "seconds": 307.85879710002337,
+   "alignment": 0.6170947437841429,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 282,
+   "samples": 577536,
+   "return": -39.971855107628286,
+   "seconds": 308.98302330006845,
+   "alignment": 0.41327589554535626,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 283,
+   "samples": 579584,
+   "return": -36.09516408978343,
+   "seconds": 310.03504330001306,
+   "alignment": 0.3424047547105438,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 284,
+   "samples": 581632,
+   "return": -36.09516408978343,
+   "seconds": 311.0104225000832,
+   "alignment": 0.5877361804767386,
+   "collisions": 0.26,
+   "drones": 8
+  },
+  {
+   "update": 285,
+   "samples": 583680,
+   "return": -43.83705035741841,
+   "seconds": 311.98898720007855,
+   "alignment": 0.4253581676176582,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 286,
+   "samples": 585728,
+   "return": -38.65927332397514,
+   "seconds": 313.0850876000477,
+   "alignment": 0.561524940466771,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 287,
+   "samples": 587776,
+   "return": -38.65927332397514,
+   "seconds": 314.28830150002614,
+   "alignment": 0.5039425659400606,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 288,
+   "samples": 589824,
+   "return": -46.77082247453327,
+   "seconds": 315.3723996001063,
+   "alignment": 0.668244024431816,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 289,
+   "samples": 591872,
+   "return": -46.77082247453327,
+   "seconds": 316.51417110010516,
+   "alignment": 0.7134397144566705,
+   "collisions": 0.24,
+   "drones": 8
+  },
+  {
+   "update": 290,
+   "samples": 593920,
+   "return": -48.633632831087745,
+   "seconds": 317.5365149000427,
+   "alignment": 0.23001433353662495,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 291,
+   "samples": 595968,
+   "return": -52.448543093300394,
+   "seconds": 318.5704623000929,
+   "alignment": 0.4798503790027045,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 292,
+   "samples": 598016,
+   "return": -52.448543093300394,
+   "seconds": 319.4890246000141,
+   "alignment": 0.5509136889934774,
+   "collisions": 0.03,
+   "drones": 8
+  },
+  {
+   "update": 293,
+   "samples": 600064,
+   "return": -49.37697651073104,
+   "seconds": 320.6039211000316,
+   "alignment": 0.6181203512853098,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 294,
+   "samples": 602112,
+   "return": -48.40054830102376,
+   "seconds": 321.7316975001013,
+   "alignment": 0.5552986856278546,
+   "collisions": 0.16,
+   "drones": 8
+  },
+  {
+   "update": 295,
+   "samples": 604160,
+   "return": -48.40054830102376,
+   "seconds": 322.8034966000123,
+   "alignment": 0.5598331151059578,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 296,
+   "samples": 606208,
+   "return": -41.389211847788786,
+   "seconds": 323.7574423000915,
+   "alignment": 0.49207624881184286,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 297,
+   "samples": 608256,
+   "return": -43.8023944800399,
+   "seconds": 324.749237800017,
+   "alignment": 0.44363992251860934,
+   "collisions": 0.18,
+   "drones": 8
+  },
+  {
+   "update": 298,
+   "samples": 610304,
+   "return": -43.8023944800399,
+   "seconds": 325.69102170004044,
+   "alignment": 0.5759537698773266,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 299,
+   "samples": 612352,
+   "return": -38.9801747062625,
+   "seconds": 326.8130384000251,
+   "alignment": 0.6230201984652619,
+   "collisions": 0.09,
+   "drones": 8
+  },
+  {
+   "update": 300,
+   "samples": 614400,
+   "return": -32.50570343435906,
+   "seconds": 327.802241000114,
+   "alignment": 0.7682295050979937,
+   "collisions": 0.05,
+   "drones": 8
+  },
+  {
+   "update": 301,
+   "samples": 616448,
+   "return": -32.50570343435906,
+   "seconds": 328.74094630009495,
+   "alignment": 0.5009987747344603,
+   "collisions": 0.79,
+   "drones": 8
+  },
+  {
+   "update": 302,
+   "samples": 618496,
+   "return": -82.57700041391372,
+   "seconds": 329.6743981000036,
+   "alignment": 0.5018685159972351,
+   "collisions": 1.37,
+   "drones": 8
+  },
+  {
+   "update": 303,
+   "samples": 620544,
+   "return": -82.57700041391372,
+   "seconds": 330.6206332000438,
+   "alignment": 0.3541408600303289,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 304,
+   "samples": 622592,
+   "return": -84.2994766374818,
+   "seconds": 331.7076582000591,
+   "alignment": 0.4531134232900105,
+   "collisions": 0.28,
+   "drones": 8
+  },
+  {
+   "update": 305,
+   "samples": 624640,
+   "return": -87.1275732787747,
+   "seconds": 332.7382112001069,
+   "alignment": 0.4262545073404644,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 306,
+   "samples": 626688,
+   "return": -87.1275732787747,
+   "seconds": 333.718658400001,
+   "alignment": 0.5334329270029732,
+   "collisions": 0.14,
+   "drones": 8
+  },
+  {
+   "update": 307,
+   "samples": 628736,
+   "return": -86.92320547235968,
+   "seconds": 334.67294210009277,
+   "alignment": 0.4964134429999784,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 308,
+   "samples": 630784,
+   "return": -92.43340068502053,
+   "seconds": 335.6207209000131,
+   "alignment": 0.42309483217984317,
+   "collisions": 0.11,
+   "drones": 8
+  },
+  {
+   "update": 309,
+   "samples": 632832,
+   "return": -92.43340068502053,
+   "seconds": 336.55421290011145,
+   "alignment": 0.34745607101999426,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 310,
+   "samples": 634880,
+   "return": -54.60023897042024,
+   "seconds": 337.53532270004507,
+   "alignment": 0.337486003705123,
+   "collisions": 0.44,
+   "drones": 8
+  },
+  {
+   "update": 311,
+   "samples": 636928,
+   "return": -56.73692013180785,
+   "seconds": 338.4956757000182,
+   "alignment": 0.24239788028205106,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 312,
+   "samples": 638976,
+   "return": -56.73692013180785,
+   "seconds": 339.69346510001924,
+   "alignment": 0.3403754561444306,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 313,
+   "samples": 641024,
+   "return": -51.739664496280554,
+   "seconds": 340.9750498000067,
+   "alignment": 0.6560587410030925,
+   "collisions": 0.13,
+   "drones": 8
+  },
+  {
+   "update": 314,
+   "samples": 643072,
+   "return": -51.739664496280554,
+   "seconds": 342.09225210000295,
+   "alignment": 0.7037452371524942,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 315,
+   "samples": 645120,
+   "return": -45.3928755821536,
+   "seconds": 343.18079270003363,
+   "alignment": 0.22975350374581055,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 316,
+   "samples": 647168,
+   "return": -51.58365740571389,
+   "seconds": 344.2547921000514,
+   "alignment": 0.4506892429025018,
+   "collisions": 0.02,
+   "drones": 8
+  },
+  {
+   "update": 317,
+   "samples": 649216,
+   "return": -51.58365740571389,
+   "seconds": 345.3771726000123,
+   "alignment": 0.7289585264832067,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 318,
+   "samples": 651264,
+   "return": -38.02367434762709,
+   "seconds": 346.43145320005715,
+   "alignment": 0.36229034559481876,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 319,
+   "samples": 653312,
+   "return": -50.29378311285218,
+   "seconds": 347.5459113001125,
+   "alignment": 0.393977177090634,
+   "collisions": 0.74,
+   "drones": 8
+  },
+  {
+   "update": 320,
+   "samples": 655360,
+   "return": -50.29378311285218,
+   "seconds": 348.59211970004253,
+   "alignment": 0.6600953224194336,
+   "collisions": 0.3,
+   "drones": 8
+  },
+  {
+   "update": 321,
+   "samples": 657408,
+   "return": -59.19656500941028,
+   "seconds": 349.62892240006477,
+   "alignment": 0.5230831663765008,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 322,
+   "samples": 659456,
+   "return": -77.53766254876436,
+   "seconds": 350.71124760003295,
+   "alignment": 0.5233586149443186,
+   "collisions": 0.49,
+   "drones": 8
+  },
+  {
+   "update": 323,
+   "samples": 661504,
+   "return": -77.53766254876436,
+   "seconds": 351.8166818000609,
+   "alignment": 0.6215647297588994,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 324,
+   "samples": 663552,
+   "return": -71.26285363197067,
+   "seconds": 352.81742010009475,
+   "alignment": 0.3696912256492934,
+   "collisions": 0.11,
+   "drones": 8
+  },
+  {
+   "update": 325,
+   "samples": 665600,
+   "return": -76.54380761639376,
+   "seconds": 353.924072700087,
+   "alignment": 0.47617725061107,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 326,
+   "samples": 667648,
+   "return": -76.54380761639376,
+   "seconds": 354.9585035000928,
+   "alignment": 0.5274824177353516,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 327,
+   "samples": 669696,
+   "return": -62.38869626985006,
+   "seconds": 356.0341113000177,
+   "alignment": 0.5954972435486444,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 328,
+   "samples": 671744,
+   "return": -62.38869626985006,
+   "seconds": 357.0262998000253,
+   "alignment": 0.7177583715440473,
+   "collisions": 0.65,
+   "drones": 8
+  },
+  {
+   "update": 329,
+   "samples": 673792,
+   "return": -66.747200917813,
+   "seconds": 358.1103724000277,
+   "alignment": 0.2478872415927791,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 330,
+   "samples": 675840,
+   "return": -78.75554095034849,
+   "seconds": 359.1409534000559,
+   "alignment": 0.3131307686343734,
+   "collisions": 1.1,
+   "drones": 8
+  },
+  {
+   "update": 331,
+   "samples": 677888,
+   "return": -78.75554095034849,
+   "seconds": 360.04719390009996,
+   "alignment": 0.23742052093636068,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 332,
+   "samples": 679936,
+   "return": -86.84343055308372,
+   "seconds": 361.17870480008423,
+   "alignment": 0.7914075046658509,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 333,
+   "samples": 681984,
+   "return": -107.23482723694569,
+   "seconds": 362.1151438000379,
+   "alignment": 0.4282280223687046,
+   "collisions": 1.51,
+   "drones": 8
+  },
+  {
+   "update": 334,
+   "samples": 684032,
+   "return": -107.23482723694569,
+   "seconds": 362.9691611001035,
+   "alignment": 0.5073941122987439,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 335,
+   "samples": 686080,
+   "return": -118.76218003758576,
+   "seconds": 363.97298730001785,
+   "alignment": 0.5285501108076419,
+   "collisions": 0.4,
+   "drones": 8
+  },
+  {
+   "update": 336,
+   "samples": 688128,
+   "return": -106.73605003799166,
+   "seconds": 364.8819473000476,
+   "alignment": 0.5210933311296145,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 337,
+   "samples": 690176,
+   "return": -106.73605003799166,
+   "seconds": 365.81178920005914,
+   "alignment": 0.21985104935399427,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 338,
+   "samples": 692224,
+   "return": -89.11911197107656,
+   "seconds": 366.74688530003186,
+   "alignment": 0.0179801901196074,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 339,
+   "samples": 694272,
+   "return": -89.11911197107656,
+   "seconds": 367.8031106000999,
+   "alignment": 0.5603610394336134,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 340,
+   "samples": 696320,
+   "return": -84.69456435359716,
+   "seconds": 368.85277810005937,
+   "alignment": 0.6148982405048349,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 341,
+   "samples": 698368,
+   "return": -77.70139332224025,
+   "seconds": 369.8216445000144,
+   "alignment": 0.47643689574489556,
+   "collisions": 0.64,
+   "drones": 8
+  },
+  {
+   "update": 342,
+   "samples": 700416,
+   "return": -77.70139332224025,
+   "seconds": 370.7525762000587,
+   "alignment": 0.4645592640702981,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 343,
+   "samples": 702464,
+   "return": -69.5253143732294,
+   "seconds": 371.75491160003,
+   "alignment": 0.731425278963479,
+   "collisions": 0.25,
+   "drones": 8
+  },
+  {
+   "update": 344,
+   "samples": 704512,
+   "return": -69.56230602565975,
+   "seconds": 372.9096487000352,
+   "alignment": 0.4418491026083147,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 345,
+   "samples": 706560,
+   "return": -69.56230602565975,
+   "seconds": 374.0901553001022,
+   "alignment": 0.47533691837619996,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 346,
+   "samples": 708608,
+   "return": -64.42735217724038,
+   "seconds": 375.06850730010774,
+   "alignment": 0.6565027379061806,
+   "collisions": 0.14,
+   "drones": 8
+  },
+  {
+   "update": 347,
+   "samples": 710656,
+   "return": -93.93853742608388,
+   "seconds": 376.1294525000267,
+   "alignment": 0.5943148447242851,
+   "collisions": 1.72,
+   "drones": 8
+  },
+  {
+   "update": 348,
+   "samples": 712704,
+   "return": -93.93853742608388,
+   "seconds": 377.12539270007983,
+   "alignment": 0.42970389369223083,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 349,
+   "samples": 714752,
+   "return": -79.47402522282408,
+   "seconds": 377.9381218000781,
+   "alignment": 0.5902550890761112,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 350,
+   "samples": 716800,
+   "return": -68.53773874265806,
+   "seconds": 378.8557536000153,
+   "alignment": 0.6382334393212451,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 351,
+   "samples": 718848,
+   "return": -68.53773874265806,
+   "seconds": 379.84312970004976,
+   "alignment": 0.534627315535935,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 352,
+   "samples": 720896,
+   "return": -65.41626853800079,
+   "seconds": 380.8451508000726,
+   "alignment": 0.4799822415948938,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 353,
+   "samples": 722944,
+   "return": -65.41626853800079,
+   "seconds": 381.7757704000687,
+   "alignment": 0.485472550267414,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 354,
+   "samples": 724992,
+   "return": -63.78027449867786,
+   "seconds": 382.6117969000479,
+   "alignment": 0.4656838021022459,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 355,
+   "samples": 727040,
+   "return": -30.55597766817518,
+   "seconds": 383.47780560003594,
+   "alignment": 0.5284562102772974,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 356,
+   "samples": 729088,
+   "return": -30.55597766817518,
+   "seconds": 384.3426807000069,
+   "alignment": 0.728088393440058,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 357,
+   "samples": 731136,
+   "return": -22.10238700676273,
+   "seconds": 385.25485310005024,
+   "alignment": 0.47710572471083557,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 358,
+   "samples": 733184,
+   "return": -26.55376249955352,
+   "seconds": 386.25371430011,
+   "alignment": 0.5065357229285119,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 359,
+   "samples": 735232,
+   "return": -26.55376249955352,
+   "seconds": 387.2910956001142,
+   "alignment": 0.7195964908429883,
+   "collisions": 0.28,
+   "drones": 8
+  },
+  {
+   "update": 360,
+   "samples": 737280,
+   "return": -32.50554856110175,
+   "seconds": 388.32169220002834,
+   "alignment": 0.4742948616190282,
+   "collisions": 0.08,
+   "drones": 8
+  },
+  {
+   "update": 361,
+   "samples": 739328,
+   "return": -29.561181899390796,
+   "seconds": 389.4012302000774,
+   "alignment": 0.5410425079522554,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 362,
+   "samples": 741376,
+   "return": -29.561181899390796,
+   "seconds": 390.4208243000321,
+   "alignment": 0.8412126094360803,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 363,
+   "samples": 743424,
+   "return": -26.93210450620245,
+   "seconds": 391.64691530005075,
+   "alignment": 0.547697326338371,
+   "collisions": 0.06,
+   "drones": 8
+  },
+  {
+   "update": 364,
+   "samples": 745472,
+   "return": -26.93210450620245,
+   "seconds": 392.7244407000253,
+   "alignment": 0.7901102949083395,
+   "collisions": 0.46,
+   "drones": 8
+  },
+  {
+   "update": 365,
+   "samples": 747520,
+   "return": -40.73120222490761,
+   "seconds": 393.75669390009716,
+   "alignment": 0.7258904137287132,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 366,
+   "samples": 749568,
+   "return": -43.08527362734767,
+   "seconds": 394.741044400027,
+   "alignment": 0.6194933506646786,
+   "collisions": 0.42,
+   "drones": 8
+  },
+  {
+   "update": 367,
+   "samples": 751616,
+   "return": -43.08527362734767,
+   "seconds": 395.7262411999982,
+   "alignment": 0.7016237731875418,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 368,
+   "samples": 753664,
+   "return": -35.029053320022285,
+   "seconds": 396.69905330007896,
+   "alignment": 0.5160548069200473,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 369,
+   "samples": 755712,
+   "return": -38.75625284230155,
+   "seconds": 397.6489198000636,
+   "alignment": 0.4513720988175268,
+   "collisions": 0.09,
+   "drones": 8
+  },
+  {
+   "update": 370,
+   "samples": 757760,
+   "return": -38.75625284230155,
+   "seconds": 398.4953337000916,
+   "alignment": 0.7237059447842765,
+   "collisions": 0.27,
+   "drones": 8
+  },
+  {
+   "update": 371,
+   "samples": 759808,
+   "return": -49.659176308512585,
+   "seconds": 399.556126600015,
+   "alignment": 0.3722023809365045,
+   "collisions": 0.27,
+   "drones": 8
+  },
+  {
+   "update": 372,
+   "samples": 761856,
+   "return": -43.39946526168792,
+   "seconds": 400.8693963000551,
+   "alignment": 0.38339456353547574,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 373,
+   "samples": 763904,
+   "return": -43.39946526168792,
+   "seconds": 402.688372900011,
+   "alignment": 0.6174274056453612,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 374,
+   "samples": 765952,
+   "return": -38.046109340819974,
+   "seconds": 404.7733910001116,
+   "alignment": 0.6310410389857446,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 375,
+   "samples": 768000,
+   "return": -46.51578585249122,
+   "seconds": 406.3187703000149,
+   "alignment": 0.395094867749715,
+   "collisions": 0.39,
+   "drones": 8
+  },
+  {
+   "update": 376,
+   "samples": 770048,
+   "return": -46.51578585249122,
+   "seconds": 407.6607213000534,
+   "alignment": 0.8326975130279061,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 377,
+   "samples": 772096,
+   "return": -40.64179561539284,
+   "seconds": 408.96309309999924,
+   "alignment": 0.5742968250133836,
+   "collisions": 0.27,
+   "drones": 8
+  },
+  {
+   "update": 378,
+   "samples": 774144,
+   "return": -40.64179561539284,
+   "seconds": 410.16709720005747,
+   "alignment": 0.579011250733168,
+   "collisions": 0.05,
+   "drones": 8
+  },
+  {
+   "update": 379,
+   "samples": 776192,
+   "return": -32.150595475657994,
+   "seconds": 411.5054496000521,
+   "alignment": 0.29701387917031363,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 380,
+   "samples": 778240,
+   "return": -32.925891302389594,
+   "seconds": 412.8276337001007,
+   "alignment": 0.5222588210929953,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 381,
+   "samples": 780288,
+   "return": -32.925891302389594,
+   "seconds": 414.029911300051,
+   "alignment": 0.5880714115253877,
+   "collisions": 0.46,
+   "drones": 8
+  },
+  {
+   "update": 382,
+   "samples": 782336,
+   "return": -46.223638338602015,
+   "seconds": 415.2628274000017,
+   "alignment": 0.39372501698432344,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 383,
+   "samples": 784384,
+   "return": -43.53192808172209,
+   "seconds": 416.36183180008084,
+   "alignment": 0.3517967627666566,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 384,
+   "samples": 786432,
+   "return": -43.53192808172209,
+   "seconds": 417.1552167000482,
+   "alignment": 0.612099276965224,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 385,
+   "samples": 788480,
+   "return": -43.504765084944665,
+   "seconds": 417.9894262000453,
+   "alignment": 0.6677370580535035,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 386,
+   "samples": 790528,
+   "return": -36.12263874079181,
+   "seconds": 418.8315169000998,
+   "alignment": 0.6907807522606885,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 387,
+   "samples": 792576,
+   "return": -36.12263874079181,
+   "seconds": 419.8908229001099,
+   "alignment": 0.7043771337896471,
+   "collisions": 0.46,
+   "drones": 8
+  },
+  {
+   "update": 388,
+   "samples": 794624,
+   "return": -44.99265842618678,
+   "seconds": 420.9311635000631,
+   "alignment": 0.4455374950673627,
+   "collisions": 0.28,
+   "drones": 8
+  },
+  {
+   "update": 389,
+   "samples": 796672,
+   "return": -44.99265842618678,
+   "seconds": 421.8565481000114,
+   "alignment": 0.3903648731482323,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 390,
+   "samples": 798720,
+   "return": -38.763469198289826,
+   "seconds": 422.78472350002266,
+   "alignment": 0.7217176308317229,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 391,
+   "samples": 800768,
+   "return": -53.734844635095115,
+   "seconds": 423.9514753000112,
+   "alignment": 0.5360316536345074,
+   "collisions": 1.27,
+   "drones": 8
+  },
+  {
+   "update": 392,
+   "samples": 802816,
+   "return": -53.734844635095115,
+   "seconds": 424.9567858000519,
+   "alignment": 0.8424463448107133,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 393,
+   "samples": 804864,
+   "return": -50.80999562650717,
+   "seconds": 425.9092166000046,
+   "alignment": 0.6263976905414569,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 394,
+   "samples": 806912,
+   "return": -61.79651268884767,
+   "seconds": 426.9628198000137,
+   "alignment": 0.5436990428171092,
+   "collisions": 0.43,
+   "drones": 8
+  },
+  {
+   "update": 395,
+   "samples": 808960,
+   "return": -61.79651268884767,
+   "seconds": 428.04901330010034,
+   "alignment": 0.3608113008854377,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 396,
+   "samples": 811008,
+   "return": -55.45104906232787,
+   "seconds": 429.06411540007684,
+   "alignment": 0.5994558676670494,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 397,
+   "samples": 813056,
+   "return": -52.38479662000814,
+   "seconds": 430.2393090000842,
+   "alignment": 0.7782256638583844,
+   "collisions": 0.23,
+   "drones": 8
+  },
+  {
+   "update": 398,
+   "samples": 815104,
+   "return": -52.38479662000814,
+   "seconds": 431.3365077000344,
+   "alignment": 0.6066516192385393,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 399,
+   "samples": 817152,
+   "return": -31.73237194464423,
+   "seconds": 432.52092310006265,
+   "alignment": 0.5726648077675391,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 400,
+   "samples": 819200,
+   "return": -42.387209579314366,
+   "seconds": 433.8848239000654,
+   "alignment": 0.4763813752069928,
+   "collisions": 0.23,
+   "drones": 8
+  },
+  {
+   "update": 401,
+   "samples": 821248,
+   "return": -42.387209579314366,
+   "seconds": 435.2693316000514,
+   "alignment": 0.5913480325699341,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 402,
+   "samples": 823296,
+   "return": -35.83306189231789,
+   "seconds": 436.67496180010494,
+   "alignment": 0.47355459610174194,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 403,
+   "samples": 825344,
+   "return": -35.83306189231789,
+   "seconds": 438.0468124001054,
+   "alignment": 0.49048943970861536,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 404,
+   "samples": 827392,
+   "return": -31.47617004302301,
+   "seconds": 439.42354750004597,
+   "alignment": 0.5494595683014866,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 405,
+   "samples": 829440,
+   "return": -36.579556176667396,
+   "seconds": 440.79441410000436,
+   "alignment": 0.37485929888332464,
+   "collisions": 0.31,
+   "drones": 8
+  },
+  {
+   "update": 406,
+   "samples": 831488,
+   "return": -36.579556176667396,
+   "seconds": 442.1622899000067,
+   "alignment": 0.41929970062685046,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 407,
+   "samples": 833536,
+   "return": -43.23550849492021,
+   "seconds": 443.46938380005304,
+   "alignment": 0.6354495895365428,
+   "collisions": 0.08,
+   "drones": 8
+  },
+  {
+   "update": 408,
+   "samples": 835584,
+   "return": -36.03803890452109,
+   "seconds": 444.75865480001085,
+   "alignment": 0.5734263721602944,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 409,
+   "samples": 837632,
+   "return": -36.03803890452109,
+   "seconds": 446.02341230004095,
+   "alignment": 0.47089528752343623,
+   "collisions": 0.2,
+   "drones": 8
+  },
+  {
+   "update": 410,
+   "samples": 839680,
+   "return": -57.755359679914,
+   "seconds": 447.24948190001305,
+   "alignment": 0.31270928783831603,
+   "collisions": 0.4,
+   "drones": 8
+  },
+  {
+   "update": 411,
+   "samples": 841728,
+   "return": -78.33761226016286,
+   "seconds": 448.4466141000157,
+   "alignment": 0.5820222269419556,
+   "collisions": 1.14,
+   "drones": 8
+  },
+  {
+   "update": 412,
+   "samples": 843776,
+   "return": -78.33761226016286,
+   "seconds": 449.7602958000498,
+   "alignment": 0.7360041270861936,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 413,
+   "samples": 845824,
+   "return": -78.2521353744105,
+   "seconds": 451.03152470011264,
+   "alignment": 0.5989434560037235,
+   "collisions": 0.52,
+   "drones": 8
+  },
+  {
+   "update": 414,
+   "samples": 847872,
+   "return": -78.2521353744105,
+   "seconds": 452.32835440000053,
+   "alignment": 0.7574450788704303,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 415,
+   "samples": 849920,
+   "return": -69.41630901263916,
+   "seconds": 453.6674106999999,
+   "alignment": 0.4954344052032426,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 416,
+   "samples": 851968,
+   "return": -72.40584138556069,
+   "seconds": 455.1212156000547,
+   "alignment": 0.46142876277690736,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 417,
+   "samples": 854016,
+   "return": -72.40584138556069,
+   "seconds": 456.3485939000966,
+   "alignment": 0.7780236624961411,
+   "collisions": 0.1,
+   "drones": 8
+  },
+  {
+   "update": 418,
+   "samples": 856064,
+   "return": -55.02891198245807,
+   "seconds": 457.60042370005976,
+   "alignment": 0.6736869862621424,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 419,
+   "samples": 858112,
+   "return": -38.204930045416674,
+   "seconds": 458.9090220000362,
+   "alignment": 0.632788430240813,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 420,
+   "samples": 860160,
+   "return": -38.204930045416674,
+   "seconds": 460.25376540003344,
+   "alignment": 0.6895686511805588,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 421,
+   "samples": 862208,
+   "return": -26.885817067340305,
+   "seconds": 461.60390280000865,
+   "alignment": 0.7894250948376822,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 422,
+   "samples": 864256,
+   "return": -34.011183818892825,
+   "seconds": 462.88843660010025,
+   "alignment": 0.6856932758260583,
+   "collisions": 0.46,
+   "drones": 8
+  },
+  {
+   "update": 423,
+   "samples": 866304,
+   "return": -34.011183818892825,
+   "seconds": 464.22814290004317,
+   "alignment": 0.4838191270372708,
+   "collisions": 0.06,
+   "drones": 8
+  },
+  {
+   "update": 424,
+   "samples": 868352,
+   "return": -39.49772609476749,
+   "seconds": 465.5523551000515,
+   "alignment": 0.2845454435924409,
+   "collisions": 0.29,
+   "drones": 8
+  },
+  {
+   "update": 425,
+   "samples": 870400,
+   "return": -38.8491717580524,
+   "seconds": 466.83215430006385,
+   "alignment": 0.586726539655858,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 426,
+   "samples": 872448,
+   "return": -38.8491717580524,
+   "seconds": 468.0600025000749,
+   "alignment": 0.36662294836060616,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 427,
+   "samples": 874496,
+   "return": -37.08402326150171,
+   "seconds": 468.82057520002127,
+   "alignment": 0.6869256819117229,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 428,
+   "samples": 876544,
+   "return": -37.08402326150171,
+   "seconds": 469.56325170001946,
+   "alignment": 0.8555249726496729,
+   "collisions": 0.35,
+   "drones": 8
+  },
+  {
+   "update": 429,
+   "samples": 878592,
+   "return": -42.568431319916996,
+   "seconds": 470.32061590009835,
+   "alignment": 0.49533316909979824,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 430,
+   "samples": 880640,
+   "return": -38.947613128659576,
+   "seconds": 471.1865856000222,
+   "alignment": 0.48844970279930805,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 431,
+   "samples": 882688,
+   "return": -38.947613128659576,
+   "seconds": 472.13597330008633,
+   "alignment": 0.3572569518020293,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 432,
+   "samples": 884736,
+   "return": -35.98030264049957,
+   "seconds": 473.07406370004173,
+   "alignment": 0.5632772834811497,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 433,
+   "samples": 886784,
+   "return": -29.81021855892468,
+   "seconds": 474.524140200112,
+   "alignment": 0.6560010516339507,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 434,
+   "samples": 888832,
+   "return": -29.81021855892468,
+   "seconds": 475.76886010007,
+   "alignment": 0.9701044391071996,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 435,
+   "samples": 890880,
+   "return": -15.281529763147791,
+   "seconds": 477.0359901000047,
+   "alignment": 0.7006427630077496,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 436,
+   "samples": 892928,
+   "return": -10.749322387577939,
+   "seconds": 478.37161960010417,
+   "alignment": 0.5551062727390916,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 437,
+   "samples": 894976,
+   "return": -10.749322387577939,
+   "seconds": 479.5252835000865,
+   "alignment": 0.4538855265134593,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 438,
+   "samples": 897024,
+   "return": -11.877758168647796,
+   "seconds": 480.71756750007626,
+   "alignment": 0.6055697093109366,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 439,
+   "samples": 899072,
+   "return": -11.877758168647796,
+   "seconds": 481.9786867001094,
+   "alignment": 0.4900299764317749,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 440,
+   "samples": 901120,
+   "return": -7.32568345574511,
+   "seconds": 483.18074070010334,
+   "alignment": 0.3031825257467427,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 441,
+   "samples": 903168,
+   "return": -19.209316837724163,
+   "seconds": 484.3990388000384,
+   "alignment": 0.5560723254214135,
+   "collisions": 0.06,
+   "drones": 8
+  },
+  {
+   "update": 442,
+   "samples": 905216,
+   "return": -19.209316837724163,
+   "seconds": 485.62079270009417,
+   "alignment": 0.7670912570575598,
+   "collisions": 0.24,
+   "drones": 8
+  },
+  {
+   "update": 443,
+   "samples": 907264,
+   "return": -44.65093396089715,
+   "seconds": 486.95941220002715,
+   "alignment": 0.5928618723933359,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 444,
+   "samples": 909312,
+   "return": -45.44847129273021,
+   "seconds": 488.29547130002175,
+   "alignment": 0.5487260984498105,
+   "collisions": 0.04,
+   "drones": 8
+  },
+  {
+   "update": 445,
+   "samples": 911360,
+   "return": -45.44847129273021,
+   "seconds": 489.3876900000032,
+   "alignment": 0.2330392272233674,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 446,
+   "samples": 913408,
+   "return": -50.02026567281628,
+   "seconds": 490.6552646000637,
+   "alignment": 0.4133033867850356,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 447,
+   "samples": 915456,
+   "return": -51.913291472408126,
+   "seconds": 491.93187590001617,
+   "alignment": 0.4935889721144038,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 448,
+   "samples": 917504,
+   "return": -51.913291472408126,
+   "seconds": 493.21113950002473,
+   "alignment": 0.5157106281393351,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 449,
+   "samples": 919552,
+   "return": -41.920948648215926,
+   "seconds": 494.5390149001032,
+   "alignment": 0.7158986071024899,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 450,
+   "samples": 921600,
+   "return": -21.40807741141025,
+   "seconds": 495.81530990009196,
+   "alignment": 0.7324763029262437,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 451,
+   "samples": 923648,
+   "return": -21.40807741141025,
+   "seconds": 497.0325328001054,
+   "alignment": 0.5643779485045879,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 452,
+   "samples": 925696,
+   "return": -31.95913561748348,
+   "seconds": 498.286715800059,
+   "alignment": 0.48683836653376567,
+   "collisions": 0.43,
+   "drones": 8
+  },
+  {
+   "update": 453,
+   "samples": 927744,
+   "return": -31.95913561748348,
+   "seconds": 499.5827937000431,
+   "alignment": 0.4868417587814207,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 454,
+   "samples": 929792,
+   "return": -28.423203937590735,
+   "seconds": 500.88415080006234,
+   "alignment": 0.3777048844510192,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 455,
+   "samples": 931840,
+   "return": -32.18837793015045,
+   "seconds": 502.2702482000459,
+   "alignment": 0.42426318564161847,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 456,
+   "samples": 933888,
+   "return": -32.18837793015045,
+   "seconds": 503.69100950006396,
+   "alignment": 0.5610641751935149,
+   "collisions": 0.33,
+   "drones": 8
+  },
+  {
+   "update": 457,
+   "samples": 935936,
+   "return": -42.46541354868659,
+   "seconds": 505.0850276000565,
+   "alignment": 0.477455258519026,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 458,
+   "samples": 937984,
+   "return": -51.541187391742824,
+   "seconds": 506.1631505000405,
+   "alignment": 0.45253253124034304,
+   "collisions": 0.03,
+   "drones": 8
+  },
+  {
+   "update": 459,
+   "samples": 940032,
+   "return": -51.541187391742824,
+   "seconds": 506.8775443000486,
+   "alignment": 0.6306576577699111,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 460,
+   "samples": 942080,
+   "return": -42.983848552042765,
+   "seconds": 507.5645237000426,
+   "alignment": 0.5974774033077247,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 461,
+   "samples": 944128,
+   "return": -36.947344900994,
+   "seconds": 508.26213520008605,
+   "alignment": 0.6841771237944825,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 462,
+   "samples": 946176,
+   "return": -36.947344900994,
+   "seconds": 508.9579823000822,
+   "alignment": 0.2854525725792036,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 463,
+   "samples": 948224,
+   "return": -39.14551460514376,
+   "seconds": 509.79411710007116,
+   "alignment": 0.4693252561192958,
+   "collisions": 0.09,
+   "drones": 8
+  },
+  {
+   "update": 464,
+   "samples": 950272,
+   "return": -39.14551460514376,
+   "seconds": 510.66355010005645,
+   "alignment": 0.5793588815688026,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 465,
+   "samples": 952320,
+   "return": -29.3636863534628,
+   "seconds": 511.58122000005096,
+   "alignment": 0.5097710935478021,
+   "collisions": 0.13,
+   "drones": 8
+  },
+  {
+   "update": 466,
+   "samples": 954368,
+   "return": -51.4143995888413,
+   "seconds": 512.6619946000865,
+   "alignment": 0.5716133186234827,
+   "collisions": 1.08,
+   "drones": 8
+  },
+  {
+   "update": 467,
+   "samples": 956416,
+   "return": -51.4143995888413,
+   "seconds": 513.658754400094,
+   "alignment": 0.5516702308755046,
+   "collisions": 0.01,
+   "drones": 8
+  },
+  {
+   "update": 468,
+   "samples": 958464,
+   "return": -55.55423260525713,
+   "seconds": 514.6575432000682,
+   "alignment": 0.7719532246353432,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 469,
+   "samples": 960512,
+   "return": -64.61201435216317,
+   "seconds": 515.6569475000724,
+   "alignment": 0.8908388970232352,
+   "collisions": 0.69,
+   "drones": 8
+  },
+  {
+   "update": 470,
+   "samples": 962560,
+   "return": -64.61201435216317,
+   "seconds": 516.7564529000083,
+   "alignment": 0.7967168200787217,
+   "collisions": 1.65,
+   "drones": 8
+  },
+  {
+   "update": 471,
+   "samples": 964608,
+   "return": -101.23401336491443,
+   "seconds": 517.6253259000368,
+   "alignment": 0.8373471455128302,
+   "collisions": 0.89,
+   "drones": 8
+  },
+  {
+   "update": 472,
+   "samples": 966656,
+   "return": -145.42651253274744,
+   "seconds": 518.6595383000094,
+   "alignment": 0.6357707899795295,
+   "collisions": 1.24,
+   "drones": 8
+  },
+  {
+   "update": 473,
+   "samples": 968704,
+   "return": -145.42651253274744,
+   "seconds": 519.5717440000735,
+   "alignment": 0.3560513468369911,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 474,
+   "samples": 970752,
+   "return": -129.43673778356825,
+   "seconds": 520.6320171001134,
+   "alignment": 0.4462507202317674,
+   "collisions": 0.27,
+   "drones": 8
+  },
+  {
+   "update": 475,
+   "samples": 972800,
+   "return": -138.31957449686632,
+   "seconds": 521.7407625000924,
+   "alignment": 0.4706834216846482,
+   "collisions": 0.61,
+   "drones": 8
+  },
+  {
+   "update": 476,
+   "samples": 974848,
+   "return": -138.31957449686632,
+   "seconds": 522.7968002000125,
+   "alignment": 0.30780640714701524,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 477,
+   "samples": 976896,
+   "return": -137.55402686236556,
+   "seconds": 523.8539141000947,
+   "alignment": 0.5317373653633872,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 478,
+   "samples": 978944,
+   "return": -137.55402686236556,
+   "seconds": 524.7682025000686,
+   "alignment": 0.5833239359887687,
+   "collisions": 0.12,
+   "drones": 8
+  },
+  {
+   "update": 479,
+   "samples": 980992,
+   "return": -96.02441409477396,
+   "seconds": 525.8044359000633,
+   "alignment": 0.5970833512166835,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 480,
+   "samples": 983040,
+   "return": -76.7428858846808,
+   "seconds": 527.025204500067,
+   "alignment": 0.3732825972460791,
+   "collisions": 0.81,
+   "drones": 8
+  },
+  {
+   "update": 481,
+   "samples": 985088,
+   "return": -76.7428858846808,
+   "seconds": 528.0821185000241,
+   "alignment": 0.5541984437216757,
+   "collisions": 0.93,
+   "drones": 8
+  },
+  {
+   "update": 482,
+   "samples": 987136,
+   "return": -100.8464386506068,
+   "seconds": 529.0350261999993,
+   "alignment": 0.2834033092504902,
+   "collisions": 0.08,
+   "drones": 8
+  },
+  {
+   "update": 483,
+   "samples": 989184,
+   "return": -90.76617433288338,
+   "seconds": 529.8886602000566,
+   "alignment": 0.6057865633339286,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 484,
+   "samples": 991232,
+   "return": -90.76617433288338,
+   "seconds": 530.8191188001074,
+   "alignment": 0.5041647689162478,
+   "collisions": 0.02,
+   "drones": 8
+  },
+  {
+   "update": 485,
+   "samples": 993280,
+   "return": -99.5135565984223,
+   "seconds": 531.9616722000064,
+   "alignment": 0.572363236702411,
+   "collisions": 0.95,
+   "drones": 8
+  },
+  {
+   "update": 486,
+   "samples": 995328,
+   "return": -107.1311392664661,
+   "seconds": 532.964527000091,
+   "alignment": 0.7521078163795764,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 487,
+   "samples": 997376,
+   "return": -107.1311392664661,
+   "seconds": 533.8638501000823,
+   "alignment": 0.4845971651137947,
+   "collisions": 0.91,
+   "drones": 8
+  },
+  {
+   "update": 488,
+   "samples": 999424,
+   "return": -111.0858951212721,
+   "seconds": 534.6890443000011,
+   "alignment": 0.37119595762182916,
+   "collisions": 0.6,
+   "drones": 8
+  },
+  {
+   "update": 489,
+   "samples": 1001472,
+   "return": -111.0858951212721,
+   "seconds": 535.5243246000027,
+   "alignment": 0.6892407719251921,
+   "collisions": 0.78,
+   "drones": 8
+  },
+  {
+   "update": 490,
+   "samples": 1003520,
+   "return": -90.90520755459325,
+   "seconds": 536.4402827000013,
+   "alignment": 0.5343451113128103,
+   "collisions": 0.21,
+   "drones": 8
+  },
+  {
+   "update": 491,
+   "samples": 1005568,
+   "return": -108.00727285165053,
+   "seconds": 537.452257100027,
+   "alignment": 0.5736360688958928,
+   "collisions": 0.77,
+   "drones": 8
+  },
+  {
+   "update": 492,
+   "samples": 1007616,
+   "return": -108.00727285165053,
+   "seconds": 538.4536744001089,
+   "alignment": 0.6161251944100432,
+   "collisions": 1.01,
+   "drones": 8
+  },
+  {
+   "update": 493,
+   "samples": 1009664,
+   "return": -112.4150197717025,
+   "seconds": 539.4162463000976,
+   "alignment": 0.7448152002771445,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 494,
+   "samples": 1011712,
+   "return": -111.01522932251069,
+   "seconds": 540.6107590000611,
+   "alignment": 0.6962970021145884,
+   "collisions": 0.44,
+   "drones": 8
+  },
+  {
+   "update": 495,
+   "samples": 1013760,
+   "return": -111.01522932251069,
+   "seconds": 541.8850117000984,
+   "alignment": 0.8851530437945355,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 496,
+   "samples": 1015808,
+   "return": -78.31997269060598,
+   "seconds": 542.9451546000782,
+   "alignment": 0.3153935403180867,
+   "collisions": 0.15,
+   "drones": 8
+  },
+  {
+   "update": 497,
+   "samples": 1017856,
+   "return": -68.64180862054381,
+   "seconds": 543.8789188000374,
+   "alignment": 0.6764394831403293,
+   "collisions": 0.04,
+   "drones": 8
+  },
+  {
+   "update": 498,
+   "samples": 1019904,
+   "return": -68.64180862054381,
+   "seconds": 544.9192431000993,
+   "alignment": 0.549827051238989,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 499,
+   "samples": 1021952,
+   "return": -48.40813795743443,
+   "seconds": 545.926003200002,
+   "alignment": 0.4549546074939589,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 500,
+   "samples": 1024000,
+   "return": -44.593410467354715,
+   "seconds": 546.9105612999992,
+   "alignment": 0.654732745982822,
+   "collisions": 0.72,
+   "drones": 8
+  },
+  {
+   "update": 501,
+   "samples": 1026048,
+   "return": -44.593410467354715,
+   "seconds": 547.7951776001137,
+   "alignment": 0.5216266279122976,
+   "collisions": 0.43,
+   "drones": 8
+  },
+  {
+   "update": 502,
+   "samples": 1028096,
+   "return": -53.768751628046815,
+   "seconds": 548.6974105000263,
+   "alignment": 0.5837772008252337,
+   "collisions": 0.06,
+   "drones": 8
+  },
+  {
+   "update": 503,
+   "samples": 1030144,
+   "return": -53.768751628046815,
+   "seconds": 549.6211992000462,
+   "alignment": 0.7665019256459246,
+   "collisions": 0.51,
+   "drones": 8
+  },
+  {
+   "update": 504,
+   "samples": 1032192,
+   "return": -63.2781407399767,
+   "seconds": 550.6274100000737,
+   "alignment": 0.369090193308906,
+   "collisions": 0.09,
+   "drones": 8
+  },
+  {
+   "update": 505,
+   "samples": 1034240,
+   "return": -79.47773522045591,
+   "seconds": 551.7822028000373,
+   "alignment": 0.2911177107862873,
+   "collisions": 0.43,
+   "drones": 8
+  },
+  {
+   "update": 506,
+   "samples": 1036288,
+   "return": -79.47773522045591,
+   "seconds": 552.7340951000806,
+   "alignment": 0.5451100185156459,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 507,
+   "samples": 1038336,
+   "return": -81.43748740425103,
+   "seconds": 553.693300700048,
+   "alignment": 0.6644511878363534,
+   "collisions": 0.13,
+   "drones": 8
+  },
+  {
+   "update": 508,
+   "samples": 1040384,
+   "return": -69.89891317777915,
+   "seconds": 554.7803925001062,
+   "alignment": 0.5387375430225723,
+   "collisions": 0.01,
+   "drones": 8
+  },
+  {
+   "update": 509,
+   "samples": 1042432,
+   "return": -69.89891317777915,
+   "seconds": 555.7856153000612,
+   "alignment": 0.3275200344524862,
+   "collisions": 1.71,
+   "drones": 8
+  },
+  {
+   "update": 510,
+   "samples": 1044480,
+   "return": -90.1189429427734,
+   "seconds": 556.6842815000564,
+   "alignment": 0.4972647279535833,
+   "collisions": 0.2,
+   "drones": 8
+  },
+  {
+   "update": 511,
+   "samples": 1046528,
+   "return": -88.60432496706548,
+   "seconds": 557.5427326000063,
+   "alignment": 0.5092180156980775,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 512,
+   "samples": 1048576,
+   "return": -88.60432496706548,
+   "seconds": 558.3971627000719,
+   "alignment": 0.5414824196611508,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 513,
+   "samples": 1050624,
+   "return": -70.93637457849945,
+   "seconds": 559.3894820000278,
+   "alignment": 0.5513865808574985,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 514,
+   "samples": 1052672,
+   "return": -70.93637457849945,
+   "seconds": 560.5197320000734,
+   "alignment": 0.628717221255299,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 515,
+   "samples": 1054720,
+   "return": -68.89708784770787,
+   "seconds": 561.695314600016,
+   "alignment": 0.4475288404449654,
+   "collisions": 0.04,
+   "drones": 8
+  },
+  {
+   "update": 516,
+   "samples": 1056768,
+   "return": -67.4833040813805,
+   "seconds": 562.7891071001068,
+   "alignment": 0.5647008488059376,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 517,
+   "samples": 1058816,
+   "return": -67.4833040813805,
+   "seconds": 563.6618292001076,
+   "alignment": 0.8503655449131904,
+   "collisions": 0.31,
+   "drones": 8
+  },
+  {
+   "update": 518,
+   "samples": 1060864,
+   "return": -28.758911539159318,
+   "seconds": 564.5563340000808,
+   "alignment": 0.4282048110002762,
+   "collisions": 0.05,
+   "drones": 8
+  },
+  {
+   "update": 519,
+   "samples": 1062912,
+   "return": -49.218936207662274,
+   "seconds": 565.5002684000647,
+   "alignment": 0.6412369222774912,
+   "collisions": 0.78,
+   "drones": 8
+  },
+  {
+   "update": 520,
+   "samples": 1064960,
+   "return": -49.218936207662274,
+   "seconds": 566.4528459000867,
+   "alignment": 0.859242294990733,
+   "collisions": 0.02,
+   "drones": 8
+  },
+  {
+   "update": 521,
+   "samples": 1067008,
+   "return": -50.63484625466926,
+   "seconds": 567.5464535000501,
+   "alignment": 0.1734764681259093,
+   "collisions": 0.24,
+   "drones": 8
+  },
+  {
+   "update": 522,
+   "samples": 1069056,
+   "return": -58.81237742219692,
+   "seconds": 568.5666948000435,
+   "alignment": 0.3462045048318322,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 523,
+   "samples": 1071104,
+   "return": -58.81237742219692,
+   "seconds": 569.4900662000291,
+   "alignment": 0.29365558206131487,
+   "collisions": 0.06,
+   "drones": 8
+  },
+  {
+   "update": 524,
+   "samples": 1073152,
+   "return": -67.90431246821754,
+   "seconds": 570.427413300029,
+   "alignment": 0.4590899093554634,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 525,
+   "samples": 1075200,
+   "return": -80.00353686632971,
+   "seconds": 571.476296100067,
+   "alignment": 0.5619458432233341,
+   "collisions": 0.15,
+   "drones": 8
+  },
+  {
+   "update": 526,
+   "samples": 1077248,
+   "return": -80.00353686632971,
+   "seconds": 572.4799296000274,
+   "alignment": 0.6777079366833414,
+   "collisions": 0.49,
+   "drones": 8
+  },
+  {
+   "update": 527,
+   "samples": 1079296,
+   "return": -61.97099054185874,
+   "seconds": 573.3207771000452,
+   "alignment": 0.48542371007596424,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 528,
+   "samples": 1081344,
+   "return": -61.97099054185874,
+   "seconds": 574.1580823000986,
+   "alignment": 0.6001480414622925,
+   "collisions": 0.13,
+   "drones": 8
+  },
+  {
+   "update": 529,
+   "samples": 1083392,
+   "return": -61.3059463730775,
+   "seconds": 575.0371107000392,
+   "alignment": 0.3306651083658613,
+   "collisions": 0.03,
+   "drones": 8
+  },
+  {
+   "update": 530,
+   "samples": 1085440,
+   "return": -57.928337562784506,
+   "seconds": 576.1321228001034,
+   "alignment": 0.48439024205613934,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 531,
+   "samples": 1087488,
+   "return": -57.928337562784506,
+   "seconds": 577.1346543000545,
+   "alignment": 0.5639534536827273,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 532,
+   "samples": 1089536,
+   "return": -48.065228709594706,
+   "seconds": 578.0082497000694,
+   "alignment": 0.5134451686842297,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 533,
+   "samples": 1091584,
+   "return": -35.87874654673654,
+   "seconds": 578.8760616000509,
+   "alignment": 0.43638494448482207,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 534,
+   "samples": 1093632,
+   "return": -35.87874654673654,
+   "seconds": 580.0372531000758,
+   "alignment": 0.5066536120549585,
+   "collisions": 0.27,
+   "drones": 8
+  },
+  {
+   "update": 535,
+   "samples": 1095680,
+   "return": -33.56715804660091,
+   "seconds": 581.1201664000982,
+   "alignment": 0.5731431167323473,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 536,
+   "samples": 1097728,
+   "return": -45.108182410749635,
+   "seconds": 582.515013000113,
+   "alignment": 0.6556502277403081,
+   "collisions": 0.82,
+   "drones": 8
+  },
+  {
+   "update": 537,
+   "samples": 1099776,
+   "return": -45.108182410749635,
+   "seconds": 583.6996301000472,
+   "alignment": 0.7610214283749425,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 538,
+   "samples": 1101824,
+   "return": -36.21783551627722,
+   "seconds": 584.6758708000416,
+   "alignment": 0.5336806714538938,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 539,
+   "samples": 1103872,
+   "return": -36.21783551627722,
+   "seconds": 585.6269085000968,
+   "alignment": 0.6890837554069642,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 540,
+   "samples": 1105920,
+   "return": -34.18406746493846,
+   "seconds": 586.6885026000673,
+   "alignment": 0.5464377706815128,
+   "collisions": 0.83,
+   "drones": 8
+  },
+  {
+   "update": 541,
+   "samples": 1107968,
+   "return": -58.92392934682526,
+   "seconds": 587.6714337000158,
+   "alignment": 0.5635340967257053,
+   "collisions": 0.16,
+   "drones": 8
+  },
+  {
+   "update": 542,
+   "samples": 1110016,
+   "return": -58.92392934682526,
+   "seconds": 588.60564720002,
+   "alignment": 0.44088867933466674,
+   "collisions": 0.24,
+   "drones": 8
+  },
+  {
+   "update": 543,
+   "samples": 1112064,
+   "return": -60.84030101617342,
+   "seconds": 589.6314655001042,
+   "alignment": 0.49302318709296467,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 544,
+   "samples": 1114112,
+   "return": -52.41197949007858,
+   "seconds": 590.7381257000379,
+   "alignment": 0.5513983136903449,
+   "collisions": 0.21,
+   "drones": 8
+  },
+  {
+   "update": 545,
+   "samples": 1116160,
+   "return": -52.41197949007858,
+   "seconds": 591.6779397000792,
+   "alignment": 0.8150564182971689,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 546,
+   "samples": 1118208,
+   "return": -52.40140244632293,
+   "seconds": 592.613162200083,
+   "alignment": 0.7880744672513369,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 547,
+   "samples": 1120256,
+   "return": -46.03297450018645,
+   "seconds": 593.5541030000895,
+   "alignment": 0.7327282382647553,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 548,
+   "samples": 1122304,
+   "return": -46.03297450018645,
+   "seconds": 594.569261000026,
+   "alignment": 0.6971051779306369,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 549,
+   "samples": 1124352,
+   "return": -31.27391271042752,
+   "seconds": 595.6364669000031,
+   "alignment": 0.608576602729168,
+   "collisions": 0.33,
+   "drones": 8
+  },
+  {
+   "update": 550,
+   "samples": 1126400,
+   "return": -19.172020217765656,
+   "seconds": 596.6185338000068,
+   "alignment": 0.9006568971390689,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 551,
+   "samples": 1128448,
+   "return": -19.172020217765656,
+   "seconds": 597.5945291001117,
+   "alignment": 0.25230927708762185,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 552,
+   "samples": 1130496,
+   "return": -16.66950885538854,
+   "seconds": 598.580193300033,
+   "alignment": 0.4778491888230234,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 553,
+   "samples": 1132544,
+   "return": -16.66950885538854,
+   "seconds": 599.5698261000216,
+   "alignment": 0.8806046589221849,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 554,
+   "samples": 1134592,
+   "return": -17.717603000224564,
+   "seconds": 600.5413162000477,
+   "alignment": 0.41317365147774265,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 555,
+   "samples": 1136640,
+   "return": -36.778747714225105,
+   "seconds": 601.485893300036,
+   "alignment": 0.6933629898613204,
+   "collisions": 0.51,
+   "drones": 8
+  },
+  {
+   "update": 556,
+   "samples": 1138688,
+   "return": -36.778747714225105,
+   "seconds": 602.5186273000436,
+   "alignment": 0.7557386713170103,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 557,
+   "samples": 1140736,
+   "return": -24.065646432485927,
+   "seconds": 603.420294300071,
+   "alignment": 0.054353405662156504,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 558,
+   "samples": 1142784,
+   "return": -34.237916752607894,
+   "seconds": 604.3896661000326,
+   "alignment": 0.5277717783663326,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 559,
+   "samples": 1144832,
+   "return": -34.237916752607894,
+   "seconds": 605.440691600088,
+   "alignment": 0.49595693941878305,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 560,
+   "samples": 1146880,
+   "return": -37.42005929405703,
+   "seconds": 606.403030400048,
+   "alignment": 0.35012074253397985,
+   "collisions": 0.17,
+   "drones": 8
+  },
+  {
+   "update": 561,
+   "samples": 1148928,
+   "return": -49.49479996727881,
+   "seconds": 607.4151826000307,
+   "alignment": 0.8064656886070487,
+   "collisions": 0.59,
+   "drones": 8
+  },
+  {
+   "update": 562,
+   "samples": 1150976,
+   "return": -49.49479996727881,
+   "seconds": 608.4574632000877,
+   "alignment": 0.7333596988593222,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 563,
+   "samples": 1153024,
+   "return": -36.815479859159495,
+   "seconds": 609.4452959001064,
+   "alignment": 0.6136381936327742,
+   "collisions": 0.04,
+   "drones": 8
+  },
+  {
+   "update": 564,
+   "samples": 1155072,
+   "return": -36.815479859159495,
+   "seconds": 610.3236718000844,
+   "alignment": 0.6708432731558531,
+   "collisions": 1.09,
+   "drones": 8
+  },
+  {
+   "update": 565,
+   "samples": 1157120,
+   "return": -58.08461652989754,
+   "seconds": 611.1713518000906,
+   "alignment": 0.546045344482546,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 566,
+   "samples": 1159168,
+   "return": -64.67561024034822,
+   "seconds": 612.0672435000306,
+   "alignment": 0.426768181624344,
+   "collisions": 0.56,
+   "drones": 8
+  },
+  {
+   "update": 567,
+   "samples": 1161216,
+   "return": -64.67561024034822,
+   "seconds": 612.911350700073,
+   "alignment": 0.5699698837598629,
+   "collisions": 1.2,
+   "drones": 8
+  },
+  {
+   "update": 568,
+   "samples": 1163264,
+   "return": -80.77401178230666,
+   "seconds": 613.7581291000824,
+   "alignment": 0.585578662118024,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 569,
+   "samples": 1165312,
+   "return": -71.53491485980267,
+   "seconds": 614.7751972000115,
+   "alignment": 0.5588789403892389,
+   "collisions": 0.07,
+   "drones": 8
+  },
+  {
+   "update": 570,
+   "samples": 1167360,
+   "return": -71.53491485980267,
+   "seconds": 615.8641281001037,
+   "alignment": 0.7574394982024194,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 571,
+   "samples": 1169408,
+   "return": -68.47610242121428,
+   "seconds": 616.9809938000981,
+   "alignment": 0.6064401649863358,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 572,
+   "samples": 1171456,
+   "return": -53.859331347365696,
+   "seconds": 618.294059200096,
+   "alignment": 0.6252098247754154,
+   "collisions": 0.33,
+   "drones": 8
+  },
+  {
+   "update": 573,
+   "samples": 1173504,
+   "return": -53.859331347365696,
+   "seconds": 619.7712854000274,
+   "alignment": 0.3918321180439871,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 574,
+   "samples": 1175552,
+   "return": -43.02119893502422,
+   "seconds": 621.1150724000763,
+   "alignment": 0.774597651723459,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 575,
+   "samples": 1177600,
+   "return": -21.571002473812587,
+   "seconds": 622.4542337000603,
+   "alignment": 0.7603068887729799,
+   "collisions": 0.47,
+   "drones": 8
+  },
+  {
+   "update": 576,
+   "samples": 1179648,
+   "return": -21.571002473812587,
+   "seconds": 623.7713707000948,
+   "alignment": 0.406093080978749,
+   "collisions": 0.25,
+   "drones": 8
+  },
+  {
+   "update": 577,
+   "samples": 1181696,
+   "return": -29.064259742331434,
+   "seconds": 625.0910777000245,
+   "alignment": 0.5190206786410487,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 578,
+   "samples": 1183744,
+   "return": -29.064259742331434,
+   "seconds": 626.3697111000074,
+   "alignment": 0.6230175122526012,
+   "collisions": 1.66,
+   "drones": 8
+  },
+  {
+   "update": 579,
+   "samples": 1185792,
+   "return": -72.79607516578517,
+   "seconds": 627.6595996000106,
+   "alignment": 0.5745483574113981,
+   "collisions": 0.11,
+   "drones": 8
+  },
+  {
+   "update": 580,
+   "samples": 1187840,
+   "return": -83.39308596881537,
+   "seconds": 628.9296664000722,
+   "alignment": 0.5217361254315291,
+   "collisions": 0.32,
+   "drones": 8
+  },
+  {
+   "update": 581,
+   "samples": 1189888,
+   "return": -83.39308596881537,
+   "seconds": 630.2108162000077,
+   "alignment": 0.6615558233724963,
+   "collisions": 0.38,
+   "drones": 8
+  },
+  {
+   "update": 582,
+   "samples": 1191936,
+   "return": -87.22281944374272,
+   "seconds": 631.5707051000791,
+   "alignment": 0.3081616354049436,
+   "collisions": 0.37,
+   "drones": 8
+  },
+  {
+   "update": 583,
+   "samples": 1193984,
+   "return": -103.61246511368873,
+   "seconds": 632.9349413000746,
+   "alignment": 0.6652276781823392,
+   "collisions": 0.15,
+   "drones": 8
+  },
+  {
+   "update": 584,
+   "samples": 1196032,
+   "return": -103.61246511368873,
+   "seconds": 634.2300012001069,
+   "alignment": 0.6336144562037943,
+   "collisions": 0.45,
+   "drones": 8
+  },
+  {
+   "update": 585,
+   "samples": 1198080,
+   "return": -107.04251256202369,
+   "seconds": 635.5865613000933,
+   "alignment": 0.5606723451343464,
+   "collisions": 0.17,
+   "drones": 8
+  },
+  {
+   "update": 1,
+   "samples": 1203200,
+   "return": NaN,
+   "seconds": 1.8408860999625176,
+   "alignment": 0.8132018048382146,
+   "collisions": 0.1,
+   "drones": 20
+  },
+  {
+   "update": 2,
+   "samples": 1208320,
+   "return": -73.69580708251979,
+   "seconds": 3.5290711999405175,
+   "alignment": 0.6640582003628146,
+   "collisions": 1.405,
+   "drones": 20
+  },
+  {
+   "update": 3,
+   "samples": 1213440,
+   "return": -73.69580708251979,
+   "seconds": 6.139109299983829,
+   "alignment": 0.8230093206341205,
+   "collisions": 1.89,
+   "drones": 20
+  },
+  {
+   "update": 4,
+   "samples": 1218560,
+   "return": -85.93153041346787,
+   "seconds": 10.086757999961264,
+   "alignment": 0.8512132938753354,
+   "collisions": 0.46,
+   "drones": 20
+  },
+  {
+   "update": 5,
+   "samples": 1223680,
+   "return": -106.46130757403232,
+   "seconds": 13.325330900028348,
+   "alignment": 0.7234231070674919,
+   "collisions": 3.44,
+   "drones": 20
+  },
+  {
+   "update": 6,
+   "samples": 1228800,
+   "return": -106.46130757403232,
+   "seconds": 15.32430530001875,
+   "alignment": 0.8078402783923683,
+   "collisions": 4.57,
+   "drones": 20
+  },
+  {
+   "update": 7,
+   "samples": 1233920,
+   "return": -141.29578878838925,
+   "seconds": 17.89381479995791,
+   "alignment": 0.884260528560583,
+   "collisions": 0.76,
+   "drones": 20
+  },
+  {
+   "update": 8,
+   "samples": 1239040,
+   "return": -149.0192285226798,
+   "seconds": 24.29932029999327,
+   "alignment": 0.7974764851389067,
+   "collisions": 4.075,
+   "drones": 20
+  },
+  {
+   "update": 9,
+   "samples": 1244160,
+   "return": -149.0192285226798,
+   "seconds": 27.102645899984054,
+   "alignment": 0.8090235937679623,
+   "collisions": 0.59,
+   "drones": 20
+  },
+  {
+   "update": 10,
+   "samples": 1249280,
+   "return": -158.95903302534978,
+   "seconds": 29.05839829996694,
+   "alignment": 0.7594023782946596,
+   "collisions": 1.535,
+   "drones": 20
+  },
+  {
+   "update": 11,
+   "samples": 1254400,
+   "return": -167.152546370101,
+   "seconds": 31.033315900014713,
+   "alignment": 0.6836155604055782,
+   "collisions": 3.765,
+   "drones": 20
+  },
+  {
+   "update": 12,
+   "samples": 1259520,
+   "return": -167.152546370101,
+   "seconds": 32.67099309992045,
+   "alignment": 0.8060872169499811,
+   "collisions": 0.84,
+   "drones": 20
+  },
+  {
+   "update": 13,
+   "samples": 1264640,
+   "return": -169.4749047100213,
+   "seconds": 34.41842170001473,
+   "alignment": 0.7774527095226873,
+   "collisions": 1.92,
+   "drones": 20
+  },
+  {
+   "update": 14,
+   "samples": 1269760,
+   "return": -169.4749047100213,
+   "seconds": 43.935046799946576,
+   "alignment": 0.5432956617468523,
+   "collisions": 2.4,
+   "drones": 20
+  },
+  {
+   "update": 15,
+   "samples": 1274880,
+   "return": -142.7280739682279,
+   "seconds": 48.68003199994564,
+   "alignment": 0.7879784872848437,
+   "collisions": 0.59,
+   "drones": 20
+  },
+  {
+   "update": 16,
+   "samples": 1280000,
+   "return": -114.72336544388331,
+   "seconds": 51.63383339997381,
+   "alignment": 0.6836337852882387,
+   "collisions": 0.62,
+   "drones": 20
+  },
+  {
+   "update": 17,
+   "samples": 1285120,
+   "return": -114.72336544388331,
+   "seconds": 55.47271080000792,
+   "alignment": 0.5409444586666114,
+   "collisions": 0.505,
+   "drones": 20
+  },
+  {
+   "update": 18,
+   "samples": 1290240,
+   "return": -100.37085000076499,
+   "seconds": 57.7825382000301,
+   "alignment": 0.763981243707862,
+   "collisions": 0.02,
+   "drones": 20
+  },
+  {
+   "update": 19,
+   "samples": 1295360,
+   "return": -87.43107908945481,
+   "seconds": 60.86144080001395,
+   "alignment": 0.5283255062270992,
+   "collisions": 1.32,
+   "drones": 20
+  },
+  {
+   "update": 20,
+   "samples": 1300480,
+   "return": -87.43107908945481,
+   "seconds": 67.90286829997785,
+   "alignment": 0.7606325410026074,
+   "collisions": 1.065,
+   "drones": 20
+  },
+  {
+   "update": 21,
+   "samples": 1305600,
+   "return": -83.54096887235565,
+   "seconds": 72.4943300000159,
+   "alignment": 0.6763707218712602,
+   "collisions": 0.96,
+   "drones": 20
+  },
+  {
+   "update": 22,
+   "samples": 1310720,
+   "return": -73.73684638411333,
+   "seconds": 74.68020419997629,
+   "alignment": 0.5466027087138225,
+   "collisions": 1.475,
+   "drones": 20
+  },
+  {
+   "update": 23,
+   "samples": 1315840,
+   "return": -73.73684638411333,
+   "seconds": 76.6274402999552,
+   "alignment": 0.6751429217519876,
+   "collisions": 0.07,
+   "drones": 20
+  },
+  {
+   "update": 24,
+   "samples": 1320960,
+   "return": -67.13951224891807,
+   "seconds": 78.47659089998342,
+   "alignment": 0.7561239991173535,
+   "collisions": 0.78,
+   "drones": 20
+  },
+  {
+   "update": 25,
+   "samples": 1326080,
+   "return": -75.3400976943711,
+   "seconds": 80.1244594999589,
+   "alignment": 0.6895048995169821,
+   "collisions": 1.16,
+   "drones": 20
+  },
+  {
+   "update": 26,
+   "samples": 1331200,
+   "return": -75.3400976943711,
+   "seconds": 81.80535249994136,
+   "alignment": 0.5807436853471284,
+   "collisions": 0.45,
+   "drones": 20
+  },
+  {
+   "update": 27,
+   "samples": 1336320,
+   "return": -76.08813423661437,
+   "seconds": 83.41738210001495,
+   "alignment": 0.6261807375555651,
+   "collisions": 0.96,
+   "drones": 20
+  },
+  {
+   "update": 28,
+   "samples": 1341440,
+   "return": -76.08813423661437,
+   "seconds": 84.99209479999263,
+   "alignment": 0.6479181938790873,
+   "collisions": 0.44,
+   "drones": 20
+  },
+  {
+   "update": 29,
+   "samples": 1346560,
+   "return": -54.218743713958574,
+   "seconds": 86.61729059997015,
+   "alignment": 0.7547559760678385,
+   "collisions": 0.34,
+   "drones": 20
+  },
+  {
+   "update": 30,
+   "samples": 1351680,
+   "return": -55.736637491585824,
+   "seconds": 88.52755629993044,
+   "alignment": 0.5830298232702075,
+   "collisions": 0.9,
+   "drones": 20
+  },
+  {
+   "update": 31,
+   "samples": 1356800,
+   "return": -55.736637491585824,
+   "seconds": 95.69292369997129,
+   "alignment": 0.5026270349246781,
+   "collisions": 0.31,
+   "drones": 20
+  },
+  {
+   "update": 32,
+   "samples": 1361920,
+   "return": -62.332561681761476,
+   "seconds": 98.68988139997236,
+   "alignment": 0.7411985960907103,
+   "collisions": 0.0,
+   "drones": 20
+  },
+  {
+   "update": 33,
+   "samples": 1367040,
+   "return": -70.95333889675868,
+   "seconds": 101.39355639996938,
+   "alignment": 0.420665758751902,
+   "collisions": 3.37,
+   "drones": 20
+  },
+  {
+   "update": 34,
+   "samples": 1372160,
+   "return": -70.95333889675868,
+   "seconds": 105.13868219999131,
+   "alignment": 0.8137783155305692,
+   "collisions": 0.565,
+   "drones": 20
+  },
+  {
+   "update": 35,
+   "samples": 1377280,
+   "return": -72.90469718151125,
+   "seconds": 107.94751189998351,
+   "alignment": 0.7027575096839652,
+   "collisions": 1.19,
+   "drones": 20
+  },
+  {
+   "update": 36,
+   "samples": 1382400,
+   "return": -78.24691552481036,
+   "seconds": 112.2588486999739,
+   "alignment": 0.7864611191642125,
+   "collisions": 1.67,
+   "drones": 20
+  },
+  {
+   "update": 37,
+   "samples": 1387520,
+   "return": -78.24691552481036,
+   "seconds": 114.50062329997309,
+   "alignment": 0.8022790673515496,
+   "collisions": 0.0,
+   "drones": 20
+  },
+  {
+   "update": 38,
+   "samples": 1392640,
+   "return": -66.01613640260278,
+   "seconds": 116.21648179995827,
+   "alignment": 0.6586940354772353,
+   "collisions": 0.39,
+   "drones": 20
+  },
+  {
+   "update": 39,
+   "samples": 1397760,
+   "return": -66.01613640260278,
+   "seconds": 117.88423620001413,
+   "alignment": 0.6466344028106539,
+   "collisions": 0.06,
+   "drones": 20
+  },
+  {
+   "update": 40,
+   "samples": 1402880,
+   "return": -57.93889161097762,
+   "seconds": 119.55317389999982,
+   "alignment": 0.8048183856090226,
+   "collisions": 1.21,
+   "drones": 20
+  },
+  {
+   "update": 41,
+   "samples": 1408000,
+   "return": -45.00891046222872,
+   "seconds": 121.20079759997316,
+   "alignment": 0.7720227808973088,
+   "collisions": 0.79,
+   "drones": 20
+  },
+  {
+   "update": 42,
+   "samples": 1413120,
+   "return": -45.00891046222872,
+   "seconds": 122.88617549999617,
+   "alignment": 0.7030866771411448,
+   "collisions": 0.13,
+   "drones": 20
+  },
+  {
+   "update": 43,
+   "samples": 1418240,
+   "return": -26.764764775736843,
+   "seconds": 124.8007793999277,
+   "alignment": 0.7221801972170897,
+   "collisions": 0.0,
+   "drones": 20
+  },
+  {
+   "update": 44,
+   "samples": 1423360,
+   "return": -31.900182383360896,
+   "seconds": 127.40269959997386,
+   "alignment": 0.593401316318323,
+   "collisions": 2.19,
+   "drones": 20
+  },
+  {
+   "update": 45,
+   "samples": 1428480,
+   "return": -31.900182383360896,
+   "seconds": 133.75738550000824,
+   "alignment": 0.81728561598854,
+   "collisions": 0.35,
+   "drones": 20
+  },
+  {
+   "update": 46,
+   "samples": 1433600,
+   "return": -32.29895048749658,
+   "seconds": 135.94606550002936,
+   "alignment": 0.7500900000377796,
+   "collisions": 0.36,
+   "drones": 20
+  },
+  {
+   "update": 47,
+   "samples": 1438720,
+   "return": -36.39404119458172,
+   "seconds": 137.9911297999788,
+   "alignment": 0.5980284870914871,
+   "collisions": 0.5,
+   "drones": 20
+  },
+  {
+   "update": 48,
+   "samples": 1443840,
+   "return": -36.39404119458172,
+   "seconds": 139.8256424999563,
+   "alignment": 0.7568493072602416,
+   "collisions": 0.0,
+   "drones": 20
+  },
+  {
+   "update": 49,
+   "samples": 1448960,
+   "return": -20.913968669618303,
+   "seconds": 141.52200709993485,
+   "alignment": 0.8141126387596384,
+   "collisions": 0.0,
+   "drones": 20
+  },
+  {
+   "update": 50,
+   "samples": 1454080,
+   "return": -37.14406959863258,
+   "seconds": 143.5890333999414,
+   "alignment": 0.7370155550325934,
+   "collisions": 2.55,
+   "drones": 20
+  },
+  {
+   "update": 51,
+   "samples": 1459200,
+   "return": -37.14406959863258,
+   "seconds": 149.6002703999402,
+   "alignment": 0.8026121478852667,
+   "collisions": 0.45,
+   "drones": 20
+  },
+  {
+   "update": 52,
+   "samples": 1464320,
+   "return": -31.771646878490138,
+   "seconds": 152.47929649997968,
+   "alignment": 0.659013136783673,
+   "collisions": 1.13,
+   "drones": 20
+  },
+  {
+   "update": 53,
+   "samples": 1469440,
+   "return": -31.771646878490138,
+   "seconds": 154.5321733999299,
+   "alignment": 0.7118612721927086,
+   "collisions": 0.13,
+   "drones": 20
+  },
+  {
+   "update": 54,
+   "samples": 1474560,
+   "return": -30.25135793516382,
+   "seconds": 157.54797750001308,
+   "alignment": 0.7504839748805417,
+   "collisions": 0.0,
+   "drones": 20
+  },
+  {
+   "update": 55,
+   "samples": 1479680,
+   "return": -30.726864203687747,
+   "seconds": 159.38508909998927,
+   "alignment": 0.6501112370167509,
+   "collisions": 0.72,
+   "drones": 20
+  },
+  {
+   "update": 56,
+   "samples": 1484800,
+   "return": -30.726864203687747,
+   "seconds": 161.48131119995378,
+   "alignment": 0.7891369900323656,
+   "collisions": 0.2,
+   "drones": 20
+  },
+  {
+   "update": 57,
+   "samples": 1489920,
+   "return": -33.57441776796879,
+   "seconds": 163.45822439994663,
+   "alignment": 0.7242064939277388,
+   "collisions": 0.0,
+   "drones": 20
+  },
+  {
+   "update": 58,
+   "samples": 1495040,
+   "return": -18.221054213591216,
+   "seconds": 165.56839229993057,
+   "alignment": 0.7662938837853249,
+   "collisions": 0.16,
+   "drones": 20
+  },
+  {
+   "update": 59,
+   "samples": 1500160,
+   "return": -18.221054213591216,
+   "seconds": 167.40599400002975,
+   "alignment": 0.8273260347867268,
+   "collisions": 0.15,
+   "drones": 20
+  },
+  {
+   "update": 60,
+   "samples": 1505280,
+   "return": -14.287580399096097,
+   "seconds": 169.20247359992936,
+   "alignment": 0.7052344408603668,
+   "collisions": 0.57,
+   "drones": 20
+  },
+  {
+   "update": 61,
+   "samples": 1510400,
+   "return": -27.631007385782265,
+   "seconds": 170.92354490002617,
+   "alignment": 0.5489950991560025,
+   "collisions": 2.04,
+   "drones": 20
+  },
+  {
+   "update": 62,
+   "samples": 1515520,
+   "return": -27.631007385782265,
+   "seconds": 173.74970249994658,
+   "alignment": 0.7176676480915156,
+   "collisions": 1.09,
+   "drones": 20
+  },
+  {
+   "update": 63,
+   "samples": 1520640,
+   "return": -40.89576954274211,
+   "seconds": 175.66880500002299,
+   "alignment": 0.47408754639484313,
+   "collisions": 1.29,
+   "drones": 20
+  },
+  {
+   "update": 64,
+   "samples": 1525760,
+   "return": -40.89576954274211,
+   "seconds": 177.48686770000495,
+   "alignment": 0.7445667751472627,
+   "collisions": 1.09,
+   "drones": 20
+  },
+  {
+   "update": 65,
+   "samples": 1530880,
+   "return": -51.57569638823817,
+   "seconds": 179.6782429999439,
+   "alignment": 0.8044044066399547,
+   "collisions": 0.04,
+   "drones": 20
+  },
+  {
+   "update": 66,
+   "samples": 1536000,
+   "return": -66.40883150965342,
+   "seconds": 181.44509239995386,
+   "alignment": 0.6789526702510819,
+   "collisions": 1.67,
+   "drones": 20
+  },
+  {
+   "update": 67,
+   "samples": 1541120,
+   "return": -66.40883150965342,
+   "seconds": 183.52094419999048,
+   "alignment": 0.6739638547298938,
+   "collisions": 0.295,
+   "drones": 20
+  },
+  {
+   "update": 68,
+   "samples": 1546240,
+   "return": -65.86675787065583,
+   "seconds": 185.6450772000244,
+   "alignment": 0.7627272500454336,
+   "collisions": 0.33,
+   "drones": 20
+  },
+  {
+   "update": 69,
+   "samples": 1551360,
+   "return": -62.788928656438415,
+   "seconds": 187.7592318999814,
+   "alignment": 0.7435383257687045,
+   "collisions": 1.02,
+   "drones": 20
+  },
+  {
+   "update": 70,
+   "samples": 1556480,
+   "return": -62.788928656438415,
+   "seconds": 189.81276429991703,
+   "alignment": 0.7617807765334648,
+   "collisions": 0.53,
+   "drones": 20
+  },
+  {
+   "update": 71,
+   "samples": 1561600,
+   "return": -51.63852852124563,
+   "seconds": 191.70610960002523,
+   "alignment": 0.6136346324935611,
+   "collisions": 0.63,
+   "drones": 20
+  },
+  {
+   "update": 72,
+   "samples": 1566720,
+   "return": -50.855604729587995,
+   "seconds": 193.96534039999824,
+   "alignment": 0.7592900295225311,
+   "collisions": 0.77,
+   "drones": 20
+  },
+  {
+   "update": 73,
+   "samples": 1571840,
+   "return": -50.855604729587995,
+   "seconds": 195.9775026999414,
+   "alignment": 0.7715859233875056,
+   "collisions": 0.32,
+   "drones": 20
+  },
+  {
+   "update": 74,
+   "samples": 1576960,
+   "return": -52.75548700927601,
+   "seconds": 197.84610820002854,
+   "alignment": 0.6808041472293428,
+   "collisions": 1.315,
+   "drones": 20
+  },
+  {
+   "update": 75,
+   "samples": 1582080,
+   "return": -44.19945056984806,
+   "seconds": 199.59811120002996,
+   "alignment": 0.7667251214082885,
+   "collisions": 0.18,
+   "drones": 20
+  },
+  {
+   "update": 76,
+   "samples": 1587200,
+   "return": -44.19945056984806,
+   "seconds": 201.4002760000294,
+   "alignment": 0.7857253867968079,
+   "collisions": 0.63,
+   "drones": 20
+  },
+  {
+   "update": 77,
+   "samples": 1592320,
+   "return": -39.73069923588722,
+   "seconds": 203.02128250000533,
+   "alignment": 0.7795857822351726,
+   "collisions": 0.89,
+   "drones": 20
+  },
+  {
+   "update": 78,
+   "samples": 1597440,
+   "return": -39.73069923588722,
+   "seconds": 204.70079729997087,
+   "alignment": 0.7403213893598732,
+   "collisions": 1.26,
+   "drones": 20
+  },
+  {
+   "update": 79,
+   "samples": 1602560,
+   "return": -47.12361667738861,
+   "seconds": 206.3198243000079,
+   "alignment": 0.8260415703833337,
+   "collisions": 0.46,
+   "drones": 20
+  },
+  {
+   "update": 80,
+   "samples": 1607680,
+   "return": -61.30540784338168,
+   "seconds": 207.86223229998723,
+   "alignment": 0.6443062492253009,
+   "collisions": 2.88,
+   "drones": 20
+  },
+  {
+   "update": 81,
+   "samples": 1612800,
+   "return": -61.30540784338168,
+   "seconds": 209.56563019996975,
+   "alignment": 0.756291640477843,
+   "collisions": 0.78,
+   "drones": 20
+  },
+  {
+   "update": 82,
+   "samples": 1617920,
+   "return": -53.26811812766944,
+   "seconds": 211.1692348999204,
+   "alignment": 0.7437351636746127,
+   "collisions": 0.26,
+   "drones": 20
+  },
+  {
+   "update": 83,
+   "samples": 1623040,
+   "return": -69.30165239390922,
+   "seconds": 212.69406399992295,
+   "alignment": 0.6126892304652479,
+   "collisions": 1.52,
+   "drones": 20
+  },
+  {
+   "update": 84,
+   "samples": 1628160,
+   "return": -69.30165239390922,
+   "seconds": 214.3192260999931,
+   "alignment": 0.6844409433901437,
+   "collisions": 1.24,
+   "drones": 20
+  },
+  {
+   "update": 85,
+   "samples": 1633280,
+   "return": -79.85631774982674,
+   "seconds": 215.9543122999603,
+   "alignment": 0.6297211164033366,
+   "collisions": 1.37,
+   "drones": 20
+  },
+  {
+   "update": 86,
+   "samples": 1638400,
+   "return": -71.44580254428118,
+   "seconds": 217.55298229993787,
+   "alignment": 0.7326696576395187,
+   "collisions": 0.07,
+   "drones": 20
+  },
+  {
+   "update": 87,
+   "samples": 1643520,
+   "return": -71.44580254428118,
+   "seconds": 219.0730130999582,
+   "alignment": 0.7890233633650624,
+   "collisions": 0.0,
+   "drones": 20
+  },
+  {
+   "update": 88,
+   "samples": 1648640,
+   "return": -47.38833376424434,
+   "seconds": 220.97395679994952,
+   "alignment": 0.7522433861373795,
+   "collisions": 0.0,
+   "drones": 20
+  },
+  {
+   "update": 89,
+   "samples": 1653760,
+   "return": -47.38833376424434,
+   "seconds": 222.87405340000987,
+   "alignment": 0.7774980544373095,
+   "collisions": 0.0,
+   "drones": 20
+  },
+  {
+   "update": 90,
+   "samples": 1658880,
+   "return": -36.30509518390368,
+   "seconds": 224.6393362999661,
+   "alignment": 0.6027306970355648,
+   "collisions": 0.14,
+   "drones": 20
+  },
+  {
+   "update": 91,
+   "samples": 1664000,
+   "return": -29.778638826840087,
+   "seconds": 226.2519738000119,
+   "alignment": 0.5801070224443552,
+   "collisions": 0.17,
+   "drones": 20
+  },
+  {
+   "update": 92,
+   "samples": 1669120,
+   "return": -29.778638826840087,
+   "seconds": 227.880581800011,
+   "alignment": 0.6725200294601926,
+   "collisions": 1.68,
+   "drones": 20
+  },
+  {
+   "update": 93,
+   "samples": 1674240,
+   "return": -25.61417433032317,
+   "seconds": 229.5365825999761,
+   "alignment": 0.6978081337660312,
+   "collisions": 0.92,
+   "drones": 20
+  },
+  {
+   "update": 94,
+   "samples": 1679360,
+   "return": -36.788753405945556,
+   "seconds": 231.15578199992888,
+   "alignment": 0.6352505635334967,
+   "collisions": 1.28,
+   "drones": 20
+  },
+  {
+   "update": 95,
+   "samples": 1684480,
+   "return": -36.788753405945556,
+   "seconds": 232.8468978999881,
+   "alignment": 0.6422580730820984,
+   "collisions": 0.61,
+   "drones": 20
+  },
+  {
+   "update": 96,
+   "samples": 1689600,
+   "return": -42.241219889419185,
+   "seconds": 234.47835440002382,
+   "alignment": 0.37487353444027627,
+   "collisions": 0.0,
+   "drones": 20
+  },
+  {
+   "update": 97,
+   "samples": 1694720,
+   "return": -48.08026820651558,
+   "seconds": 236.13356629991904,
+   "alignment": 0.5315920981248964,
+   "collisions": 0.0,
+   "drones": 20
+  },
+  {
+   "update": 98,
+   "samples": 1699840,
+   "return": -48.08026820651558,
+   "seconds": 237.7577672000043,
+   "alignment": 0.5437571980138639,
+   "collisions": 0.0,
+   "drones": 20
+  },
+  {
+   "update": 99,
+   "samples": 1704960,
+   "return": -45.38829521313137,
+   "seconds": 239.52818110003136,
+   "alignment": 0.7237908960013674,
+   "collisions": 0.99,
+   "drones": 20
+  },
+  {
+   "update": 100,
+   "samples": 1710080,
+   "return": -48.526755692932696,
+   "seconds": 241.41836399992462,
+   "alignment": 0.7096955597174077,
+   "collisions": 1.92,
+   "drones": 20
+  },
+  {
+   "update": 101,
+   "samples": 1715200,
+   "return": -48.526755692932696,
+   "seconds": 243.18439079995733,
+   "alignment": 0.8047404885880929,
+   "collisions": 0.75,
+   "drones": 20
+  },
+  {
+   "update": 102,
+   "samples": 1720320,
+   "return": -41.546221583610404,
+   "seconds": 244.6775301999878,
+   "alignment": 0.7311991272384907,
+   "collisions": 0.4,
+   "drones": 20
+  },
+  {
+   "update": 103,
+   "samples": 1725440,
+   "return": -41.546221583610404,
+   "seconds": 246.22092629992403,
+   "alignment": 0.8133496456885956,
+   "collisions": 0.8,
+   "drones": 20
+  },
+  {
+   "update": 104,
+   "samples": 1730560,
+   "return": -40.032166243157,
+   "seconds": 247.84132000000682,
+   "alignment": 0.6121775271795786,
+   "collisions": 0.0,
+   "drones": 20
+  },
+  {
+   "update": 105,
+   "samples": 1735680,
+   "return": -36.799901924995694,
+   "seconds": 249.5188542000251,
+   "alignment": 0.6785012318548996,
+   "collisions": 0.0,
+   "drones": 20
+  },
+  {
+   "update": 106,
+   "samples": 1740800,
+   "return": -36.799901924995694,
+   "seconds": 251.53238129999954,
+   "alignment": 0.6426109869200073,
+   "collisions": 0.0,
+   "drones": 20
+  },
+  {
+   "update": 107,
+   "samples": 1745920,
+   "return": -29.793496511444555,
+   "seconds": 253.78583509998862,
+   "alignment": 0.6691169640963258,
+   "collisions": 0.0,
+   "drones": 20
+  },
+  {
+   "update": 108,
+   "samples": 1751040,
+   "return": -14.91173594909875,
+   "seconds": 255.52431050001178,
+   "alignment": 0.7092963103863419,
+   "collisions": 0.27,
+   "drones": 20
+  },
+  {
+   "update": 109,
+   "samples": 1756160,
+   "return": -14.91173594909875,
+   "seconds": 257.1023021999281,
+   "alignment": 0.6373335170002867,
+   "collisions": 0.14,
+   "drones": 20
+  },
+  {
+   "update": 110,
+   "samples": 1761280,
+   "return": -9.634805335355214,
+   "seconds": 258.96897259994876,
+   "alignment": 0.6717150764439579,
+   "collisions": 0.1,
+   "drones": 20
+  },
+  {
+   "update": 111,
+   "samples": 1766400,
+   "return": -4.598894982421535,
+   "seconds": 261.0597390999319,
+   "alignment": 0.7295483697575409,
+   "collisions": 0.0,
+   "drones": 20
+  },
+  {
+   "update": 112,
+   "samples": 1771520,
+   "return": -4.598894982421535,
+   "seconds": 262.76796039997134,
+   "alignment": 0.8196728310561966,
+   "collisions": 0.96,
+   "drones": 20
+  },
+  {
+   "update": 113,
+   "samples": 1776640,
+   "return": -14.437734669641078,
+   "seconds": 264.2937782999361,
+   "alignment": 0.6279112024120648,
+   "collisions": 0.79,
+   "drones": 20
+  },
+  {
+   "update": 114,
+   "samples": 1781760,
+   "return": -14.437734669641078,
+   "seconds": 265.851983099943,
+   "alignment": 0.8120733626162577,
+   "collisions": 1.79,
+   "drones": 20
+  },
+  {
+   "update": 115,
+   "samples": 1786880,
+   "return": -29.79500932790696,
+   "seconds": 267.4458627999993,
+   "alignment": 0.697524842657197,
+   "collisions": 0.0,
+   "drones": 20
+  },
+  {
+   "update": 116,
+   "samples": 1792000,
+   "return": -31.28904998573272,
+   "seconds": 269.17083660000935,
+   "alignment": 0.7725614282623513,
+   "collisions": 0.49,
+   "drones": 20
+  },
+  {
+   "update": 117,
+   "samples": 1797120,
+   "return": -31.28904998573272,
+   "seconds": 270.7178138999734,
+   "alignment": 0.7102883290502305,
+   "collisions": 0.56,
+   "drones": 20
+  },
+  {
+   "update": 118,
+   "samples": 1802240,
+   "return": -32.76162659255669,
+   "seconds": 272.249547699932,
+   "alignment": 0.7879013128874176,
+   "collisions": 0.25,
+   "drones": 20
+  },
+  {
+   "update": 119,
+   "samples": 1807360,
+   "return": -42.993234130051576,
+   "seconds": 273.8918843999272,
+   "alignment": 0.7507795864864601,
+   "collisions": 1.33,
+   "drones": 20
+  },
+  {
+   "update": 120,
+   "samples": 1812480,
+   "return": -42.993234130051576,
+   "seconds": 275.473227999988,
+   "alignment": 0.8505647699220442,
+   "collisions": 0.19,
+   "drones": 20
+  },
+  {
+   "update": 121,
+   "samples": 1817600,
+   "return": -33.88240848087291,
+   "seconds": 277.0900199000025,
+   "alignment": 0.7255430050914711,
+   "collisions": 0.14,
+   "drones": 20
+  },
+  {
+   "update": 122,
+   "samples": 1822720,
+   "return": -22.472374536742674,
+   "seconds": 278.72183699999005,
+   "alignment": 0.7267979616437164,
+   "collisions": 0.09,
+   "drones": 20
+  },
+  {
+   "update": 123,
+   "samples": 1827840,
+   "return": -22.472374536742674,
+   "seconds": 280.3895693999948,
+   "alignment": 0.7825834572115418,
+   "collisions": 0.0,
+   "drones": 20
+  },
+  {
+   "update": 124,
+   "samples": 1832960,
+   "return": -16.437599954723787,
+   "seconds": 282.0765397999203,
+   "alignment": 0.7073021327785072,
+   "collisions": 0.53,
+   "drones": 20
+  },
+  {
+   "update": 125,
+   "samples": 1838080,
+   "return": -21.893486759231973,
+   "seconds": 283.5930092999479,
+   "alignment": 0.762878891792797,
+   "collisions": 0.72,
+   "drones": 20
+  },
+  {
+   "update": 126,
+   "samples": 1843200,
+   "return": -21.893486759231973,
+   "seconds": 285.25388620002195,
+   "alignment": 0.7325727582817856,
+   "collisions": 0.6,
+   "drones": 20
+  },
+  {
+   "update": 127,
+   "samples": 1848320,
+   "return": -16.467074378067235,
+   "seconds": 287.0337248999858,
+   "alignment": 0.7654904050637883,
+   "collisions": 0.24,
+   "drones": 20
+  },
+  {
+   "update": 128,
+   "samples": 1853440,
+   "return": -16.467074378067235,
+   "seconds": 289.0352966999635,
+   "alignment": 0.7382268969573957,
+   "collisions": 0.84,
+   "drones": 20
+  },
+  {
+   "update": 129,
+   "samples": 1858560,
+   "return": -20.717533878551812,
+   "seconds": 290.8335155999521,
+   "alignment": 0.7840755614102838,
+   "collisions": 0.16,
+   "drones": 20
+  },
+  {
+   "update": 130,
+   "samples": 1863680,
+   "return": -30.26201632248327,
+   "seconds": 292.56543950003106,
+   "alignment": 0.7198717501493255,
+   "collisions": 1.34,
+   "drones": 20
+  },
+  {
+   "update": 131,
+   "samples": 1868800,
+   "return": -30.26201632248327,
+   "seconds": 294.10628750000615,
+   "alignment": 0.720611411188597,
+   "collisions": 0.2,
+   "drones": 20
+  },
+  {
+   "update": 132,
+   "samples": 1873920,
+   "return": -33.71482364933552,
+   "seconds": 295.67070569994394,
+   "alignment": 0.7966175341382218,
+   "collisions": 0.0,
+   "drones": 20
+  },
+  {
+   "update": 133,
+   "samples": 1879040,
+   "return": -22.855024777751133,
+   "seconds": 297.32253949996084,
+   "alignment": 0.6337862009928339,
+   "collisions": 0.46,
+   "drones": 20
+  },
+  {
+   "update": 134,
+   "samples": 1884160,
+   "return": -22.855024777751133,
+   "seconds": 298.9409908999223,
+   "alignment": 0.7386598244187845,
+   "collisions": 0.06,
+   "drones": 20
+  },
+  {
+   "update": 135,
+   "samples": 1889280,
+   "return": -23.542996254444514,
+   "seconds": 300.3376442999579,
+   "alignment": 0.6270915729841167,
+   "collisions": 0.69,
+   "drones": 20
+  },
+  {
+   "update": 136,
+   "samples": 1894400,
+   "return": -37.06340206101736,
+   "seconds": 301.60008499992546,
+   "alignment": 0.6598546504022826,
+   "collisions": 1.48,
+   "drones": 20
+  },
+  {
+   "update": 137,
+   "samples": 1899520,
+   "return": -37.06340206101736,
+   "seconds": 302.8447791999206,
+   "alignment": 0.8271530130965757,
+   "collisions": 0.0,
+   "drones": 20
+  },
+  {
+   "update": 138,
+   "samples": 1904640,
+   "return": -26.197939954915444,
+   "seconds": 304.17203120002523,
+   "alignment": 0.6380088142572684,
+   "collisions": 0.39,
+   "drones": 20
+  },
+  {
+   "update": 139,
+   "samples": 1909760,
+   "return": -26.197939954915444,
+   "seconds": 305.41433449997567,
+   "alignment": 0.8485080537205133,
+   "collisions": 0.62,
+   "drones": 20
+  },
+  {
+   "update": 140,
+   "samples": 1914880,
+   "return": -32.51351670875198,
+   "seconds": 306.60101719992235,
+   "alignment": 0.7234709155161838,
+   "collisions": 0.0,
+   "drones": 20
+  },
+  {
+   "update": 141,
+   "samples": 1920000,
+   "return": -30.526509794371254,
+   "seconds": 307.891420800006,
+   "alignment": 0.7834802517904242,
+   "collisions": 0.04,
+   "drones": 20
+  },
+  {
+   "update": 142,
+   "samples": 1925120,
+   "return": -30.526509794371254,
+   "seconds": 309.1637838999741,
+   "alignment": 0.7866507686071103,
+   "collisions": 1.97,
+   "drones": 20
+  },
+  {
+   "update": 143,
+   "samples": 1930240,
+   "return": -38.78985217547716,
+   "seconds": 310.4293912999565,
+   "alignment": 0.6671566941814921,
+   "collisions": 0.0,
+   "drones": 20
+  },
+  {
+   "update": 144,
+   "samples": 1935360,
+   "return": -22.005016527823862,
+   "seconds": 311.9541093999287,
+   "alignment": 0.7571610129206441,
+   "collisions": 0.54,
+   "drones": 20
+  },
+  {
+   "update": 145,
+   "samples": 1940480,
+   "return": -22.005016527823862,
+   "seconds": 313.3112441999838,
+   "alignment": 0.7993284043849852,
+   "collisions": 0.0,
+   "drones": 20
+  },
+  {
+   "update": 146,
+   "samples": 1945600,
+   "return": -22.189760967181808,
+   "seconds": 314.55494449997786,
+   "alignment": 0.8375330385974001,
+   "collisions": 0.04,
+   "drones": 20
+  },
+  {
+   "update": 147,
+   "samples": 1950720,
+   "return": -14.396342384740365,
+   "seconds": 315.7796646999195,
+   "alignment": 0.8110422095788584,
+   "collisions": 0.36,
+   "drones": 20
+  },
+  {
+   "update": 148,
+   "samples": 1955840,
+   "return": -14.396342384740365,
+   "seconds": 317.0605367999524,
+   "alignment": 0.7824732899628547,
+   "collisions": 0.34,
+   "drones": 20
+  },
+  {
+   "update": 149,
+   "samples": 1960960,
+   "return": -19.773485458711164,
+   "seconds": 318.32404159998987,
+   "alignment": 0.785347845724798,
+   "collisions": 0.14,
+   "drones": 20
+  },
+  {
+   "update": 150,
+   "samples": 1966080,
+   "return": -1.2783163760470955,
+   "seconds": 319.58941539993975,
+   "alignment": 0.8875450548673602,
+   "collisions": 0.0,
+   "drones": 20
+  },
+  {
+   "update": 151,
+   "samples": 1971200,
+   "return": -1.2783163760470955,
+   "seconds": 320.86853350000456,
+   "alignment": 0.7694071933275083,
+   "collisions": 0.48,
+   "drones": 20
+  },
+  {
+   "update": 152,
+   "samples": 1976320,
+   "return": -14.294583358965374,
+   "seconds": 322.08114339993335,
+   "alignment": 0.744130015087839,
+   "collisions": 2.07,
+   "drones": 20
+  },
+  {
+   "update": 153,
+   "samples": 1981440,
+   "return": -14.294583358965374,
+   "seconds": 323.35340399993584,
+   "alignment": 0.6562172270362467,
+   "collisions": 0.27,
+   "drones": 20
+  },
+  {
+   "update": 154,
+   "samples": 1986560,
+   "return": -20.99085651286711,
+   "seconds": 324.644917299971,
+   "alignment": 0.8824051569560606,
+   "collisions": 0.0,
+   "drones": 20
+  },
+  {
+   "update": 155,
+   "samples": 1991680,
+   "return": -18.89477921908962,
+   "seconds": 325.8762472999515,
+   "alignment": 0.732260468421787,
+   "collisions": 0.0,
+   "drones": 20
+  },
+  {
+   "update": 156,
+   "samples": 1996800,
+   "return": -18.89477921908962,
+   "seconds": 327.11233209993225,
+   "alignment": 0.8976289027327796,
+   "collisions": 0.24,
+   "drones": 20
+  }
+ ]
+}

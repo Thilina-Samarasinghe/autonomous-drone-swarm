@@ -1,11 +1,11 @@
 # Autonomous Drone Swarm Simulation
 
-> 🚧 **Work in progress.** Phases 0–7 (simulation core, boids flocking,
+> 🚧 **Work in progress.** Phases 0–8 (simulation core, boids flocking,
 > obstacle avoidance with lidar + ORCA, radio communication with shared
 > mapping, path planning on each drone's own map, formation flying,
 > cooperative search and rescue, multi-drone route planning over terrain and
-> threats) are built. Reinforcement learning and the final experiments are
-> **still being built**. See [Roadmap](#roadmap) below.
+> threats, reinforcement learning) are built. The final robustness
+> experiments are **still being built**. See [Roadmap](#roadmap) below.
 
 A 2D simulator for a swarm of **20–50 autonomous drones**. Every drone makes its
 own decisions using only what it can sense around itself, and cooperative
@@ -62,9 +62,9 @@ intelligence**, not one central AI controlling every drone.
 | 4 | Path planning (A* and cost field) on each drone's own map, replanning, maze, benchmark | ✅ Done |
 | 5 | Formation flying: 5 shapes, Hungarian slot assignment, leader trail, squeezing through gaps, benchmark | ✅ Done |
 | 6 | Search and rescue: frontier + Voronoi exploration, PSO victim search, auction task allocation, batteries, benchmark | ✅ Done |
-| 7 | Terrain and threat zones, PSO / hybrid multi-drone route planner with departure delays, benchmark | ✅ Done (under review) |
-| 8 | Multi-agent reinforcement learning (MAPPO) for **all** behaviours | 🔜 Next |
-| 9 | Benchmarks, robustness experiments, demo video | 📋 Planned |
+| 7 | Terrain and threat zones, PSO / hybrid multi-drone route planner with departure delays, benchmark | ✅ Done |
+| 8 | Reinforcement learning: shared-policy PPO with a centralised critic, 4 behaviours trained on CPU, benchmark vs hand-written | ✅ Done (under review) |
+| 9 | Benchmarks, robustness experiments, demo video | 🔜 Next |
 
 ---
 
@@ -170,6 +170,15 @@ intelligence**, not one central AI controlling every drone.
   another path or by waiting a few seconds before take-off.
 - **Terrain benchmark** (Phase 7): every planner at 6, 12 and 30 drones, planned
   and then flown with ORCA on.
+- **Learned policies** (Phase 8): one small neural network (55 → 64 → 64 → 2)
+  shared by every drone, each feeding it only its own local observation.
+  It's trained with PPO and a centralised critic (the MAPPO idea), for four
+  behaviours: navigation with collision avoidance, flocking, formation keeping
+  and search. Training runs inside the real simulator on a laptop CPU (4
+  behaviours in parallel, ~30 min).
+- **Plug-in deployment** (Phase 8): `--policy models/<task>.pt` flies a trained
+  policy in any scenario, optionally wrapped in ORCA (`--rl-orca`).
+- **Learned-vs-hand-written benchmark** (Phase 8): every behaviour with 20 drones.
 - **Fast neighbour search**: KD-tree, roughly N log N cost.
 - **Real-time Pygame viewer**: neighbour links, trails, perception circles,
   live stats panel, behaviour weights tunable while running, add or remove drones.
@@ -184,6 +193,8 @@ intelligence**, not one central AI controlling every drone.
 - Incremental D\* Lite (re-using the previous search instead of a full recompute)
 - Signals blocked by obstacles; victims that move; charging-pad queueing
 - 3D flight (altitude as a real dimension rather than a terrain cost)
+- RL policies that match the hand-written controllers at 20 drones (needs far
+  more training than a CPU laptop gives; see the Phase 8 results)
 - Leader-follower and virtual-structure formations with shape switching
 - Search and rescue: Voronoi area split, frontier exploration, PSO victim search,
   CBBA/auction task allocation, battery and return-to-base
@@ -238,6 +249,13 @@ python -m swarm.main --headless --scenario survey --no-relay --out outputs/singl
 python -m swarm.main --scenario maze --plan
 python -m swarm.main --scenario maze --planner astar
 python -m swarm.main --headless --scenario maze --plan --no-share --out outputs/maze_ownmap
+
+# Reinforcement learning (Phase 8)
+python -m experiments.train_rl                                  # train all 4 behaviours (~25 min, 4 cores)
+python -m experiments.train_rl --init models --drones 20 --samples 800000   # curriculum stage 2
+python -m swarm.main --scenario forest --policy models/stage1_8drones/navigate.pt --rl-orca
+python -m swarm.main --scenario open --drones 8 --policy models/flock.pt
+python -m experiments.benchmark_rl                              # learned vs hand-written, 20 drones
 
 # Terrain and threat zones (Phase 7)
 python -m swarm.main --scenario terrain --drones 12
@@ -300,6 +318,8 @@ python -m swarm.main --config configs/my_experiment.yaml
 | `--victims` | from config (8) | Rescue: number of victims |
 | `--no-radio` | off | Switch the radio off entirely |
 | `--route-planner` | from config (`hybrid`) | Terrain: `hybrid`, `pso`, `grid` or `straight` |
+| `--policy` | off | Fly a trained policy, e.g. `models/navigate.pt` |
+| `--rl-orca` | off | Wrap the trained policy in the ORCA safety layer |
 | `--headless` | off | Run without a window |
 | `--steps` | from config (3000) | Steps for a headless run (1 step = 0.05 s) |
 | `--out` | `outputs/latest` | Output folder for headless results |
@@ -454,6 +474,8 @@ metres and seconds. Unknown keys raise an error, so typos are caught early.
 | | `speed` / `separation` | 5.0 / 6.0 | Used to deconflict routes in time |
 | | `w_length` / `w_threat` / `w_climb` / `w_turn` / `w_conflict` / `w_delay` | 1 / 40 / 0.5 / 60 / 50 / 2.5 | Cost weights |
 | | `max_delay` / `lane` | 15 / 8 | Longest departure wait (s); straight leg out of start / into goal (m) |
+| `rl` | `policy` | "" | Path to a trained policy (empty = hand-written controllers) |
+| | `orca` | false | Wrap the learned policy in ORCA |
 | `render` | `window_width` × `window_height` | 1200 × 760 | |
 | | `fps` | 60 | |
 | | `trail_length` | 40 | Frames of trail per drone |
@@ -597,7 +619,14 @@ triggers an immediate replan.
 can see in a straight line on its own map. This turns the staircase grid
 path into smooth flight without a separate smoothing step.
 
-### Terrain and threat zones (Phase 7)
+### Reinforcement learning (Phase 8)
+python -m experiments.train_rl                                  # train all 4 behaviours (~25 min, 4 cores)
+python -m experiments.train_rl --init models --drones 20 --samples 800000   # curriculum stage 2
+python -m swarm.main --scenario forest --policy models/stage1_8drones/navigate.pt --rl-orca
+python -m swarm.main --scenario open --drones 8 --policy models/flock.pt
+python -m experiments.benchmark_rl                              # learned vs hand-written, 20 drones
+
+# Terrain and threat zones (Phase 7)
 python -m swarm.main --scenario terrain --drones 12
 python -m swarm.main --scenario terrain --drones 12 --route-planner grid
 python -m swarm.main --headless --scenario terrain --drones 12 --steps 2400 --out outputs/terrain
@@ -652,7 +681,14 @@ followers instantly; in reality they would ride on the radio messages (the
 leader's *position and velocity* do go over the radio, with latency and loss).
 The leader is fixed (drone 0); leader failure and re-election come in Phase 9.
 
-### Terrain and threat zones (Phase 7)
+### Reinforcement learning (Phase 8)
+python -m experiments.train_rl                                  # train all 4 behaviours (~25 min, 4 cores)
+python -m experiments.train_rl --init models --drones 20 --samples 800000   # curriculum stage 2
+python -m swarm.main --scenario forest --policy models/stage1_8drones/navigate.pt --rl-orca
+python -m swarm.main --scenario open --drones 8 --policy models/flock.pt
+python -m experiments.benchmark_rl                              # learned vs hand-written, 20 drones
+
+# Terrain and threat zones (Phase 7)
 python -m swarm.main --scenario terrain --drones 12
 python -m swarm.main --scenario terrain --drones 12 --route-planner grid
 python -m swarm.main --headless --scenario terrain --drones 12 --steps 2400 --out outputs/terrain
@@ -703,7 +739,14 @@ returns once its battery covers only 1.5× the straight-line trip home plus an
 is "stuck": an explorer drops its target; a returning drone backs off toward
 open space for 3 s and tries again.
 
-### Terrain and threat zones (Phase 7)
+### Reinforcement learning (Phase 8)
+python -m experiments.train_rl                                  # train all 4 behaviours (~25 min, 4 cores)
+python -m experiments.train_rl --init models --drones 20 --samples 800000   # curriculum stage 2
+python -m swarm.main --scenario forest --policy models/stage1_8drones/navigate.pt --rl-orca
+python -m swarm.main --scenario open --drones 8 --policy models/flock.pt
+python -m experiments.benchmark_rl                              # learned vs hand-written, 20 drones
+
+# Terrain and threat zones (Phase 7)
 
 ```
  starts, goals, terrain ──> plan every route before take-off (one drone at a time)
@@ -749,6 +792,41 @@ west, so no route runs along the crowded start or goal lines.
 **Flying.** Each drone waits for its departure delay, then steers at a point
 8 m ahead on its route. ORCA stays on, so a planned route can never cause a
 collision; the benchmark measures how often ORCA has to step in.
+
+### Reinforcement learning (Phase 8)
+
+```
+ each drone: own observation (55 numbers) --> shared actor network --> desired velocity --> fixed tracking rule --> acceleration
+ training only: [own obs, team-average obs] --> critic network --> value (centralised training, decentralised execution)
+```
+
+**Observation** (identical in training and deployment, `swarm/rl/observe.py`):
+own velocity; direction and distance to the current target (goal, planner
+waypoint or formation slot); the 6 nearest neighbours' relative positions and
+velocities; 12 lidar sectors, where the arena edge (geofence) also counts;
+and 8 sectors of "still unknown" space from the drone's own map.
+
+**Action:** a desired velocity. A fixed rule turns it into an acceleration,
+(v_desired − v) / 0.5 s, within the drone's limits. ORCA can wrap the result
+like any other controller.
+
+**Training:** PPO with GAE(λ = 0.95), a clipped objective, 4 epochs per
+update and rewards scaled by a running estimate of the return's spread. The
+actor and critic have separate optimisers. Every drone's experience trains the
+same network (parameter sharing). The critic also sees the team-average
+observation, but it's only used during training (the MAPPO idea). Rewards
+per behaviour:
+
+| Behaviour | Rewarded for | Penalised for (all behaviours) |
+|---|---|---|
+| navigate | progress toward the goal, arriving | collisions, near misses, obstacle hits, hugging the arena edge, jerky flight |
+| flock | alignment with neighbours, having up to 4 neighbours, cruise speed | ... plus being alone |
+| formation | getting closer to the slot behind a scripted leader, being within 1.5 m | ... plus distance from the slot |
+| search | newly mapped cells on the drone's own map | |
+
+**Curriculum:** stage 1 trains with 8 drones (navigation starts with 4).
+Stage 2 continues every policy with 20 drones; for navigation, half the
+episodes give every drone the same goal.
 
 Lessons from development (found by tests and benchmarks):
 
@@ -829,6 +907,20 @@ Lessons from development (found by tests and benchmarks):
   goals. Two fixes: conflicts are only excused when *both* drones are near their
   own endpoints (flying past a parked drone counts), and PSO waypoints stay
   between the start and goal lanes.
+- *Phase 8:* the first training run got *worse* over time. The actor and critic
+  shared one gradient clip, so the critic's huge value-error gradients shrank
+  the actor's updates to almost nothing. Separate optimisers and reward
+  scaling fixed it, and a pure-maths toy task (now a test) confirmed PPO learns.
+- *Phase 8:* with accelerations as actions, every task was also a momentum
+  control problem and nothing learned in the CPU budget. Desired-velocity
+  actions made formation and search learn.
+- *Phase 8:* navigation, flocking and search still went backwards: drones were
+  penalised for hugging the arena edge, which they couldn't perceive (the lidar
+  only sees obstacles). Adding the geofence to the lidar sectors fixed it.
+- *Phase 8:* policies trained with 8 drones worked at 8 (the flocking policy
+  matched boids: 0 collisions, alignment 0.99) but fell apart at 20, where the
+  swarm is much denser. A second curriculum stage at 20 drones helped flocking
+  during training, but made navigation worse (see the results).
 
 ---
 
@@ -863,6 +955,7 @@ Lessons from development (found by tests and benchmarks):
 | `planned_forbidden_m` / `planned_conflict` | Terrain: metres of forbidden flight and time-conflict score in the plan | 0 / low |
 | `close_encounter_pair_s` | Terrain: seconds that pairs of drones spent closer than 6 m en route | low |
 | `flown_threat` / `flown_lethal_s` / `flown_above_ceiling_s` | Terrain: what the drones actually flew through | low / 0 / 0 |
+| `policy` / `policy_with_orca` | Which trained policy flew, and whether ORCA wrapped it | |
 
 Planned metrics for later phases:
 messages sent, path length, formation error, energy use.
@@ -1087,6 +1180,59 @@ What the numbers show:
   depends far less on last-second avoidance, which matters if a sensor, the
   radio or ORCA itself ever fails (Phase 9 tests exactly that).
 
+### Phase 8: learned policies vs hand-written controllers
+
+Every behaviour flown by **20 drones**, 3 seeds per row, 120 s (search 60 s).
+"Stage 1" policies were trained with 8 drones (~1–2 M samples, 24 min for
+all four in parallel); "stage 2" continued them with 20 drones (+0.8 M
+samples each, 7 min). Collisions are drone-steps in contact.
+Reproduce with `python -m experiments.benchmark_rl --models <folder>`.
+
+**Navigation** (forest and random obstacle fields, every drone to the same goal):
+
+| Controller | Arrived (forest / random) | Time for 90% to arrive | Drone collisions | Obstacle hits |
+|---|---|---|---|---|
+| boids, no avoidance | 100% / 98% | 34 / 36 s | 0 | 1,101 / 1,643 |
+| **boids + ORCA** (hand-written default) | 100% / 98% | 40 / 37 s | **0** | **0** |
+| RL alone, stage 1 | 93% / 98% | **25 / 23 s** | 5,869 / 6,399 | 32 / 6 |
+| **RL + ORCA, stage 1** | 97% / 97% | **31 / 26 s** | 1.7 / 2.0 | **0** |
+| RL alone, stage 2 | 67% / 67% | 55 / 84 s | 1,732 / 1,844 | 21 / 10 |
+| RL + ORCA, stage 2 | 72% / 58% | 53 / 51 s | 0 | 0 |
+
+**Flocking, formation and search** (stage 1 / stage 2 policies):
+
+| Behaviour | Hand-written | RL stage 1 | RL stage 2 |
+|---|---|---|---|
+| flock: local alignment, speed, collisions | 0.98, 4.2 m/s, **0** | 0.15, 0.0 m/s, 235,557 | 0.81, 1.2 m/s, 30,696 |
+| formation (V): slot error, collisions | **4.2 m**, 0 | 12.4 m, 641 | 14.2 m, 328 |
+| search: average drone's map after 60 s, collisions | 89%, **0** | **91%**, 82 | 88%, 98 |
+
+What the numbers show:
+- **The learned navigation policy is faster but not safe on its own.** It gets
+  20 drones to the goal ~35% faster than boids + ORCA, but with thousands of
+  collision steps: it learned "go" much better than "don't touch".
+- **Learned speed + hand-written safety is the useful combination.** With
+  ORCA wrapping it, the stage-1 policy still arrives ~20–30% faster than
+  boids + ORCA, with ~2 collision steps in 120 s and no obstacle hits.
+- **Flocking learned at the training size but didn't scale.** With 8 drones
+  the policy matches boids (alignment 0.99, 0 collisions); with 20 it
+  collapses, and in the 120 s run the drones stop and pile up. Stage 2 helped
+  but nowhere near enough.
+- **Search learned the most:** the learned explorers map as much as
+  flocking with map sharing (91% vs 89%), from nothing but "new cells are
+  good", but they still bump into each other.
+- **Formation learned to follow, not to hold a shape**: 3× the
+  hand-written error.
+- **The second curriculum stage made navigation worse.** The shared-goal
+  episodes probably taught a crowd behaviour that doesn't transfer. Stage-1
+  policies are kept in `models/stage1_8drones/`.
+- **Bottom line**: with about an hour of CPU training, hand-written
+  controllers remain better and safer for every behaviour at 20 drones. RL's
+  real strength showed up as raw navigation speed. Closing the gap would take
+  much more training (tens of millions of samples), longer training episodes,
+  and probably a neighbour-count-independent network (e.g. a graph network);
+  a free Colab or Kaggle GPU would be the practical next step.
+
 ---
 
 ## Project structure
@@ -1112,6 +1258,11 @@ autonomous-drone-swarm/
 │   ├── planning/
 │   │   ├── grid.py           cost map, A*, backward-Dijkstra cost field, path extraction
 │   │   └── planner.py        per-drone replanning and string-pulling path following
+│   ├── rl/
+│   │   ├── observe.py        55-number local observation, desired-velocity actions
+│   │   ├── env.py            training tasks and rewards on the real simulator
+│   │   ├── ppo.py            shared-policy PPO with a centralised critic
+│   │   └── controller.py     flying a trained policy as a normal controller
 │   ├── terrain/
 │   │   ├── terrain.py        hills, threat zones, no-fly peaks, lookup tables
 │   │   ├── route_cost.py     shared route cost incl. time conflicts
@@ -1146,7 +1297,11 @@ autonomous-drone-swarm/
 │   ├── benchmark_planning.py    planning on/off, own vs shared map, A* vs field
 │   ├── benchmark_formation.py   shapes, squeezing, obstacle courses
 │   ├── benchmark_rescue.py      search strategies, with and without radio
-│   └── benchmark_terrain.py     route planners at 6 / 12 / 30 drones
+│   ├── benchmark_terrain.py     route planners at 6 / 12 / 30 drones
+│   ├── train_rl.py              train the 4 policies in parallel (curriculum)
+│   └── benchmark_rl.py          learned vs hand-written, 20 drones
+├── models/                   trained policies (stage 2) + logs and learning curves
+│   └── stage1_8drones/       stage-1 policies (8 drones), best for navigation
 ├── tests/
 │   ├── test_core.py          Phase 0-1 tests
 │   ├── test_phase2.py        Phase 2 tests
@@ -1154,19 +1309,20 @@ autonomous-drone-swarm/
 │   ├── test_phase4.py        Phase 4 tests
 │   ├── test_phase5.py        Phase 5 tests
 │   ├── test_phase6.py        Phase 6 tests
-│   └── test_phase7.py        Phase 7 tests
+│   ├── test_phase7.py        Phase 7 tests
+│   └── test_phase8.py        Phase 8 tests
 ├── requirements.txt
 └── pytest.ini
 ```
 
-Planned addition: `swarm/rl/`.
+Planned addition: `experiments/robustness.py` (Phase 9).
 
 ---
 
 ## Testing
 
 ```bash
-python -m pytest            # 157 tests, ~4 min
+python -m pytest            # 176 tests, ~4 min
 python -m pytest -v         # verbose
 ```
 
@@ -1246,6 +1402,16 @@ The tests cover:
 - *Phase 7:* end to end, drones fly their hybrid routes with 0 time in lethal
   cores, 0 collisions and everyone arriving; drones wait for their departure
   slot; straight routes are flagged as dangerous; CLI and viewer keys work
+- *Phase 8:* observation layout (velocity, clipped target, nearest
+  neighbours first, empty lidar, geofence), map sectors, velocity commands
+  turned into bounded accelerations
+- *Phase 8:* every training task steps with finite rewards; moving toward the
+  goal earns more than moving away; the formation leader is scripted and not
+  trained; collisions are penalised
+- *Phase 8:* PPO runs, a saved policy reloads to identical actions, and PPO
+  clearly learns a trivial toy task
+- *Phase 8:* every policy flies inside the normal simulator; with ORCA a policy
+  never collides; the `--policy` / `--rl-orca` CLI flags work
 
 ---
 
@@ -1263,8 +1429,8 @@ Full details are in [docs/PLAN.md](docs/PLAN.md).
 | 5 | Formation flying | Leader-follower with 5 shapes, Hungarian slot assignment, leader trail, squeezing through gaps, benchmark | ✅ |
 | 6 | Search and rescue | Frontier + Voronoi exploration, PSO victim search, auction task allocation, batteries and charging, radio reporting, benchmark | ✅ |
 | 7 | Terrain and threats | Hills and no-fly peaks, threat zones, shared route cost with time conflicts, PSO / hybrid / grid planners, departure delays, benchmark | ✅ |
-| 8 | Reinforcement learning | PettingZoo env, shared-parameter MAPPO, curriculum learning; policies for avoidance, flocking, formation and search | 🔜 |
-| 9 | Experiments and demo | Scaling, communication-loss and drone-failure tests, RL vs. classical, demo video | 📋 |
+| 8 | Reinforcement learning | Shared-policy PPO with centralised critic, 4 behaviours, 2-stage curriculum, deployment as a controller, benchmark vs hand-written | ✅ |
+| 9 | Experiments and demo | Scaling, communication-loss and drone-failure tests, demo video | 🔜 |
 
 ---
 
@@ -1298,7 +1464,8 @@ Full details are in [docs/PLAN.md](docs/PLAN.md).
 | Hybrid PSO seeded with a grid search | Reliable, legal, deconflicted routes | ✅ |
 | Douglas–Peucker simplification | Turning grid paths into a few waypoints | ✅ |
 | Pure-pursuit path following | Flying the planned routes | ✅ |
-| MAPPO (multi-agent PPO) | Learned policies for every behaviour | 📋 Phase 8 |
+| PPO with a centralised critic (MAPPO-style), parameter sharing | Learned policies for 4 behaviours | ✅ |
+| GAE(λ), reward scaling, curriculum learning | Making CPU training work | ✅ |
 
 ---
 
@@ -1356,6 +1523,9 @@ Full details are in [docs/PLAN.md](docs/PLAN.md).
 - J. Cortés et al., *Coverage Control for Mobile Sensing Networks*, IEEE TRA 2004
 - H.-L. Choi et al., *Consensus-Based Decentralized Auctions (CBBA)*, IEEE TRO 2009
 - C. Yu et al., *The Surprising Effectiveness of PPO in Cooperative Multi-Agent Games (MAPPO)*, NeurIPS 2022
+- J. Schulman et al., *Proximal Policy Optimization Algorithms*, arXiv 2017
+- J. Schulman et al., *High-Dimensional Continuous Control Using Generalized Advantage Estimation*, ICLR 2016
+- S. Huang et al., *The 37 Implementation Details of Proximal Policy Optimization*, ICLR Blog Track 2022
 
 ---
 

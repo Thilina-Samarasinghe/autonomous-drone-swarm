@@ -72,9 +72,6 @@ class Simulation:
             self.route_plan = plan_routes(tc.planner, self.scenario.starts, self.scenario.goals,
                                           self.terrain, tc, base.size, 8.0,
                                           np.random.default_rng([self.cfg.sim.seed, 13]))
-        self.controller: Controller = self._custom_controller or build_controller(
-            self.cfg, mission=self.mission_active or self.terrain is not None)
-
         d = self.cfg.drones
         if self.scenario.starts is not None:
             starts = self.scenario.starts
@@ -89,6 +86,7 @@ class Simulation:
         self.time_to_arrive_90: float | None = None
         self.time_leader_arrived: float | None = None   # formation runs: drone 0 reached the goal
         self._init_info_systems()
+        self.controller: Controller = self._make_controller()
         self.neighbors: NeighborPairs
         self.scan: Scan
         self.detections: Detections
@@ -154,13 +152,27 @@ class Simulation:
             self.cfg.formation.shape = shape
             self.formation = FormationManager(self.state.n, self.cfg.formation, self.cfg.sim.dt,
                                               self.world.size)
-        self.controller = self._custom_controller or build_controller(
-            self.cfg, mission=self.mission_active or self.terrain is not None)
+        self.controller = self._make_controller()
 
     def set_avoidance(self, method: str) -> None:
         """Switch avoidance method on the fly (keeps the current swarm state)."""
         self.cfg.avoidance.method = method
-        self.controller = build_controller(self.cfg, mission=self.mission_active or self.terrain is not None)
+        self.controller = self._make_controller()
+
+    def _make_controller(self) -> Controller:
+        """The controller stack for the current settings: a custom controller if
+        one was given, a trained policy if `rl.policy` is set, else the
+        hand-written controllers."""
+        if self._custom_controller is not None:
+            return self._custom_controller
+        if self.cfg.rl.policy:
+            from swarm.control.orca import OrcaSafetyLayer
+            from swarm.rl.controller import RLController
+            d = self.cfg.drones
+            ctrl = RLController(self.cfg.rl.policy, d.max_speed, d.max_accel, d.perception_radius,
+                                self.maps, self.world.size)
+            return OrcaSafetyLayer(ctrl, d, self.cfg.avoidance) if self.cfg.rl.orca else ctrl
+        return build_controller(self.cfg, mission=self.mission_active or self.terrain is not None)
 
     def add_drones(self, k: int) -> None:
         d = self.cfg.drones
@@ -172,11 +184,13 @@ class Simulation:
         vel = np.stack([np.cos(heading), np.sin(heading)], 1) * d.spawn_speed
         self.state.add(pos, vel)
         self._init_info_systems()   # maps and radio are sized per drone, so they restart
+        self.controller = self._make_controller()
         self._refresh(obstacle_hits=0)
 
     def remove_drones(self, k: int) -> None:
         self.state.remove_last(min(k, self.state.n - 1))
         self._init_info_systems()
+        self.controller = self._make_controller()
         self._refresh(obstacle_hits=0)
 
     def _refresh(self, obstacle_hits: int) -> None:

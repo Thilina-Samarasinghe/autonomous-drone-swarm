@@ -178,6 +178,12 @@ class TerrainConfig:
 
 
 @dataclass
+class RLConfig:
+    policy: str = ""                  # path to a trained policy (models/<task>.pt); "" = off
+    orca: bool = False                # wrap the learned policy in the ORCA safety layer
+
+
+@dataclass
 class RenderConfig:
     window_width: int = 1200
     window_height: int = 760
@@ -201,6 +207,7 @@ class Config:
     formation: FormationConfig = field(default_factory=FormationConfig)
     mission: MissionConfig = field(default_factory=MissionConfig)
     terrain: TerrainConfig = field(default_factory=TerrainConfig)
+    rl: RLConfig = field(default_factory=RLConfig)
     render: RenderConfig = field(default_factory=RenderConfig)
 
     def to_dict(self) -> dict[str, Any]:

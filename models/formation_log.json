@@ -1,0 +1,6519 @@
+{
+ "meta": {
+  "task": "formation",
+  "drones": 20,
+  "samples": 800000,
+  "seed": 0,
+  "train_seconds": 989.8281968000811,
+  "stages": [
+   {
+    "drones": 8,
+    "samples": 1000000
+   },
+   {
+    "drones": 20,
+    "samples": 800000
+   }
+  ]
+ },
+ "log": [
+  {
+   "update": 1,
+   "samples": 1792,
+   "return": NaN,
+   "seconds": 1.6523214998887852,
+   "slot_error": 14.996616057726582,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 2,
+   "samples": 3584,
+   "return": -85.16887474765203,
+   "seconds": 3.2654889998957515,
+   "slot_error": 29.5431191298506,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 3,
+   "samples": 5376,
+   "return": -85.16887474765203,
+   "seconds": 4.720926099922508,
+   "slot_error": 35.33345315376066,
+   "collisions": 0.14,
+   "drones": 8
+  },
+  {
+   "update": 4,
+   "samples": 7168,
+   "return": -106.53090344429282,
+   "seconds": 6.113448099931702,
+   "slot_error": 9.838123509444515,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 5,
+   "samples": 8960,
+   "return": -96.58403538238434,
+   "seconds": 7.562837599893101,
+   "slot_error": 20.983068822660762,
+   "collisions": 0.12,
+   "drones": 8
+  },
+  {
+   "update": 6,
+   "samples": 10752,
+   "return": -96.58403538238434,
+   "seconds": 9.214468099991791,
+   "slot_error": 54.81463531726539,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 7,
+   "samples": 12544,
+   "return": -108.2169828452565,
+   "seconds": 10.63571459997911,
+   "slot_error": 27.46061033526062,
+   "collisions": 0.25,
+   "drones": 8
+  },
+  {
+   "update": 8,
+   "samples": 14336,
+   "return": -115.59525207437568,
+   "seconds": 12.177047399920411,
+   "slot_error": 41.257052573116724,
+   "collisions": 0.07,
+   "drones": 8
+  },
+  {
+   "update": 9,
+   "samples": 16128,
+   "return": -115.59525207437568,
+   "seconds": 13.790589899988845,
+   "slot_error": 37.5662264599019,
+   "collisions": 0.18,
+   "drones": 8
+  },
+  {
+   "update": 10,
+   "samples": 17920,
+   "return": -127.7550591050194,
+   "seconds": 15.209156699944288,
+   "slot_error": 23.685171847139117,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 11,
+   "samples": 19712,
+   "return": -119.57952699931506,
+   "seconds": 16.512274299981073,
+   "slot_error": 26.382656813497984,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 12,
+   "samples": 21504,
+   "return": -119.57952699931506,
+   "seconds": 17.936611099983566,
+   "slot_error": 39.406008336842696,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 13,
+   "samples": 23296,
+   "return": -132.40319817693674,
+   "seconds": 19.55840419989545,
+   "slot_error": 46.8096516180178,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 14,
+   "samples": 25088,
+   "return": -132.40319817693674,
+   "seconds": 20.954166999901645,
+   "slot_error": 69.3422440065447,
+   "collisions": 0.02,
+   "drones": 8
+  },
+  {
+   "update": 15,
+   "samples": 26880,
+   "return": -131.048739638133,
+   "seconds": 22.04223539994564,
+   "slot_error": 29.26034827778969,
+   "collisions": 0.38,
+   "drones": 8
+  },
+  {
+   "update": 16,
+   "samples": 28672,
+   "return": -134.44670603809186,
+   "seconds": 23.20395119988825,
+   "slot_error": 50.42481350017943,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 17,
+   "samples": 30464,
+   "return": -134.44670603809186,
+   "seconds": 24.34156199998688,
+   "slot_error": 26.93643518808772,
+   "collisions": 0.52,
+   "drones": 8
+  },
+  {
+   "update": 18,
+   "samples": 32256,
+   "return": -138.8670866570739,
+   "seconds": 25.40350239991676,
+   "slot_error": 21.520070723421714,
+   "collisions": 0.57,
+   "drones": 8
+  },
+  {
+   "update": 19,
+   "samples": 34048,
+   "return": -155.48463263189353,
+   "seconds": 26.467134299920872,
+   "slot_error": 35.10295924105584,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 20,
+   "samples": 35840,
+   "return": -155.48463263189353,
+   "seconds": 27.461596299894154,
+   "slot_error": 48.84640560236966,
+   "collisions": 1.17,
+   "drones": 8
+  },
+  {
+   "update": 21,
+   "samples": 37632,
+   "return": -180.33140342314397,
+   "seconds": 28.465984399896115,
+   "slot_error": 34.42570700004317,
+   "collisions": 0.53,
+   "drones": 8
+  },
+  {
+   "update": 22,
+   "samples": 39424,
+   "return": -200.66358210409192,
+   "seconds": 29.49241039995104,
+   "slot_error": 74.25849635566549,
+   "collisions": 0.21,
+   "drones": 8
+  },
+  {
+   "update": 23,
+   "samples": 41216,
+   "return": -200.66358210409192,
+   "seconds": 30.46412059990689,
+   "slot_error": 36.15072380222487,
+   "collisions": 0.25,
+   "drones": 8
+  },
+  {
+   "update": 24,
+   "samples": 43008,
+   "return": -199.14967745556328,
+   "seconds": 31.3730941999238,
+   "slot_error": 33.08746447154433,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 25,
+   "samples": 44800,
+   "return": -177.76789089136125,
+   "seconds": 32.319191699963994,
+   "slot_error": 13.359265375561009,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 26,
+   "samples": 46592,
+   "return": -177.76789089136125,
+   "seconds": 33.326532599981874,
+   "slot_error": 30.69160485640954,
+   "collisions": 0.26,
+   "drones": 8
+  },
+  {
+   "update": 27,
+   "samples": 48384,
+   "return": -180.11761478827768,
+   "seconds": 34.25365079997573,
+   "slot_error": 24.640639429440288,
+   "collisions": 0.39,
+   "drones": 8
+  },
+  {
+   "update": 28,
+   "samples": 50176,
+   "return": -180.11761478827768,
+   "seconds": 35.130970699945465,
+   "slot_error": 44.6318816891401,
+   "collisions": 0.12,
+   "drones": 8
+  },
+  {
+   "update": 29,
+   "samples": 51968,
+   "return": -160.45448708666459,
+   "seconds": 36.04752779996488,
+   "slot_error": 33.059826362918855,
+   "collisions": 0.06,
+   "drones": 8
+  },
+  {
+   "update": 30,
+   "samples": 53760,
+   "return": -147.66094564874493,
+   "seconds": 37.05048239999451,
+   "slot_error": 65.69808948868427,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 31,
+   "samples": 55552,
+   "return": -147.66094564874493,
+   "seconds": 37.99436839995906,
+   "slot_error": 26.06939717753288,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 32,
+   "samples": 57344,
+   "return": -139.4794981438467,
+   "seconds": 39.0812102999771,
+   "slot_error": 23.91181990779268,
+   "collisions": 0.86,
+   "drones": 8
+  },
+  {
+   "update": 33,
+   "samples": 59136,
+   "return": -170.21596092751216,
+   "seconds": 40.13608649990056,
+   "slot_error": 74.20812042379258,
+   "collisions": 0.49,
+   "drones": 8
+  },
+  {
+   "update": 34,
+   "samples": 60928,
+   "return": -170.21596092751216,
+   "seconds": 41.06293859996367,
+   "slot_error": 12.100554894750452,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 35,
+   "samples": 62720,
+   "return": -162.0929826891183,
+   "seconds": 42.06843399989884,
+   "slot_error": 20.955980581101176,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 36,
+   "samples": 64512,
+   "return": -154.02850804062828,
+   "seconds": 42.945378899923526,
+   "slot_error": 75.614802569978,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 37,
+   "samples": 66304,
+   "return": -154.02850804062828,
+   "seconds": 43.91512849996798,
+   "slot_error": 42.07774601449948,
+   "collisions": 0.13,
+   "drones": 8
+  },
+  {
+   "update": 38,
+   "samples": 68096,
+   "return": -148.28590287711205,
+   "seconds": 45.13294829998631,
+   "slot_error": 36.236004093200364,
+   "collisions": 0.33,
+   "drones": 8
+  },
+  {
+   "update": 39,
+   "samples": 69888,
+   "return": -148.28590287711205,
+   "seconds": 46.35335099999793,
+   "slot_error": 30.615455659346573,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 40,
+   "samples": 71680,
+   "return": -154.55618570437656,
+   "seconds": 47.42049019993283,
+   "slot_error": 35.16925052639015,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 41,
+   "samples": 73472,
+   "return": -138.68512382540422,
+   "seconds": 48.673887499957345,
+   "slot_error": 62.27006650418925,
+   "collisions": 0.11,
+   "drones": 8
+  },
+  {
+   "update": 42,
+   "samples": 75264,
+   "return": -138.68512382540422,
+   "seconds": 49.82606719993055,
+   "slot_error": 19.11273589861423,
+   "collisions": 0.22,
+   "drones": 8
+  },
+  {
+   "update": 43,
+   "samples": 77056,
+   "return": -133.90057682401132,
+   "seconds": 50.76627989998087,
+   "slot_error": 26.65866206429654,
+   "collisions": 0.07,
+   "drones": 8
+  },
+  {
+   "update": 44,
+   "samples": 78848,
+   "return": -132.5942220043441,
+   "seconds": 51.83422929991502,
+   "slot_error": 45.26338488991159,
+   "collisions": 0.38,
+   "drones": 8
+  },
+  {
+   "update": 45,
+   "samples": 80640,
+   "return": -132.5942220043441,
+   "seconds": 52.90718789992388,
+   "slot_error": 39.25716608559053,
+   "collisions": 0.75,
+   "drones": 8
+  },
+  {
+   "update": 46,
+   "samples": 82432,
+   "return": -161.19805308178434,
+   "seconds": 53.98373169999104,
+   "slot_error": 19.481948320756857,
+   "collisions": 0.24,
+   "drones": 8
+  },
+  {
+   "update": 47,
+   "samples": 84224,
+   "return": -154.22134957696753,
+   "seconds": 55.07556859997567,
+   "slot_error": 51.777337599937624,
+   "collisions": 0.16,
+   "drones": 8
+  },
+  {
+   "update": 48,
+   "samples": 86016,
+   "return": -154.22134957696753,
+   "seconds": 56.1513020999264,
+   "slot_error": 20.648993786862757,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 49,
+   "samples": 87808,
+   "return": -156.2279649124219,
+   "seconds": 57.180051899980754,
+   "slot_error": 28.990859811730488,
+   "collisions": 0.35,
+   "drones": 8
+  },
+  {
+   "update": 50,
+   "samples": 89600,
+   "return": -157.64848617579878,
+   "seconds": 58.463307999889366,
+   "slot_error": 12.072946928146452,
+   "collisions": 0.73,
+   "drones": 8
+  },
+  {
+   "update": 51,
+   "samples": 91392,
+   "return": -157.64848617579878,
+   "seconds": 59.883705299929716,
+   "slot_error": 35.247881632969566,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 52,
+   "samples": 93184,
+   "return": -159.7981774899625,
+   "seconds": 61.07845959998667,
+   "slot_error": 42.62556432832953,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 53,
+   "samples": 94976,
+   "return": -159.7981774899625,
+   "seconds": 62.18909909995273,
+   "slot_error": 17.53995997807397,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 54,
+   "samples": 96768,
+   "return": -116.6464169397151,
+   "seconds": 63.26836209988687,
+   "slot_error": 13.988246204715862,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 55,
+   "samples": 98560,
+   "return": -112.85051093384921,
+   "seconds": 64.3935291999951,
+   "slot_error": 32.051665077658626,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 56,
+   "samples": 100352,
+   "return": -112.85051093384921,
+   "seconds": 65.54986439994536,
+   "slot_error": 25.265835934176277,
+   "collisions": 0.1,
+   "drones": 8
+  },
+  {
+   "update": 57,
+   "samples": 102144,
+   "return": -108.88546324439012,
+   "seconds": 66.6903024999192,
+   "slot_error": 21.999942097290305,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 58,
+   "samples": 103936,
+   "return": -110.45556028417361,
+   "seconds": 67.72398079989944,
+   "slot_error": 32.166400429577145,
+   "collisions": 0.15,
+   "drones": 8
+  },
+  {
+   "update": 59,
+   "samples": 105728,
+   "return": -110.45556028417361,
+   "seconds": 68.77528449997772,
+   "slot_error": 46.575618281433115,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 60,
+   "samples": 107520,
+   "return": -107.55934994225224,
+   "seconds": 69.99250419996679,
+   "slot_error": 25.33185158451768,
+   "collisions": 0.05,
+   "drones": 8
+  },
+  {
+   "update": 61,
+   "samples": 109312,
+   "return": -117.73525658892675,
+   "seconds": 71.1091790999053,
+   "slot_error": 29.039229524286664,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 62,
+   "samples": 111104,
+   "return": -117.73525658892675,
+   "seconds": 72.19557939993683,
+   "slot_error": 29.09051394020689,
+   "collisions": 0.07,
+   "drones": 8
+  },
+  {
+   "update": 63,
+   "samples": 112896,
+   "return": -123.28285545187828,
+   "seconds": 73.29799120000098,
+   "slot_error": 24.53951394731678,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 64,
+   "samples": 114688,
+   "return": -123.28285545187828,
+   "seconds": 74.42096999997739,
+   "slot_error": 50.06177287940872,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 65,
+   "samples": 116480,
+   "return": -120.66458707812501,
+   "seconds": 75.38259989989456,
+   "slot_error": 25.592435828388407,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 66,
+   "samples": 118272,
+   "return": -117.93047828397621,
+   "seconds": 76.51881349994801,
+   "slot_error": 19.27588250238726,
+   "collisions": 0.27,
+   "drones": 8
+  },
+  {
+   "update": 67,
+   "samples": 120064,
+   "return": -117.93047828397621,
+   "seconds": 77.70400889997836,
+   "slot_error": 24.995123336398027,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 68,
+   "samples": 121856,
+   "return": -113.52170846962295,
+   "seconds": 78.99002719996497,
+   "slot_error": 25.41426299729531,
+   "collisions": 0.36,
+   "drones": 8
+  },
+  {
+   "update": 69,
+   "samples": 123648,
+   "return": -128.15113102158315,
+   "seconds": 80.16897829994559,
+   "slot_error": 37.53634623433665,
+   "collisions": 0.03,
+   "drones": 8
+  },
+  {
+   "update": 70,
+   "samples": 125440,
+   "return": -128.15113102158315,
+   "seconds": 81.37821549992077,
+   "slot_error": 50.3162976666988,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 71,
+   "samples": 127232,
+   "return": -128.64790326459666,
+   "seconds": 82.45990629994776,
+   "slot_error": 30.680211874048073,
+   "collisions": 0.38,
+   "drones": 8
+  },
+  {
+   "update": 72,
+   "samples": 129024,
+   "return": -152.39974731531362,
+   "seconds": 83.45371459994931,
+   "slot_error": 56.68672482067055,
+   "collisions": 0.46,
+   "drones": 8
+  },
+  {
+   "update": 73,
+   "samples": 130816,
+   "return": -152.39974731531362,
+   "seconds": 84.38034399994649,
+   "slot_error": 32.41950002118087,
+   "collisions": 0.5,
+   "drones": 8
+  },
+  {
+   "update": 74,
+   "samples": 132608,
+   "return": -166.97896305386925,
+   "seconds": 85.33911999990232,
+   "slot_error": 32.54758765711001,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 75,
+   "samples": 134400,
+   "return": -165.70128553830438,
+   "seconds": 86.54805189999752,
+   "slot_error": 24.78532971069054,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 76,
+   "samples": 136192,
+   "return": -165.70128553830438,
+   "seconds": 87.67138729989529,
+   "slot_error": 15.699387840730852,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 77,
+   "samples": 137984,
+   "return": -145.2980645483601,
+   "seconds": 88.90113739995286,
+   "slot_error": 15.808211758883909,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 78,
+   "samples": 139776,
+   "return": -145.2980645483601,
+   "seconds": 89.94788489991333,
+   "slot_error": 19.45260455812938,
+   "collisions": 0.27,
+   "drones": 8
+  },
+  {
+   "update": 79,
+   "samples": 141568,
+   "return": -140.93504870100213,
+   "seconds": 91.08248799992725,
+   "slot_error": 12.334052531472237,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 80,
+   "samples": 143360,
+   "return": -120.57277968642885,
+   "seconds": 92.18507339991629,
+   "slot_error": 19.279559653087023,
+   "collisions": 0.61,
+   "drones": 8
+  },
+  {
+   "update": 81,
+   "samples": 145152,
+   "return": -120.57277968642885,
+   "seconds": 93.28567449992988,
+   "slot_error": 24.404027205380345,
+   "collisions": 0.96,
+   "drones": 8
+  },
+  {
+   "update": 82,
+   "samples": 146944,
+   "return": -124.2722070345231,
+   "seconds": 94.5002154998947,
+   "slot_error": 12.857510429073582,
+   "collisions": 0.12,
+   "drones": 8
+  },
+  {
+   "update": 83,
+   "samples": 148736,
+   "return": -138.0416287820329,
+   "seconds": 95.54507279989775,
+   "slot_error": 25.833941015720335,
+   "collisions": 0.5,
+   "drones": 8
+  },
+  {
+   "update": 84,
+   "samples": 150528,
+   "return": -138.0416287820329,
+   "seconds": 96.5991782998899,
+   "slot_error": 18.986326749599833,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 85,
+   "samples": 152320,
+   "return": -135.80765804969957,
+   "seconds": 97.6969188998919,
+   "slot_error": 17.163358373421026,
+   "collisions": 0.74,
+   "drones": 8
+  },
+  {
+   "update": 86,
+   "samples": 154112,
+   "return": -157.9364139855623,
+   "seconds": 99.0034624999389,
+   "slot_error": 54.14430004907814,
+   "collisions": 0.25,
+   "drones": 8
+  },
+  {
+   "update": 87,
+   "samples": 155904,
+   "return": -157.9364139855623,
+   "seconds": 100.13539139996283,
+   "slot_error": 34.74432806856679,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 88,
+   "samples": 157696,
+   "return": -158.45589709641894,
+   "seconds": 101.18533549993299,
+   "slot_error": 39.52687496845698,
+   "collisions": 0.09,
+   "drones": 8
+  },
+  {
+   "update": 89,
+   "samples": 159488,
+   "return": -158.45589709641894,
+   "seconds": 102.46116789989173,
+   "slot_error": 52.014370001954276,
+   "collisions": 0.52,
+   "drones": 8
+  },
+  {
+   "update": 90,
+   "samples": 161280,
+   "return": -157.242167591657,
+   "seconds": 103.60109839995857,
+   "slot_error": 22.29551399170811,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 91,
+   "samples": 163072,
+   "return": -143.86705905587962,
+   "seconds": 104.83931239997037,
+   "slot_error": 15.937378763750276,
+   "collisions": 0.41,
+   "drones": 8
+  },
+  {
+   "update": 92,
+   "samples": 164864,
+   "return": -143.86705905587962,
+   "seconds": 105.9340834999457,
+   "slot_error": 30.31776029399643,
+   "collisions": 1.19,
+   "drones": 8
+  },
+  {
+   "update": 93,
+   "samples": 166656,
+   "return": -185.2994984319492,
+   "seconds": 106.988561199978,
+   "slot_error": 22.0624528817324,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 94,
+   "samples": 168448,
+   "return": -165.30144615178995,
+   "seconds": 108.07453329989221,
+   "slot_error": 33.90314746312097,
+   "collisions": 0.15,
+   "drones": 8
+  },
+  {
+   "update": 95,
+   "samples": 170240,
+   "return": -165.30144615178995,
+   "seconds": 109.24464239994995,
+   "slot_error": 26.992494648535462,
+   "collisions": 0.05,
+   "drones": 8
+  },
+  {
+   "update": 96,
+   "samples": 172032,
+   "return": -163.5131589737089,
+   "seconds": 110.41744869994,
+   "slot_error": 17.65125173148486,
+   "collisions": 0.2,
+   "drones": 8
+  },
+  {
+   "update": 97,
+   "samples": 173824,
+   "return": -148.44737078629967,
+   "seconds": 111.55967989994679,
+   "slot_error": 42.36659908608578,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 98,
+   "samples": 175616,
+   "return": -148.44737078629967,
+   "seconds": 112.68783239996992,
+   "slot_error": 26.517914311947358,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 99,
+   "samples": 177408,
+   "return": -152.48236212027592,
+   "seconds": 113.77202679996844,
+   "slot_error": 26.573011326485716,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 100,
+   "samples": 179200,
+   "return": -117.17013346187927,
+   "seconds": 114.92959609988611,
+   "slot_error": 49.573546311126684,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 101,
+   "samples": 180992,
+   "return": -117.17013346187927,
+   "seconds": 115.96788549993653,
+   "slot_error": 24.751082714001576,
+   "collisions": 0.02,
+   "drones": 8
+  },
+  {
+   "update": 102,
+   "samples": 182784,
+   "return": -129.92522232111034,
+   "seconds": 117.12759219994769,
+   "slot_error": 36.978928088443816,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 103,
+   "samples": 184576,
+   "return": -129.92522232111034,
+   "seconds": 118.23550809989683,
+   "slot_error": 12.38789633326804,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 104,
+   "samples": 186368,
+   "return": -117.31985092546893,
+   "seconds": 119.27056309999898,
+   "slot_error": 28.675198844775718,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 105,
+   "samples": 188160,
+   "return": -115.71582615881229,
+   "seconds": 120.24772349989507,
+   "slot_error": 52.69694232034545,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 106,
+   "samples": 189952,
+   "return": -115.71582615881229,
+   "seconds": 121.3025816999143,
+   "slot_error": 13.846487093399894,
+   "collisions": 0.27,
+   "drones": 8
+  },
+  {
+   "update": 107,
+   "samples": 191744,
+   "return": -110.86391522763401,
+   "seconds": 122.46768469992094,
+   "slot_error": 20.025900453830182,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 108,
+   "samples": 193536,
+   "return": -109.06309164402754,
+   "seconds": 123.61498169996776,
+   "slot_error": 30.682504669402505,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 109,
+   "samples": 195328,
+   "return": -109.06309164402754,
+   "seconds": 124.70137579995207,
+   "slot_error": 43.545278388575,
+   "collisions": 0.07,
+   "drones": 8
+  },
+  {
+   "update": 110,
+   "samples": 197120,
+   "return": -100.7728319608754,
+   "seconds": 125.73901519994251,
+   "slot_error": 36.348716525557464,
+   "collisions": 0.1,
+   "drones": 8
+  },
+  {
+   "update": 111,
+   "samples": 198912,
+   "return": -113.98689043107349,
+   "seconds": 126.7631784999976,
+   "slot_error": 55.935820413245644,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 112,
+   "samples": 200704,
+   "return": -113.98689043107349,
+   "seconds": 127.97582179994788,
+   "slot_error": 28.242459970757363,
+   "collisions": 0.32,
+   "drones": 8
+  },
+  {
+   "update": 113,
+   "samples": 202496,
+   "return": -133.40355801242808,
+   "seconds": 128.99617589998525,
+   "slot_error": 35.02770377316253,
+   "collisions": 0.09,
+   "drones": 8
+  },
+  {
+   "update": 114,
+   "samples": 204288,
+   "return": -133.40355801242808,
+   "seconds": 129.95378819992766,
+   "slot_error": 34.5206504359335,
+   "collisions": 0.13,
+   "drones": 8
+  },
+  {
+   "update": 115,
+   "samples": 206080,
+   "return": -139.46655023520478,
+   "seconds": 131.04893509997055,
+   "slot_error": 34.25533463848432,
+   "collisions": 0.17,
+   "drones": 8
+  },
+  {
+   "update": 116,
+   "samples": 207872,
+   "return": -147.7465057791051,
+   "seconds": 131.98551929998212,
+   "slot_error": 46.00268247124871,
+   "collisions": 0.27,
+   "drones": 8
+  },
+  {
+   "update": 117,
+   "samples": 209664,
+   "return": -147.7465057791051,
+   "seconds": 132.97470979997888,
+   "slot_error": 22.88263206707977,
+   "collisions": 0.02,
+   "drones": 8
+  },
+  {
+   "update": 118,
+   "samples": 211456,
+   "return": -148.60117753832998,
+   "seconds": 134.03857079998124,
+   "slot_error": 19.461987195990783,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 119,
+   "samples": 213248,
+   "return": -145.32965368797517,
+   "seconds": 135.14029139990453,
+   "slot_error": 42.083684697984225,
+   "collisions": 0.24,
+   "drones": 8
+  },
+  {
+   "update": 120,
+   "samples": 215040,
+   "return": -145.32965368797517,
+   "seconds": 136.25687079993077,
+   "slot_error": 31.215063229004446,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 121,
+   "samples": 216832,
+   "return": -133.56730550728153,
+   "seconds": 137.41600079997443,
+   "slot_error": 23.366446209593875,
+   "collisions": 0.35,
+   "drones": 8
+  },
+  {
+   "update": 122,
+   "samples": 218624,
+   "return": -140.28300280407242,
+   "seconds": 138.67005879990757,
+   "slot_error": 54.51022727593799,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 123,
+   "samples": 220416,
+   "return": -140.28300280407242,
+   "seconds": 139.91270999994595,
+   "slot_error": 25.783590537846845,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 124,
+   "samples": 222208,
+   "return": -129.28828987777723,
+   "seconds": 141.0449344998924,
+   "slot_error": 15.137706756317105,
+   "collisions": 0.05,
+   "drones": 8
+  },
+  {
+   "update": 125,
+   "samples": 224000,
+   "return": -116.32621046279249,
+   "seconds": 142.12818289990537,
+   "slot_error": 22.49039482574915,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 126,
+   "samples": 225792,
+   "return": -116.32621046279249,
+   "seconds": 143.31114149990026,
+   "slot_error": 24.527687280371104,
+   "collisions": 0.42,
+   "drones": 8
+  },
+  {
+   "update": 127,
+   "samples": 227584,
+   "return": -128.5011821482737,
+   "seconds": 144.46257749991491,
+   "slot_error": 36.52115064931497,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 128,
+   "samples": 229376,
+   "return": -128.5011821482737,
+   "seconds": 145.5114449999528,
+   "slot_error": 36.83908758208218,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 129,
+   "samples": 231168,
+   "return": -122.0942968600074,
+   "seconds": 146.54750299989246,
+   "slot_error": 24.36318688329935,
+   "collisions": 0.62,
+   "drones": 8
+  },
+  {
+   "update": 130,
+   "samples": 232960,
+   "return": -148.5409299337779,
+   "seconds": 147.70591159991454,
+   "slot_error": 38.5477431363199,
+   "collisions": 0.31,
+   "drones": 8
+  },
+  {
+   "update": 131,
+   "samples": 234752,
+   "return": -148.5409299337779,
+   "seconds": 148.6515729998937,
+   "slot_error": 13.582158051070653,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 132,
+   "samples": 236544,
+   "return": -145.95709327467154,
+   "seconds": 149.59088189993054,
+   "slot_error": 16.804249857593245,
+   "collisions": 0.16,
+   "drones": 8
+  },
+  {
+   "update": 133,
+   "samples": 238336,
+   "return": -150.1316216018633,
+   "seconds": 150.4503332999302,
+   "slot_error": 23.300676868279997,
+   "collisions": 0.06,
+   "drones": 8
+  },
+  {
+   "update": 134,
+   "samples": 240128,
+   "return": -150.1316216018633,
+   "seconds": 151.42899689998012,
+   "slot_error": 25.087218589915757,
+   "collisions": 0.12,
+   "drones": 8
+  },
+  {
+   "update": 135,
+   "samples": 241920,
+   "return": -135.74024074694776,
+   "seconds": 152.77600579999853,
+   "slot_error": 20.096445822990322,
+   "collisions": 0.08,
+   "drones": 8
+  },
+  {
+   "update": 136,
+   "samples": 243712,
+   "return": -134.85113594884422,
+   "seconds": 154.26454989996273,
+   "slot_error": 25.436290822412392,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 137,
+   "samples": 245504,
+   "return": -134.85113594884422,
+   "seconds": 155.7525023999624,
+   "slot_error": 11.802298872113091,
+   "collisions": 0.08,
+   "drones": 8
+  },
+  {
+   "update": 138,
+   "samples": 247296,
+   "return": -95.027336712752,
+   "seconds": 157.52920769993216,
+   "slot_error": 21.263509971010773,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 139,
+   "samples": 249088,
+   "return": -95.027336712752,
+   "seconds": 159.1591057999758,
+   "slot_error": 41.80377540561251,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 140,
+   "samples": 250880,
+   "return": -102.45142496362178,
+   "seconds": 160.5320633999072,
+   "slot_error": 15.217663610745475,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 141,
+   "samples": 252672,
+   "return": -104.3719955012427,
+   "seconds": 161.78700679994654,
+   "slot_error": 21.903751462983855,
+   "collisions": 0.18,
+   "drones": 8
+  },
+  {
+   "update": 142,
+   "samples": 254464,
+   "return": -104.3719955012427,
+   "seconds": 163.06883859995287,
+   "slot_error": 41.58020317409988,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 143,
+   "samples": 256256,
+   "return": -106.44762121462388,
+   "seconds": 164.51893969997764,
+   "slot_error": 20.278707293864787,
+   "collisions": 0.01,
+   "drones": 8
+  },
+  {
+   "update": 144,
+   "samples": 258048,
+   "return": -102.16941781842324,
+   "seconds": 166.23633059998974,
+   "slot_error": 26.521887915567223,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 145,
+   "samples": 259840,
+   "return": -102.16941781842324,
+   "seconds": 167.8826344999252,
+   "slot_error": 33.51892068511405,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 146,
+   "samples": 261632,
+   "return": -107.73099679695649,
+   "seconds": 169.35343419993296,
+   "slot_error": 21.817471856175388,
+   "collisions": 0.15,
+   "drones": 8
+  },
+  {
+   "update": 147,
+   "samples": 263424,
+   "return": -106.72746869979851,
+   "seconds": 170.81642049993388,
+   "slot_error": 31.21826975904386,
+   "collisions": 0.09,
+   "drones": 8
+  },
+  {
+   "update": 148,
+   "samples": 265216,
+   "return": -106.72746869979851,
+   "seconds": 172.19636019994505,
+   "slot_error": 31.170658604394493,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 149,
+   "samples": 267008,
+   "return": -106.64573139949562,
+   "seconds": 173.43632959993556,
+   "slot_error": 21.479013488297202,
+   "collisions": 0.38,
+   "drones": 8
+  },
+  {
+   "update": 150,
+   "samples": 268800,
+   "return": -113.49271878118743,
+   "seconds": 174.78828539990354,
+   "slot_error": 33.66399640969205,
+   "collisions": 0.01,
+   "drones": 8
+  },
+  {
+   "update": 151,
+   "samples": 270592,
+   "return": -113.49271878118743,
+   "seconds": 176.40096619992983,
+   "slot_error": 14.574223649202436,
+   "collisions": 0.58,
+   "drones": 8
+  },
+  {
+   "update": 152,
+   "samples": 272384,
+   "return": -130.39157116054557,
+   "seconds": 177.8356217999244,
+   "slot_error": 16.49273091211658,
+   "collisions": 0.1,
+   "drones": 8
+  },
+  {
+   "update": 153,
+   "samples": 274176,
+   "return": -130.39157116054557,
+   "seconds": 179.2420288999565,
+   "slot_error": 58.9759509703323,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 154,
+   "samples": 275968,
+   "return": -132.07808766039088,
+   "seconds": 180.6408624999458,
+   "slot_error": 23.534862676722533,
+   "collisions": 0.5,
+   "drones": 8
+  },
+  {
+   "update": 155,
+   "samples": 277760,
+   "return": -138.85143056213937,
+   "seconds": 182.10345830000006,
+   "slot_error": 22.50774029673109,
+   "collisions": 0.13,
+   "drones": 8
+  },
+  {
+   "update": 156,
+   "samples": 279552,
+   "return": -138.85143056213937,
+   "seconds": 183.5038650999777,
+   "slot_error": 15.608846004714906,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 157,
+   "samples": 281344,
+   "return": -136.9352042677309,
+   "seconds": 184.94764949998353,
+   "slot_error": 14.265551701359202,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 158,
+   "samples": 283136,
+   "return": -125.53859307536663,
+   "seconds": 186.2348962998949,
+   "slot_error": 33.44913885629121,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 159,
+   "samples": 284928,
+   "return": -125.53859307536663,
+   "seconds": 187.63251819997095,
+   "slot_error": 18.57995545302872,
+   "collisions": 0.51,
+   "drones": 8
+  },
+  {
+   "update": 160,
+   "samples": 286720,
+   "return": -117.53474566870509,
+   "seconds": 189.11086829996202,
+   "slot_error": 20.64759013813924,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 161,
+   "samples": 288512,
+   "return": -113.42438905126558,
+   "seconds": 190.47934909991454,
+   "slot_error": 33.47036510434843,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 162,
+   "samples": 290304,
+   "return": -113.42438905126558,
+   "seconds": 191.82355849992018,
+   "slot_error": 22.925318512877777,
+   "collisions": 0.05,
+   "drones": 8
+  },
+  {
+   "update": 163,
+   "samples": 292096,
+   "return": -100.453739173986,
+   "seconds": 193.06464939995203,
+   "slot_error": 11.487512244108546,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 164,
+   "samples": 293888,
+   "return": -100.453739173986,
+   "seconds": 194.34717699990142,
+   "slot_error": 8.94556316540051,
+   "collisions": 0.15,
+   "drones": 8
+  },
+  {
+   "update": 165,
+   "samples": 295680,
+   "return": -94.4925849929506,
+   "seconds": 195.62894979992416,
+   "slot_error": 9.298104581682031,
+   "collisions": 0.11,
+   "drones": 8
+  },
+  {
+   "update": 166,
+   "samples": 297472,
+   "return": -89.00272560424261,
+   "seconds": 196.86465419991873,
+   "slot_error": 15.949392920344708,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 167,
+   "samples": 299264,
+   "return": -89.00272560424261,
+   "seconds": 198.33184979995713,
+   "slot_error": 38.80296415251168,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 168,
+   "samples": 301056,
+   "return": -85.60731756384443,
+   "seconds": 199.86594749998767,
+   "slot_error": 25.309731139912437,
+   "collisions": 0.09,
+   "drones": 8
+  },
+  {
+   "update": 169,
+   "samples": 302848,
+   "return": -91.20137600523967,
+   "seconds": 201.51744239998516,
+   "slot_error": 44.49101538721328,
+   "collisions": 0.05,
+   "drones": 8
+  },
+  {
+   "update": 170,
+   "samples": 304640,
+   "return": -91.20137600523967,
+   "seconds": 202.95743169996422,
+   "slot_error": 15.58334282135256,
+   "collisions": 0.25,
+   "drones": 8
+  },
+  {
+   "update": 171,
+   "samples": 306432,
+   "return": -98.99738851080599,
+   "seconds": 204.43468069995288,
+   "slot_error": 14.083834982703575,
+   "collisions": 0.05,
+   "drones": 8
+  },
+  {
+   "update": 172,
+   "samples": 308224,
+   "return": -101.44108681958626,
+   "seconds": 205.7524728999706,
+   "slot_error": 11.815307947036494,
+   "collisions": 0.09,
+   "drones": 8
+  },
+  {
+   "update": 173,
+   "samples": 310016,
+   "return": -101.44108681958626,
+   "seconds": 207.15791989990976,
+   "slot_error": 7.660518462947104,
+   "collisions": 0.09,
+   "drones": 8
+  },
+  {
+   "update": 174,
+   "samples": 311808,
+   "return": -102.09870449731213,
+   "seconds": 209.06333999999333,
+   "slot_error": 18.05123645377701,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 175,
+   "samples": 313600,
+   "return": -95.90929080896201,
+   "seconds": 210.81530339992605,
+   "slot_error": 29.265480430805713,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 176,
+   "samples": 315392,
+   "return": -95.90929080896201,
+   "seconds": 212.38912749988958,
+   "slot_error": 12.34293777793836,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 177,
+   "samples": 317184,
+   "return": -83.95791875708976,
+   "seconds": 213.9879585999297,
+   "slot_error": 19.805108244419245,
+   "collisions": 0.34,
+   "drones": 8
+  },
+  {
+   "update": 178,
+   "samples": 318976,
+   "return": -83.95791875708976,
+   "seconds": 215.5213339999318,
+   "slot_error": 20.64987497822086,
+   "collisions": 0.05,
+   "drones": 8
+  },
+  {
+   "update": 179,
+   "samples": 320768,
+   "return": -84.25664367924173,
+   "seconds": 216.87319799989928,
+   "slot_error": 18.36824633894541,
+   "collisions": 0.665,
+   "drones": 8
+  },
+  {
+   "update": 180,
+   "samples": 322560,
+   "return": -108.00065750868455,
+   "seconds": 217.89517279993743,
+   "slot_error": 28.994954408449647,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 181,
+   "samples": 324352,
+   "return": -108.00065750868455,
+   "seconds": 218.9663559999317,
+   "slot_error": 13.58387452484497,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 182,
+   "samples": 326144,
+   "return": -107.62508227943783,
+   "seconds": 220.1835859999992,
+   "slot_error": 18.301155466537047,
+   "collisions": 0.19,
+   "drones": 8
+  },
+  {
+   "update": 183,
+   "samples": 327936,
+   "return": -109.30610010021401,
+   "seconds": 221.4419114999473,
+   "slot_error": 22.776095113722068,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 184,
+   "samples": 329728,
+   "return": -109.30610010021401,
+   "seconds": 222.53267299989238,
+   "slot_error": 20.76622575212392,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 185,
+   "samples": 331520,
+   "return": -117.16244134202631,
+   "seconds": 223.51570969994646,
+   "slot_error": 16.172844092044542,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 186,
+   "samples": 333312,
+   "return": -110.0551554644231,
+   "seconds": 224.6394192998996,
+   "slot_error": 24.540486931180926,
+   "collisions": 0.24,
+   "drones": 8
+  },
+  {
+   "update": 187,
+   "samples": 335104,
+   "return": -110.0551554644231,
+   "seconds": 225.82743409997784,
+   "slot_error": 28.152492592046492,
+   "collisions": 0.16,
+   "drones": 8
+  },
+  {
+   "update": 188,
+   "samples": 336896,
+   "return": -104.88516509642193,
+   "seconds": 226.82726219994947,
+   "slot_error": 18.089131832626812,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 189,
+   "samples": 338688,
+   "return": -104.88516509642193,
+   "seconds": 227.8446223998908,
+   "slot_error": 15.881323992336897,
+   "collisions": 0.07,
+   "drones": 8
+  },
+  {
+   "update": 190,
+   "samples": 340480,
+   "return": -105.27870562046012,
+   "seconds": 229.10261269996408,
+   "slot_error": 19.167372513011646,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 191,
+   "samples": 342272,
+   "return": -100.35883403507509,
+   "seconds": 230.27836809994187,
+   "slot_error": 15.938375986864557,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 192,
+   "samples": 344064,
+   "return": -100.35883403507509,
+   "seconds": 231.23156239988748,
+   "slot_error": 29.85063796578551,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 193,
+   "samples": 345856,
+   "return": -98.54566382779572,
+   "seconds": 232.175121499924,
+   "slot_error": 22.383409578052735,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 194,
+   "samples": 347648,
+   "return": -110.83107649537435,
+   "seconds": 233.11542209994514,
+   "slot_error": 43.68839428933052,
+   "collisions": 0.14,
+   "drones": 8
+  },
+  {
+   "update": 195,
+   "samples": 349440,
+   "return": -110.83107649537435,
+   "seconds": 234.02938909991644,
+   "slot_error": 46.30627600867368,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 196,
+   "samples": 351232,
+   "return": -104.60894985597947,
+   "seconds": 235.00621749996208,
+   "slot_error": 20.392712686766323,
+   "collisions": 0.1,
+   "drones": 8
+  },
+  {
+   "update": 197,
+   "samples": 353024,
+   "return": -115.91393240809703,
+   "seconds": 236.14006939996034,
+   "slot_error": 26.267979703368155,
+   "collisions": 0.28,
+   "drones": 8
+  },
+  {
+   "update": 198,
+   "samples": 354816,
+   "return": -115.91393240809703,
+   "seconds": 237.2493096999824,
+   "slot_error": 40.35061551758869,
+   "collisions": 0.08,
+   "drones": 8
+  },
+  {
+   "update": 199,
+   "samples": 356608,
+   "return": -125.59343229028809,
+   "seconds": 238.2715337999398,
+   "slot_error": 37.12977848484939,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 200,
+   "samples": 358400,
+   "return": -132.5114312325095,
+   "seconds": 239.36611579998862,
+   "slot_error": 62.429103732591905,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 201,
+   "samples": 360192,
+   "return": -132.5114312325095,
+   "seconds": 240.53247519989964,
+   "slot_error": 33.590711303515384,
+   "collisions": 0.5,
+   "drones": 8
+  },
+  {
+   "update": 202,
+   "samples": 361984,
+   "return": -136.56411802882857,
+   "seconds": 241.7382713999832,
+   "slot_error": 33.410194975731116,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 203,
+   "samples": 363776,
+   "return": -136.56411802882857,
+   "seconds": 242.79615169996396,
+   "slot_error": 33.96476430929302,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 204,
+   "samples": 365568,
+   "return": -129.96856500683913,
+   "seconds": 243.84802689997014,
+   "slot_error": 31.668278322362074,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 205,
+   "samples": 367360,
+   "return": -131.85123048027785,
+   "seconds": 245.00433149992023,
+   "slot_error": 51.3355954420996,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 206,
+   "samples": 369152,
+   "return": -131.85123048027785,
+   "seconds": 246.0564739999827,
+   "slot_error": 18.914950197553658,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 207,
+   "samples": 370944,
+   "return": -123.00060844247555,
+   "seconds": 246.99178289994597,
+   "slot_error": 25.254203730844562,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 208,
+   "samples": 372736,
+   "return": -121.92754564988138,
+   "seconds": 247.968945599976,
+   "slot_error": 30.4257503430154,
+   "collisions": 0.14,
+   "drones": 8
+  },
+  {
+   "update": 209,
+   "samples": 374528,
+   "return": -121.92754564988138,
+   "seconds": 249.02110259991605,
+   "slot_error": 61.326273722032184,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 210,
+   "samples": 376320,
+   "return": -114.00019117728016,
+   "seconds": 250.15073839994147,
+   "slot_error": 33.98995584584616,
+   "collisions": 0.09,
+   "drones": 8
+  },
+  {
+   "update": 211,
+   "samples": 378112,
+   "return": -147.67777465277925,
+   "seconds": 251.22199339990038,
+   "slot_error": 79.21961055860564,
+   "collisions": 1.215,
+   "drones": 8
+  },
+  {
+   "update": 212,
+   "samples": 379904,
+   "return": -147.67777465277925,
+   "seconds": 252.20380019990262,
+   "slot_error": 19.268866551419478,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 213,
+   "samples": 381696,
+   "return": -138.2612779012507,
+   "seconds": 253.23374589998275,
+   "slot_error": 23.107962127978443,
+   "collisions": 0.14,
+   "drones": 8
+  },
+  {
+   "update": 214,
+   "samples": 383488,
+   "return": -138.2612779012507,
+   "seconds": 254.42370439996012,
+   "slot_error": 80.27686638012017,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 215,
+   "samples": 385280,
+   "return": -151.41040961541086,
+   "seconds": 255.44458979996853,
+   "slot_error": 23.34907760528996,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 216,
+   "samples": 387072,
+   "return": -146.84306538470554,
+   "seconds": 256.41709899995476,
+   "slot_error": 21.820928903540743,
+   "collisions": 0.04,
+   "drones": 8
+  },
+  {
+   "update": 217,
+   "samples": 388864,
+   "return": -146.84306538470554,
+   "seconds": 257.33708069997374,
+   "slot_error": 30.635840080297044,
+   "collisions": 0.05,
+   "drones": 8
+  },
+  {
+   "update": 218,
+   "samples": 390656,
+   "return": -145.61106639509288,
+   "seconds": 258.26134399999864,
+   "slot_error": 26.39653106429437,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 219,
+   "samples": 392448,
+   "return": -116.02174429299308,
+   "seconds": 259.24080729996786,
+   "slot_error": 37.3370601292304,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 220,
+   "samples": 394240,
+   "return": -116.02174429299308,
+   "seconds": 260.376086599892,
+   "slot_error": 47.85054749171477,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 221,
+   "samples": 396032,
+   "return": -125.37205226266224,
+   "seconds": 261.36550979991443,
+   "slot_error": 22.539223618694503,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 222,
+   "samples": 397824,
+   "return": -118.0782314779157,
+   "seconds": 262.23617920000106,
+   "slot_error": 37.576336084338074,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 223,
+   "samples": 399616,
+   "return": -118.0782314779157,
+   "seconds": 263.2509282999672,
+   "slot_error": 36.15620574956398,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 224,
+   "samples": 401408,
+   "return": -128.47011341629747,
+   "seconds": 264.35923649999313,
+   "slot_error": 21.690415708574864,
+   "collisions": 0.07,
+   "drones": 8
+  },
+  {
+   "update": 225,
+   "samples": 403200,
+   "return": -129.40262058975807,
+   "seconds": 265.518825899926,
+   "slot_error": 52.93013799213992,
+   "collisions": 0.05,
+   "drones": 8
+  },
+  {
+   "update": 226,
+   "samples": 404992,
+   "return": -129.40262058975807,
+   "seconds": 266.69902819988783,
+   "slot_error": 37.41815374174361,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 227,
+   "samples": 406784,
+   "return": -132.34740669821622,
+   "seconds": 267.71059839997906,
+   "slot_error": 34.85146593943134,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 228,
+   "samples": 408576,
+   "return": -132.34740669821622,
+   "seconds": 268.68910679989494,
+   "slot_error": 83.93340624994632,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 229,
+   "samples": 410368,
+   "return": -137.62112350482408,
+   "seconds": 269.62531969998963,
+   "slot_error": 39.72907111719538,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 230,
+   "samples": 412160,
+   "return": -141.58988920500684,
+   "seconds": 270.5866489999462,
+   "slot_error": 34.54631917149274,
+   "collisions": 0.06,
+   "drones": 8
+  },
+  {
+   "update": 231,
+   "samples": 413952,
+   "return": -141.58988920500684,
+   "seconds": 271.61407539993525,
+   "slot_error": 44.50587325817293,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 232,
+   "samples": 415744,
+   "return": -136.80278412956395,
+   "seconds": 272.7058071999345,
+   "slot_error": 32.898867273475005,
+   "collisions": 0.26,
+   "drones": 8
+  },
+  {
+   "update": 233,
+   "samples": 417536,
+   "return": -147.0054018880382,
+   "seconds": 273.7312626999337,
+   "slot_error": 66.48562587315764,
+   "collisions": 0.05,
+   "drones": 8
+  },
+  {
+   "update": 234,
+   "samples": 419328,
+   "return": -147.0054018880382,
+   "seconds": 274.67394519993104,
+   "slot_error": 29.055116399764437,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 235,
+   "samples": 421120,
+   "return": -142.15272310412223,
+   "seconds": 275.7611135999905,
+   "slot_error": 19.121028982795245,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 236,
+   "samples": 422912,
+   "return": -146.97646226075062,
+   "seconds": 276.93255639995914,
+   "slot_error": 35.804645139925114,
+   "collisions": 0.57,
+   "drones": 8
+  },
+  {
+   "update": 237,
+   "samples": 424704,
+   "return": -146.97646226075062,
+   "seconds": 277.89332539995667,
+   "slot_error": 48.19519118013928,
+   "collisions": 0.19,
+   "drones": 8
+  },
+  {
+   "update": 238,
+   "samples": 426496,
+   "return": -157.19494822832607,
+   "seconds": 279.1544479998993,
+   "slot_error": 36.39530945641778,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 239,
+   "samples": 428288,
+   "return": -157.19494822832607,
+   "seconds": 280.31720869999845,
+   "slot_error": 68.7133683948613,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 240,
+   "samples": 430080,
+   "return": -157.5557662001583,
+   "seconds": 281.32738309993874,
+   "slot_error": 48.11570240656149,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 241,
+   "samples": 431872,
+   "return": -152.48585908440592,
+   "seconds": 282.2463079999434,
+   "slot_error": 44.16572057090906,
+   "collisions": 1.04,
+   "drones": 8
+  },
+  {
+   "update": 242,
+   "samples": 433664,
+   "return": -152.48585908440592,
+   "seconds": 283.1719654999906,
+   "slot_error": 35.81617366422009,
+   "collisions": 0.25,
+   "drones": 8
+  },
+  {
+   "update": 243,
+   "samples": 435456,
+   "return": -183.78907724518794,
+   "seconds": 284.0516295999987,
+   "slot_error": 38.94191569097855,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 244,
+   "samples": 437248,
+   "return": -192.73012603641087,
+   "seconds": 284.96606689994223,
+   "slot_error": 42.08991444365223,
+   "collisions": 0.825,
+   "drones": 8
+  },
+  {
+   "update": 245,
+   "samples": 439040,
+   "return": -192.73012603641087,
+   "seconds": 285.9587535999017,
+   "slot_error": 81.14270854412969,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 246,
+   "samples": 440832,
+   "return": -186.99577177448933,
+   "seconds": 287.0010513999732,
+   "slot_error": 40.50495559207721,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 247,
+   "samples": 442624,
+   "return": -195.30942637055995,
+   "seconds": 288.0523884999566,
+   "slot_error": 78.35777764120243,
+   "collisions": 0.16,
+   "drones": 8
+  },
+  {
+   "update": 248,
+   "samples": 444416,
+   "return": -195.30942637055995,
+   "seconds": 289.0132565998938,
+   "slot_error": 34.34374050876992,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 249,
+   "samples": 446208,
+   "return": -190.15164011842324,
+   "seconds": 289.95069279999007,
+   "slot_error": 24.455130223803124,
+   "collisions": 0.08,
+   "drones": 8
+  },
+  {
+   "update": 250,
+   "samples": 448000,
+   "return": -163.66663384955092,
+   "seconds": 290.9093549998943,
+   "slot_error": 46.04755859296688,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 251,
+   "samples": 449792,
+   "return": -163.66663384955092,
+   "seconds": 291.8604132999899,
+   "slot_error": 32.26506359053142,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 252,
+   "samples": 451584,
+   "return": -142.90449995656712,
+   "seconds": 293.0412349998951,
+   "slot_error": 35.01221255748193,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 253,
+   "samples": 453376,
+   "return": -142.90449995656712,
+   "seconds": 294.12533589999657,
+   "slot_error": 62.175761043119344,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 254,
+   "samples": 455168,
+   "return": -138.39830656488795,
+   "seconds": 295.27560499997344,
+   "slot_error": 34.86548788876168,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 255,
+   "samples": 456960,
+   "return": -127.91475569219433,
+   "seconds": 296.3940941999899,
+   "slot_error": 36.887737422056695,
+   "collisions": 0.05,
+   "drones": 8
+  },
+  {
+   "update": 256,
+   "samples": 458752,
+   "return": -127.91475569219433,
+   "seconds": 297.39583669998683,
+   "slot_error": 39.78535811787251,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 257,
+   "samples": 460544,
+   "return": -126.88081136238293,
+   "seconds": 298.30901529989205,
+   "slot_error": 27.594232857392562,
+   "collisions": 0.05,
+   "drones": 8
+  },
+  {
+   "update": 258,
+   "samples": 462336,
+   "return": -125.13563951945034,
+   "seconds": 299.32396660000086,
+   "slot_error": 32.486419462460624,
+   "collisions": 0.08,
+   "drones": 8
+  },
+  {
+   "update": 259,
+   "samples": 464128,
+   "return": -125.13563951945034,
+   "seconds": 300.35400839999784,
+   "slot_error": 42.19683983662695,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 260,
+   "samples": 465920,
+   "return": -123.08998543157641,
+   "seconds": 301.31790979998186,
+   "slot_error": 27.040482909491793,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 261,
+   "samples": 467712,
+   "return": -117.20282594571628,
+   "seconds": 302.29347519995645,
+   "slot_error": 36.10300957186506,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 262,
+   "samples": 469504,
+   "return": -117.20282594571628,
+   "seconds": 303.1736464999849,
+   "slot_error": 22.600582131506453,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 263,
+   "samples": 471296,
+   "return": -115.54548453679236,
+   "seconds": 304.1755511999363,
+   "slot_error": 33.98483689739718,
+   "collisions": 0.06,
+   "drones": 8
+  },
+  {
+   "update": 264,
+   "samples": 473088,
+   "return": -115.54548453679236,
+   "seconds": 305.3255912999157,
+   "slot_error": 61.882827736587835,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 265,
+   "samples": 474880,
+   "return": -118.21735881007378,
+   "seconds": 306.47999929997604,
+   "slot_error": 26.162367864626823,
+   "collisions": 0.13,
+   "drones": 8
+  },
+  {
+   "update": 266,
+   "samples": 476672,
+   "return": -122.15863126993148,
+   "seconds": 307.59664779994637,
+   "slot_error": 40.52750560424606,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 267,
+   "samples": 478464,
+   "return": -122.15863126993148,
+   "seconds": 308.70430669991765,
+   "slot_error": 32.246584558990946,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 268,
+   "samples": 480256,
+   "return": -122.63958638593115,
+   "seconds": 309.706617299933,
+   "slot_error": 30.65673703722212,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 269,
+   "samples": 482048,
+   "return": -124.42311043685893,
+   "seconds": 310.8256067999173,
+   "slot_error": 49.96808795742471,
+   "collisions": 0.05,
+   "drones": 8
+  },
+  {
+   "update": 270,
+   "samples": 483840,
+   "return": -124.42311043685893,
+   "seconds": 311.997370799887,
+   "slot_error": 35.84756179127655,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 271,
+   "samples": 485632,
+   "return": -125.0934645830375,
+   "seconds": 313.1506523999851,
+   "slot_error": 20.078793810109858,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 272,
+   "samples": 487424,
+   "return": -119.8910565278256,
+   "seconds": 314.27850839996245,
+   "slot_error": 50.74019860564601,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 273,
+   "samples": 489216,
+   "return": -119.8910565278256,
+   "seconds": 315.2935049999505,
+   "slot_error": 28.73474994451026,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 274,
+   "samples": 491008,
+   "return": -108.73869544532707,
+   "seconds": 316.46547669998836,
+   "slot_error": 25.082352623599736,
+   "collisions": 0.2,
+   "drones": 8
+  },
+  {
+   "update": 275,
+   "samples": 492800,
+   "return": -114.55785568218312,
+   "seconds": 317.6008419999853,
+   "slot_error": 35.845097078786985,
+   "collisions": 0.09,
+   "drones": 8
+  },
+  {
+   "update": 276,
+   "samples": 494592,
+   "return": -114.55785568218312,
+   "seconds": 318.5443908999441,
+   "slot_error": 28.959095245020464,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 277,
+   "samples": 496384,
+   "return": -114.61509090966263,
+   "seconds": 319.4857234999072,
+   "slot_error": 29.701739171201897,
+   "collisions": 0.09,
+   "drones": 8
+  },
+  {
+   "update": 278,
+   "samples": 498176,
+   "return": -114.61509090966263,
+   "seconds": 320.7994490999263,
+   "slot_error": 26.577543735058608,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 279,
+   "samples": 499968,
+   "return": -110.5021378750547,
+   "seconds": 321.87088719999883,
+   "slot_error": 23.29395764046965,
+   "collisions": 0.15,
+   "drones": 8
+  },
+  {
+   "update": 280,
+   "samples": 501760,
+   "return": -110.62979373053697,
+   "seconds": 322.94461559993215,
+   "slot_error": 21.932703656718086,
+   "collisions": 0.06,
+   "drones": 8
+  },
+  {
+   "update": 281,
+   "samples": 503552,
+   "return": -110.62979373053697,
+   "seconds": 324.11441979999654,
+   "slot_error": 37.514570845337204,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 282,
+   "samples": 505344,
+   "return": -115.80119801009923,
+   "seconds": 325.3779763999628,
+   "slot_error": 20.58770666226789,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 283,
+   "samples": 507136,
+   "return": -107.53381850835369,
+   "seconds": 326.4813137999736,
+   "slot_error": 31.9743547634414,
+   "collisions": 0.07,
+   "drones": 8
+  },
+  {
+   "update": 284,
+   "samples": 508928,
+   "return": -107.53381850835369,
+   "seconds": 327.453693099902,
+   "slot_error": 15.425587862967431,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 285,
+   "samples": 510720,
+   "return": -98.91766563108726,
+   "seconds": 328.3361762999557,
+   "slot_error": 19.771578458291923,
+   "collisions": 0.15,
+   "drones": 8
+  },
+  {
+   "update": 286,
+   "samples": 512512,
+   "return": -101.79794070471814,
+   "seconds": 329.37644819996785,
+   "slot_error": 25.5909302498909,
+   "collisions": 0.04,
+   "drones": 8
+  },
+  {
+   "update": 287,
+   "samples": 514304,
+   "return": -101.79794070471814,
+   "seconds": 330.466641399893,
+   "slot_error": 17.06250924058344,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 288,
+   "samples": 516096,
+   "return": -94.00997445288917,
+   "seconds": 331.5837936999742,
+   "slot_error": 14.378164627486672,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 289,
+   "samples": 517888,
+   "return": -94.00997445288917,
+   "seconds": 332.6506612999365,
+   "slot_error": 32.687246177713675,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 290,
+   "samples": 519680,
+   "return": -90.36573212255878,
+   "seconds": 333.69290099991485,
+   "slot_error": 24.71431777625903,
+   "collisions": 0.01,
+   "drones": 8
+  },
+  {
+   "update": 291,
+   "samples": 521472,
+   "return": -94.5827863045991,
+   "seconds": 334.8036022000015,
+   "slot_error": 23.51987893531809,
+   "collisions": 0.03,
+   "drones": 8
+  },
+  {
+   "update": 292,
+   "samples": 523264,
+   "return": -94.5827863045991,
+   "seconds": 335.7499695000006,
+   "slot_error": 28.249200441497607,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 293,
+   "samples": 525056,
+   "return": -99.55876202529554,
+   "seconds": 336.7495163999265,
+   "slot_error": 16.485667007349615,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 294,
+   "samples": 526848,
+   "return": -95.83678124692503,
+   "seconds": 337.82932329992764,
+   "slot_error": 26.522765183783058,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 295,
+   "samples": 528640,
+   "return": -95.83678124692503,
+   "seconds": 338.9164954998996,
+   "slot_error": 25.757053477310784,
+   "collisions": 0.03,
+   "drones": 8
+  },
+  {
+   "update": 296,
+   "samples": 530432,
+   "return": -103.23268074990172,
+   "seconds": 340.1739718999015,
+   "slot_error": 15.915301719071422,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 297,
+   "samples": 532224,
+   "return": -96.09290289672126,
+   "seconds": 341.42467969993595,
+   "slot_error": 16.039032281723767,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 298,
+   "samples": 534016,
+   "return": -96.09290289672126,
+   "seconds": 342.62090649991296,
+   "slot_error": 21.094556627035708,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 299,
+   "samples": 535808,
+   "return": -89.29227885697578,
+   "seconds": 343.69796639995184,
+   "slot_error": 26.67748718857701,
+   "collisions": 0.02,
+   "drones": 8
+  },
+  {
+   "update": 300,
+   "samples": 537600,
+   "return": -91.11382473710901,
+   "seconds": 344.8459604999516,
+   "slot_error": 36.04180597220402,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 301,
+   "samples": 539392,
+   "return": -91.11382473710901,
+   "seconds": 346.0614821999334,
+   "slot_error": 27.71717853156078,
+   "collisions": 0.02,
+   "drones": 8
+  },
+  {
+   "update": 302,
+   "samples": 541184,
+   "return": -88.73672153096643,
+   "seconds": 347.26093979994766,
+   "slot_error": 13.134340725502529,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 303,
+   "samples": 542976,
+   "return": -88.73672153096643,
+   "seconds": 348.54262629989535,
+   "slot_error": 26.98306846660471,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 304,
+   "samples": 544768,
+   "return": -85.62871363590197,
+   "seconds": 349.6906165999826,
+   "slot_error": 26.667102715920052,
+   "collisions": 0.05,
+   "drones": 8
+  },
+  {
+   "update": 305,
+   "samples": 546560,
+   "return": -93.70473290960715,
+   "seconds": 350.778004999971,
+   "slot_error": 18.397323421631935,
+   "collisions": 0.06,
+   "drones": 8
+  },
+  {
+   "update": 306,
+   "samples": 548352,
+   "return": -93.70473290960715,
+   "seconds": 351.9702169999946,
+   "slot_error": 19.10398492188298,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 307,
+   "samples": 550144,
+   "return": -91.49089454621821,
+   "seconds": 353.03385319991503,
+   "slot_error": 20.226650990358877,
+   "collisions": 0.34,
+   "drones": 8
+  },
+  {
+   "update": 308,
+   "samples": 551936,
+   "return": -94.13186198511123,
+   "seconds": 354.1463948999299,
+   "slot_error": 16.95584833151193,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 309,
+   "samples": 553728,
+   "return": -94.13186198511123,
+   "seconds": 355.3166530999588,
+   "slot_error": 18.405727793290097,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 310,
+   "samples": 555520,
+   "return": -93.5551749162827,
+   "seconds": 356.4129071999341,
+   "slot_error": 23.500328008432223,
+   "collisions": 0.04,
+   "drones": 8
+  },
+  {
+   "update": 311,
+   "samples": 557312,
+   "return": -94.0854898401511,
+   "seconds": 357.3301362999482,
+   "slot_error": 21.539808226089825,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 312,
+   "samples": 559104,
+   "return": -94.0854898401511,
+   "seconds": 358.35664139990695,
+   "slot_error": 19.172665977215505,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 313,
+   "samples": 560896,
+   "return": -88.96539425664146,
+   "seconds": 359.52281559992116,
+   "slot_error": 19.783039249520026,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 314,
+   "samples": 562688,
+   "return": -88.96539425664146,
+   "seconds": 360.67503569996916,
+   "slot_error": 16.234711509355872,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 315,
+   "samples": 564480,
+   "return": -88.11823981059047,
+   "seconds": 361.7510407998925,
+   "slot_error": 21.55337861915067,
+   "collisions": 0.12,
+   "drones": 8
+  },
+  {
+   "update": 316,
+   "samples": 566272,
+   "return": -82.96344903863185,
+   "seconds": 362.6228729999857,
+   "slot_error": 17.046783598790583,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 317,
+   "samples": 568064,
+   "return": -82.96344903863185,
+   "seconds": 363.662958699977,
+   "slot_error": 21.199716613047187,
+   "collisions": 0.06,
+   "drones": 8
+  },
+  {
+   "update": 318,
+   "samples": 569856,
+   "return": -85.84433664551614,
+   "seconds": 364.5624081999995,
+   "slot_error": 16.059773565029037,
+   "collisions": 0.17,
+   "drones": 8
+  },
+  {
+   "update": 319,
+   "samples": 571648,
+   "return": -85.48228192858073,
+   "seconds": 365.5741553999251,
+   "slot_error": 18.233429596058667,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 320,
+   "samples": 573440,
+   "return": -85.48228192858073,
+   "seconds": 366.56475409993436,
+   "slot_error": 19.865843179460335,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 321,
+   "samples": 575232,
+   "return": -85.55672109424381,
+   "seconds": 367.68929129990283,
+   "slot_error": 14.577539678254436,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 322,
+   "samples": 577024,
+   "return": -86.68475950156301,
+   "seconds": 368.73950439994223,
+   "slot_error": 19.38954441595562,
+   "collisions": 0.21,
+   "drones": 8
+  },
+  {
+   "update": 323,
+   "samples": 578816,
+   "return": -86.68475950156301,
+   "seconds": 369.72177749988623,
+   "slot_error": 13.116756484283677,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 324,
+   "samples": 580608,
+   "return": -83.84970707288886,
+   "seconds": 370.6383525999263,
+   "slot_error": 19.162586087862675,
+   "collisions": 0.19,
+   "drones": 8
+  },
+  {
+   "update": 325,
+   "samples": 582400,
+   "return": -84.23226106168337,
+   "seconds": 371.6738376999274,
+   "slot_error": 21.518684949824713,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 326,
+   "samples": 584192,
+   "return": -84.23226106168337,
+   "seconds": 372.7316947999643,
+   "slot_error": 20.09199625179674,
+   "collisions": 0.12,
+   "drones": 8
+  },
+  {
+   "update": 327,
+   "samples": 585984,
+   "return": -83.35132980827807,
+   "seconds": 373.72446329996455,
+   "slot_error": 13.337180947475247,
+   "collisions": 0.05,
+   "drones": 8
+  },
+  {
+   "update": 328,
+   "samples": 587776,
+   "return": -83.35132980827807,
+   "seconds": 374.6983848999953,
+   "slot_error": 19.900442921259472,
+   "collisions": 0.02,
+   "drones": 8
+  },
+  {
+   "update": 329,
+   "samples": 589568,
+   "return": -84.07268670024682,
+   "seconds": 375.79363299999386,
+   "slot_error": 14.705187946961722,
+   "collisions": 0.11,
+   "drones": 8
+  },
+  {
+   "update": 330,
+   "samples": 591360,
+   "return": -84.45519764763205,
+   "seconds": 376.7850624999264,
+   "slot_error": 13.22972900046002,
+   "collisions": 0.06,
+   "drones": 8
+  },
+  {
+   "update": 331,
+   "samples": 593152,
+   "return": -84.45519764763205,
+   "seconds": 377.71101939992514,
+   "slot_error": 17.66734947886207,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 332,
+   "samples": 594944,
+   "return": -85.81810505052132,
+   "seconds": 378.6447524999967,
+   "slot_error": 17.765473650405436,
+   "collisions": 0.03,
+   "drones": 8
+  },
+  {
+   "update": 333,
+   "samples": 596736,
+   "return": -82.5956232592778,
+   "seconds": 379.60781239997596,
+   "slot_error": 16.979493582402842,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 334,
+   "samples": 598528,
+   "return": -82.5956232592778,
+   "seconds": 380.6230121999979,
+   "slot_error": 16.77674562151864,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 335,
+   "samples": 600320,
+   "return": -78.68870410801803,
+   "seconds": 381.67052529996727,
+   "slot_error": 14.994358810029706,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 336,
+   "samples": 602112,
+   "return": -77.07524464167848,
+   "seconds": 382.5901499999454,
+   "slot_error": 19.504182071167758,
+   "collisions": 0.05,
+   "drones": 8
+  },
+  {
+   "update": 337,
+   "samples": 603904,
+   "return": -77.07524464167848,
+   "seconds": 383.54861429997254,
+   "slot_error": 17.769312310154586,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 338,
+   "samples": 605696,
+   "return": -74.59210247611337,
+   "seconds": 384.47218309994787,
+   "slot_error": 16.5163618123943,
+   "collisions": 0.09,
+   "drones": 8
+  },
+  {
+   "update": 339,
+   "samples": 607488,
+   "return": -74.59210247611337,
+   "seconds": 385.44658239989076,
+   "slot_error": 22.297360057607456,
+   "collisions": 0.07,
+   "drones": 8
+  },
+  {
+   "update": 340,
+   "samples": 609280,
+   "return": -77.16300929751306,
+   "seconds": 386.46049589989707,
+   "slot_error": 15.909429320343165,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 341,
+   "samples": 611072,
+   "return": -73.89402774660638,
+   "seconds": 387.67820429999847,
+   "slot_error": 12.848926516655204,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 342,
+   "samples": 612864,
+   "return": -73.89402774660638,
+   "seconds": 388.8318976999726,
+   "slot_error": 15.624900308736052,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 343,
+   "samples": 614656,
+   "return": -73.51579176660577,
+   "seconds": 389.98087039997336,
+   "slot_error": 14.419586732652988,
+   "collisions": 0.06,
+   "drones": 8
+  },
+  {
+   "update": 344,
+   "samples": 616448,
+   "return": -71.6051153145772,
+   "seconds": 391.04175179998856,
+   "slot_error": 12.231988887619268,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 345,
+   "samples": 618240,
+   "return": -71.6051153145772,
+   "seconds": 392.054541099933,
+   "slot_error": 16.740549356628765,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 346,
+   "samples": 620032,
+   "return": -70.5225544527911,
+   "seconds": 393.08268569991924,
+   "slot_error": 16.775614989948302,
+   "collisions": 0.1,
+   "drones": 8
+  },
+  {
+   "update": 347,
+   "samples": 621824,
+   "return": -70.45020888624194,
+   "seconds": 394.0587038999656,
+   "slot_error": 23.239968190473665,
+   "collisions": 0.03,
+   "drones": 8
+  },
+  {
+   "update": 348,
+   "samples": 623616,
+   "return": -70.45020888624194,
+   "seconds": 395.0937207998941,
+   "slot_error": 15.66928259999722,
+   "collisions": 0.14,
+   "drones": 8
+  },
+  {
+   "update": 349,
+   "samples": 625408,
+   "return": -76.0983966562342,
+   "seconds": 396.12269009999,
+   "slot_error": 19.438692127950247,
+   "collisions": 0.04,
+   "drones": 8
+  },
+  {
+   "update": 350,
+   "samples": 627200,
+   "return": -82.79385820231838,
+   "seconds": 397.11566029989626,
+   "slot_error": 25.369768868154452,
+   "collisions": 0.02,
+   "drones": 8
+  },
+  {
+   "update": 351,
+   "samples": 628992,
+   "return": -82.79385820231838,
+   "seconds": 398.10332499991637,
+   "slot_error": 22.17625157127324,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 352,
+   "samples": 630784,
+   "return": -90.25287724653795,
+   "seconds": 399.24961819988675,
+   "slot_error": 27.54839779959842,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 353,
+   "samples": 632576,
+   "return": -90.25287724653795,
+   "seconds": 400.4814472999424,
+   "slot_error": 15.206170961477637,
+   "collisions": 0.07,
+   "drones": 8
+  },
+  {
+   "update": 354,
+   "samples": 634368,
+   "return": -94.64631707140154,
+   "seconds": 402.39032139990013,
+   "slot_error": 13.45102426309975,
+   "collisions": 0.04,
+   "drones": 8
+  },
+  {
+   "update": 355,
+   "samples": 636160,
+   "return": -89.13998528653003,
+   "seconds": 405.13503739994485,
+   "slot_error": 15.358086492325032,
+   "collisions": 0.14,
+   "drones": 8
+  },
+  {
+   "update": 356,
+   "samples": 637952,
+   "return": -89.13998528653003,
+   "seconds": 406.62101619993336,
+   "slot_error": 27.51206745945723,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 357,
+   "samples": 639744,
+   "return": -92.65027289765874,
+   "seconds": 408.0190342999995,
+   "slot_error": 17.61506340407558,
+   "collisions": 0.04,
+   "drones": 8
+  },
+  {
+   "update": 358,
+   "samples": 641536,
+   "return": -87.6994327813162,
+   "seconds": 409.3848503999179,
+   "slot_error": 16.81008078406911,
+   "collisions": 0.06,
+   "drones": 8
+  },
+  {
+   "update": 359,
+   "samples": 643328,
+   "return": -87.6994327813162,
+   "seconds": 410.75579169997945,
+   "slot_error": 21.278144063746623,
+   "collisions": 0.04,
+   "drones": 8
+  },
+  {
+   "update": 360,
+   "samples": 645120,
+   "return": -83.98918507234175,
+   "seconds": 412.0328581999056,
+   "slot_error": 16.165453519381167,
+   "collisions": 0.15,
+   "drones": 8
+  },
+  {
+   "update": 361,
+   "samples": 646912,
+   "return": -88.41256746332976,
+   "seconds": 413.3478698999388,
+   "slot_error": 31.64994169543982,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 362,
+   "samples": 648704,
+   "return": -88.41256746332976,
+   "seconds": 414.5873640999198,
+   "slot_error": 19.327347632762656,
+   "collisions": 0.11,
+   "drones": 8
+  },
+  {
+   "update": 363,
+   "samples": 650496,
+   "return": -93.03552174751293,
+   "seconds": 415.87039249995723,
+   "slot_error": 15.358011947047647,
+   "collisions": 0.03,
+   "drones": 8
+  },
+  {
+   "update": 364,
+   "samples": 652288,
+   "return": -93.03552174751293,
+   "seconds": 416.71574339992367,
+   "slot_error": 14.520552315152404,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 365,
+   "samples": 654080,
+   "return": -83.48759600320018,
+   "seconds": 417.61591179994866,
+   "slot_error": 15.51795536843536,
+   "collisions": 0.1,
+   "drones": 8
+  },
+  {
+   "update": 366,
+   "samples": 655872,
+   "return": -86.14542513978395,
+   "seconds": 418.58665689988993,
+   "slot_error": 15.130117733412344,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 367,
+   "samples": 657664,
+   "return": -86.14542513978395,
+   "seconds": 419.6340481999796,
+   "slot_error": 16.1580176599264,
+   "collisions": 0.09,
+   "drones": 8
+  },
+  {
+   "update": 368,
+   "samples": 659456,
+   "return": -85.05641445648912,
+   "seconds": 420.6754358999897,
+   "slot_error": 15.267587026307709,
+   "collisions": 0.06,
+   "drones": 8
+  },
+  {
+   "update": 369,
+   "samples": 661248,
+   "return": -79.65217793198539,
+   "seconds": 421.7329884999199,
+   "slot_error": 17.318232253757973,
+   "collisions": 0.06,
+   "drones": 8
+  },
+  {
+   "update": 370,
+   "samples": 663040,
+   "return": -79.65217793198539,
+   "seconds": 422.71183980000205,
+   "slot_error": 22.30074496504396,
+   "collisions": 0.04,
+   "drones": 8
+  },
+  {
+   "update": 371,
+   "samples": 664832,
+   "return": -78.14530742123776,
+   "seconds": 423.7695684999926,
+   "slot_error": 13.883862013301137,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 372,
+   "samples": 666624,
+   "return": -80.01632978051933,
+   "seconds": 424.89279059995897,
+   "slot_error": 20.391593662083707,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 373,
+   "samples": 668416,
+   "return": -80.01632978051933,
+   "seconds": 425.8399215999525,
+   "slot_error": 20.691931007184973,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 374,
+   "samples": 670208,
+   "return": -80.0165688824973,
+   "seconds": 427.0471049998887,
+   "slot_error": 14.573760710848301,
+   "collisions": 0.09,
+   "drones": 8
+  },
+  {
+   "update": 375,
+   "samples": 672000,
+   "return": -85.7179712145368,
+   "seconds": 428.0536166999955,
+   "slot_error": 32.94412706338998,
+   "collisions": 0.04,
+   "drones": 8
+  },
+  {
+   "update": 376,
+   "samples": 673792,
+   "return": -85.7179712145368,
+   "seconds": 429.07659289997537,
+   "slot_error": 20.446130414118684,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 377,
+   "samples": 675584,
+   "return": -85.87591614012982,
+   "seconds": 430.1826506999787,
+   "slot_error": 18.65757733013207,
+   "collisions": 0.06,
+   "drones": 8
+  },
+  {
+   "update": 378,
+   "samples": 677376,
+   "return": -85.87591614012982,
+   "seconds": 431.26504399999976,
+   "slot_error": 30.959689285690573,
+   "collisions": 0.03,
+   "drones": 8
+  },
+  {
+   "update": 379,
+   "samples": 679168,
+   "return": -90.31033114177856,
+   "seconds": 432.40187059994787,
+   "slot_error": 13.6122651782196,
+   "collisions": 0.12,
+   "drones": 8
+  },
+  {
+   "update": 380,
+   "samples": 680960,
+   "return": -92.45609040702122,
+   "seconds": 433.8557128999382,
+   "slot_error": 18.310839853799894,
+   "collisions": 0.21,
+   "drones": 8
+  },
+  {
+   "update": 381,
+   "samples": 682752,
+   "return": -92.45609040702122,
+   "seconds": 435.31586049997713,
+   "slot_error": 14.677264038693952,
+   "collisions": 0.12,
+   "drones": 8
+  },
+  {
+   "update": 382,
+   "samples": 684544,
+   "return": -92.7985963855231,
+   "seconds": 436.77032619994134,
+   "slot_error": 16.16267718280302,
+   "collisions": 0.13,
+   "drones": 8
+  },
+  {
+   "update": 383,
+   "samples": 686336,
+   "return": -88.04412022778808,
+   "seconds": 438.1995485998923,
+   "slot_error": 16.05771710817364,
+   "collisions": 0.02,
+   "drones": 8
+  },
+  {
+   "update": 384,
+   "samples": 688128,
+   "return": -88.04412022778808,
+   "seconds": 439.6700203999644,
+   "slot_error": 22.921656812329758,
+   "collisions": 0.03,
+   "drones": 8
+  },
+  {
+   "update": 385,
+   "samples": 689920,
+   "return": -90.94285514850655,
+   "seconds": 441.12744889990427,
+   "slot_error": 16.55014291880128,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 386,
+   "samples": 691712,
+   "return": -83.42791788411955,
+   "seconds": 442.47838589991443,
+   "slot_error": 19.424777809584256,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 387,
+   "samples": 693504,
+   "return": -83.42791788411955,
+   "seconds": 443.8372005999554,
+   "slot_error": 23.65795134369219,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 388,
+   "samples": 695296,
+   "return": -85.93841857755221,
+   "seconds": 445.16152349999174,
+   "slot_error": 20.213486554879367,
+   "collisions": 0.1,
+   "drones": 8
+  },
+  {
+   "update": 389,
+   "samples": 697088,
+   "return": -85.93841857755221,
+   "seconds": 446.4387069999939,
+   "slot_error": 26.6222336469605,
+   "collisions": 0.11,
+   "drones": 8
+  },
+  {
+   "update": 390,
+   "samples": 698880,
+   "return": -88.51699572759826,
+   "seconds": 447.7308849999681,
+   "slot_error": 13.431345982118444,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 391,
+   "samples": 700672,
+   "return": -83.64689863769641,
+   "seconds": 449.00811559997965,
+   "slot_error": 17.36030935535617,
+   "collisions": 0.09,
+   "drones": 8
+  },
+  {
+   "update": 392,
+   "samples": 702464,
+   "return": -83.64689863769641,
+   "seconds": 450.2560081999982,
+   "slot_error": 17.21718558542869,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 393,
+   "samples": 704256,
+   "return": -81.0727529922571,
+   "seconds": 451.6664520999184,
+   "slot_error": 17.665983659317565,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 394,
+   "samples": 706048,
+   "return": -87.76598474413663,
+   "seconds": 453.027098499937,
+   "slot_error": 32.17266114260109,
+   "collisions": 0.01,
+   "drones": 8
+  },
+  {
+   "update": 395,
+   "samples": 707840,
+   "return": -87.76598474413663,
+   "seconds": 454.4335424999008,
+   "slot_error": 17.140158640260644,
+   "collisions": 0.05,
+   "drones": 8
+  },
+  {
+   "update": 396,
+   "samples": 709632,
+   "return": -86.37720793656585,
+   "seconds": 455.9013845999725,
+   "slot_error": 22.312521036706084,
+   "collisions": 0.06,
+   "drones": 8
+  },
+  {
+   "update": 397,
+   "samples": 711424,
+   "return": -85.86736382670247,
+   "seconds": 457.1988760998938,
+   "slot_error": 23.6000866341256,
+   "collisions": 0.08,
+   "drones": 8
+  },
+  {
+   "update": 398,
+   "samples": 713216,
+   "return": -85.86736382670247,
+   "seconds": 458.4999287999235,
+   "slot_error": 17.88562290816481,
+   "collisions": 0.04,
+   "drones": 8
+  },
+  {
+   "update": 399,
+   "samples": 715008,
+   "return": -91.13444851299224,
+   "seconds": 459.85940049996134,
+   "slot_error": 16.215964839553514,
+   "collisions": 0.05,
+   "drones": 8
+  },
+  {
+   "update": 400,
+   "samples": 716800,
+   "return": -91.69689189291057,
+   "seconds": 461.27410569996573,
+   "slot_error": 26.784468868399564,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 401,
+   "samples": 718592,
+   "return": -91.69689189291057,
+   "seconds": 462.6327032999834,
+   "slot_error": 15.1927583381848,
+   "collisions": 0.19,
+   "drones": 8
+  },
+  {
+   "update": 402,
+   "samples": 720384,
+   "return": -90.76397915118936,
+   "seconds": 463.9472790999571,
+   "slot_error": 15.53888128039918,
+   "collisions": 0.09,
+   "drones": 8
+  },
+  {
+   "update": 403,
+   "samples": 722176,
+   "return": -90.76397915118936,
+   "seconds": 465.3259751999285,
+   "slot_error": 21.488493658399513,
+   "collisions": 0.07,
+   "drones": 8
+  },
+  {
+   "update": 404,
+   "samples": 723968,
+   "return": -91.53725085034223,
+   "seconds": 466.638118899893,
+   "slot_error": 14.867690059757024,
+   "collisions": 0.02,
+   "drones": 8
+  },
+  {
+   "update": 405,
+   "samples": 725760,
+   "return": -88.31777250764847,
+   "seconds": 467.9153025998967,
+   "slot_error": 23.576132190886828,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 406,
+   "samples": 727552,
+   "return": -88.31777250764847,
+   "seconds": 468.7035060999915,
+   "slot_error": 37.82104966003501,
+   "collisions": 0.02,
+   "drones": 8
+  },
+  {
+   "update": 407,
+   "samples": 729344,
+   "return": -91.5423024051461,
+   "seconds": 469.47588739998173,
+   "slot_error": 16.759003171119513,
+   "collisions": 0.07,
+   "drones": 8
+  },
+  {
+   "update": 408,
+   "samples": 731136,
+   "return": -97.55252270903522,
+   "seconds": 470.2167771999957,
+   "slot_error": 31.78746752359285,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 409,
+   "samples": 732928,
+   "return": -97.55252270903522,
+   "seconds": 471.11065869999584,
+   "slot_error": 32.54958061035732,
+   "collisions": 0.08,
+   "drones": 8
+  },
+  {
+   "update": 410,
+   "samples": 734720,
+   "return": -103.0169865057579,
+   "seconds": 472.0734766999958,
+   "slot_error": 18.972186469437062,
+   "collisions": 0.1,
+   "drones": 8
+  },
+  {
+   "update": 411,
+   "samples": 736512,
+   "return": -100.16817490272847,
+   "seconds": 473.12750339997,
+   "slot_error": 14.326646647412703,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 412,
+   "samples": 738304,
+   "return": -100.16817490272847,
+   "seconds": 474.4797607999062,
+   "slot_error": 18.543737698508334,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 413,
+   "samples": 740096,
+   "return": -100.0560615167608,
+   "seconds": 475.8484688999597,
+   "slot_error": 14.552948396588398,
+   "collisions": 0.03,
+   "drones": 8
+  },
+  {
+   "update": 414,
+   "samples": 741888,
+   "return": -100.0560615167608,
+   "seconds": 477.21066909993533,
+   "slot_error": 20.141769202225284,
+   "collisions": 0.05,
+   "drones": 8
+  },
+  {
+   "update": 415,
+   "samples": 743680,
+   "return": -95.18132761427967,
+   "seconds": 478.5882499999134,
+   "slot_error": 23.702235697536945,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 416,
+   "samples": 745472,
+   "return": -92.33631565546742,
+   "seconds": 479.8797604999272,
+   "slot_error": 16.397211415032427,
+   "collisions": 0.14,
+   "drones": 8
+  },
+  {
+   "update": 417,
+   "samples": 747264,
+   "return": -92.33631565546742,
+   "seconds": 481.1735841999762,
+   "slot_error": 18.88193623930379,
+   "collisions": 0.07,
+   "drones": 8
+  },
+  {
+   "update": 418,
+   "samples": 749056,
+   "return": -87.63540593271387,
+   "seconds": 482.4549176999135,
+   "slot_error": 15.423774149056317,
+   "collisions": 0.67,
+   "drones": 8
+  },
+  {
+   "update": 419,
+   "samples": 750848,
+   "return": -94.2037744655659,
+   "seconds": 483.73859909991734,
+   "slot_error": 20.722127604751048,
+   "collisions": 0.1,
+   "drones": 8
+  },
+  {
+   "update": 420,
+   "samples": 752640,
+   "return": -94.2037744655659,
+   "seconds": 484.99310379999224,
+   "slot_error": 20.54298073480605,
+   "collisions": 0.69,
+   "drones": 8
+  },
+  {
+   "update": 421,
+   "samples": 754432,
+   "return": -109.25268527543633,
+   "seconds": 486.3875862999121,
+   "slot_error": 22.110642717245035,
+   "collisions": 0.08,
+   "drones": 8
+  },
+  {
+   "update": 422,
+   "samples": 756224,
+   "return": -112.67752540380198,
+   "seconds": 487.8076796999667,
+   "slot_error": 18.78168424794158,
+   "collisions": 0.04,
+   "drones": 8
+  },
+  {
+   "update": 423,
+   "samples": 758016,
+   "return": -112.67752540380198,
+   "seconds": 489.1702785999514,
+   "slot_error": 24.417682127867348,
+   "collisions": 0.04,
+   "drones": 8
+  },
+  {
+   "update": 424,
+   "samples": 759808,
+   "return": -112.09826765349949,
+   "seconds": 490.5616831999505,
+   "slot_error": 18.763555597727713,
+   "collisions": 0.1,
+   "drones": 8
+  },
+  {
+   "update": 425,
+   "samples": 761600,
+   "return": -109.32664154157706,
+   "seconds": 491.8736177999526,
+   "slot_error": 18.01004890638355,
+   "collisions": 0.01,
+   "drones": 8
+  },
+  {
+   "update": 426,
+   "samples": 763392,
+   "return": -109.32664154157706,
+   "seconds": 493.2465017999057,
+   "slot_error": 20.02280669776224,
+   "collisions": 0.12,
+   "drones": 8
+  },
+  {
+   "update": 427,
+   "samples": 765184,
+   "return": -106.17187730613827,
+   "seconds": 494.54447949992027,
+   "slot_error": 13.061728018371824,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 428,
+   "samples": 766976,
+   "return": -106.17187730613827,
+   "seconds": 495.89681819989346,
+   "slot_error": 17.756392549210744,
+   "collisions": 0.08,
+   "drones": 8
+  },
+  {
+   "update": 429,
+   "samples": 768768,
+   "return": -92.0390116746411,
+   "seconds": 497.19892729993444,
+   "slot_error": 12.880506091320658,
+   "collisions": 0.13,
+   "drones": 8
+  },
+  {
+   "update": 430,
+   "samples": 770560,
+   "return": -90.38451116738665,
+   "seconds": 498.5261762998998,
+   "slot_error": 16.533113294699177,
+   "collisions": 0.09,
+   "drones": 8
+  },
+  {
+   "update": 431,
+   "samples": 772352,
+   "return": -90.38451116738665,
+   "seconds": 499.81020680000074,
+   "slot_error": 21.552047671343953,
+   "collisions": 0.01,
+   "drones": 8
+  },
+  {
+   "update": 432,
+   "samples": 774144,
+   "return": -88.61905882432143,
+   "seconds": 501.15963449992705,
+   "slot_error": 10.58122025965135,
+   "collisions": 0.21,
+   "drones": 8
+  },
+  {
+   "update": 433,
+   "samples": 775936,
+   "return": -91.18102810246637,
+   "seconds": 502.6377597999526,
+   "slot_error": 19.71609771198258,
+   "collisions": 0.08,
+   "drones": 8
+  },
+  {
+   "update": 434,
+   "samples": 777728,
+   "return": -91.18102810246637,
+   "seconds": 504.26064179989044,
+   "slot_error": 18.503528728026552,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 435,
+   "samples": 779520,
+   "return": -90.16739358060764,
+   "seconds": 505.6722728998866,
+   "slot_error": 20.596277232458288,
+   "collisions": 0.02,
+   "drones": 8
+  },
+  {
+   "update": 436,
+   "samples": 781312,
+   "return": -87.91960291930643,
+   "seconds": 506.50706669990905,
+   "slot_error": 14.549758424414035,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 437,
+   "samples": 783104,
+   "return": -87.91960291930643,
+   "seconds": 507.23895069991704,
+   "slot_error": 14.568529289279086,
+   "collisions": 0.08,
+   "drones": 8
+  },
+  {
+   "update": 438,
+   "samples": 784896,
+   "return": -84.91679128656781,
+   "seconds": 507.9922184998868,
+   "slot_error": 17.543413560594622,
+   "collisions": 0.07,
+   "drones": 8
+  },
+  {
+   "update": 439,
+   "samples": 786688,
+   "return": -84.91679128656781,
+   "seconds": 508.74050590000115,
+   "slot_error": 15.982260981785362,
+   "collisions": 0.03,
+   "drones": 8
+  },
+  {
+   "update": 440,
+   "samples": 788480,
+   "return": -83.56208126773886,
+   "seconds": 509.5131158999866,
+   "slot_error": 13.341264960443393,
+   "collisions": 0.1,
+   "drones": 8
+  },
+  {
+   "update": 441,
+   "samples": 790272,
+   "return": -81.09672722688754,
+   "seconds": 510.45579909998924,
+   "slot_error": 12.786017938705877,
+   "collisions": 0.02,
+   "drones": 8
+  },
+  {
+   "update": 442,
+   "samples": 792064,
+   "return": -81.09672722688754,
+   "seconds": 511.4577217999613,
+   "slot_error": 18.536486384364686,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 443,
+   "samples": 793856,
+   "return": -77.50565959032186,
+   "seconds": 512.6213348999154,
+   "slot_error": 13.724475556926278,
+   "collisions": 0.345,
+   "drones": 8
+  },
+  {
+   "update": 444,
+   "samples": 795648,
+   "return": -80.98461778116327,
+   "seconds": 513.8166364999488,
+   "slot_error": 14.634255948305118,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 445,
+   "samples": 797440,
+   "return": -80.98461778116327,
+   "seconds": 514.7798453998985,
+   "slot_error": 16.106982566792254,
+   "collisions": 0.15,
+   "drones": 8
+  },
+  {
+   "update": 446,
+   "samples": 799232,
+   "return": -83.45944440404979,
+   "seconds": 515.8706476999214,
+   "slot_error": 14.390429654185318,
+   "collisions": 0.15,
+   "drones": 8
+  },
+  {
+   "update": 447,
+   "samples": 801024,
+   "return": -87.5920620946567,
+   "seconds": 517.0435825999593,
+   "slot_error": 19.190644444668923,
+   "collisions": 0.15,
+   "drones": 8
+  },
+  {
+   "update": 448,
+   "samples": 802816,
+   "return": -87.5920620946567,
+   "seconds": 518.022885399987,
+   "slot_error": 20.318722519889015,
+   "collisions": 0.05,
+   "drones": 8
+  },
+  {
+   "update": 449,
+   "samples": 804608,
+   "return": -84.5189098670584,
+   "seconds": 519.1729759000009,
+   "slot_error": 13.626536566731406,
+   "collisions": 0.01,
+   "drones": 8
+  },
+  {
+   "update": 450,
+   "samples": 806400,
+   "return": -86.50678322483394,
+   "seconds": 520.2979108999716,
+   "slot_error": 21.398639738625462,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 451,
+   "samples": 808192,
+   "return": -86.50678322483394,
+   "seconds": 521.4529708999908,
+   "slot_error": 19.50647048943071,
+   "collisions": 0.1,
+   "drones": 8
+  },
+  {
+   "update": 452,
+   "samples": 809984,
+   "return": -90.46844506430061,
+   "seconds": 522.5839760999661,
+   "slot_error": 24.812226174978345,
+   "collisions": 0.14,
+   "drones": 8
+  },
+  {
+   "update": 453,
+   "samples": 811776,
+   "return": -90.46844506430061,
+   "seconds": 523.6787871998968,
+   "slot_error": 13.871139444814217,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 454,
+   "samples": 813568,
+   "return": -88.58749072294658,
+   "seconds": 524.5875997999683,
+   "slot_error": 15.98997937537967,
+   "collisions": 0.05,
+   "drones": 8
+  },
+  {
+   "update": 455,
+   "samples": 815360,
+   "return": -86.26154360408151,
+   "seconds": 525.5919095999561,
+   "slot_error": 22.077408731457293,
+   "collisions": 0.02,
+   "drones": 8
+  },
+  {
+   "update": 456,
+   "samples": 817152,
+   "return": -86.26154360408151,
+   "seconds": 526.7614462999627,
+   "slot_error": 21.16801135908364,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 457,
+   "samples": 818944,
+   "return": -88.85120727343649,
+   "seconds": 527.9015672999667,
+   "slot_error": 16.427646473751114,
+   "collisions": 0.205,
+   "drones": 8
+  },
+  {
+   "update": 458,
+   "samples": 820736,
+   "return": -92.82021319762036,
+   "seconds": 528.910831999965,
+   "slot_error": 26.893004864992225,
+   "collisions": 0.02,
+   "drones": 8
+  },
+  {
+   "update": 459,
+   "samples": 822528,
+   "return": -92.82021319762036,
+   "seconds": 529.7620737999678,
+   "slot_error": 14.610192637500235,
+   "collisions": 0.07,
+   "drones": 8
+  },
+  {
+   "update": 460,
+   "samples": 824320,
+   "return": -84.87993474434023,
+   "seconds": 530.750808199984,
+   "slot_error": 13.854614315185897,
+   "collisions": 0.14,
+   "drones": 8
+  },
+  {
+   "update": 461,
+   "samples": 826112,
+   "return": -85.71890722991688,
+   "seconds": 531.8986141999485,
+   "slot_error": 15.262326608861244,
+   "collisions": 0.07,
+   "drones": 8
+  },
+  {
+   "update": 462,
+   "samples": 827904,
+   "return": -85.71890722991688,
+   "seconds": 532.9037210999522,
+   "slot_error": 19.569086364992234,
+   "collisions": 0.1,
+   "drones": 8
+  },
+  {
+   "update": 463,
+   "samples": 829696,
+   "return": -88.86938792526676,
+   "seconds": 533.8282535999315,
+   "slot_error": 22.93268353946857,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 464,
+   "samples": 831488,
+   "return": -88.86938792526676,
+   "seconds": 534.8363909999607,
+   "slot_error": 21.566156933114062,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 465,
+   "samples": 833280,
+   "return": -88.44345343743495,
+   "seconds": 535.7678307999158,
+   "slot_error": 18.076869764621314,
+   "collisions": 0.19,
+   "drones": 8
+  },
+  {
+   "update": 466,
+   "samples": 835072,
+   "return": -91.00080418507356,
+   "seconds": 536.8054736999329,
+   "slot_error": 16.945166929320195,
+   "collisions": 0.08,
+   "drones": 8
+  },
+  {
+   "update": 467,
+   "samples": 836864,
+   "return": -91.00080418507356,
+   "seconds": 537.8898057999322,
+   "slot_error": 9.721606424412482,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 468,
+   "samples": 838656,
+   "return": -89.03149276338851,
+   "seconds": 539.07823069999,
+   "slot_error": 16.225587853703292,
+   "collisions": 0.43,
+   "drones": 8
+  },
+  {
+   "update": 469,
+   "samples": 840448,
+   "return": -102.67600058519581,
+   "seconds": 540.2265988999279,
+   "slot_error": 11.814199277020148,
+   "collisions": 0.3,
+   "drones": 8
+  },
+  {
+   "update": 470,
+   "samples": 842240,
+   "return": -102.67600058519581,
+   "seconds": 541.4309354999568,
+   "slot_error": 18.30829879737307,
+   "collisions": 0.18,
+   "drones": 8
+  },
+  {
+   "update": 471,
+   "samples": 844032,
+   "return": -100.62940073598416,
+   "seconds": 542.6096874999348,
+   "slot_error": 12.290933354000963,
+   "collisions": 0.09,
+   "drones": 8
+  },
+  {
+   "update": 472,
+   "samples": 845824,
+   "return": -98.96251855473426,
+   "seconds": 543.7644422999583,
+   "slot_error": 17.233055989481265,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 473,
+   "samples": 847616,
+   "return": -98.96251855473426,
+   "seconds": 544.8676567999646,
+   "slot_error": 14.286078602914962,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 474,
+   "samples": 849408,
+   "return": -87.56428815113281,
+   "seconds": 545.9948361999122,
+   "slot_error": 17.083588616963894,
+   "collisions": 0.04,
+   "drones": 8
+  },
+  {
+   "update": 475,
+   "samples": 851200,
+   "return": -94.10240657518527,
+   "seconds": 546.9732010998996,
+   "slot_error": 16.489352920523928,
+   "collisions": 0.12,
+   "drones": 8
+  },
+  {
+   "update": 476,
+   "samples": 852992,
+   "return": -94.10240657518527,
+   "seconds": 547.9305125999963,
+   "slot_error": 18.687899992922166,
+   "collisions": 0.16,
+   "drones": 8
+  },
+  {
+   "update": 477,
+   "samples": 854784,
+   "return": -85.468211203024,
+   "seconds": 548.8821163999382,
+   "slot_error": 12.500593354369432,
+   "collisions": 0.12,
+   "drones": 8
+  },
+  {
+   "update": 478,
+   "samples": 856576,
+   "return": -85.468211203024,
+   "seconds": 549.7764293999644,
+   "slot_error": 15.316245604050597,
+   "collisions": 0.05,
+   "drones": 8
+  },
+  {
+   "update": 479,
+   "samples": 858368,
+   "return": -78.92039856870767,
+   "seconds": 550.831613499904,
+   "slot_error": 11.161877946316721,
+   "collisions": 0.11,
+   "drones": 8
+  },
+  {
+   "update": 480,
+   "samples": 860160,
+   "return": -76.93029748568699,
+   "seconds": 551.8347814999288,
+   "slot_error": 13.065043387603941,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 481,
+   "samples": 861952,
+   "return": -76.93029748568699,
+   "seconds": 552.8572595999576,
+   "slot_error": 21.103221760801745,
+   "collisions": 0.16,
+   "drones": 8
+  },
+  {
+   "update": 482,
+   "samples": 863744,
+   "return": -82.24148903560413,
+   "seconds": 553.942452599993,
+   "slot_error": 10.780242369168208,
+   "collisions": 0.09,
+   "drones": 8
+  },
+  {
+   "update": 483,
+   "samples": 865536,
+   "return": -75.71909517493889,
+   "seconds": 555.1020931999665,
+   "slot_error": 12.998362415515748,
+   "collisions": 0.07,
+   "drones": 8
+  },
+  {
+   "update": 484,
+   "samples": 867328,
+   "return": -75.71909517493889,
+   "seconds": 556.0420609998982,
+   "slot_error": 11.058955349571338,
+   "collisions": 0.12,
+   "drones": 8
+  },
+  {
+   "update": 485,
+   "samples": 869120,
+   "return": -68.16345765153463,
+   "seconds": 557.002778199967,
+   "slot_error": 15.316504759911561,
+   "collisions": 0.15,
+   "drones": 8
+  },
+  {
+   "update": 486,
+   "samples": 870912,
+   "return": -73.96358332027262,
+   "seconds": 558.024886499974,
+   "slot_error": 12.633513310883496,
+   "collisions": 0.1,
+   "drones": 8
+  },
+  {
+   "update": 487,
+   "samples": 872704,
+   "return": -73.96358332027262,
+   "seconds": 559.3113077000016,
+   "slot_error": 19.326229614939823,
+   "collisions": 0.09,
+   "drones": 8
+  },
+  {
+   "update": 488,
+   "samples": 874496,
+   "return": -79.29481040858632,
+   "seconds": 560.4291275999276,
+   "slot_error": 11.689750116993096,
+   "collisions": 0.32,
+   "drones": 8
+  },
+  {
+   "update": 489,
+   "samples": 876288,
+   "return": -79.29481040858632,
+   "seconds": 561.5570237999782,
+   "slot_error": 8.940960785052152,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 490,
+   "samples": 878080,
+   "return": -76.57863623198658,
+   "seconds": 562.7298390999204,
+   "slot_error": 15.407993787676155,
+   "collisions": 0.145,
+   "drones": 8
+  },
+  {
+   "update": 491,
+   "samples": 879872,
+   "return": -80.62361272790079,
+   "seconds": 563.6759938999312,
+   "slot_error": 14.512943256488766,
+   "collisions": 0.02,
+   "drones": 8
+  },
+  {
+   "update": 492,
+   "samples": 881664,
+   "return": -80.62361272790079,
+   "seconds": 564.5966577999061,
+   "slot_error": 11.81757218770052,
+   "collisions": 0.02,
+   "drones": 8
+  },
+  {
+   "update": 493,
+   "samples": 883456,
+   "return": -79.20106630421903,
+   "seconds": 565.500837199972,
+   "slot_error": 12.94950981221057,
+   "collisions": 0.04,
+   "drones": 8
+  },
+  {
+   "update": 494,
+   "samples": 885248,
+   "return": -73.33240749700948,
+   "seconds": 566.5878008999862,
+   "slot_error": 12.994877215042738,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 495,
+   "samples": 887040,
+   "return": -73.33240749700948,
+   "seconds": 567.7240182999521,
+   "slot_error": 14.460400170114942,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 496,
+   "samples": 888832,
+   "return": -66.17155482485762,
+   "seconds": 569.033856999944,
+   "slot_error": 16.39230194205384,
+   "collisions": 0.31,
+   "drones": 8
+  },
+  {
+   "update": 497,
+   "samples": 890624,
+   "return": -70.10802617798461,
+   "seconds": 570.0583223999711,
+   "slot_error": 12.873466414252317,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 498,
+   "samples": 892416,
+   "return": -70.10802617798461,
+   "seconds": 571.1116396998987,
+   "slot_error": 9.788737954983024,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 499,
+   "samples": 894208,
+   "return": -64.66121380051207,
+   "seconds": 572.220151699963,
+   "slot_error": 14.02910304916219,
+   "collisions": 0.32,
+   "drones": 8
+  },
+  {
+   "update": 500,
+   "samples": 896000,
+   "return": -66.30723711072106,
+   "seconds": 573.2601434999378,
+   "slot_error": 8.440932337835774,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 501,
+   "samples": 897792,
+   "return": -66.30723711072106,
+   "seconds": 574.1165357999271,
+   "slot_error": 16.024210065166866,
+   "collisions": 0.02,
+   "drones": 8
+  },
+  {
+   "update": 502,
+   "samples": 899584,
+   "return": -67.36696386663122,
+   "seconds": 575.091673299903,
+   "slot_error": 17.221734996046504,
+   "collisions": 0.2,
+   "drones": 8
+  },
+  {
+   "update": 503,
+   "samples": 901376,
+   "return": -67.36696386663122,
+   "seconds": 576.1728853998939,
+   "slot_error": 13.459846472940772,
+   "collisions": 0.06,
+   "drones": 8
+  },
+  {
+   "update": 504,
+   "samples": 903168,
+   "return": -77.4535765103647,
+   "seconds": 577.2804213999771,
+   "slot_error": 12.20546776042137,
+   "collisions": 0.03,
+   "drones": 8
+  },
+  {
+   "update": 505,
+   "samples": 904960,
+   "return": -71.86271994063452,
+   "seconds": 578.2477893999312,
+   "slot_error": 11.549993854964384,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 506,
+   "samples": 906752,
+   "return": -71.86271994063452,
+   "seconds": 579.3135148999281,
+   "slot_error": 8.386159193114176,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 507,
+   "samples": 908544,
+   "return": -72.51596369155432,
+   "seconds": 580.3581935999682,
+   "slot_error": 12.724377569796525,
+   "collisions": 0.03,
+   "drones": 8
+  },
+  {
+   "update": 508,
+   "samples": 910336,
+   "return": -72.28092195541416,
+   "seconds": 581.5973072999623,
+   "slot_error": 16.425500668694678,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 509,
+   "samples": 912128,
+   "return": -72.28092195541416,
+   "seconds": 582.8530052999267,
+   "slot_error": 7.7871753754818895,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 510,
+   "samples": 913920,
+   "return": -69.25196756571344,
+   "seconds": 583.972148599918,
+   "slot_error": 8.268218613958366,
+   "collisions": 0.12,
+   "drones": 8
+  },
+  {
+   "update": 511,
+   "samples": 915712,
+   "return": -57.56932808567477,
+   "seconds": 584.9209313999163,
+   "slot_error": 15.601779727821159,
+   "collisions": 0.02,
+   "drones": 8
+  },
+  {
+   "update": 512,
+   "samples": 917504,
+   "return": -57.56932808567477,
+   "seconds": 585.9155650999164,
+   "slot_error": 10.118658259587445,
+   "collisions": 0.255,
+   "drones": 8
+  },
+  {
+   "update": 513,
+   "samples": 919296,
+   "return": -63.158592046185994,
+   "seconds": 586.9226008999394,
+   "slot_error": 12.406712034063828,
+   "collisions": 0.12,
+   "drones": 8
+  },
+  {
+   "update": 514,
+   "samples": 921088,
+   "return": -63.158592046185994,
+   "seconds": 588.0024137999862,
+   "slot_error": 10.914901576238575,
+   "collisions": 0.1,
+   "drones": 8
+  },
+  {
+   "update": 515,
+   "samples": 922880,
+   "return": -63.91382128412281,
+   "seconds": 588.9411264999071,
+   "slot_error": 8.599045480461111,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 516,
+   "samples": 924672,
+   "return": -62.24653968916995,
+   "seconds": 590.0265547999879,
+   "slot_error": 9.015242105119546,
+   "collisions": 0.1,
+   "drones": 8
+  },
+  {
+   "update": 517,
+   "samples": 926464,
+   "return": -62.24653968916995,
+   "seconds": 591.1519069999922,
+   "slot_error": 12.160506634985047,
+   "collisions": 0.11,
+   "drones": 8
+  },
+  {
+   "update": 518,
+   "samples": 928256,
+   "return": -64.74601934763086,
+   "seconds": 592.2478563999757,
+   "slot_error": 10.092635199247804,
+   "collisions": 0.14,
+   "drones": 8
+  },
+  {
+   "update": 519,
+   "samples": 930048,
+   "return": -68.54457191320382,
+   "seconds": 593.1954540999141,
+   "slot_error": 11.708452566048257,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 520,
+   "samples": 931840,
+   "return": -68.54457191320382,
+   "seconds": 594.1269000999164,
+   "slot_error": 16.598501290387436,
+   "collisions": 0.04,
+   "drones": 8
+  },
+  {
+   "update": 521,
+   "samples": 933632,
+   "return": -64.49040385403657,
+   "seconds": 595.1257057999028,
+   "slot_error": 13.800953137685157,
+   "collisions": 0.07,
+   "drones": 8
+  },
+  {
+   "update": 522,
+   "samples": 935424,
+   "return": -67.71496712339334,
+   "seconds": 596.3295605999883,
+   "slot_error": 16.929489866558434,
+   "collisions": 0.05,
+   "drones": 8
+  },
+  {
+   "update": 523,
+   "samples": 937216,
+   "return": -67.71496712339334,
+   "seconds": 597.3251586999977,
+   "slot_error": 17.670843380586803,
+   "collisions": 0.03,
+   "drones": 8
+  },
+  {
+   "update": 524,
+   "samples": 939008,
+   "return": -69.87651515419405,
+   "seconds": 598.3123651999049,
+   "slot_error": 13.387863682921065,
+   "collisions": 0.14,
+   "drones": 8
+  },
+  {
+   "update": 525,
+   "samples": 940800,
+   "return": -70.7773052703873,
+   "seconds": 599.4510778998956,
+   "slot_error": 9.270692473094623,
+   "collisions": 0.05,
+   "drones": 8
+  },
+  {
+   "update": 526,
+   "samples": 942592,
+   "return": -70.7773052703873,
+   "seconds": 600.4356747999554,
+   "slot_error": 8.987657965578553,
+   "collisions": 0.49,
+   "drones": 8
+  },
+  {
+   "update": 527,
+   "samples": 944384,
+   "return": -76.50801169872045,
+   "seconds": 601.4469371999148,
+   "slot_error": 13.884629122075175,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 528,
+   "samples": 946176,
+   "return": -76.50801169872045,
+   "seconds": 602.4970666998997,
+   "slot_error": 7.9635487423535505,
+   "collisions": 0.34,
+   "drones": 8
+  },
+  {
+   "update": 529,
+   "samples": 947968,
+   "return": -82.42469744712476,
+   "seconds": 603.4062397999223,
+   "slot_error": 10.298800672287776,
+   "collisions": 0.04,
+   "drones": 8
+  },
+  {
+   "update": 530,
+   "samples": 949760,
+   "return": -77.47661010068917,
+   "seconds": 604.4432873999467,
+   "slot_error": 11.83549429240235,
+   "collisions": 0.07,
+   "drones": 8
+  },
+  {
+   "update": 531,
+   "samples": 951552,
+   "return": -77.47661010068917,
+   "seconds": 605.536416899995,
+   "slot_error": 9.952219295690321,
+   "collisions": 0.15,
+   "drones": 8
+  },
+  {
+   "update": 532,
+   "samples": 953344,
+   "return": -79.35378056117513,
+   "seconds": 606.6544601999922,
+   "slot_error": 15.814499269109456,
+   "collisions": 0.21,
+   "drones": 8
+  },
+  {
+   "update": 533,
+   "samples": 955136,
+   "return": -87.22136095991604,
+   "seconds": 607.7996716999914,
+   "slot_error": 11.855444019745882,
+   "collisions": 0.25,
+   "drones": 8
+  },
+  {
+   "update": 534,
+   "samples": 956928,
+   "return": -87.22136095991604,
+   "seconds": 608.9925237999996,
+   "slot_error": 18.754075766073875,
+   "collisions": 0.25,
+   "drones": 8
+  },
+  {
+   "update": 535,
+   "samples": 958720,
+   "return": -84.51273592869288,
+   "seconds": 609.9854956999188,
+   "slot_error": 8.59290277302303,
+   "collisions": 0.1,
+   "drones": 8
+  },
+  {
+   "update": 536,
+   "samples": 960512,
+   "return": -76.2460884550055,
+   "seconds": 610.9445970999077,
+   "slot_error": 11.706443145108556,
+   "collisions": 0.01,
+   "drones": 8
+  },
+  {
+   "update": 537,
+   "samples": 962304,
+   "return": -76.2460884550055,
+   "seconds": 611.8689152000006,
+   "slot_error": 10.946694625800594,
+   "collisions": 0.23,
+   "drones": 8
+  },
+  {
+   "update": 538,
+   "samples": 964096,
+   "return": -80.82498696716706,
+   "seconds": 612.7611059999326,
+   "slot_error": 11.55818525818719,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 539,
+   "samples": 965888,
+   "return": -80.82498696716706,
+   "seconds": 613.8004863999086,
+   "slot_error": 11.347524808159156,
+   "collisions": 0.07,
+   "drones": 8
+  },
+  {
+   "update": 540,
+   "samples": 967680,
+   "return": -76.42586475281107,
+   "seconds": 614.8907776999986,
+   "slot_error": 12.049157685810117,
+   "collisions": 0.05,
+   "drones": 8
+  },
+  {
+   "update": 541,
+   "samples": 969472,
+   "return": -66.00596672534546,
+   "seconds": 616.1016636999557,
+   "slot_error": 11.362004808176572,
+   "collisions": 0.21,
+   "drones": 8
+  },
+  {
+   "update": 542,
+   "samples": 971264,
+   "return": -66.00596672534546,
+   "seconds": 617.3930965999607,
+   "slot_error": 9.447269607674784,
+   "collisions": 0.04,
+   "drones": 8
+  },
+  {
+   "update": 543,
+   "samples": 973056,
+   "return": -64.18724281388693,
+   "seconds": 618.8651064999867,
+   "slot_error": 9.207205917782913,
+   "collisions": 0.44,
+   "drones": 8
+  },
+  {
+   "update": 544,
+   "samples": 974848,
+   "return": -69.12955336504072,
+   "seconds": 620.402382100001,
+   "slot_error": 7.788949262869894,
+   "collisions": 0.01,
+   "drones": 8
+  },
+  {
+   "update": 545,
+   "samples": 976640,
+   "return": -69.12955336504072,
+   "seconds": 621.7283112999285,
+   "slot_error": 15.01102586962383,
+   "collisions": 0.22,
+   "drones": 8
+  },
+  {
+   "update": 546,
+   "samples": 978432,
+   "return": -68.3410281415191,
+   "seconds": 623.1627196999034,
+   "slot_error": 18.460573322271827,
+   "collisions": 0.29,
+   "drones": 8
+  },
+  {
+   "update": 547,
+   "samples": 980224,
+   "return": -80.412550901833,
+   "seconds": 624.5390172998887,
+   "slot_error": 12.02724560363603,
+   "collisions": 0.2,
+   "drones": 8
+  },
+  {
+   "update": 548,
+   "samples": 982016,
+   "return": -80.412550901833,
+   "seconds": 625.8502617999911,
+   "slot_error": 10.311224356740148,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 549,
+   "samples": 983808,
+   "return": -84.61382343569608,
+   "seconds": 627.2824896998936,
+   "slot_error": 13.203603285250233,
+   "collisions": 0.1,
+   "drones": 8
+  },
+  {
+   "update": 550,
+   "samples": 985600,
+   "return": -81.06586660537182,
+   "seconds": 628.5468563999748,
+   "slot_error": 9.244182729246742,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 551,
+   "samples": 987392,
+   "return": -81.06586660537182,
+   "seconds": 629.895685800002,
+   "slot_error": 8.633101880721304,
+   "collisions": 0.01,
+   "drones": 8
+  },
+  {
+   "update": 552,
+   "samples": 989184,
+   "return": -77.02987597199349,
+   "seconds": 631.2155239999993,
+   "slot_error": 9.054054328789062,
+   "collisions": 0.15,
+   "drones": 8
+  },
+  {
+   "update": 553,
+   "samples": 990976,
+   "return": -77.02987597199349,
+   "seconds": 632.6321407998912,
+   "slot_error": 13.012691229911944,
+   "collisions": 0.03,
+   "drones": 8
+  },
+  {
+   "update": 554,
+   "samples": 992768,
+   "return": -74.86730679028054,
+   "seconds": 634.0305118999677,
+   "slot_error": 16.510795938619882,
+   "collisions": 0.04,
+   "drones": 8
+  },
+  {
+   "update": 555,
+   "samples": 994560,
+   "return": -64.70488065656686,
+   "seconds": 635.4478111999342,
+   "slot_error": 6.1864702908899085,
+   "collisions": 0.0,
+   "drones": 8
+  },
+  {
+   "update": 556,
+   "samples": 996352,
+   "return": -64.70488065656686,
+   "seconds": 636.7415825999342,
+   "slot_error": 8.18210710296903,
+   "collisions": 0.05,
+   "drones": 8
+  },
+  {
+   "update": 557,
+   "samples": 998144,
+   "return": -60.90107344867265,
+   "seconds": 637.9502616999671,
+   "slot_error": 12.671608569342483,
+   "collisions": 0.22,
+   "drones": 8
+  },
+  {
+   "update": 558,
+   "samples": 999936,
+   "return": -63.54341359374357,
+   "seconds": 639.0435076999711,
+   "slot_error": 9.974247293471898,
+   "collisions": 0.12,
+   "drones": 8
+  },
+  {
+   "update": 1,
+   "samples": 1004800,
+   "return": NaN,
+   "seconds": 1.900058600003831,
+   "slot_error": 15.488215887655779,
+   "collisions": 0.81,
+   "drones": 20
+  },
+  {
+   "update": 2,
+   "samples": 1009664,
+   "return": -150.51080345313255,
+   "seconds": 3.5832390999421477,
+   "slot_error": 15.404839430499324,
+   "collisions": 1.31,
+   "drones": 20
+  },
+  {
+   "update": 3,
+   "samples": 1014528,
+   "return": -150.51080345313255,
+   "seconds": 6.779803200042807,
+   "slot_error": 11.717067931118736,
+   "collisions": 0.405,
+   "drones": 20
+  },
+  {
+   "update": 4,
+   "samples": 1019392,
+   "return": -126.53548080641562,
+   "seconds": 10.728775699972175,
+   "slot_error": 13.815170904860052,
+   "collisions": 0.21,
+   "drones": 20
+  },
+  {
+   "update": 5,
+   "samples": 1024256,
+   "return": -117.73392920202438,
+   "seconds": 13.925873299944215,
+   "slot_error": 9.274346676496698,
+   "collisions": 0.695,
+   "drones": 20
+  },
+  {
+   "update": 6,
+   "samples": 1029120,
+   "return": -117.73392920202438,
+   "seconds": 16.502544899936765,
+   "slot_error": 9.618287423567983,
+   "collisions": 0.17,
+   "drones": 20
+  },
+  {
+   "update": 7,
+   "samples": 1033984,
+   "return": -102.77434346349742,
+   "seconds": 19.919042599969544,
+   "slot_error": 9.116669427735467,
+   "collisions": 0.52,
+   "drones": 20
+  },
+  {
+   "update": 8,
+   "samples": 1038848,
+   "return": -103.14583000366947,
+   "seconds": 23.47936779994052,
+   "slot_error": 21.03600959845709,
+   "collisions": 0.52,
+   "drones": 20
+  },
+  {
+   "update": 9,
+   "samples": 1043712,
+   "return": -103.14583000366947,
+   "seconds": 26.697183400043286,
+   "slot_error": 14.237258525446803,
+   "collisions": 0.2,
+   "drones": 20
+  },
+  {
+   "update": 10,
+   "samples": 1048576,
+   "return": -93.99937290287866,
+   "seconds": 28.84379940002691,
+   "slot_error": 22.721445482150234,
+   "collisions": 0.87,
+   "drones": 20
+  },
+  {
+   "update": 11,
+   "samples": 1053440,
+   "return": -96.58730505276868,
+   "seconds": 31.0109180000145,
+   "slot_error": 11.962644817300207,
+   "collisions": 0.27,
+   "drones": 20
+  },
+  {
+   "update": 12,
+   "samples": 1058304,
+   "return": -96.58730505276868,
+   "seconds": 32.78814550000243,
+   "slot_error": 12.25314006961183,
+   "collisions": 0.74,
+   "drones": 20
+  },
+  {
+   "update": 13,
+   "samples": 1063168,
+   "return": -94.49803551769689,
+   "seconds": 34.53700869996101,
+   "slot_error": 15.171167885039363,
+   "collisions": 0.44,
+   "drones": 20
+  },
+  {
+   "update": 14,
+   "samples": 1068032,
+   "return": -94.49803551769689,
+   "seconds": 44.893291200045496,
+   "slot_error": 11.03247057487535,
+   "collisions": 0.22,
+   "drones": 20
+  },
+  {
+   "update": 15,
+   "samples": 1072896,
+   "return": -102.49029540081438,
+   "seconds": 48.66935790004209,
+   "slot_error": 14.055773940110628,
+   "collisions": 1.44,
+   "drones": 20
+  },
+  {
+   "update": 16,
+   "samples": 1077760,
+   "return": -108.0586279026744,
+   "seconds": 51.68590679997578,
+   "slot_error": 11.005727936647395,
+   "collisions": 0.625,
+   "drones": 20
+  },
+  {
+   "update": 17,
+   "samples": 1082624,
+   "return": -108.0586279026744,
+   "seconds": 55.7369294000091,
+   "slot_error": 7.997804184547133,
+   "collisions": 0.76,
+   "drones": 20
+  },
+  {
+   "update": 18,
+   "samples": 1087488,
+   "return": -104.60272152712203,
+   "seconds": 57.900881099980325,
+   "slot_error": 16.586126995172403,
+   "collisions": 0.88,
+   "drones": 20
+  },
+  {
+   "update": 19,
+   "samples": 1092352,
+   "return": -106.3622818342687,
+   "seconds": 60.61819279997144,
+   "slot_error": 13.890775407821634,
+   "collisions": 0.79,
+   "drones": 20
+  },
+  {
+   "update": 20,
+   "samples": 1097216,
+   "return": -106.3622818342687,
+   "seconds": 68.42178500001319,
+   "slot_error": 9.665739703344286,
+   "collisions": 0.39,
+   "drones": 20
+  },
+  {
+   "update": 21,
+   "samples": 1102080,
+   "return": -108.68329015608383,
+   "seconds": 72.85479310003575,
+   "slot_error": 11.175834019666596,
+   "collisions": 0.46,
+   "drones": 20
+  },
+  {
+   "update": 22,
+   "samples": 1106944,
+   "return": -104.4254104999939,
+   "seconds": 75.12565990001895,
+   "slot_error": 10.369969134988319,
+   "collisions": 0.35,
+   "drones": 20
+  },
+  {
+   "update": 23,
+   "samples": 1111808,
+   "return": -104.4254104999939,
+   "seconds": 77.28599230002146,
+   "slot_error": 9.615133451842091,
+   "collisions": 0.625,
+   "drones": 20
+  },
+  {
+   "update": 24,
+   "samples": 1116672,
+   "return": -94.2577655784118,
+   "seconds": 79.04812319995835,
+   "slot_error": 20.192561899945755,
+   "collisions": 0.575,
+   "drones": 20
+  },
+  {
+   "update": 25,
+   "samples": 1121536,
+   "return": -98.90517002129522,
+   "seconds": 80.79823970003054,
+   "slot_error": 13.174800074462755,
+   "collisions": 0.31,
+   "drones": 20
+  },
+  {
+   "update": 26,
+   "samples": 1126400,
+   "return": -98.90517002129522,
+   "seconds": 82.51296900003217,
+   "slot_error": 13.302260252444066,
+   "collisions": 1.49,
+   "drones": 20
+  },
+  {
+   "update": 27,
+   "samples": 1131264,
+   "return": -103.81377124426126,
+   "seconds": 84.23946499999147,
+   "slot_error": 22.722375590200826,
+   "collisions": 1.445,
+   "drones": 20
+  },
+  {
+   "update": 28,
+   "samples": 1136128,
+   "return": -103.81377124426126,
+   "seconds": 85.9538982999511,
+   "slot_error": 12.42635979098949,
+   "collisions": 0.64,
+   "drones": 20
+  },
+  {
+   "update": 29,
+   "samples": 1140992,
+   "return": -111.38749487955951,
+   "seconds": 87.5152857999783,
+   "slot_error": 12.231702707280938,
+   "collisions": 0.55,
+   "drones": 20
+  },
+  {
+   "update": 30,
+   "samples": 1145856,
+   "return": -113.04178852741839,
+   "seconds": 92.0712425999809,
+   "slot_error": 11.990471806799919,
+   "collisions": 0.68,
+   "drones": 20
+  },
+  {
+   "update": 31,
+   "samples": 1150720,
+   "return": -113.04178852741839,
+   "seconds": 95.3212296999991,
+   "slot_error": 11.365354465415098,
+   "collisions": 0.615,
+   "drones": 20
+  },
+  {
+   "update": 32,
+   "samples": 1155584,
+   "return": -119.13571856953277,
+   "seconds": 98.19255489995703,
+   "slot_error": 14.068571045809565,
+   "collisions": 0.18,
+   "drones": 20
+  },
+  {
+   "update": 33,
+   "samples": 1160448,
+   "return": -116.82048672810849,
+   "seconds": 100.91496279998682,
+   "slot_error": 18.71458784870205,
+   "collisions": 0.44,
+   "drones": 20
+  },
+  {
+   "update": 34,
+   "samples": 1165312,
+   "return": -116.82048672810849,
+   "seconds": 103.62578719994053,
+   "slot_error": 9.56096394904963,
+   "collisions": 0.32,
+   "drones": 20
+  },
+  {
+   "update": 35,
+   "samples": 1170176,
+   "return": -106.31920061946471,
+   "seconds": 107.38845600001514,
+   "slot_error": 10.23731537283087,
+   "collisions": 0.19,
+   "drones": 20
+  },
+  {
+   "update": 36,
+   "samples": 1175040,
+   "return": -92.56841546850634,
+   "seconds": 112.25879360002,
+   "slot_error": 12.026767255961179,
+   "collisions": 0.4,
+   "drones": 20
+  },
+  {
+   "update": 37,
+   "samples": 1179904,
+   "return": -92.56841546850634,
+   "seconds": 114.62874079996254,
+   "slot_error": 13.318964390749132,
+   "collisions": 0.835,
+   "drones": 20
+  },
+  {
+   "update": 38,
+   "samples": 1184768,
+   "return": -99.00808315251243,
+   "seconds": 116.46109160000924,
+   "slot_error": 19.002077863814158,
+   "collisions": 1.13,
+   "drones": 20
+  },
+  {
+   "update": 39,
+   "samples": 1189632,
+   "return": -99.00808315251243,
+   "seconds": 118.18374599993695,
+   "slot_error": 22.09589274405805,
+   "collisions": 0.645,
+   "drones": 20
+  },
+  {
+   "update": 40,
+   "samples": 1194496,
+   "return": -106.35623938392037,
+   "seconds": 119.86177379998844,
+   "slot_error": 13.816817278055398,
+   "collisions": 0.555,
+   "drones": 20
+  },
+  {
+   "update": 41,
+   "samples": 1199360,
+   "return": -106.49615552976702,
+   "seconds": 121.55573829996865,
+   "slot_error": 13.693559591013555,
+   "collisions": 0.76,
+   "drones": 20
+  },
+  {
+   "update": 42,
+   "samples": 1204224,
+   "return": -106.49615552976702,
+   "seconds": 123.38372010004241,
+   "slot_error": 22.52349437175882,
+   "collisions": 1.125,
+   "drones": 20
+  },
+  {
+   "update": 43,
+   "samples": 1209088,
+   "return": -115.85787940268744,
+   "seconds": 125.30573699995875,
+   "slot_error": 9.944072877526867,
+   "collisions": 0.08,
+   "drones": 20
+  },
+  {
+   "update": 44,
+   "samples": 1213952,
+   "return": -120.59810769342558,
+   "seconds": 129.63597329996992,
+   "slot_error": 23.88451950402849,
+   "collisions": 0.93,
+   "drones": 20
+  },
+  {
+   "update": 45,
+   "samples": 1218816,
+   "return": -120.59810769342558,
+   "seconds": 134.4149709000485,
+   "slot_error": 7.3895962337442915,
+   "collisions": 0.51,
+   "drones": 20
+  },
+  {
+   "update": 46,
+   "samples": 1223680,
+   "return": -114.10131432589296,
+   "seconds": 136.57876810000744,
+   "slot_error": 16.620616862815744,
+   "collisions": 1.21,
+   "drones": 20
+  },
+  {
+   "update": 47,
+   "samples": 1228544,
+   "return": -117.47082604646764,
+   "seconds": 138.667640700005,
+   "slot_error": 21.51474822017695,
+   "collisions": 1.31,
+   "drones": 20
+  },
+  {
+   "update": 48,
+   "samples": 1233408,
+   "return": -117.47082604646764,
+   "seconds": 140.40129479998723,
+   "slot_error": 11.918602794578282,
+   "collisions": 0.34,
+   "drones": 20
+  },
+  {
+   "update": 49,
+   "samples": 1238272,
+   "return": -119.53655529412458,
+   "seconds": 142.52266060002148,
+   "slot_error": 19.30288618534497,
+   "collisions": 1.365,
+   "drones": 20
+  },
+  {
+   "update": 50,
+   "samples": 1243136,
+   "return": -116.29301031543014,
+   "seconds": 144.38671500002965,
+   "slot_error": 7.729996615897659,
+   "collisions": 0.78,
+   "drones": 20
+  },
+  {
+   "update": 51,
+   "samples": 1248000,
+   "return": -116.29301031543014,
+   "seconds": 150.64790890004952,
+   "slot_error": 10.724693060999957,
+   "collisions": 0.89,
+   "drones": 20
+  },
+  {
+   "update": 52,
+   "samples": 1252864,
+   "return": -119.0828166735536,
+   "seconds": 152.94602070003748,
+   "slot_error": 11.601035876627423,
+   "collisions": 0.795,
+   "drones": 20
+  },
+  {
+   "update": 53,
+   "samples": 1257728,
+   "return": -119.0828166735536,
+   "seconds": 156.45085579995066,
+   "slot_error": 18.14403588333296,
+   "collisions": 0.32,
+   "drones": 20
+  },
+  {
+   "update": 54,
+   "samples": 1262592,
+   "return": -121.24889653534278,
+   "seconds": 158.8271296999883,
+   "slot_error": 8.359651778722599,
+   "collisions": 0.11,
+   "drones": 20
+  },
+  {
+   "update": 55,
+   "samples": 1267456,
+   "return": -102.42395107992893,
+   "seconds": 160.89591970003676,
+   "slot_error": 23.983045879808724,
+   "collisions": 0.24,
+   "drones": 20
+  },
+  {
+   "update": 56,
+   "samples": 1272320,
+   "return": -102.42395107992893,
+   "seconds": 163.07608230004553,
+   "slot_error": 21.538407474861078,
+   "collisions": 0.59,
+   "drones": 20
+  },
+  {
+   "update": 57,
+   "samples": 1277184,
+   "return": -101.59378854597716,
+   "seconds": 165.28342310001608,
+   "slot_error": 14.850986176285437,
+   "collisions": 0.42,
+   "drones": 20
+  },
+  {
+   "update": 58,
+   "samples": 1282048,
+   "return": -95.05064485136297,
+   "seconds": 167.1892780000344,
+   "slot_error": 17.99695018427789,
+   "collisions": 0.41,
+   "drones": 20
+  },
+  {
+   "update": 59,
+   "samples": 1286912,
+   "return": -95.05064485136297,
+   "seconds": 169.0615872000344,
+   "slot_error": 7.396612494997867,
+   "collisions": 0.14,
+   "drones": 20
+  },
+  {
+   "update": 60,
+   "samples": 1291776,
+   "return": -83.29216043025892,
+   "seconds": 170.87809919996653,
+   "slot_error": 12.818933684846554,
+   "collisions": 0.53,
+   "drones": 20
+  },
+  {
+   "update": 61,
+   "samples": 1296640,
+   "return": -86.69952223569457,
+   "seconds": 174.18168349994812,
+   "slot_error": 20.778169934949325,
+   "collisions": 0.62,
+   "drones": 20
+  },
+  {
+   "update": 62,
+   "samples": 1301504,
+   "return": -86.69952223569457,
+   "seconds": 176.0775201000506,
+   "slot_error": 21.47331245109128,
+   "collisions": 0.67,
+   "drones": 20
+  },
+  {
+   "update": 63,
+   "samples": 1306368,
+   "return": -101.68119637965553,
+   "seconds": 178.5568814999424,
+   "slot_error": 21.74000892449569,
+   "collisions": 0.695,
+   "drones": 20
+  },
+  {
+   "update": 64,
+   "samples": 1311232,
+   "return": -101.68119637965553,
+   "seconds": 180.50736269995105,
+   "slot_error": 10.762610570330317,
+   "collisions": 0.515,
+   "drones": 20
+  },
+  {
+   "update": 65,
+   "samples": 1316096,
+   "return": -102.18630319482975,
+   "seconds": 182.36816660000477,
+   "slot_error": 13.073098469804991,
+   "collisions": 0.99,
+   "drones": 20
+  },
+  {
+   "update": 66,
+   "samples": 1320960,
+   "return": -109.84623594240327,
+   "seconds": 184.76561160001438,
+   "slot_error": 14.287625234369116,
+   "collisions": 0.575,
+   "drones": 20
+  },
+  {
+   "update": 67,
+   "samples": 1325824,
+   "return": -109.84623594240327,
+   "seconds": 186.97608339996077,
+   "slot_error": 18.454974245841058,
+   "collisions": 0.4,
+   "drones": 20
+  },
+  {
+   "update": 68,
+   "samples": 1330688,
+   "return": -117.8570059641332,
+   "seconds": 189.18434839998372,
+   "slot_error": 16.09503204735808,
+   "collisions": 0.925,
+   "drones": 20
+  },
+  {
+   "update": 69,
+   "samples": 1335552,
+   "return": -122.34642562048418,
+   "seconds": 191.03129079996143,
+   "slot_error": 20.346128939913378,
+   "collisions": 0.735,
+   "drones": 20
+  },
+  {
+   "update": 70,
+   "samples": 1340416,
+   "return": -122.34642562048418,
+   "seconds": 193.46531290002167,
+   "slot_error": 8.126914316296599,
+   "collisions": 0.23,
+   "drones": 20
+  },
+  {
+   "update": 71,
+   "samples": 1345280,
+   "return": -110.41606712086073,
+   "seconds": 195.67505800002255,
+   "slot_error": 10.446045738790586,
+   "collisions": 0.19,
+   "drones": 20
+  },
+  {
+   "update": 72,
+   "samples": 1350144,
+   "return": -100.61461644374802,
+   "seconds": 197.6144515000051,
+   "slot_error": 13.971667692694064,
+   "collisions": 0.27,
+   "drones": 20
+  },
+  {
+   "update": 73,
+   "samples": 1355008,
+   "return": -100.61461644374802,
+   "seconds": 199.4198179000523,
+   "slot_error": 20.637236190706236,
+   "collisions": 0.975,
+   "drones": 20
+  },
+  {
+   "update": 74,
+   "samples": 1359872,
+   "return": -98.94482956463473,
+   "seconds": 201.27641459996812,
+   "slot_error": 20.061683832478728,
+   "collisions": 0.825,
+   "drones": 20
+  },
+  {
+   "update": 75,
+   "samples": 1364736,
+   "return": -101.15416898197816,
+   "seconds": 202.96562279993668,
+   "slot_error": 7.987074560643987,
+   "collisions": 0.33,
+   "drones": 20
+  },
+  {
+   "update": 76,
+   "samples": 1369600,
+   "return": -101.15416898197816,
+   "seconds": 204.70772639999632,
+   "slot_error": 10.166259627161116,
+   "collisions": 0.39,
+   "drones": 20
+  },
+  {
+   "update": 77,
+   "samples": 1374464,
+   "return": -96.5969260327756,
+   "seconds": 206.43409150000662,
+   "slot_error": 19.985744206839193,
+   "collisions": 1.31,
+   "drones": 20
+  },
+  {
+   "update": 78,
+   "samples": 1379328,
+   "return": -96.5969260327756,
+   "seconds": 208.03620390000287,
+   "slot_error": 14.133271977245538,
+   "collisions": 0.9,
+   "drones": 20
+  },
+  {
+   "update": 79,
+   "samples": 1384192,
+   "return": -104.09473638727124,
+   "seconds": 209.7424998000497,
+   "slot_error": 10.930209428549752,
+   "collisions": 0.53,
+   "drones": 20
+  },
+  {
+   "update": 80,
+   "samples": 1389056,
+   "return": -110.57931890558798,
+   "seconds": 211.41093769995496,
+   "slot_error": 21.45897729879388,
+   "collisions": 1.18,
+   "drones": 20
+  },
+  {
+   "update": 81,
+   "samples": 1393920,
+   "return": -110.57931890558798,
+   "seconds": 213.10782299994025,
+   "slot_error": 8.063288263747094,
+   "collisions": 0.11,
+   "drones": 20
+  },
+  {
+   "update": 82,
+   "samples": 1398784,
+   "return": -106.88321712707427,
+   "seconds": 214.72126420005225,
+   "slot_error": 6.714850085746698,
+   "collisions": 0.39,
+   "drones": 20
+  },
+  {
+   "update": 83,
+   "samples": 1403648,
+   "return": -105.56384700033604,
+   "seconds": 216.41267280001193,
+   "slot_error": 15.67156376543407,
+   "collisions": 0.925,
+   "drones": 20
+  },
+  {
+   "update": 84,
+   "samples": 1408512,
+   "return": -105.56384700033604,
+   "seconds": 218.02327490004245,
+   "slot_error": 15.875088536336659,
+   "collisions": 0.2,
+   "drones": 20
+  },
+  {
+   "update": 85,
+   "samples": 1413376,
+   "return": -104.33980497445934,
+   "seconds": 219.61652889999095,
+   "slot_error": 13.580793866654403,
+   "collisions": 0.35,
+   "drones": 20
+  },
+  {
+   "update": 86,
+   "samples": 1418240,
+   "return": -93.46458119893211,
+   "seconds": 221.8569290000014,
+   "slot_error": 7.08963978504473,
+   "collisions": 0.6,
+   "drones": 20
+  },
+  {
+   "update": 87,
+   "samples": 1423104,
+   "return": -93.46458119893211,
+   "seconds": 223.56680220004637,
+   "slot_error": 21.44172461275316,
+   "collisions": 0.33,
+   "drones": 20
+  },
+  {
+   "update": 88,
+   "samples": 1427968,
+   "return": -101.65434251447141,
+   "seconds": 225.43435120000504,
+   "slot_error": 16.22863265804586,
+   "collisions": 1.24,
+   "drones": 20
+  },
+  {
+   "update": 89,
+   "samples": 1432832,
+   "return": -101.65434251447141,
+   "seconds": 227.08072379999794,
+   "slot_error": 13.061715350341796,
+   "collisions": 0.47,
+   "drones": 20
+  },
+  {
+   "update": 90,
+   "samples": 1437696,
+   "return": -102.95624441909499,
+   "seconds": 228.78330779995304,
+   "slot_error": 11.319422612768205,
+   "collisions": 0.49,
+   "drones": 20
+  },
+  {
+   "update": 91,
+   "samples": 1442560,
+   "return": -103.87130260894892,
+   "seconds": 230.48078420001548,
+   "slot_error": 20.0715095427588,
+   "collisions": 0.14,
+   "drones": 20
+  },
+  {
+   "update": 92,
+   "samples": 1447424,
+   "return": -103.87130260894892,
+   "seconds": 232.22581229999196,
+   "slot_error": 12.311523967427293,
+   "collisions": 0.05,
+   "drones": 20
+  },
+  {
+   "update": 93,
+   "samples": 1452288,
+   "return": -95.62916359381921,
+   "seconds": 234.01960610004608,
+   "slot_error": 11.792504238416509,
+   "collisions": 0.4,
+   "drones": 20
+  },
+  {
+   "update": 94,
+   "samples": 1457152,
+   "return": -95.80789239166411,
+   "seconds": 235.72131129994523,
+   "slot_error": 9.11698380291954,
+   "collisions": 0.14,
+   "drones": 20
+  },
+  {
+   "update": 95,
+   "samples": 1462016,
+   "return": -95.80789239166411,
+   "seconds": 237.3794819000177,
+   "slot_error": 16.64710275530166,
+   "collisions": 0.12,
+   "drones": 20
+  },
+  {
+   "update": 96,
+   "samples": 1466880,
+   "return": -83.2670918481547,
+   "seconds": 239.19653590000235,
+   "slot_error": 17.591540921937714,
+   "collisions": 0.46,
+   "drones": 20
+  },
+  {
+   "update": 97,
+   "samples": 1471744,
+   "return": -78.2083866486549,
+   "seconds": 241.10490249993745,
+   "slot_error": 10.55158516972044,
+   "collisions": 0.22,
+   "drones": 20
+  },
+  {
+   "update": 98,
+   "samples": 1476608,
+   "return": -78.2083866486549,
+   "seconds": 243.03629530000035,
+   "slot_error": 21.79629839505179,
+   "collisions": 0.85,
+   "drones": 20
+  },
+  {
+   "update": 99,
+   "samples": 1481472,
+   "return": -80.39494548734251,
+   "seconds": 244.62681369995698,
+   "slot_error": 8.127431355767152,
+   "collisions": 0.58,
+   "drones": 20
+  },
+  {
+   "update": 100,
+   "samples": 1486336,
+   "return": -81.69294694689225,
+   "seconds": 246.14786060003098,
+   "slot_error": 7.1048266576133505,
+   "collisions": 0.4,
+   "drones": 20
+  },
+  {
+   "update": 101,
+   "samples": 1491200,
+   "return": -81.69294694689225,
+   "seconds": 247.8163550000172,
+   "slot_error": 14.185102264540362,
+   "collisions": 0.845,
+   "drones": 20
+  },
+  {
+   "update": 102,
+   "samples": 1496064,
+   "return": -94.88596780090927,
+   "seconds": 249.5819226000458,
+   "slot_error": 17.327120099254913,
+   "collisions": 0.76,
+   "drones": 20
+  },
+  {
+   "update": 103,
+   "samples": 1500928,
+   "return": -94.88596780090927,
+   "seconds": 251.69070599996485,
+   "slot_error": 20.98727588039992,
+   "collisions": 0.695,
+   "drones": 20
+  },
+  {
+   "update": 104,
+   "samples": 1505792,
+   "return": -104.66672133609259,
+   "seconds": 254.11344149999786,
+   "slot_error": 14.381973094147057,
+   "collisions": 0.43,
+   "drones": 20
+  },
+  {
+   "update": 105,
+   "samples": 1510656,
+   "return": -101.978422406981,
+   "seconds": 255.8576664000284,
+   "slot_error": 15.277590789262753,
+   "collisions": 0.115,
+   "drones": 20
+  },
+  {
+   "update": 106,
+   "samples": 1515520,
+   "return": -101.978422406981,
+   "seconds": 257.60108579997905,
+   "slot_error": 9.440013781807512,
+   "collisions": 0.29,
+   "drones": 20
+  },
+  {
+   "update": 107,
+   "samples": 1520384,
+   "return": -98.18114914216373,
+   "seconds": 259.67201640002895,
+   "slot_error": 21.017094285042454,
+   "collisions": 1.225,
+   "drones": 20
+  },
+  {
+   "update": 108,
+   "samples": 1525248,
+   "return": -111.65768133961642,
+   "seconds": 261.69126949994825,
+   "slot_error": 18.012862160109048,
+   "collisions": 0.615,
+   "drones": 20
+  },
+  {
+   "update": 109,
+   "samples": 1530112,
+   "return": -111.65768133961642,
+   "seconds": 263.43979530001525,
+   "slot_error": 13.424440070807584,
+   "collisions": 0.67,
+   "drones": 20
+  },
+  {
+   "update": 110,
+   "samples": 1534976,
+   "return": -109.32740237360977,
+   "seconds": 265.09636790002696,
+   "slot_error": 13.194125920823705,
+   "collisions": 0.0,
+   "drones": 20
+  },
+  {
+   "update": 111,
+   "samples": 1539840,
+   "return": -94.43653402698628,
+   "seconds": 266.74353640002664,
+   "slot_error": 9.117064231717295,
+   "collisions": 0.2,
+   "drones": 20
+  },
+  {
+   "update": 112,
+   "samples": 1544704,
+   "return": -94.43653402698628,
+   "seconds": 268.5741059000138,
+   "slot_error": 13.856764909636844,
+   "collisions": 0.55,
+   "drones": 20
+  },
+  {
+   "update": 113,
+   "samples": 1549568,
+   "return": -96.8609806694387,
+   "seconds": 270.22972109995317,
+   "slot_error": 15.274674654495858,
+   "collisions": 1.435,
+   "drones": 20
+  },
+  {
+   "update": 114,
+   "samples": 1554432,
+   "return": -96.8609806694387,
+   "seconds": 271.8070944000501,
+   "slot_error": 17.463227535431983,
+   "collisions": 0.47,
+   "drones": 20
+  },
+  {
+   "update": 115,
+   "samples": 1559296,
+   "return": -105.37467909694442,
+   "seconds": 273.53865510004107,
+   "slot_error": 11.782257578029878,
+   "collisions": 0.27,
+   "drones": 20
+  },
+  {
+   "update": 116,
+   "samples": 1564160,
+   "return": -91.54589852582419,
+   "seconds": 275.1552059999667,
+   "slot_error": 10.08457008106883,
+   "collisions": 0.12,
+   "drones": 20
+  },
+  {
+   "update": 117,
+   "samples": 1569024,
+   "return": -91.54589852582419,
+   "seconds": 276.8823887000326,
+   "slot_error": 21.706659527210423,
+   "collisions": 0.51,
+   "drones": 20
+  },
+  {
+   "update": 118,
+   "samples": 1573888,
+   "return": -89.63427585399992,
+   "seconds": 278.5564736999804,
+   "slot_error": 10.69704483908758,
+   "collisions": 0.19,
+   "drones": 20
+  },
+  {
+   "update": 119,
+   "samples": 1578752,
+   "return": -98.67648770401357,
+   "seconds": 280.22044629999436,
+   "slot_error": 18.526478041303267,
+   "collisions": 0.62,
+   "drones": 20
+  },
+  {
+   "update": 120,
+   "samples": 1583616,
+   "return": -98.67648770401357,
+   "seconds": 281.9083065999439,
+   "slot_error": 17.43280430130674,
+   "collisions": 0.45,
+   "drones": 20
+  },
+  {
+   "update": 121,
+   "samples": 1588480,
+   "return": -103.89275078188075,
+   "seconds": 283.4649717999855,
+   "slot_error": 19.354502468537536,
+   "collisions": 0.36,
+   "drones": 20
+  },
+  {
+   "update": 122,
+   "samples": 1593344,
+   "return": -104.1080981567967,
+   "seconds": 285.1704048999818,
+   "slot_error": 18.22377273834382,
+   "collisions": 0.75,
+   "drones": 20
+  },
+  {
+   "update": 123,
+   "samples": 1598208,
+   "return": -104.1080981567967,
+   "seconds": 286.99613969994243,
+   "slot_error": 14.524554523840543,
+   "collisions": 0.25,
+   "drones": 20
+  },
+  {
+   "update": 124,
+   "samples": 1603072,
+   "return": -110.72800186612866,
+   "seconds": 289.15020220004953,
+   "slot_error": 12.481424300491854,
+   "collisions": 0.26,
+   "drones": 20
+  },
+  {
+   "update": 125,
+   "samples": 1607936,
+   "return": -100.69198532603728,
+   "seconds": 291.0157981000375,
+   "slot_error": 14.515943059750143,
+   "collisions": 0.21,
+   "drones": 20
+  },
+  {
+   "update": 126,
+   "samples": 1612800,
+   "return": -100.69198532603728,
+   "seconds": 292.84575940005016,
+   "slot_error": 11.779070222712646,
+   "collisions": 0.51,
+   "drones": 20
+  },
+  {
+   "update": 127,
+   "samples": 1617664,
+   "return": -102.22826977306224,
+   "seconds": 294.46706659998745,
+   "slot_error": 23.777954186480883,
+   "collisions": 0.83,
+   "drones": 20
+  },
+  {
+   "update": 128,
+   "samples": 1622528,
+   "return": -102.22826977306224,
+   "seconds": 296.14359220000915,
+   "slot_error": 11.62344638904283,
+   "collisions": 0.05,
+   "drones": 20
+  },
+  {
+   "update": 129,
+   "samples": 1627392,
+   "return": -98.71081929033723,
+   "seconds": 297.97097589995246,
+   "slot_error": 9.726108160788188,
+   "collisions": 0.14,
+   "drones": 20
+  },
+  {
+   "update": 130,
+   "samples": 1632256,
+   "return": -85.04247190394385,
+   "seconds": 299.42231860000174,
+   "slot_error": 23.784239750962218,
+   "collisions": 0.21,
+   "drones": 20
+  },
+  {
+   "update": 131,
+   "samples": 1637120,
+   "return": -85.04247190394385,
+   "seconds": 300.7995094000362,
+   "slot_error": 12.223472848885859,
+   "collisions": 0.35,
+   "drones": 20
+  },
+  {
+   "update": 132,
+   "samples": 1641984,
+   "return": -83.37588336657325,
+   "seconds": 302.10017430002335,
+   "slot_error": 17.276710476707173,
+   "collisions": 0.42,
+   "drones": 20
+  },
+  {
+   "update": 133,
+   "samples": 1646848,
+   "return": -91.95546032154573,
+   "seconds": 303.4532205000287,
+   "slot_error": 21.15850047594604,
+   "collisions": 0.37,
+   "drones": 20
+  },
+  {
+   "update": 134,
+   "samples": 1651712,
+   "return": -91.95546032154573,
+   "seconds": 304.80901690002065,
+   "slot_error": 13.491543358663943,
+   "collisions": 0.46,
+   "drones": 20
+  },
+  {
+   "update": 135,
+   "samples": 1656576,
+   "return": -91.17578193050785,
+   "seconds": 306.1316903999541,
+   "slot_error": 17.0472507587041,
+   "collisions": 0.55,
+   "drones": 20
+  },
+  {
+   "update": 136,
+   "samples": 1661440,
+   "return": -93.86073430216359,
+   "seconds": 307.43539330002386,
+   "slot_error": 21.84014284845196,
+   "collisions": 0.41,
+   "drones": 20
+  },
+  {
+   "update": 137,
+   "samples": 1666304,
+   "return": -93.86073430216359,
+   "seconds": 308.748992000008,
+   "slot_error": 19.58491958312461,
+   "collisions": 0.44,
+   "drones": 20
+  },
+  {
+   "update": 138,
+   "samples": 1671168,
+   "return": -103.80483651760612,
+   "seconds": 310.0824212000007,
+   "slot_error": 16.088150288660536,
+   "collisions": 0.08,
+   "drones": 20
+  },
+  {
+   "update": 139,
+   "samples": 1676032,
+   "return": -103.80483651760612,
+   "seconds": 311.58407690003514,
+   "slot_error": 12.2014161198344,
+   "collisions": 0.46,
+   "drones": 20
+  },
+  {
+   "update": 140,
+   "samples": 1680896,
+   "return": -102.97514651023933,
+   "seconds": 313.01372419996187,
+   "slot_error": 11.097021286049383,
+   "collisions": 0.19,
+   "drones": 20
+  },
+  {
+   "update": 141,
+   "samples": 1685760,
+   "return": -98.92321488885796,
+   "seconds": 314.3377325000474,
+   "slot_error": 24.169310373376376,
+   "collisions": 0.48,
+   "drones": 20
+  },
+  {
+   "update": 142,
+   "samples": 1690624,
+   "return": -98.92321488885796,
+   "seconds": 315.64343229995575,
+   "slot_error": 14.626539067273953,
+   "collisions": 0.52,
+   "drones": 20
+  },
+  {
+   "update": 143,
+   "samples": 1695488,
+   "return": -104.79557628366186,
+   "seconds": 316.9756838999456,
+   "slot_error": 15.825213465442639,
+   "collisions": 0.4,
+   "drones": 20
+  },
+  {
+   "update": 144,
+   "samples": 1700352,
+   "return": -102.93278263110685,
+   "seconds": 318.3508006000193,
+   "slot_error": 19.369871575322133,
+   "collisions": 0.26,
+   "drones": 20
+  },
+  {
+   "update": 145,
+   "samples": 1705216,
+   "return": -102.93278263110685,
+   "seconds": 319.70165659999475,
+   "slot_error": 12.224715616478402,
+   "collisions": 0.45,
+   "drones": 20
+  },
+  {
+   "update": 146,
+   "samples": 1710080,
+   "return": -99.33544406850234,
+   "seconds": 321.03970139997546,
+   "slot_error": 10.402181384191223,
+   "collisions": 0.54,
+   "drones": 20
+  },
+  {
+   "update": 147,
+   "samples": 1714944,
+   "return": -97.17393455167394,
+   "seconds": 322.3626118999673,
+   "slot_error": 9.703702741763859,
+   "collisions": 0.49,
+   "drones": 20
+  },
+  {
+   "update": 148,
+   "samples": 1719808,
+   "return": -97.17393455167394,
+   "seconds": 323.62599289999343,
+   "slot_error": 11.01854852192527,
+   "collisions": 0.16,
+   "drones": 20
+  },
+  {
+   "update": 149,
+   "samples": 1724672,
+   "return": -94.58825383058226,
+   "seconds": 324.9872096000472,
+   "slot_error": 24.409207179713043,
+   "collisions": 0.22,
+   "drones": 20
+  },
+  {
+   "update": 150,
+   "samples": 1729536,
+   "return": -101.00082620131752,
+   "seconds": 326.29232879995834,
+   "slot_error": 24.575816093177263,
+   "collisions": 1.77,
+   "drones": 20
+  },
+  {
+   "update": 151,
+   "samples": 1734400,
+   "return": -101.00082620131752,
+   "seconds": 327.6915393000236,
+   "slot_error": 14.85194821516161,
+   "collisions": 0.25,
+   "drones": 20
+  },
+  {
+   "update": 152,
+   "samples": 1739264,
+   "return": -102.95611261012114,
+   "seconds": 329.111137000029,
+   "slot_error": 18.69367619987153,
+   "collisions": 0.45,
+   "drones": 20
+  },
+  {
+   "update": 153,
+   "samples": 1744128,
+   "return": -102.95611261012114,
+   "seconds": 330.2759917000076,
+   "slot_error": 12.349399601378511,
+   "collisions": 0.57,
+   "drones": 20
+  },
+  {
+   "update": 154,
+   "samples": 1748992,
+   "return": -102.23895743138235,
+   "seconds": 331.55762760003563,
+   "slot_error": 16.029160840254434,
+   "collisions": 0.18,
+   "drones": 20
+  },
+  {
+   "update": 155,
+   "samples": 1753856,
+   "return": -103.3834670599487,
+   "seconds": 332.7234146000119,
+   "slot_error": 14.788259560660606,
+   "collisions": 0.91,
+   "drones": 20
+  },
+  {
+   "update": 156,
+   "samples": 1758720,
+   "return": -103.3834670599487,
+   "seconds": 333.9304005999584,
+   "slot_error": 18.540289422398825,
+   "collisions": 0.875,
+   "drones": 20
+  },
+  {
+   "update": 157,
+   "samples": 1763584,
+   "return": -118.66021975679845,
+   "seconds": 335.03194200003054,
+   "slot_error": 11.173434698772176,
+   "collisions": 0.24,
+   "drones": 20
+  },
+  {
+   "update": 158,
+   "samples": 1768448,
+   "return": -104.9611365026173,
+   "seconds": 336.12691700004507,
+   "slot_error": 16.562404344626444,
+   "collisions": 0.37,
+   "drones": 20
+  },
+  {
+   "update": 159,
+   "samples": 1773312,
+   "return": -104.9611365026173,
+   "seconds": 337.22859099996276,
+   "slot_error": 10.806689352267307,
+   "collisions": 0.3,
+   "drones": 20
+  },
+  {
+   "update": 160,
+   "samples": 1778176,
+   "return": -97.98622460664367,
+   "seconds": 338.37506790005136,
+   "slot_error": 11.900258310247134,
+   "collisions": 0.04,
+   "drones": 20
+  },
+  {
+   "update": 161,
+   "samples": 1783040,
+   "return": -96.05022400173709,
+   "seconds": 339.4466348999413,
+   "slot_error": 22.51065502091807,
+   "collisions": 0.45,
+   "drones": 20
+  },
+  {
+   "update": 162,
+   "samples": 1787904,
+   "return": -96.05022400173709,
+   "seconds": 340.55793959996663,
+   "slot_error": 23.569076714024344,
+   "collisions": 0.52,
+   "drones": 20
+  },
+  {
+   "update": 163,
+   "samples": 1792768,
+   "return": -101.38019987223295,
+   "seconds": 341.6352137000067,
+   "slot_error": 20.1172747369872,
+   "collisions": 0.78,
+   "drones": 20
+  },
+  {
+   "update": 164,
+   "samples": 1797632,
+   "return": -101.38019987223295,
+   "seconds": 342.76177450001705,
+   "slot_error": 11.645768393000175,
+   "collisions": 0.22,
+   "drones": 20
+  }
+ ]
+}
