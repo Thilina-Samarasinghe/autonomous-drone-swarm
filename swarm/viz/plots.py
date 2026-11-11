@@ -67,3 +67,30 @@ def plot_metrics(history: list[Metrics], radius: float, path: str) -> None:
     fig.tight_layout()
     fig.savefig(path, dpi=130)
     plt.close(fig)
+
+
+def plot_info(info: list, path: str) -> None:
+    """Knowledge over time (Phase 3): map coverage, accuracy, radio graph."""
+    t = np.array([i.time for i in info])
+    fig, axes = plt.subplots(1, 3, figsize=(14, 4))
+    ax = axes[0]
+    ax.plot(t, [i.map_coverage_team for i in info], lw=1.6, label="team (union)")
+    ax.plot(t, [i.map_coverage_mean for i in info], lw=1.6, label="average drone")
+    ax.plot(t, [i.map_coverage_min for i in info], lw=1.2, ls="--", label="least-informed drone")
+    ax.set_ylim(0, 1.02)
+    ax.set_title("Map coverage (fraction of arena)")
+    ax.legend(loc="lower right")
+    ax = axes[1]
+    ax.plot(t, [i.map_accuracy for i in info], lw=1.4)
+    ax.set_title("Map accuracy (known cells correct)")
+    ax = axes[2]
+    ax.plot(t, [i.comm_groups for i in info], lw=1.4, label="radio groups")
+    ax.plot(t, [i.info_age for i in info], lw=1.4, label="info age (s)")
+    ax.set_title("Radio network")
+    ax.legend(loc="upper right")
+    for ax in axes:
+        ax.set_xlabel("time [s]")
+        ax.grid(alpha=0.3)
+    fig.tight_layout()
+    fig.savefig(path, dpi=120)
+    plt.close(fig)

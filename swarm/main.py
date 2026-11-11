@@ -3,6 +3,8 @@
   python -m swarm.main                       # interactive viewer
   python -m swarm.main --drones 50           # override drone count
   python -m swarm.main --scenario forest --avoidance hybrid
+  python -m swarm.main --scenario survey --packet-loss 0.3
+  python -m swarm.main --headless --scenario survey --no-share --out outputs/noshare
   python -m swarm.main --headless --steps 3000 --out outputs/run1
 """
 
@@ -28,6 +30,10 @@ def parse_args(argv=None):
     p.add_argument("--seed", type=int)
     p.add_argument("--scenario", choices=SCENARIOS, help="world layout")
     p.add_argument("--avoidance", choices=METHODS, help="obstacle / collision avoidance method")
+    p.add_argument("--packet-loss", type=float, help="radio packet loss probability 0..1")
+    p.add_argument("--comm-range", type=float, help="radio range in metres")
+    p.add_argument("--no-share", action="store_true", help="drones do not share maps")
+    p.add_argument("--no-relay", action="store_true", help="single-hop radio (no forwarding)")
     p.add_argument("--headless", action="store_true", help="run without a window")
     p.add_argument("--steps", type=int, help="steps for a headless run")
     p.add_argument("--out", default="outputs/latest", help="output folder for headless runs")
@@ -47,6 +53,19 @@ def main(argv=None) -> None:
         overrides.setdefault("scenario", {})["name"] = args.scenario
     if args.avoidance is not None:
         overrides.setdefault("avoidance", {})["method"] = args.avoidance
+    comms = {}
+    if args.packet_loss is not None:
+        if not 0.0 <= args.packet_loss <= 1.0:
+            raise SystemExit("--packet-loss must be between 0 and 1")
+        comms["packet_loss"] = args.packet_loss
+    if args.comm_range is not None:
+        comms["range"] = args.comm_range
+    if args.no_share:
+        comms["share_maps"] = False
+    if args.no_relay:
+        comms["relay"] = False
+    if comms:
+        overrides["comms"] = comms
     cfg = load_config(args.config, overrides)
     sim = Simulation(cfg)
 
@@ -55,13 +74,19 @@ def main(argv=None) -> None:
         Viewer(sim).run()
         return
 
-    from swarm.viz.plots import plot_metrics, plot_trajectories
+    from swarm.viz.plots import plot_info, plot_metrics, plot_trajectories
 
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
     rec = Recorder(every=5)
+    info_every = max(1, round(1.0 / cfg.sim.dt))          # sample knowledge once per second
+    history, info = [], [sim.info_metrics()]
     t0 = time.perf_counter()
-    history = sim.run(cfg.sim.steps, rec)
+    for _ in range(cfg.sim.steps):
+        history.append(sim.step())
+        rec.capture(sim)
+        if sim.step_count % info_every == 0:
+            info.append(sim.info_metrics())
     wall = time.perf_counter() - t0
 
     import numpy as np
@@ -70,6 +95,8 @@ def main(argv=None) -> None:
                       cfg.scenario.goal_radius,
                       f"{cfg.scenario.name} / {cfg.avoidance.method} - {cfg.drones.count} drones")
     plot_metrics(history, cfg.drones.radius, str(out / "metrics.png"))
+    if sim.maps is not None or sim.comms is not None:
+        plot_info(info, str(out / "comms_mapping.png"))
 
     tail = history[len(history) // 2:]
     summary = {
@@ -92,6 +119,21 @@ def main(argv=None) -> None:
         "time_to_90pct_arrived_s": (round(sim.time_to_arrive_90, 2)
                                     if sim.time_to_arrive_90 is not None else None),
     }
+    last = info[-1]
+    summary.update({
+        "map_sharing": cfg.comms.share_maps,
+        "packet_loss": cfg.comms.packet_loss,
+        "relay": cfg.comms.relay,
+        "map_coverage_mean_final": round(last.map_coverage_mean, 3),
+        "map_coverage_min_final": round(last.map_coverage_min, 3),
+        "map_coverage_team_final": round(last.map_coverage_team, 3),
+        "map_accuracy_final": round(last.map_accuracy, 4),
+        "time_to_50pct_mean_coverage_s": next(
+            (round(i.time, 1) for i in info if i.map_coverage_mean >= 0.5), None),
+        "messages_delivered": last.delivered,
+        "messages_dropped": last.dropped,
+        "kbytes_sent": round(last.kbytes_sent, 1),
+    })
     (out / "summary.json").write_text(json.dumps(summary, indent=2))
     print(json.dumps(summary, indent=2))
     print(f"Plots written to {out.resolve()}")

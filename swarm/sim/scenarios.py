@@ -1,7 +1,9 @@
 """Built-in test scenarios. Each returns obstacles, a spawn region and a goal.
 
-World is 200 x 120 m. Spawn is on the left, goal on the right, so every
-obstacle scenario forces the swarm to cross the obstacle field.
+World is 200 x 120 m. In forest / corridor / random the swarm spawns on the
+left and the goal is on the right, so it must cross the obstacle field.
+In survey, obstacles cover the whole arena, drones start scattered across it
+and there is no goal: flocks roam and map the area (used for Phase 3 comms).
 """
 
 from __future__ import annotations
@@ -12,7 +14,7 @@ import numpy as np
 
 from swarm.sim.obstacles import Obstacles
 
-SCENARIOS = ("open", "forest", "corridor", "random")
+SCENARIOS = ("open", "forest", "corridor", "random", "survey")
 
 
 @dataclass
@@ -48,13 +50,19 @@ def build_scenario(name: str, world_size: np.ndarray, rng: np.random.Generator,
         circles = [(130.0, h / 2 + 12, 3.0), (130.0, h / 2 - 12, 3.0)]
         return Scenario(name, Obstacles(circles=circles, boxes=boxes), left_spawn, right_goal)
 
-    if name == "random":
+    if name in ("random", "survey"):
+        if name == "survey":
+            x_lo, x_hi, num_obstacles = 20.0, w - 20.0, max(num_obstacles, 30)
+            spawn, goal = (14.0, 14.0, w - 14.0, h - 14.0), None
+        else:
+            x_lo, x_hi = 60.0, w - 50.0
+            spawn, goal = left_spawn, right_goal
         circles, boxes = [], []
         placed: list[tuple[float, float, float]] = []   # (x, y, bounding radius)
         tries = 0
         while len(placed) < num_obstacles and tries < 5000:
             tries += 1
-            x, y = rng.uniform(60.0, w - 50.0), rng.uniform(8.0, h - 8.0)
+            x, y = rng.uniform(x_lo, x_hi), rng.uniform(8.0, h - 8.0)
             if rng.random() < 0.6:
                 r = rng.uniform(1.5, 4.5)
                 shape, bound = ("c", (x, y, r)), r
@@ -66,6 +74,6 @@ def build_scenario(name: str, world_size: np.ndarray, rng: np.random.Generator,
                 continue
             placed.append((x, y, bound))
             (circles if shape[0] == "c" else boxes).append(shape[1])
-        return Scenario(name, Obstacles(circles=circles, boxes=boxes), left_spawn, right_goal)
+        return Scenario(name, Obstacles(circles=circles, boxes=boxes), spawn, goal)
 
     raise ValueError(f"Unknown scenario '{name}'. Choose from {SCENARIOS}")

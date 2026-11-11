@@ -65,9 +65,32 @@ class AvoidanceConfig:
 
 @dataclass
 class ScenarioConfig:
-    name: str = "open"                # open | forest | corridor | random
+    name: str = "open"                # open | forest | corridor | random | survey
     goal_radius: float = 15.0         # drones inside this radius count as arrived
     num_obstacles: int = 25           # used by the random scenario
+
+
+@dataclass
+class MappingConfig:
+    enabled: bool = True
+    cell_size: float = 2.0            # metres per occupancy-grid cell
+    update_interval: float = 0.1      # seconds between lidar -> map updates
+    l_free: float = -0.4              # log-odds added when a beam passes through a cell
+    l_occ: float = 0.85               # log-odds added when a beam ends in a cell
+    l_max: float = 4.0                # clamp, keeps cells able to change their mind
+    known_threshold: float = 1.0      # |log-odds| above this = cell is "known"
+
+
+@dataclass
+class CommsConfig:
+    enabled: bool = True
+    range: float = 30.0               # radio range (m)
+    packet_loss: float = 0.0          # probability each delivery is lost (0..1)
+    latency: float = 0.1              # seconds from send to receive
+    broadcast_interval: float = 0.25  # seconds between broadcasts (4 Hz)
+    share_maps: bool = True           # include map cells in messages
+    relay: bool = True                # re-broadcast what was learned from others (multi-hop)
+    max_cells_per_message: int = 300  # bandwidth cap
 
 
 @dataclass
@@ -88,6 +111,8 @@ class Config:
     sensor: SensorConfig = field(default_factory=SensorConfig)
     avoidance: AvoidanceConfig = field(default_factory=AvoidanceConfig)
     scenario: ScenarioConfig = field(default_factory=ScenarioConfig)
+    mapping: MappingConfig = field(default_factory=MappingConfig)
+    comms: CommsConfig = field(default_factory=CommsConfig)
     render: RenderConfig = field(default_factory=RenderConfig)
 
     def to_dict(self) -> dict[str, Any]:
@@ -104,6 +129,12 @@ def _merge(target: Any, overrides: dict[str, Any], path: str = "") -> None:
             if not isinstance(value, dict):
                 raise TypeError(f"Config section '{path}{key}' must be a mapping")
             _merge(current, value, f"{path}{key}.")
+        elif isinstance(current, bool):
+            if isinstance(value, str):
+                if value.lower() not in ("true", "false", "1", "0", "yes", "no"):
+                    raise ValueError(f"Config key '{path}{key}' must be true/false, got '{value}'")
+                value = value.lower() in ("true", "1", "yes")
+            setattr(target, key, bool(value))
         else:
             setattr(target, key, type(current)(value))
 

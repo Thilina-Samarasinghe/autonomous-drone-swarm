@@ -151,7 +151,13 @@ def test_orca_stops_drone_before_wall():
 @pytest.mark.parametrize("name", SCENARIOS)
 def test_scenarios_build_with_free_spawn(name):
     sc = build_scenario(name, np.array([200.0, 120.0]), np.random.default_rng(0))
-    if sc.spawn_region is not None:
+    if name == "survey":
+        # survey spawns among obstacles on purpose: check the drones actually spawned
+        world = World(200, 120, 12, sc.obstacles)
+        state = SwarmState.spawn(50, world, np.random.default_rng(0), 3.0, 0.5, sc.spawn_region)
+        sd, _ = sc.obstacles.signed_distance(state.pos)
+        assert (sd >= 3.0).all()
+    elif sc.spawn_region is not None:
         x0, y0, x1, y1 = sc.spawn_region
         grid = np.stack(np.meshgrid(np.linspace(x0, x1, 20), np.linspace(y0, y1, 20)), -1).reshape(-1, 2)
         sd, _ = sc.obstacles.signed_distance(grid)

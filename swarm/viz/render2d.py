@@ -2,10 +2,13 @@
 
 Controls
   SPACE pause / resume     .  single step (while paused)
-  1-4  scenario: open / forest / corridor / random
+  1-5  scenario: open/forest/corridor/random/survey
   M  cycle avoidance: none > apf > orca > hybrid
-  L  neighbour links        C  perception circles
-  T  trails                 V  lidar beams
+  L  links: radio > sensing > off
+  G  map overlay: selected drone > team > off
+  TAB  select next drone (ghosts = what it believes)
+  N  map sharing on/off     P  packet loss 0/20/50/80%
+  C  perception circles     T  trails    V  lidar beams
   LMB set shared goal       RMB clear goal
   + / -  add / remove 5 drones
   Q/A separation  W/S alignment  E/D cohesion  (+/- 0.1)
@@ -32,6 +35,10 @@ TRAIL = (90, 110, 150)
 TEXT = (220, 226, 235)
 GOAL = (230, 70, 70)
 RADIUS = (70, 90, 120)
+RADIO = (70, 200, 140)
+DROP = (235, 70, 70)
+SELECT = (255, 255, 255)
+GHOST = (255, 255, 255)
 OBSTACLE = (120, 128, 145)
 OBSTACLE_EDGE = (170, 178, 195)
 BEAM = (38, 44, 58)
@@ -55,7 +62,7 @@ class Viewer:
         self.sim = sim
         rc = sim.cfg.render
         pygame.init()
-        pygame.display.set_caption("Autonomous Drone Swarm - Phase 2: Obstacle avoidance")
+        pygame.display.set_caption("Autonomous Drone Swarm - Phase 3: Communication & mapping")
         self.screen = pygame.display.set_mode((rc.window_width, rc.window_height))
         self.clock = pygame.time.Clock()
         self.font = pygame.font.SysFont("consolas", 15)
@@ -69,7 +76,9 @@ class Viewer:
         ])
 
         self.paused = False
-        self.show_links = True
+        self.link_mode = "radio"          # radio | sensing | off
+        self.map_mode = "off"             # off | drone | team
+        self.selected = 0
         self.show_circles = False
         self.show_trails = True
         self.show_help = False
@@ -108,7 +117,20 @@ class Viewer:
         elif k == pygame.K_PERIOD and self.paused:
             self._advance(1)
         elif k == pygame.K_l:
-            self.show_links = not self.show_links
+            modes = ("radio", "sensing", "off")
+            self.link_mode = modes[(modes.index(self.link_mode) + 1) % len(modes)]
+        elif k == pygame.K_g:
+            modes = ("drone", "team", "off")
+            self.map_mode = modes[(modes.index(self.map_mode) + 1) % len(modes)]
+        elif k == pygame.K_TAB:
+            self.selected = (self.selected + 1) % max(self.sim.state.n, 1)
+        elif k == pygame.K_n:
+            self.sim.cfg.comms.share_maps = not self.sim.cfg.comms.share_maps
+        elif k == pygame.K_p:
+            levels = (0.0, 0.2, 0.5, 0.8)
+            cur = self.sim.cfg.comms.packet_loss
+            nxt = min(range(len(levels)), key=lambda i: abs(levels[i] - cur)) + 1
+            self.sim.cfg.comms.packet_loss = levels[nxt % len(levels)]
         elif k == pygame.K_c:
             self.show_circles = not self.show_circles
         elif k == pygame.K_v:
@@ -116,7 +138,7 @@ class Viewer:
         elif k == pygame.K_m:
             cur = self.sim.cfg.avoidance.method
             self.sim.set_avoidance(METHODS[(METHODS.index(cur) + 1) % len(METHODS)])
-        elif k in (pygame.K_1, pygame.K_2, pygame.K_3, pygame.K_4):
+        elif k in (pygame.K_1, pygame.K_2, pygame.K_3, pygame.K_4, pygame.K_5):
             self.sim.cfg.scenario.name = SCENARIOS[k - pygame.K_1]
             self.sim.reset()
             self.trails.clear()
@@ -164,6 +186,7 @@ class Viewer:
         br = self.to_screen(np.array([w.width, 0.0]))
         rect = pygame.Rect(*tl, *(br - tl))
         pygame.draw.rect(self.screen, ARENA, rect)
+        self._draw_map(rect)
         m = w.boundary_margin * self.scale
         pygame.draw.rect(self.screen, MARGIN, rect.inflate(-2 * m, -2 * m), 1)
         pygame.draw.rect(self.screen, MARGIN, rect, 2)
@@ -182,6 +205,23 @@ class Viewer:
             pygame.draw.circle(self.screen, (90, 50, 55), g,
                                self.sim.cfg.scenario.goal_radius * self.scale, 1)
 
+    def _draw_map(self, rect: pygame.Rect) -> None:
+        maps = self.sim.maps
+        if self.map_mode == "off" or maps is None:
+            return
+        if self.map_mode == "drone":
+            values = maps.L[min(self.selected, maps.n - 1)]
+        else:
+            values = maps.team_map()
+        grid = maps.grid(values)[::-1]                       # row 0 = top of screen
+        thr = self.sim.cfg.mapping.known_threshold
+        rgba = np.zeros(grid.shape + (4,), dtype=np.uint8)
+        free, occ = grid <= -thr, grid >= thr
+        rgba[free] = (40, 90, 70, 150)
+        rgba[occ] = (235, 150, 60, 230)
+        surf = pygame.image.frombuffer(rgba.tobytes(), (maps.gw, maps.gh), "RGBA")
+        self.screen.blit(pygame.transform.scale(surf, (rect.width, rect.height)), rect.topleft)
+
     def _draw_swarm(self) -> None:
         sim = self.sim
         d = sim.cfg.drones
@@ -192,9 +232,15 @@ class Viewer:
             for idx in range(pts.shape[1]):
                 pygame.draw.lines(self.screen, TRAIL, False, pts[:, idx].tolist(), 1)
 
-        if self.show_links:
+        if self.link_mode == "sensing":
             for a, b in sim.neighbors.undirected():
                 pygame.draw.line(self.screen, LINK, pos_s[a], pos_s[b], 1)
+        elif self.link_mode == "radio" and sim.comms is not None:
+            for a, b in sim.comms.links:
+                pygame.draw.line(self.screen, RADIO, pos_s[a], pos_s[b], 1)
+            for a, b in sim.comms.recent_drops:
+                if a < len(pos_s) and b < len(pos_s):
+                    pygame.draw.line(self.screen, DROP, pos_s[a], pos_s[b], 2)
 
         if self.show_beams:
             scan = sim.scan
@@ -226,12 +272,28 @@ class Viewer:
             pygame.draw.circle(self.screen, GOAL, g, 8, 2)
             pygame.draw.circle(self.screen, GOAL, g, 3)
 
+        # selected drone: radio range + where it BELIEVES the others are
+        if sim.state.n:
+            k = min(self.selected, sim.state.n - 1)
+            pygame.draw.circle(self.screen, SELECT, pos_s[k], size + 5, 2)
+            if sim.comms is not None:
+                pygame.draw.circle(self.screen, (60, 110, 90), pos_s[k],
+                                   sim.cfg.comms.range * self.scale, 1)
+                belief = sim.comms.table[k]
+                seen = ~np.isnan(belief[:, 2])
+                seen[k] = False
+                ghosts = self.to_screen(belief[seen, :2])
+                ages = sim.time - belief[seen, 2]
+                for gp, age in zip(ghosts, ages):
+                    fade = int(np.clip(255 - age * 12, 60, 255))
+                    pygame.draw.circle(self.screen, (fade, fade, fade), gp, 3, 1)
+
     def _draw_hud(self) -> None:
         sim, m, w = self.sim, self.sim.metrics, self.sim.cfg.boids
         x0 = self.screen.get_width() - HUD_W
         pygame.draw.rect(self.screen, (12, 15, 22), (x0, 0, HUD_W, self.screen.get_height()))
         lines = [
-            ("PHASE 2 - AVOIDANCE", None),
+            ("PHASE 3 - COMMS & MAPPING", None),
             ("", None),
             (f"scenario  {sim.cfg.scenario.name:>11s}", (150, 200, 255)),
             (f"avoidance {sim.cfg.avoidance.method:>11s}", (150, 200, 255)),
@@ -251,10 +313,30 @@ class Viewer:
             (f"mean speed   {m.mean_speed:8.2f} m/s", None),
             (f"local polar. {m.local_polarization:8.2f}", None),
             (f"groups       {m.groups:8d}", None),
+            (f"weights s/a/c {w.separation_weight:.1f}/{w.alignment_weight:.1f}/{w.cohesion_weight:.1f}", None),
             ("", None),
-            (f"sep  w (Q/A) {w.separation_weight:8.2f}", None),
-            (f"align w(W/S) {w.alignment_weight:8.2f}", None),
-            (f"coh  w (E/D) {w.cohesion_weight:8.2f}", None),
+        ]
+        im = sim.info_metrics() if (sim.maps is not None or sim.comms is not None) else None
+        if im is not None:
+            cfgc = sim.cfg.comms
+            drop_pct = 100.0 * im.dropped / max(im.dropped + im.delivered, 1)
+            k = min(self.selected, max(sim.state.n - 1, 0))
+            sel_cov = (float(sim.truth.coverage(sim.maps.L[k], sim.cfg.mapping.known_threshold))
+                       if sim.maps is not None else float("nan"))
+            lines += [
+                ("COMMS & MAP", (150, 200, 255)),
+                (f"sharing  {'on' if cfgc.share_maps else 'OFF':>4s} loss {cfgc.packet_loss:4.0%}", None),
+                (f"radio links  {im.comm_links:8d}", None),
+                (f"radio groups {im.comm_groups:8d}", None),
+                (f"dropped      {drop_pct:7.1f}%", BAD if drop_pct > 0 else None),
+                (f"traffic      {im.kbytes_sent / max(sim.time, 1e-9):6.1f} kB/s", None),
+                (f"map drone #{k:<3d}{sel_cov:7.0%}", None),
+                (f"map average  {im.map_coverage_mean:8.0%}", None),
+                (f"map team     {im.map_coverage_team:8.0%}", None),
+                (f"map accuracy {im.map_accuracy:8.1%}", None),
+                (f"info age     {im.info_age:7.1f} s", None),
+            ]
+        lines += [
             ("", None),
             ("PAUSED" if self.paused else "running", (250, 210, 60) if self.paused else (120, 220, 140)),
             ("H = help", (140, 150, 170)),

@@ -1,9 +1,9 @@
 # Autonomous Drone Swarm Simulation
 
-> 🚧 **Work in progress.** Phases 0–2 (simulation core, boids flocking,
-> obstacle avoidance with lidar + ORCA) are built. Communication, path planning,
-> formation flying, search-and-rescue and reinforcement learning are **still
-> being built**. See [Roadmap](#roadmap) below.
+> 🚧 **Work in progress.** Phases 0–3 (simulation core, boids flocking,
+> obstacle avoidance with lidar + ORCA, radio communication with shared
+> mapping) are built. Path planning, formation flying, search-and-rescue and
+> reinforcement learning are **still being built**. See [Roadmap](#roadmap) below.
 
 A 2D simulator for a swarm of **20–50 autonomous drones**. Every drone makes its
 own decisions using only what it can sense around itself, and cooperative
@@ -55,9 +55,9 @@ intelligence**, not one central AI controlling every drone.
 |---|---|---|
 | 0 | Project setup: config system, seeded fixed-timestep engine, metrics, tests | ✅ Done |
 | 1 | Boids flocking + real-time 2D viewer + headless runner with plots | ✅ Done |
-| 2 | Obstacles, lidar sensing, APF + ORCA collision avoidance, scenarios, benchmark | ✅ Done (under review) |
-| 3 | Communication network and shared map | 🔜 Next |
-| 4 | A* / D* Lite path planning | 📋 Planned |
+| 2 | Obstacles, lidar sensing, APF + ORCA collision avoidance, scenarios, benchmark | ✅ Done |
+| 3 | Radio network, per-drone occupancy maps, multi-hop map sharing, benchmark | ✅ Done (under review) |
+| 4 | A* / D* Lite path planning | 🔜 Next |
 | 5 | Formation flying | 📋 Planned |
 | 6 | Cooperative search and rescue (PSO, coverage, task allocation) | 📋 Planned |
 | 7 | Terrain cost and threat zones, PSO multi-drone path planner | 📋 Planned |
@@ -92,6 +92,20 @@ intelligence**, not one central AI controlling every drone.
   (wall with one 14 m gap), `random` (seeded mix of circles and boxes).
 - **Avoidance benchmark** (Phase 2): every method × scenario × seed in parallel,
   writing a CSV and a markdown results table.
+- **Occupancy-grid map per drone** (Phase 3): 2 m cells, log-odds updates
+  from the drone's own lidar, scored against ground truth (99.8%+ accurate).
+- **Radio network** (Phase 3): 30 m range, packet loss, latency, a broadcast
+  rate and a per-message bandwidth cap. Each drone keeps a beacon table of
+  where it believes the others are.
+- **Multi-hop map sharing** (Phase 3): drones broadcast newly learned map
+  cells plus a random sample of known ones (anti-entropy, so lost packets
+  are eventually repaired). Receivers keep the more confident value, so
+  information relayed over many hops is never double-counted. Sharing and
+  relaying can each be switched off for comparison.
+- **`survey` scenario** (Phase 3): obstacles across the whole arena, drones
+  start scattered and roam in several flocks, no goal.
+- **Communication benchmark** (Phase 3): no sharing vs single-hop vs
+  multi-hop at 0/20/50/80% packet loss.
 - **Fast neighbour search**: KD-tree, roughly N log N cost.
 - **Real-time Pygame viewer**: neighbour links, trails, perception circles,
   live stats panel, behaviour weights tunable while running, add or remove drones.
@@ -102,11 +116,8 @@ intelligence**, not one central AI controlling every drone.
 
 ### 🚧 Still being built / planned
 
-- Local occupancy map per drone built from lidar; maze scenario
-- Moving (dynamic) obstacles
-- Range-limited messaging with packet loss and latency; live communication-graph view
-- Map sharing and merging between drones
-- A*, Theta*, D* Lite path planning with path smoothing
+- Maze scenario; moving (dynamic) obstacles
+- A*, Theta*, D* Lite path planning on each drone's *own* shared map, with path smoothing
 - Leader-follower and virtual-structure formations with shape switching
 - Search and rescue: Voronoi area split, frontier exploration, PSO victim search,
   CBBA/auction task allocation, battery and return-to-base
@@ -151,6 +162,15 @@ python -m swarm.main --scenario forest --drones 50
 python -m swarm.main --scenario corridor --avoidance orca
 python -m swarm.main --headless --scenario random --avoidance apf --out outputs/apf_random
 
+# Communication and shared mapping (Phase 3)
+python -m swarm.main --scenario survey --drones 50
+python -m swarm.main --scenario survey --packet-loss 0.5
+python -m swarm.main --headless --scenario survey --no-share --out outputs/noshare
+python -m swarm.main --headless --scenario survey --no-relay --out outputs/singlehop
+
+# Benchmark communication settings (writes outputs/benchmarks/comms.*)
+python -m experiments.benchmark_comms                           # 50 drones x 3 seeds
+
 # Benchmark every avoidance method on every scenario (writes outputs/benchmarks/)
 python -m experiments.benchmark_avoidance                       # 50 drones x 5 seeds
 python -m experiments.benchmark_avoidance --drones 30 --seeds 3 --steps 1500   # quicker
@@ -164,8 +184,12 @@ python -m swarm.main --config configs/my_experiment.yaml
 | `--config` | `configs/default.yaml` | YAML configuration file |
 | `--drones` | from config (30) | Number of drones |
 | `--seed` | from config (42) | Random seed |
-| `--scenario` | from config (`open`) | `open`, `forest`, `corridor`, `random` |
+| `--scenario` | from config (`open`) | `open`, `forest`, `corridor`, `random`, `survey` |
 | `--avoidance` | from config (`orca`) | `none`, `apf`, `orca`, `hybrid` |
+| `--packet-loss` | from config (0) | Radio packet loss probability, 0–1 |
+| `--comm-range` | from config (30) | Radio range in metres |
+| `--no-share` | off | Drones don't share maps |
+| `--no-relay` | off | Single-hop radio: no forwarding of others' information |
 | `--headless` | off | Run without a window |
 | `--steps` | from config (3000) | Steps for a headless run (1 step = 0.05 s) |
 | `--out` | `outputs/latest` | Output folder for headless results |
@@ -176,7 +200,8 @@ A headless run writes:
 |---|---|
 | `trajectories.png` | Every drone's path (■ start, ● end) |
 | `metrics.png` | Min separation, polarization, mean speed and groups over time |
-| `summary.json` | Collisions, obstacle hits, closest approach, clearance, arrivals, time for 90% to arrive, alignment, run speed |
+| `comms_mapping.png` | Map coverage (team / average / worst drone), accuracy, radio groups and info age over time |
+| `summary.json` | Collisions, obstacle hits, clearance, arrivals, alignment, map coverage and accuracy, time to 50% coverage, messages delivered / dropped, traffic, run speed |
 
 ---
 
@@ -186,12 +211,16 @@ A headless run writes:
 |---|---|
 | `SPACE` | Pause / resume |
 | `.` | Single step (while paused) |
-| `1` `2` `3` `4` | Scenario: open / forest / corridor / random |
+| `1` `2` `3` `4` `5` | Scenario: open / forest / corridor / random / survey |
 | `M` | Cycle avoidance method: none → apf → orca → hybrid |
 | `V` | Toggle lidar beams (red = hit) |
 | Left click | Set a shared goal point |
 | Right click | Clear the goal |
-| `L` | Toggle neighbour links |
+| `L` | Links: radio (red = dropped message) → sensing → off |
+| `G` | Map overlay: selected drone's map → team map → off |
+| `Tab` | Select next drone (white ghosts = where it *believes* the others are) |
+| `N` | Map sharing on / off |
+| `P` | Packet loss: 0 → 20 → 50 → 80% |
 | `C` | Toggle perception circles |
 | `T` | Toggle trails |
 | `+` / `-` | Add / remove 5 drones |
@@ -205,6 +234,8 @@ A headless run writes:
 
 Drone colour shows speed: blue is slow, cyan is cruising, yellow is fast.
 The dashed red circle is the goal area; the panel shows how many drones arrived.
+In the map overlay, green cells are known free and orange cells known occupied.
+The big circle around the selected drone is its radio range.
 
 ---
 
@@ -247,6 +278,19 @@ metres and seconds. Unknown keys raise an error, so typos are caught early.
 | `scenario` | `name` | open | `open` / `forest` / `corridor` / `random` |
 | | `goal_radius` | 15 | Drones inside count as arrived (m) |
 | | `num_obstacles` | 25 | Random scenario only |
+| `mapping` | `enabled` | true | Build occupancy maps |
+| | `cell_size` | 2.0 | Grid cell size (m) |
+| | `update_interval` | 0.1 | Seconds between lidar → map updates |
+| | `l_free` / `l_occ` / `l_max` | −0.4 / 0.85 / 4.0 | Log-odds update and clamp |
+| | `known_threshold` | 1.0 | \|log-odds\| above this = cell known |
+| `comms` | `enabled` | true | Radio on |
+| | `range` | 30 | Radio range (m) |
+| | `packet_loss` | 0.0 | Probability each delivery is lost |
+| | `latency` | 0.1 | Seconds from send to receive |
+| | `broadcast_interval` | 0.25 | Seconds between broadcasts (4 Hz) |
+| | `share_maps` | true | Include map cells in messages |
+| | `relay` | true | Multi-hop forwarding |
+| | `max_cells_per_message` | 300 | Bandwidth cap |
 | `render` | `window_width` × `window_height` | 1200 × 760 | |
 | | `fps` | 60 | |
 | | `trail_length` | 40 | Frames of trail per drone |
@@ -266,6 +310,8 @@ each step (dt = 0.05 s):
   4. dynamics    = clamp accel -> update velocity -> clamp speed -> update position
   5. physics     = walls + obstacles push drones out (counted as a hit)
   6. metrics     = separation, collisions, hits, clearance, arrivals, alignment
+  7. mapping     = every 0.1 s each drone folds its lidar scan into its own map
+  8. radio       = every 0.25 s each drone broadcasts; deliveries arrive after latency
 ```
 
 ### Controller interface
@@ -327,6 +373,31 @@ as ORCA, but the benchmark showed the extra APF push only slows the swarm
 down (15–30% longer to reach the goal) without adding clearance, so **ORCA
 alone is the default**.
 
+### Communication and shared mapping (Phase 3)
+
+**Occupancy grid.** Each drone's map is a grid of 2 m cells storing the
+log-odds that the cell is occupied. A lidar beam passing through a cell
+lowers it (free); a beam ending in a cell raises it (occupied). Values are
+clamped so a cell can still change its mind. Drones never see the true map:
+ground truth is used only to score them.
+
+**Radio.** Every 0.25 s each drone broadcasts one message to every drone
+within 30 m. Each delivery can be lost (`packet_loss`) and arrives after
+`latency`. A message carries:
+- a **beacon table**: where the sender believes every drone is, with timestamps;
+  receivers keep whichever entry is newer
+- up to 300 **map cells**: first the ones the sender recently became sure
+  about, then a random sample of cells it already knows. The sample is
+  *anti-entropy*: without it, a cell whose messages were all lost would never
+  be sent again.
+
+**Merging.** A receiver adopts a cell only when the sender is clearly more
+confident about it. "More confident wins" can be applied any number of times
+with the same result, so information that loops through the network is never
+double-counted. Adopted cells are re-broadcast (relay), which is how
+knowledge travels **multi-hop** between flocks that are out of direct range.
+With `relay` off, drones forward nothing they learned from others.
+
 Lessons from development (found by tests and benchmarks):
 
 - Drones spawned at full speed in random directions collided before they
@@ -343,6 +414,15 @@ Lessons from development (found by tests and benchmarks):
 - *Phase 2:* raycasting every beam against every obstacle took half the step
   time. Testing only obstacles within sensor range made it about 3× faster
   with identical results (verified against brute force).
+- *Phase 3:* the first sharing design sent each new map cell once. If that
+  message was lost, or nobody was in range, the cell was never shared again.
+  Adding anti-entropy (a random sample of known cells per message) fixed it.
+- *Phase 3:* in single-hop mode the anti-entropy sample could still forward
+  cells learned from others, which is secretly multi-hop. Drones now track which
+  cells they observed themselves, and single-hop sends only those.
+- *Phase 3:* merging each delivered message separately was slow when a
+  tight flock exchanged ~2,500 messages per broadcast. Messages are now
+  grouped per receiver and merged in one vectorised pass.
 
 ---
 
@@ -360,8 +440,13 @@ Lessons from development (found by tests and benchmarks):
 | `min_clearance` | Smallest gap between a drone's body and an obstacle (m) | > 0 |
 | `arrived` | Drones inside the goal radius | all |
 | `time_to_90pct_arrived` | Seconds until 90% of the swarm reached the goal | lower is better |
+| `map_coverage_mean` / `min` / `team` | Fraction of the arena known by the average drone / the least-informed drone / the whole team | higher is better |
+| `map_accuracy` | Known cells classified correctly (vs ground truth) | > 99% |
+| `comm_links` / `comm_groups` | Radio links in range / connected radio groups | 1 group = everyone reachable |
+| `teammates_known` / `info_age` | How many teammates each drone knows about, and how old that information is (s) | |
+| `delivered` / `dropped` / `kbytes_sent` | Radio traffic | |
 
-Planned metrics for later phases: coverage %, victims found, time to find,
+Planned metrics for later phases: victims found, time to find,
 messages sent, path length, formation error, energy use.
 
 ---
@@ -414,6 +499,35 @@ What the numbers show:
 - 96–99% arrival rather than 100%: the last 1–2 drones are usually squeezed
   out of the crowded goal circle, not stuck.
 
+### Phase 3: communication benchmark
+
+`survey` scenario, 50 drones, 3 seeds per row, 120 s simulated. Coverage is
+the fraction of the arena a drone has classified in its **own** map.
+Reproduce with `python -m experiments.benchmark_comms`.
+
+| Setting | Average drone's map at 30 s | Time to 50% | Time to 80% | Time to 90% | Final: average / worst drone | Map accuracy | Traffic |
+|---|---|---|---|---|---|---|---|
+| no sharing | 17% | 119 s (2 of 3 runs) | never | never | 46% / 31% | 99.8% | 120 kB/s |
+| single-hop, 0% loss | 54% | 36 s | 62 s | 69 s | 94% / 58% | 99.9% | 63 kB/s |
+| **multi-hop, 0% loss** | **85%** | **3 s** | **20 s** | **49 s** | 95% / 90% | 99.8% | 186 kB/s |
+| multi-hop, 20% loss | 84% | 4 s | 24 s | 51 s | 95% / 89% | 99.9% | 186 kB/s |
+| multi-hop, 50% loss | 81% | 4 s | 40 s | 57 s | 95% / 86% | 99.9% | 186 kB/s |
+| multi-hop, 80% loss | 72% | 16 s | 44 s | 61 s | 94% / 70% | 99.9% | 186 kB/s |
+
+All 18 runs: 0 drone collisions, 0 obstacle hits.
+
+What the numbers show:
+- **Sharing is the difference between 17% and 85%** of the arena known per drone after 30 s.
+- **Relaying matters as much as sharing**: single-hop drones only learn from
+  their own flock, so the worst drone ends at 58% vs 90% with multi-hop.
+- **The swarm tolerates heavy packet loss.** 50% loss costs little, because
+  the same information arrives by many paths and anti-entropy repairs gaps.
+  Only at 80% loss does it slow down noticeably, and every setting still ends
+  above 94%.
+- **Traffic** is about 3.7 kB/s per drone with multi-hop sharing (≈ 30 kbit/s),
+  within reach of common low-power drone radios. "No sharing" still sends
+  beacon tables, which is why it isn't zero.
+
 ---
 
 ## Project structure
@@ -432,10 +546,14 @@ autonomous-drone-swarm/
 │   ├── agents/
 │   │   ├── state.py          swarm state (positions, velocities, ids), spawning
 │   │   └── sensors.py        lidar range sensor, nearest-obstacle detections
+│   ├── mapping/
+│   │   └── occupancy.py      per-drone log-odds grids, merging, ground truth
+│   ├── comms/
+│   │   └── network.py        radio model, beacon tables, message delivery
 │   ├── sim/
 │   │   ├── world.py          arena, walls, obstacles
 │   │   ├── obstacles.py      circle/box geometry: distance, raycast, collision
-│   │   ├── scenarios.py      open / forest / corridor / random layouts
+│   │   ├── scenarios.py      open / forest / corridor / random / survey layouts
 │   │   ├── dynamics.py       point-mass integration with limits
 │   │   ├── neighbors.py      KD-tree neighbour queries
 │   │   └── engine.py         simulation loop, recorder
@@ -448,23 +566,24 @@ autonomous-drone-swarm/
 │       ├── render2d.py       Pygame real-time viewer
 │       └── plots.py          Matplotlib trajectory and metric plots
 ├── experiments/
-│   └── benchmark_avoidance.py   method x scenario x seed comparison
+│   ├── benchmark_avoidance.py   method x scenario x seed comparison
+│   └── benchmark_comms.py       sharing / relay / packet-loss comparison
 ├── tests/
 │   ├── test_core.py          Phase 0-1 tests
-│   └── test_phase2.py        Phase 2 tests
+│   ├── test_phase2.py        Phase 2 tests
+│   └── test_phase3.py        Phase 3 tests
 ├── requirements.txt
 └── pytest.ini
 ```
 
-Planned additions: `swarm/comms/`, `swarm/planning/`, `swarm/missions/` and
-`swarm/rl/`.
+Planned additions: `swarm/planning/`, `swarm/missions/` and `swarm/rl/`.
 
 ---
 
 ## Testing
 
 ```bash
-python -m pytest            # 36 tests, ~35 s
+python -m pytest            # 58 tests, ~60 s
 python -m pytest -v         # verbose
 ```
 
@@ -487,6 +606,17 @@ The tests cover:
 - *Phase 2:* every scenario has an obstacle-free spawn area and goal
 - *Phase 2:* end to end, 30 drones cross the forest and the corridor with 0 collisions,
   0 obstacle hits and ≥ 90% arrived; the CLI headless run and viewer key handling also work
+- *Phase 3:* lidar marks free space and walls correctly, never cells behind a
+  wall; values stay clamped; a sweep maps a known world at > 97% accuracy
+- *Phase 3:* merge rules: the more confident value wins, merging is idempotent,
+  and duplicates keep the strongest value; messages send new cells first, then
+  a refresh sample; single-hop sends only self-observed cells
+- *Phase 3:* radio: in range → heard, out of range → never; 100% loss
+  delivers nothing; latency delays delivery exactly; positions **and** map
+  cells cross A → B → C only when relay is on
+- *Phase 3:* end to end: sharing raises every drone's coverage by > 30 points;
+  radio randomness never changes how drones fly; adding or removing drones
+  resizes maps and radio; config, CLI and viewer keys all work
 
 ---
 
@@ -499,8 +629,8 @@ Full details are in [docs/PLAN.md](docs/PLAN.md).
 | 0 | Setup | Config, engine, metrics, tests | ✅ |
 | 1 | Boids | Flocking with 20–50 drones, viewer, plots | ✅ |
 | 2 | Obstacles and avoidance | Obstacles, lidar, APF, ORCA safety layer, hybrid, forest / corridor / random scenarios, benchmark | ✅ |
-| 3 | Communication | Range-limited broadcast, packet loss and latency, comm-graph view, shared occupancy map | 🔜 |
-| 4 | Path planning | Occupancy grid, A*, Theta*, D* Lite replanning, path smoothing, maze scenario | 📋 |
+| 3 | Communication | Radio with range / loss / latency / bandwidth, beacon tables, per-drone occupancy maps, multi-hop sharing, benchmark | ✅ |
+| 4 | Path planning | A*, Theta*, D* Lite replanning on each drone's shared map, path smoothing, maze scenario | 🔜 |
 | 5 | Formation flying | Leader-follower, virtual structure, line / V / circle switching, passing through gaps | 📋 |
 | 6 | Search and rescue | Area partitioning, frontier exploration, PSO victim search, CBBA task allocation, battery | 📋 |
 | 7 | Terrain and threats | Heightmap cost, threat zones, PSO multi-drone route planner | 📋 |
@@ -519,6 +649,8 @@ Full details are in [docs/PLAN.md](docs/PLAN.md).
 | Ray casting (circle + slab intersection) | Lidar simulation | ✅ |
 | Artificial potential fields | Obstacle avoidance baseline | ✅ |
 | ORCA / velocity obstacles + 2D linear programming | Drone–drone and drone–obstacle collision prevention | ✅ |
+| Log-odds occupancy-grid mapping | Each drone's own map | ✅ |
+| Gossip / epidemic dissemination with anti-entropy | Multi-hop map and position sharing | ✅ |
 | A*, Theta*, D* Lite | Path planning and replanning | 📋 Phase 4 |
 | Leader-follower, virtual structure, consensus | Formation control | 📋 Phase 5 |
 | Frontier exploration, Voronoi coverage | Area search | 📋 Phase 6 |
@@ -562,6 +694,8 @@ Full details are in [docs/PLAN.md](docs/PLAN.md).
 - C. Reynolds, *Flocks, Herds, and Schools: A Distributed Behavioral Model*, SIGGRAPH 1987
 - C. Reynolds, *Steering Behaviors for Autonomous Characters*, GDC 1999
 - R. Olfati-Saber, *Flocking for Multi-Agent Dynamic Systems*, IEEE TAC 2006
+- S. Thrun, W. Burgard, D. Fox, *Probabilistic Robotics* (occupancy grid mapping, ch. 9), MIT Press 2005
+- A. Demers et al., *Epidemic Algorithms for Replicated Database Maintenance* (gossip, anti-entropy), PODC 1987
 - O. Khatib, *Real-Time Obstacle Avoidance for Manipulators and Mobile Robots* (potential fields), IJRR 1986
 - J. van den Berg et al., *Reciprocal n-Body Collision Avoidance (ORCA)*, ISRR 2011
 - RVO2 Library (reference ORCA implementation), UNC Chapel Hill

@@ -42,9 +42,28 @@ avoidance:
   safety_margin: 0.3
 
 scenario:
-  name: open              # open | forest | corridor | random
+  name: open              # open | forest | corridor | random | survey
   goal_radius: 15.0
   num_obstacles: 25       # random scenario only
+
+mapping:
+  enabled: true
+  cell_size: 2.0          # occupancy-grid cell (m)
+  update_interval: 0.1    # s between lidar -> map updates
+  l_free: -0.4
+  l_occ: 0.85
+  l_max: 4.0
+  known_threshold: 1.0
+
+comms:
+  enabled: true
+  range: 30.0             # radio range (m)
+  packet_loss: 0.0        # 0..1
+  latency: 0.1            # s
+  broadcast_interval: 0.25  # s (4 Hz)
+  share_maps: true
+  relay: true             # multi-hop forwarding
+  max_cells_per_message: 300
 
 render:
   window_width: 1200
