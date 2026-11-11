@@ -17,8 +17,8 @@ so a learned policy is a drop-in replacement for a hand-written one.
 | 3 | Communication | Radio (range, loss, latency, bandwidth), beacon tables, per-drone log-odds occupancy maps, multi-hop gossip sharing with anti-entropy, survey scenario, comms benchmark ✅ |
 | 4 | Path planning | Cost map from each drone's own map, A* + backward-Dijkstra cost field, optimistic replanning on obstacle changes, string-pulling path following, maze scenario, planning benchmark ✅ |
 | 5 | Formation | Leader-follower with line / V / circle / box / column, Hungarian slot assignment, radio-based leader tracking, leader breadcrumb trail, squeezing through gaps via route passage width, formation benchmark ✅ |
-| 6 | Search & rescue | Rescue scenario with 8 victims and a charging base; per-drone state machine; frontier exploration with dynamic Voronoi partitioning; PSO victim search on noisy signals; consensus auction (max 3 seekers per victim); batteries and recharging; gossip of confirmations and readings; rescue benchmark ✅ (built, awaiting review) |
-| 7 | Terrain & threats | Heightmap cost, threat zones, PSO multi-UAV path planner |
+| 6 | Search & rescue | Rescue scenario with 8 victims and a charging base; per-drone state machine; frontier exploration with dynamic Voronoi partitioning; PSO victim search on noisy signals; consensus auction (max 3 seekers per victim); batteries and recharging; gossip of confirmations and readings; rescue benchmark ✅ |
+| 7 | Terrain & threats | Gaussian-hill terrain with no-fly peaks, threat zones with lethal cores, shared route cost (length, threat, climb, turns, forbidden, space-time conflicts, delay), PSO over waypoints + departure delay, hybrid PSO seeded by grid search, grid and straight baselines, route following, terrain benchmark ✅ (built, awaiting review) |
 | 8 | Multi-agent RL | PettingZoo env; shared-parameter MAPPO (CTDE) per behaviour: avoidance, flocking, formation, search; curriculum learning |
 | 9 | Experiments | Scaling 20→50, comm loss, drone failure, RL vs classical, demo video |
 

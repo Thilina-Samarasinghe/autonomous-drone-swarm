@@ -42,7 +42,7 @@ avoidance:
   safety_margin: 0.3
 
 scenario:
-  name: open              # open | forest | corridor | random | survey | maze | rescue
+  name: open              # open | forest | corridor | random | survey | maze | rescue | terrain
   goal_radius: 15.0
   num_obstacles: 25       # random scenario only
 
@@ -117,6 +117,26 @@ mission:                  # search and rescue (runs in the rescue scenario)
   drain_speed: 0.0001     # extra per second per (m/s)^2 (~200 s at 5 m/s)
   charge_rate: 0.04       # per second on the pad (25 s to full)
   reserve: 0.08
+
+terrain:                  # hills + threat zones + pre-flight route planning (terrain scenario)
+  hills: 9
+  max_height: 100.0       # m
+  ceiling: 70.0           # ground above this cannot be flown over (m)
+  threats: 8
+  threat_radius_min: 10.0
+  threat_radius_max: 20.0
+  lethal_fraction: 0.35   # inner part of a threat zone that must never be entered
+  planner: hybrid         # hybrid (PSO seeded by grid) | pso | grid | straight
+  waypoints: 6            # free waypoints per route (PSO)
+  particles: 40
+  iterations: 150
+  speed: 5.0              # m/s used to deconflict routes in time
+  separation: 6.0         # m drones must keep at the same moment
+  w_length: 1.0           # cost weights
+  w_threat: 40.0
+  w_climb: 0.5
+  w_turn: 60.0
+  w_conflict: 50.0
 
 render:
   window_width: 1200

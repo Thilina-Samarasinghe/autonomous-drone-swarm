@@ -2,7 +2,8 @@
 
 Controls
   SPACE pause / resume     .  single step (while paused)
-  1-7  scenario: open/forest/corridor/random/survey/maze/rescue
+  1-8  scenario: open/forest/corridor/random/survey/maze/rescue/terrain
+  U  terrain: route planner hybrid > pso > grid > straight (replans)
   K  path planning on/off (yellow = selected drone's path)
   F  formation: off > line > v > circle > box > column
   M  cycle avoidance: none > apf > orca > hybrid
@@ -53,6 +54,9 @@ VICTIM_UNKNOWN = (110, 110, 120)
 VICTIM_HEARD = (255, 150, 50)
 VICTIM_FOUND = (120, 230, 120)
 BASE = (90, 160, 255)
+THREAT = (230, 60, 200)
+ROUTE_COLORS = [(31, 119, 180), (255, 127, 14), (44, 160, 44), (214, 39, 40), (148, 103, 189),
+                (140, 86, 75), (227, 119, 194), (188, 189, 34), (23, 190, 207), (250, 250, 250)]
 OBSTACLE = (120, 128, 145)
 OBSTACLE_EDGE = (170, 178, 195)
 BEAM = (38, 44, 58)
@@ -76,7 +80,7 @@ class Viewer:
         self.sim = sim
         rc = sim.cfg.render
         pygame.init()
-        pygame.display.set_caption("Autonomous Drone Swarm - Phase 6: Search and rescue")
+        pygame.display.set_caption("Autonomous Drone Swarm - Phase 7: Terrain and threats")
         self.screen = pygame.display.set_mode((rc.window_width, rc.window_height))
         self.clock = pygame.time.Clock()
         self.font = pygame.font.SysFont("consolas", 15)
@@ -158,10 +162,15 @@ class Viewer:
             self.sim.set_formation(cycle[(cycle.index(cur) + 1) % len(cycle)])
         elif k == pygame.K_k:
             self.sim.set_planning(not self.sim.cfg.planning.enabled)
-        elif k in (pygame.K_1, pygame.K_2, pygame.K_3, pygame.K_4, pygame.K_5, pygame.K_6, pygame.K_7):
+        elif k in (pygame.K_1, pygame.K_2, pygame.K_3, pygame.K_4, pygame.K_5, pygame.K_6,
+                   pygame.K_7, pygame.K_8):
             self.sim.cfg.scenario.name = SCENARIOS[k - pygame.K_1]
-            self.sim.reset()
-            self.trails.clear()
+            self._reset_with_notice()
+        elif k == pygame.K_u and self.sim.terrain is not None:
+            order = ("hybrid", "pso", "grid", "straight")
+            cur = self.sim.cfg.terrain.planner
+            self.sim.cfg.terrain.planner = order[(order.index(cur) + 1) % len(order)]
+            self._reset_with_notice()
         elif k == pygame.K_t:
             self.show_trails = not self.show_trails
             self.trails.clear()
@@ -191,6 +200,19 @@ class Viewer:
                 setattr(w, name, round(max(0.0, getattr(w, name) + delta), 2))
         return True
 
+    def _reset_with_notice(self) -> None:
+        """Reset the simulation; the terrain scenario plans routes first, which can
+        take a while, so say so on screen instead of looking frozen."""
+        if self.sim.cfg.scenario.name == "terrain":
+            self.screen.fill(BG)
+            msg = (f"Planning routes for {self.sim.cfg.drones.count} drones "
+                   f"({self.sim.cfg.terrain.planner}) ...")
+            self.screen.blit(self.font.render(msg, True, TEXT), (40, 40))
+            pygame.display.flip()
+        self.sim.reset()
+        self.trails.clear()
+        self._terrain_surface = None
+
     def _advance(self, steps: int) -> None:
         for _ in range(steps):
             self.sim.step()
@@ -206,6 +228,7 @@ class Viewer:
         br = self.to_screen(np.array([w.width, 0.0]))
         rect = pygame.Rect(*tl, *(br - tl))
         pygame.draw.rect(self.screen, ARENA, rect)
+        self._draw_terrain(rect)
         self._draw_map(rect)
         m = w.boundary_margin * self.scale
         pygame.draw.rect(self.screen, MARGIN, rect.inflate(-2 * m, -2 * m), 1)
@@ -224,6 +247,27 @@ class Viewer:
             g = self.to_screen(self.sim.goal)
             pygame.draw.circle(self.screen, (90, 50, 55), g,
                                self.sim.cfg.scenario.goal_radius * self.scale, 1)
+
+    def _draw_terrain(self, rect: pygame.Rect) -> None:
+        t = self.sim.terrain
+        if t is None:
+            return
+        if getattr(self, "_terrain_surface", None) is None or self._terrain_surface.get_size() != rect.size:
+            w, h = self.sim.world.width, self.sim.world.height
+            xs, ys = np.meshgrid(np.linspace(0, w, rect.width), np.linspace(h, 0, rect.height))
+            hgt = t.height(np.stack([xs, ys], -1))
+            f = np.clip(hgt / max(t.ceiling, 1e-6), 0, 1.3)[..., None]
+            low, mid, high = np.array([24, 44, 40]), np.array([90, 110, 60]), np.array([170, 150, 120])
+            rgb = np.where(f < 1.0, low + (mid - low) * f, mid + (high - mid) * np.clip((f - 1.0) / 0.3, 0, 1))
+            rgb[(hgt > t.ceiling)] = (150, 140, 135)
+            surf = pygame.surfarray.make_surface(np.transpose(rgb.astype(np.uint8), (1, 0, 2)))
+            self._terrain_surface = surf
+        self.screen.blit(self._terrain_surface, rect.topleft)
+        for cx, cy, r in t.threats:
+            c = self.to_screen(np.array([cx, cy]))
+            pygame.draw.circle(self.screen, THREAT, c, r * self.scale, 1)
+            pygame.draw.circle(self.screen, THREAT, c, r * 0.66 * self.scale, 1)
+            pygame.draw.circle(self.screen, (255, 60, 60), c, r * t.lethal_fraction * self.scale, 2)
 
     def _draw_map(self, rect: pygame.Rect) -> None:
         maps = self.sim.maps
@@ -323,6 +367,15 @@ class Viewer:
                     v = ms.seek_v[k]
                     pygame.draw.circle(self.screen, VICTIM_HEARD, self.to_screen(ms.gbest_pos[k, v]), 5, 1)
 
+        # terrain: planned routes, starts, goals
+        if sim.route_plan is not None:
+            for k, r in enumerate(sim.route_plan.routes):
+                col = ROUTE_COLORS[k % len(ROUTE_COLORS)]
+                pygame.draw.lines(self.screen, col, False, self.to_screen(r).tolist(), 1)
+                s0, g0 = self.to_screen(r[0]), self.to_screen(r[-1])
+                pygame.draw.rect(self.screen, col, (s0[0] - 3, s0[1] - 3, 6, 6))
+                pygame.draw.circle(self.screen, col, g0, 4, 1)
+
         # formation: leader trail, follower slots, leader marker
         fm = sim.formation
         if fm is not None and sim.state.n:
@@ -373,7 +426,7 @@ class Viewer:
         x0 = self.screen.get_width() - HUD_W
         pygame.draw.rect(self.screen, (12, 15, 22), (x0, 0, HUD_W, self.screen.get_height()))
         lines = [
-            ("PHASE 6 - SEARCH & RESCUE", None),
+            ("PHASE 7 - TERRAIN & THREATS", None),
             ("", None),
             (f"scenario  {sim.cfg.scenario.name:>11s}", (150, 200, 255)),
             (f"avoidance {sim.cfg.avoidance.method:>11s}", (150, 200, 255)),
@@ -406,6 +459,21 @@ class Viewer:
                 (f"map #{k:<3d}{sel_cov:4.0%} avg {im.map_coverage_mean:4.0%} team {im.map_coverage_team:4.0%}", None),
                 (f"map accuracy {im.map_accuracy:8.1%}", None),
                 (f"info age     {im.info_age:7.1f} s", None),
+            ]
+        if sim.follower is not None:
+            fs = sim.follower.stats
+            plan = sim.route_plan
+            conflict = sum(s["conflict"] for s in plan.scores)
+            lines += [
+                ("TERRAIN ROUTES", (150, 200, 255)),
+                (f"planner {sim.cfg.terrain.planner:>8s} {plan.seconds:5.1f} s", None),
+                (f"planned conflicts {conflict:8.0f}", BAD if conflict > 100 else None),
+                (f"arrived {int(np.isfinite(fs.arrival).sum()):3d}/{len(fs.arrival):<3d} "
+                 f"delayed {sum(d > 0.5 for d in plan.delays):3d}", None),
+                (f"close encounters {fs.close_pair_seconds:6.1f} pair-s", None),
+                (f"threat flown {fs.threat.sum():8.1f}", None),
+                (f"in lethal core {fs.lethal_time.sum():6.1f} s", BAD if fs.lethal_time.sum() > 0 else None),
+                (f"above ceiling  {fs.high_time.sum():6.1f} s", BAD if fs.high_time.sum() > 0 else None),
             ]
         if sim.mission is not None:
             ms = sim.mission

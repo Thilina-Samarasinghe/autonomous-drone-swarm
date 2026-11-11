@@ -65,7 +65,7 @@ class AvoidanceConfig:
 
 @dataclass
 class ScenarioConfig:
-    name: str = "open"                # open | forest | corridor | random | survey | maze | rescue
+    name: str = "open"                # open | forest | corridor | random | survey | maze | rescue | terrain
     goal_radius: float = 15.0         # drones inside this radius count as arrived
     num_obstacles: int = 25           # used by the random scenario
 
@@ -153,6 +153,31 @@ class MissionConfig:
 
 
 @dataclass
+class TerrainConfig:
+    hills: int = 9
+    max_height: float = 100.0         # tallest possible hill (m)
+    ceiling: float = 70.0             # ground above this cannot be flown over (m)
+    threats: int = 8
+    threat_radius_min: float = 10.0
+    threat_radius_max: float = 20.0
+    lethal_fraction: float = 0.35     # inner part of a threat zone that is forbidden
+    planner: str = "hybrid"           # hybrid (PSO seeded by grid) | pso | grid | straight
+    waypoints: int = 6                # free waypoints per route (PSO)
+    particles: int = 40
+    iterations: int = 150
+    speed: float = 5.0                # m/s used to time-deconflict routes
+    separation: float = 6.0           # m two drones must keep at the same moment
+    w_length: float = 1.0             # cost weights
+    w_threat: float = 40.0
+    w_climb: float = 0.5
+    w_turn: float = 60.0
+    w_conflict: float = 50.0
+    w_delay: float = 2.5              # cost per second of waiting before take-off
+    max_delay: float = 15.0           # longest departure delay PSO may choose (s)
+    lane: float = 8.0                 # straight leg out of the start / into the goal (m)
+
+
+@dataclass
 class RenderConfig:
     window_width: int = 1200
     window_height: int = 760
@@ -175,6 +200,7 @@ class Config:
     planning: PlanningConfig = field(default_factory=PlanningConfig)
     formation: FormationConfig = field(default_factory=FormationConfig)
     mission: MissionConfig = field(default_factory=MissionConfig)
+    terrain: TerrainConfig = field(default_factory=TerrainConfig)
     render: RenderConfig = field(default_factory=RenderConfig)
 
     def to_dict(self) -> dict[str, Any]:

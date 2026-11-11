@@ -19,6 +19,7 @@ METHODS = ("none", "apf", "orca", "hybrid")
 
 
 def build_controller(cfg: Config, mission: bool = False) -> Controller:
+    """`mission=True`: drones track a per-drone desired velocity (rescue, terrain routes)."""
     method = cfg.avoidance.method
     if method not in METHODS:
         raise ValueError(f"Unknown avoidance method '{method}'. Choose from {METHODS}")

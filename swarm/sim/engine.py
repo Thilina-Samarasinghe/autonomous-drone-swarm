@@ -15,6 +15,8 @@ from swarm.control.factory import build_controller
 from swarm.mapping.occupancy import GroundTruth, OccupancyMaps
 from swarm.formation.manager import FormationManager
 from swarm.mission.manager import RescueMission
+from swarm.terrain.follow import RouteFollower
+from swarm.terrain.route_planner import plan_routes
 from swarm.formation.shapes import SHAPES
 from swarm.planning.planner import SwarmPlanner
 from swarm.metrics import Metrics, compute_metrics
@@ -55,18 +57,31 @@ class Simulation:
         sc = self.cfg.scenario
         mc = self.cfg.mission
         self.scenario: Scenario = build_scenario(sc.name, base.size, self.rng, sc.num_obstacles,
-                                                 mc.victims, (mc.base_x, mc.base_y))
+                                                 mc.victims, (mc.base_x, mc.base_y),
+                                                 self.cfg.drones.count, self.cfg.terrain)
         self.world = World.from_config(self.cfg.world, self.scenario.obstacles)
         self.goal: np.ndarray | None = None if self.scenario.goal is None else self.scenario.goal.copy()
         # the rescue mission runs in scenarios that contain victims
         self.mission_active = (mc.enabled and self.scenario.victims is not None
                                and len(self.scenario.victims) > 0)
+        self.terrain = self.scenario.terrain
+        self.route_plan = None
+        if self.terrain is not None:
+            # pre-flight route planning for every drone (start -> its own goal)
+            tc = self.cfg.terrain
+            self.route_plan = plan_routes(tc.planner, self.scenario.starts, self.scenario.goals,
+                                          self.terrain, tc, base.size, 8.0,
+                                          np.random.default_rng([self.cfg.sim.seed, 13]))
         self.controller: Controller = self._custom_controller or build_controller(
-            self.cfg, mission=self.mission_active)
+            self.cfg, mission=self.mission_active or self.terrain is not None)
 
         d = self.cfg.drones
-        self.state = SwarmState.spawn(d.count, self.world, self.rng, d.spawn_spacing,
-                                      d.spawn_speed, region=self.scenario.spawn_region)
+        if self.scenario.starts is not None:
+            starts = self.scenario.starts
+            self.state = SwarmState(starts.copy(), np.zeros_like(starts), np.arange(len(starts)))
+        else:
+            self.state = SwarmState.spawn(d.count, self.world, self.rng, d.spawn_spacing,
+                                          d.spawn_speed, region=self.scenario.spawn_region)
         self.time = 0.0
         self.step_count = 0
         self.total_collisions = 0
@@ -91,8 +106,13 @@ class Simulation:
         self.comms = (CommsNetwork(n, self.cfg.comms, self.cfg.sim.dt, comms_rng)
                       if self.cfg.comms.enabled else None)
         self._map_every = max(1, round(self.cfg.mapping.update_interval / self.cfg.sim.dt))
+        self.follower = None
+        if self.route_plan is not None and n == len(self.route_plan.routes):
+            self.follower = RouteFollower(self.route_plan.routes, self.terrain, self.cfg.terrain.speed,
+                                          delays=self.route_plan.delays,
+                                          separation=self.cfg.terrain.separation)
         self.formation = None
-        if self.cfg.formation.enabled and not self.mission_active:
+        if self.cfg.formation.enabled and not self.mission_active and self.terrain is None:
             if self.cfg.formation.shape not in SHAPES:
                 raise ValueError(f"Unknown formation shape '{self.cfg.formation.shape}'. Choose from {SHAPES}")
             self.formation = FormationManager(n, self.cfg.formation, self.cfg.sim.dt, self.world.size)
@@ -134,12 +154,13 @@ class Simulation:
             self.cfg.formation.shape = shape
             self.formation = FormationManager(self.state.n, self.cfg.formation, self.cfg.sim.dt,
                                               self.world.size)
-        self.controller = self._custom_controller or build_controller(self.cfg, mission=self.mission_active)
+        self.controller = self._custom_controller or build_controller(
+            self.cfg, mission=self.mission_active or self.terrain is not None)
 
     def set_avoidance(self, method: str) -> None:
         """Switch avoidance method on the fly (keeps the current swarm state)."""
         self.cfg.avoidance.method = method
-        self.controller = build_controller(self.cfg, mission=self.mission_active)
+        self.controller = build_controller(self.cfg, mission=self.mission_active or self.terrain is not None)
 
     def add_drones(self, k: int) -> None:
         d = self.cfg.drones
@@ -188,8 +209,10 @@ class Simulation:
         ctx = StepContext(self.world, self.neighbors, self.goal, self.cfg.sim.dt,
                           self.scan, self.detections, targets=targets)
         if self.mission is not None:
-            ctx.extras["mission"] = self.mission.desired_velocity(self.step_count, self.state.pos,
-                                                                  targets, self.time)
+            ctx.extras["desired_velocity"] = self.mission.desired_velocity(self.step_count, self.state.pos,
+                                                                           targets, self.time)
+        if self.follower is not None:
+            ctx.extras["desired_velocity"] = self.follower.desired_velocity(self.state.pos, self.time)
         self.last_formation_targets = None
         if self.formation is not None:
             ctx.extras["formation"] = self.last_formation_targets = self.formation.update(
@@ -210,6 +233,8 @@ class Simulation:
             self.maps.integrate_scan(self.state.pos, self.scan)
         if self.comms is not None:
             self.comms.step(self.step_count, self.time, self.state.pos, self.maps, self.state.vel)
+        if self.follower is not None:
+            self.follower.record(self.time, self.state.pos, self.state.vel, self.cfg.sim.dt)
         if (self.time_to_arrive_90 is None and self.goal is not None
                 and self.metrics.arrived >= 0.9 * self.state.n):
             self.time_to_arrive_90 = self.time

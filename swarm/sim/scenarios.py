@@ -14,7 +14,7 @@ import numpy as np
 
 from swarm.sim.obstacles import Obstacles
 
-SCENARIOS = ("open", "forest", "corridor", "random", "survey", "maze", "rescue")
+SCENARIOS = ("open", "forest", "corridor", "random", "survey", "maze", "rescue", "terrain")
 
 
 @dataclass
@@ -25,11 +25,15 @@ class Scenario:
     goal: np.ndarray | None
     victims: np.ndarray | None = None                          # (V, 2) rescue scenario only
     base: np.ndarray | None = None                             # (2,) rescue base station
+    terrain: object | None = None                              # Terrain (terrain scenario only)
+    starts: np.ndarray | None = None                           # (N, 2) per-drone start (terrain)
+    goals: np.ndarray | None = None                            # (N, 2) per-drone goal (terrain)
 
 
 def build_scenario(name: str, world_size: np.ndarray, rng: np.random.Generator,
                    num_obstacles: int = 25, num_victims: int = 8,
-                   base: tuple[float, float] = (20.0, 20.0)) -> Scenario:
+                   base: tuple[float, float] = (20.0, 20.0), num_drones: int = 8,
+                   terrain_cfg=None) -> Scenario:
     w, h = float(world_size[0]), float(world_size[1])
     left_spawn = (15.0, h / 2 - 25, 45.0, h / 2 + 25)
     right_goal = np.array([w - 22.0, h / 2])
@@ -69,6 +73,19 @@ def build_scenario(name: str, world_size: np.ndarray, rng: np.random.Generator,
         spawn = (8.0, 8.0, 44.0, 50.0)
         goal = np.array([176.0, 20.0])
         return Scenario(name, Obstacles(circles=circles, boxes=boxes), spawn, goal)
+
+    if name == "terrain":
+        from swarm.config import TerrainConfig
+        from swarm.terrain.terrain import generate_terrain
+        tc = terrain_cfg or TerrainConfig()
+        starts = _column_points(num_drones, 16.0, +6.0, h)
+        goals = _column_points(num_drones, w - 16.0, -6.0, h)
+        goals = goals[rng.permutation(num_drones)]            # shuffled: routes cross
+        ter = generate_terrain(np.array([w, h]), rng, tc.hills, tc.max_height, tc.ceiling, tc.threats,
+                               (tc.threat_radius_min, tc.threat_radius_max), tc.lethal_fraction,
+                               np.vstack([starts, goals]))
+        return Scenario(name, Obstacles(circles=ter.no_fly_circles()), None, None,
+                        terrain=ter, starts=starts, goals=goals)
 
     if name == "rescue":
         # obstacles everywhere except around the base; victims hidden among them
@@ -131,3 +148,15 @@ def build_scenario(name: str, world_size: np.ndarray, rng: np.random.Generator,
         return Scenario(name, Obstacles(circles=circles, boxes=boxes), spawn, goal)
 
     raise ValueError(f"Unknown scenario '{name}'. Choose from {SCENARIOS}")
+
+
+def _column_points(n: int, x0: float, dx: float, h: float, gap: float = 4.0) -> np.ndarray:
+    """n points in vertical columns starting at x0 (next column at x0 + dx),
+    at least `gap` metres apart, centred vertically."""
+    per_col = max(1, int((h - 32.0) // gap) + 1)
+    pts = []
+    for col in range((n + per_col - 1) // per_col):
+        in_col = min(per_col, n - col * per_col)
+        ys = np.linspace(16.0, h - 16.0, in_col) if in_col > 1 else np.array([h / 2])
+        pts += [(x0 + col * dx, y) for y in ys]
+    return np.array(pts, dtype=float)

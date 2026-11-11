@@ -22,7 +22,7 @@ from swarm.mathutil import clamp_norm
 
 class MissionController(BoidsController):
     def compute(self, state: SwarmState, ctx: StepContext) -> np.ndarray:
-        desired = ctx.extras.get("mission")
+        desired = ctx.extras.get("desired_velocity")
         if desired is None:
             return super().compute(state, ctx)
         track = clamp_norm(clamp_norm(desired, self.d.max_speed) - state.vel, self.d.max_accel)

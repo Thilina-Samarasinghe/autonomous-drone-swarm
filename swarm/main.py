@@ -8,6 +8,7 @@
   python -m swarm.main --scenario maze --plan
   python -m swarm.main --scenario corridor --formation v
   python -m swarm.main --scenario rescue --drones 20
+  python -m swarm.main --scenario terrain --drones 12 --route-planner hybrid
   python -m swarm.main --headless --steps 3000 --out outputs/run1
 """
 
@@ -45,6 +46,8 @@ def parse_args(argv=None):
     p.add_argument("--seek", choices=("none", "pso"), help="rescue: victim search (none = camera only)")
     p.add_argument("--victims", type=int, help="rescue: number of victims")
     p.add_argument("--no-radio", action="store_true", help="switch the radio off entirely")
+    p.add_argument("--route-planner", choices=("hybrid", "pso", "grid", "straight"),
+                   help="terrain: route planner")
     p.add_argument("--plan", action="store_true", help="enable path planning on each drone's map")
     p.add_argument("--planner", choices=ALGORITHMS, help="planning algorithm (implies --plan)")
     p.add_argument("--headless", action="store_true", help="run without a window")
@@ -88,6 +91,8 @@ def main(argv=None) -> None:
         mission["victims"] = args.victims
     if mission:
         overrides["mission"] = mission
+    if args.route_planner:
+        overrides["terrain"] = {"planner": args.route_planner}
     if args.no_radio:
         overrides.setdefault("comms", {})["enabled"] = False
     if args.formation:
@@ -180,6 +185,25 @@ def main(argv=None) -> None:
             "returns_to_base": ms.returns,
             "stuck_recoveries": ms.stuck,
             "distance_flown_m": round(ms.distance, 0),
+        })
+    if sim.follower is not None:
+        fl = sim.follower.stats
+        sc = sim.route_plan.scores
+        summary.update({
+            "route_planner": cfg.terrain.planner,
+            "planning_s": round(sim.route_plan.seconds, 2),
+            "planned_length_m": round(sum(s["length"] for s in sc), 1),
+            "planned_threat": round(sum(s["threat"] for s in sc), 2),
+            "planned_forbidden_m": round(sum(s["lethal"] + s["too_high"] for s in sc), 2),
+            "planned_conflict": round(sum(s["conflict"] for s in sc), 1),
+            "flown_threat": round(float(fl.threat.sum()), 2),
+            "flown_lethal_s": round(float(fl.lethal_time.sum()), 2),
+            "flown_above_ceiling_s": round(float(fl.high_time.sum()), 2),
+            "close_encounter_pair_s": round(float(fl.close_pair_seconds), 1),
+            "departure_delays_s": [round(float(d), 1) for d in sim.route_plan.delays],
+            "arrived": int(np.isfinite(fl.arrival).sum()),
+            "last_arrival_s": (round(float(np.nanmax(fl.arrival)), 1)
+                               if np.isfinite(fl.arrival).any() else None),
         })
     if sim.formation is not None:
         fs = sim.formation.stats

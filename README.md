@@ -1,11 +1,11 @@
 # Autonomous Drone Swarm Simulation
 
-> 🚧 **Work in progress.** Phases 0–6 (simulation core, boids flocking,
+> 🚧 **Work in progress.** Phases 0–7 (simulation core, boids flocking,
 > obstacle avoidance with lidar + ORCA, radio communication with shared
 > mapping, path planning on each drone's own map, formation flying,
-> cooperative search and rescue) are built. Terrain and threat zones,
-> reinforcement learning and the final experiments are **still being built**.
-> See [Roadmap](#roadmap) below.
+> cooperative search and rescue, multi-drone route planning over terrain and
+> threats) are built. Reinforcement learning and the final experiments are
+> **still being built**. See [Roadmap](#roadmap) below.
 
 A 2D simulator for a swarm of **20–50 autonomous drones**. Every drone makes its
 own decisions using only what it can sense around itself, and cooperative
@@ -61,9 +61,9 @@ intelligence**, not one central AI controlling every drone.
 | 3 | Radio network, per-drone occupancy maps, multi-hop map sharing, benchmark | ✅ Done |
 | 4 | Path planning (A* and cost field) on each drone's own map, replanning, maze, benchmark | ✅ Done |
 | 5 | Formation flying: 5 shapes, Hungarian slot assignment, leader trail, squeezing through gaps, benchmark | ✅ Done |
-| 6 | Search and rescue: frontier + Voronoi exploration, PSO victim search, auction task allocation, batteries, benchmark | ✅ Done (under review) |
-| 7 | Terrain cost and threat zones, PSO multi-drone path planner | 🔜 Next |
-| 8 | Multi-agent reinforcement learning (MAPPO) for **all** behaviours | 📋 Planned |
+| 6 | Search and rescue: frontier + Voronoi exploration, PSO victim search, auction task allocation, batteries, benchmark | ✅ Done |
+| 7 | Terrain and threat zones, PSO / hybrid multi-drone route planner with departure delays, benchmark | ✅ Done (under review) |
+| 8 | Multi-agent reinforcement learning (MAPPO) for **all** behaviours | 🔜 Next |
 | 9 | Benchmarks, robustness experiments, demo video | 📋 Planned |
 
 ---
@@ -155,6 +155,21 @@ intelligence**, not one central AI controlling every drone.
   station when any drone that knows is within radio range.
 - **Rescue benchmark** (Phase 6): 6 strategies, from random search to the full
   system, plus the full system with the radio off.
+- **Terrain and threat zones** (Phase 7): a landscape of smooth hills (peaks
+  above the 70 m flight ceiling are no-fly and become physical obstacles) and
+  circular threat zones (risk grows toward the centre; the inner core is lethal).
+- **Multi-drone route planning** (Phase 7), scored by one shared cost (length,
+  threat exposure, climbing, sharp turns, forbidden areas, and **time conflicts
+  with other drones**):
+  - `pso`: Particle Swarm Optimization over waypoints **and a departure delay**
+  - `hybrid` (default): PSO seeded with the grid planner's route
+  - `grid`: the Phase 4 cost field over a terrain/threat cost grid
+  - `straight`: baseline
+- **Priority planning** (Phase 7): drones are planned one after another; each
+  must avoid where earlier drones will be *at the same moment*, either by taking
+  another path or by waiting a few seconds before take-off.
+- **Terrain benchmark** (Phase 7): every planner at 6, 12 and 30 drones, planned
+  and then flown with ORCA on.
 - **Fast neighbour search**: KD-tree, roughly N log N cost.
 - **Real-time Pygame viewer**: neighbour links, trails, perception circles,
   live stats panel, behaviour weights tunable while running, add or remove drones.
@@ -168,6 +183,7 @@ intelligence**, not one central AI controlling every drone.
 - Moving (dynamic) obstacles
 - Incremental D\* Lite (re-using the previous search instead of a full recompute)
 - Signals blocked by obstacles; victims that move; charging-pad queueing
+- 3D flight (altitude as a real dimension rather than a terrain cost)
 - Leader-follower and virtual-structure formations with shape switching
 - Search and rescue: Voronoi area split, frontier exploration, PSO victim search,
   CBBA/auction task allocation, battery and return-to-base
@@ -223,6 +239,15 @@ python -m swarm.main --scenario maze --plan
 python -m swarm.main --scenario maze --planner astar
 python -m swarm.main --headless --scenario maze --plan --no-share --out outputs/maze_ownmap
 
+# Terrain and threat zones (Phase 7)
+python -m swarm.main --scenario terrain --drones 12
+python -m swarm.main --scenario terrain --drones 12 --route-planner grid
+python -m swarm.main --headless --scenario terrain --drones 12 --steps 2400 --out outputs/terrain
+
+# Benchmark route planners (writes outputs/benchmarks/terrain.*)
+python -m experiments.benchmark_terrain                         # 6/12/30 drones x 3 seeds
+python -m experiments.benchmark_terrain --sizes 12 --seeds 2    # quicker
+
 # Search and rescue (Phase 6)
 python -m swarm.main --scenario rescue --drones 20
 python -m swarm.main --scenario rescue --explore frontier --seek none
@@ -260,7 +285,7 @@ python -m swarm.main --config configs/my_experiment.yaml
 | `--config` | `configs/default.yaml` | YAML configuration file |
 | `--drones` | from config (30) | Number of drones |
 | `--seed` | from config (42) | Random seed |
-| `--scenario` | from config (`open`) | `open`, `forest`, `corridor`, `random`, `survey`, `maze`, `rescue` |
+| `--scenario` | from config (`open`) | `open`, `forest`, `corridor`, `random`, `survey`, `maze`, `rescue`, `terrain` |
 | `--avoidance` | from config (`orca`) | `none`, `apf`, `orca`, `hybrid` |
 | `--packet-loss` | from config (0) | Radio packet loss probability, 0–1 |
 | `--comm-range` | from config (30) | Radio range in metres |
@@ -274,6 +299,7 @@ python -m swarm.main --config configs/my_experiment.yaml
 | `--seek` | from config (`pso`) | Rescue: `pso` or `none` (camera only) |
 | `--victims` | from config (8) | Rescue: number of victims |
 | `--no-radio` | off | Switch the radio off entirely |
+| `--route-planner` | from config (`hybrid`) | Terrain: `hybrid`, `pso`, `grid` or `straight` |
 | `--headless` | off | Run without a window |
 | `--steps` | from config (3000) | Steps for a headless run (1 step = 0.05 s) |
 | `--out` | `outputs/latest` | Output folder for headless results |
@@ -285,7 +311,7 @@ A headless run writes:
 | `trajectories.png` | Every drone's path (■ start, ● end) |
 | `metrics.png` | Min separation, polarization, mean speed and groups over time |
 | `comms_mapping.png` | Map coverage (team / average / worst drone), accuracy, radio groups and info age over time |
-| `summary.json` | Collisions, obstacle hits, clearance, arrivals, alignment, map coverage and accuracy, time to 50% coverage, messages delivered / dropped, traffic, plans / ms per plan / blocked replans, formation error / time in shape / squeezes / leader arrival, victims found / reported and when, drones lost, returns to base, run speed |
+| `summary.json` | Collisions, obstacle hits, clearance, arrivals, alignment, map coverage and accuracy, time to 50% coverage, messages delivered / dropped, traffic, plans / ms per plan / blocked replans, formation error / time in shape / squeezes / leader arrival, victims found / reported and when, drones lost, returns to base, planned and flown route metrics (terrain), run speed |
 
 ---
 
@@ -295,7 +321,8 @@ A headless run writes:
 |---|---|
 | `SPACE` | Pause / resume |
 | `.` | Single step (while paused) |
-| `1` … `7` | Scenario: open / forest / corridor / random / survey / maze / rescue |
+| `1` … `8` | Scenario: open / forest / corridor / random / survey / maze / rescue / terrain |
+| `U` | Terrain: cycle the route planner hybrid → pso → grid → straight (replans; shows "Planning routes…") |
 | `K` | Path planning on / off (yellow line = selected drone's path, dot = its steering target) |
 | `F` | Formation: off → line → V → circle → box → column (pink ring = leader, purple squares = slots, yellow squares = followers on the trail, purple line = leader's trail) |
 | `M` | Cycle avoidance method: none → apf → orca → hybrid |
@@ -324,6 +351,10 @@ In the rescue scenario, each drone has a dot showing its mode: cyan explore, ora
 seek, yellow return, white charging, red dead. Victims are marked ✕: grey =
 undiscovered, orange = someone hears it, green = found, ringed = reported to the
 base (blue square).
+In the terrain scenario the background is shaded by height (grey = above the
+flight ceiling), threat zones are magenta rings with a red lethal core, and each
+drone's planned route is drawn in its own colour from its start (square) to its
+goal (circle).
 In the map overlay, green cells are known free and orange cells known occupied.
 The big circle around the selected drone is its radio range.
 
@@ -415,6 +446,14 @@ metres and seconds. Unknown keys raise an error, so typos are caught early.
 | | `pso_max_speed` / `pso_jitter` | 5.0 / 1.0 | PSO speed cap and exploration noise |
 | | `battery_capacity` / `drain_hover` / `drain_speed` | 1.0 / 0.0025 / 0.0001 | ~400 s hovering, ~200 s at 5 m/s |
 | | `charge_rate` / `reserve` | 0.04 / 0.08 | 25 s to full; reserve kept for the trip home |
+| `terrain` | `hills` / `max_height` / `ceiling` | 9 / 100 / 70 | Landscape; ground above the ceiling is no-fly (m) |
+| | `threats` / `threat_radius_min` / `threat_radius_max` | 8 / 10 / 20 | Threat zones |
+| | `lethal_fraction` | 0.35 | Inner part of a threat zone that must never be entered |
+| | `planner` | hybrid | `hybrid` / `pso` / `grid` / `straight` |
+| | `waypoints` / `particles` / `iterations` | 6 / 40 / 150 | PSO size |
+| | `speed` / `separation` | 5.0 / 6.0 | Used to deconflict routes in time |
+| | `w_length` / `w_threat` / `w_climb` / `w_turn` / `w_conflict` / `w_delay` | 1 / 40 / 0.5 / 60 / 50 / 2.5 | Cost weights |
+| | `max_delay` / `lane` | 15 / 8 | Longest departure wait (s); straight leg out of start / into goal (m) |
 | `render` | `window_width` × `window_height` | 1200 × 760 | |
 | | `fps` | 60 | |
 | | `trail_length` | 40 | Frames of trail per drone |
@@ -558,7 +597,16 @@ triggers an immediate replan.
 can see in a straight line on its own map. This turns the staircase grid
 path into smooth flight without a separate smoothing step.
 
-### Search and rescue (Phase 6)
+### Terrain and threat zones (Phase 7)
+python -m swarm.main --scenario terrain --drones 12
+python -m swarm.main --scenario terrain --drones 12 --route-planner grid
+python -m swarm.main --headless --scenario terrain --drones 12 --steps 2400 --out outputs/terrain
+
+# Benchmark route planners (writes outputs/benchmarks/terrain.*)
+python -m experiments.benchmark_terrain                         # 6/12/30 drones x 3 seeds
+python -m experiments.benchmark_terrain --sizes 12 --seeds 2    # quicker
+
+# Search and rescue (Phase 6)
 python -m swarm.main --scenario rescue --drones 20
 python -m swarm.main --scenario rescue --explore frontier --seek none
 python -m swarm.main --headless --scenario rescue --drones 20 --steps 8000 --out outputs/rescue
@@ -604,7 +652,16 @@ followers instantly; in reality they would ride on the radio messages (the
 leader's *position and velocity* do go over the radio, with latency and loss).
 The leader is fixed (drone 0); leader failure and re-election come in Phase 9.
 
-### Search and rescue (Phase 6)
+### Terrain and threat zones (Phase 7)
+python -m swarm.main --scenario terrain --drones 12
+python -m swarm.main --scenario terrain --drones 12 --route-planner grid
+python -m swarm.main --headless --scenario terrain --drones 12 --steps 2400 --out outputs/terrain
+
+# Benchmark route planners (writes outputs/benchmarks/terrain.*)
+python -m experiments.benchmark_terrain                         # 6/12/30 drones x 3 seeds
+python -m experiments.benchmark_terrain --sizes 12 --seeds 2    # quicker
+
+# Search and rescue (Phase 6)
 
 ```
             hears a victim & wins the auction                 victim confirmed / lost auction / timeout
@@ -645,6 +702,53 @@ returns once its battery covers only 1.5× the straight-line trip home plus an
 **Safety net.** A navigating drone that stays within 2 m of one spot for 8 s
 is "stuck": an explorer drops its target; a returning drone backs off toward
 open space for 3 s and tries again.
+
+### Terrain and threat zones (Phase 7)
+
+```
+ starts, goals, terrain ──> plan every route before take-off (one drone at a time)
+                                │  each route: start → 8 m lane → K waypoints → 8 m lane → goal,
+                                │  plus a departure delay; cost includes time conflicts
+                                ▼  with all routes chosen so far
+ fly: each drone waits for its delay, then follows its route (pure pursuit) ──> ORCA ──> dynamics
+```
+
+**Terrain.** Ground height is a sum of Gaussian hills, evaluated exactly.
+Drones fly a fixed clearance above the ground, so crossing a hill means
+climbing. Ground above the 70 m ceiling can't be flown over; each such peak
+also becomes a circular obstacle so the lidar and ORCA respect it in flight.
+
+**Threat zones.** Risk = (1 − d/R)² inside a zone of radius R; the inner
+35% is lethal and must never be entered.
+
+**Route cost** (the same for every planner). A route is resampled to 400
+points and scored on length, ∫ risk, metres climbed, turns sharper than 30°,
+the departure delay, and **conflicts**: for every route already chosen, how
+far inside 6 m the two drones get *at the same moment*. Entering a lethal
+core, flying over ground above the ceiling, or leaving the arena is
+forbidden (a huge penalty), enforced with a safety buffer (cores 3 m bigger,
+ceiling 5 m lower) because a drone in flight can be pushed a little off its
+route. Every drone leaves its start heading east and enters its goal from the
+west, so no route runs along the crowded start or goal lines.
+
+**Planners.**
+- **PSO**: each particle is a whole route: K = 6 free waypoints plus a
+  departure delay (0–15 s). Inertia falls from 0.9 to 0.4. Drones are planned
+  in turn, each avoiding the routes before it in space *and time*. Waiting
+  costs half as much as flying, so PSO often resolves a conflict by
+  delaying take-off rather than taking a long detour.
+- **Hybrid** (default): the same PSO, with a few particles started from the
+  grid planner's route, which is known to be legal. The swarm then improves it
+  (fewer conflicts, smoother turns). PSO keeps its best-ever route, so hybrid is
+  never worse than its seed (a test checks this).
+- **Grid**: the Phase 4 cost field on a 2 m grid whose cells cost
+  length + threat + slope, with forbidden cells blocked. Optimal on its grid,
+  then simplified (Douglas–Peucker), but blind to turns and other drones.
+- **Straight**: the baseline.
+
+**Flying.** Each drone waits for its departure delay, then steers at a point
+8 m ahead on its route. ORCA stays on, so a planned route can never cause a
+collision; the benchmark measures how often ORCA has to step in.
 
 Lessons from development (found by tests and benchmarks):
 
@@ -706,6 +810,25 @@ Lessons from development (found by tests and benchmarks):
 - *Phase 6:* the viewer froze when the selected drone had no waypoint:
   pygame loops forever when asked to draw at NaN coordinates. Fixed, with a
   regression test that runs the draw in a subprocess with a timeout.
+- *Phase 7:* pure PSO sometimes left a route grazing a no-fly peak, and in
+  flight a drone was pushed 1.4 s into a lethal core while dodging another.
+  Planning with safety buffers and seeding PSO from the grid route (hybrid)
+  fixed both.
+- *Phase 7:* evaluating the terrain analytically millions of times made
+  planning slow (24 s for 12 drones). Pre-computed height/risk tables on a
+  0.5 m grid made it 3.6× faster; the lookup error (< 3 m) is inside the 5 m
+  ceiling buffer.
+- *Phase 7:* with path-only PSO, the last-planned drones took huge detours
+  (one route was 648 m for a 170 m trip) to dodge everyone before them. Adding a
+  departure delay to each particle fixed it: waiting a few seconds beats a loop.
+- *Phase 7:* a test found that a route's score depended on which other routes
+  it was scored *alongside* (the sample count followed the longest route in the
+  batch), so PSO could keep a route that was illegal on its own. Every route now
+  gets the same fixed 400 samples.
+- *Phase 7:* drones got stuck in the column of drones already parked at their
+  goals. Two fixes: conflicts are only excused when *both* drones are near their
+  own endpoints (flying past a parked drone counts), and PSO waypoints stay
+  between the start and goal lanes.
 
 ---
 
@@ -737,6 +860,9 @@ Lessons from development (found by tests and benchmarks):
 | `victim_found_times` / `all_reported` | When each victim was found; when the base knew them all | lower is better |
 | `drones_lost` | Drones whose battery ran out | 0 |
 | `returns_to_base` / `stuck_recoveries` | Recharging trips; times the stuck detector intervened | |
+| `planned_forbidden_m` / `planned_conflict` | Terrain: metres of forbidden flight and time-conflict score in the plan | 0 / low |
+| `close_encounter_pair_s` | Terrain: seconds that pairs of drones spent closer than 6 m en route | low |
+| `flown_threat` / `flown_lethal_s` / `flown_above_ceiling_s` | Terrain: what the drones actually flew through | low / 0 / 0 |
 
 Planned metrics for later phases:
 messages sent, path length, formation error, energy use.
@@ -918,6 +1044,49 @@ What the numbers show:
 - **Batteries were never a problem**: every drone went home and recharged,
   and none were lost.
 
+### Phase 7: terrain route-planning benchmark
+
+`terrain` scenario: 9 hills (some above the flight ceiling), 8 threat zones;
+drones start on the left and their goals on the right are **shuffled**, so
+routes must cross. 3 seeds per row; planned, then flown for 120 s with ORCA on.
+"Close encounters" = seconds that pairs of drones spent closer than 6 m en route.
+Reproduce with `python -m experiments.benchmark_terrain`.
+
+| Drones | Planner | Planning | Forbidden planned | Planned conflicts | Close encounters flown | Lethal core flown | Arrived | Last arrival |
+|---|---|---|---|---|---|---|---|---|
+| 6 | straight | 0.3 s | 175 m | 196 | 21 pair-s | **8.5 s** | 100% | 44 s |
+| 6 | grid | 0.3 s | 0 | 359 | 56 pair-s | 0 | 100% | 47 s |
+| 6 | pso | 8.5 s | 0 | 0 | 3 pair-s | 0 | 100% | 50 s |
+| 6 | **hybrid** | 8.2 s | **0** | **0** | 15 pair-s | **0** | 100% | 46 s |
+| 12 | straight | 0.2 s | 443 m | 1,425 | 125 pair-s | **26 s** | 100% | 47 s |
+| 12 | grid | 0.3 s | 0 | 3,177 | 289 pair-s | 0 | 100% | 50 s |
+| 12 | pso | 22 s | 8 m | 10 | 57 pair-s | 0 | 100% | 65 s |
+| 12 | **hybrid** | 21 s | **0** | 29 | **61 pair-s** | **0** | 100% | 52 s |
+| 30 | straight | 0.2 s | 982 m | 9,452 | 724 pair-s | **51 s** | 98% | 51 s |
+| 30 | grid | 0.4 s | 0 | 32,433 | 1,936 pair-s | 0 | 100% | 62 s |
+| 30 | pso | 82 s | 78 m | 507 | 379 pair-s | 0 | 100% | 76 s |
+| 30 | **hybrid** | 64 s | **0** | 716 | **427 pair-s** | **0** | 100% | 73 s |
+
+All 36 runs: 0 drone collisions, 0 obstacle hits.
+
+What the numbers show:
+- **Straight lines are deadly**: they cross lethal cores and no-fly peaks,
+  and drones spend up to 51 s inside lethal cores.
+- **The grid planner is safe and fast but blind to the other drones**:
+  every route funnels through the same cheapest corridors at the same time,
+  so ORCA has to resolve ~1,900 pair-seconds of close encounters at 30 drones.
+- **Hybrid gives 4–5× fewer close encounters than grid** at every size, is
+  legal in every run, and every drone arrives. The price: 2–11 s later
+  arrival (longer routes and departure delays) and up to a minute of planning
+  for 30 drones.
+- **Pure PSO is not reliable on its own**: at 12 and 30 drones some planned
+  routes still clip forbidden areas. Seeding it with the grid route (hybrid)
+  removes that while keeping PSO's deconfliction.
+- **Why close encounters matter when there were no collisions anyway**:
+  ORCA caught every one of them. Planned deconfliction means the swarm
+  depends far less on last-second avoidance, which matters if a sensor, the
+  radio or ORCA itself ever fails (Phase 9 tests exactly that).
+
 ---
 
 ## Project structure
@@ -943,6 +1112,11 @@ autonomous-drone-swarm/
 │   ├── planning/
 │   │   ├── grid.py           cost map, A*, backward-Dijkstra cost field, path extraction
 │   │   └── planner.py        per-drone replanning and string-pulling path following
+│   ├── terrain/
+│   │   ├── terrain.py        hills, threat zones, no-fly peaks, lookup tables
+│   │   ├── route_cost.py     shared route cost incl. time conflicts
+│   │   ├── route_planner.py  PSO / hybrid / grid / straight multi-drone planners
+│   │   └── follow.py         flying the planned routes, flown-route metrics
 │   ├── mission/
 │   │   ├── victims.py        victims and their noisy radio signal
 │   │   ├── manager.py        state machine, exploration, PSO, auction, batteries, gossip
@@ -954,7 +1128,7 @@ autonomous-drone-swarm/
 │   ├── sim/
 │   │   ├── world.py          arena, walls, obstacles
 │   │   ├── obstacles.py      circle/box geometry: distance, raycast, collision
-│   │   ├── scenarios.py      open / forest / corridor / random / survey / maze / rescue
+│   │   ├── scenarios.py      open / forest / corridor / random / survey / maze / rescue / terrain
 │   │   ├── dynamics.py       point-mass integration with limits
 │   │   ├── neighbors.py      KD-tree neighbour queries
 │   │   └── engine.py         simulation loop, recorder
@@ -971,26 +1145,28 @@ autonomous-drone-swarm/
 │   ├── benchmark_comms.py       sharing / relay / packet-loss comparison
 │   ├── benchmark_planning.py    planning on/off, own vs shared map, A* vs field
 │   ├── benchmark_formation.py   shapes, squeezing, obstacle courses
-│   └── benchmark_rescue.py      search strategies, with and without radio
+│   ├── benchmark_rescue.py      search strategies, with and without radio
+│   └── benchmark_terrain.py     route planners at 6 / 12 / 30 drones
 ├── tests/
 │   ├── test_core.py          Phase 0-1 tests
 │   ├── test_phase2.py        Phase 2 tests
 │   ├── test_phase3.py        Phase 3 tests
 │   ├── test_phase4.py        Phase 4 tests
 │   ├── test_phase5.py        Phase 5 tests
-│   └── test_phase6.py        Phase 6 tests
+│   ├── test_phase6.py        Phase 6 tests
+│   └── test_phase7.py        Phase 7 tests
 ├── requirements.txt
 └── pytest.ini
 ```
 
-Planned additions: `swarm/terrain/` and `swarm/rl/`.
+Planned addition: `swarm/rl/`.
 
 ---
 
 ## Testing
 
 ```bash
-python -m pytest            # 138 tests, ~3 min
+python -m pytest            # 157 tests, ~4 min
 python -m pytest -v         # verbose
 ```
 
@@ -1058,6 +1234,18 @@ The tests cover:
 - *Phase 6:* end to end, 12 drones find and report ≥ 3 of 4 victims with none
   lost and 0 collisions; without radio only drones at the base report; the
   viewer no longer hangs on NaN; CLI flags work
+- *Phase 7:* hill height and threat risk at known points; lethal cores and
+  buffers; the no-fly circle edge sits exactly at the ceiling; lookup tables
+  match the exact terrain; starts and goals are always safe
+- *Phase 7:* route resampling, timed positions with departure delays, the
+  cost forbidding lethal cores, conflicts counted only at the same moment
+  (take-off side by side excused, flying past a parked drone not)
+- *Phase 7:* PSO finds a safe route and its best cost never increases;
+  hybrid is never worse than its grid seed; grid routes are legal and
+  simplified; hybrid deconflicts better than grid
+- *Phase 7:* end to end, drones fly their hybrid routes with 0 time in lethal
+  cores, 0 collisions and everyone arriving; drones wait for their departure
+  slot; straight routes are flagged as dangerous; CLI and viewer keys work
 
 ---
 
@@ -1074,8 +1262,8 @@ Full details are in [docs/PLAN.md](docs/PLAN.md).
 | 4 | Path planning | Cost map, A\*, backward-Dijkstra cost field, optimistic replanning, string-pulling path following, maze, benchmark | ✅ |
 | 5 | Formation flying | Leader-follower with 5 shapes, Hungarian slot assignment, leader trail, squeezing through gaps, benchmark | ✅ |
 | 6 | Search and rescue | Frontier + Voronoi exploration, PSO victim search, auction task allocation, batteries and charging, radio reporting, benchmark | ✅ |
-| 7 | Terrain and threats | Heightmap cost, threat zones, PSO multi-drone route planner | 🔜 |
-| 8 | Reinforcement learning | PettingZoo env, shared-parameter MAPPO, curriculum learning; policies for avoidance, flocking, formation and search | 📋 |
+| 7 | Terrain and threats | Hills and no-fly peaks, threat zones, shared route cost with time conflicts, PSO / hybrid / grid planners, departure delays, benchmark | ✅ |
+| 8 | Reinforcement learning | PettingZoo env, shared-parameter MAPPO, curriculum learning; policies for avoidance, flocking, formation and search | 🔜 |
 | 9 | Experiments and demo | Scaling, communication-loss and drone-failure tests, RL vs. classical, demo video | 📋 |
 
 ---
@@ -1105,7 +1293,11 @@ Full details are in [docs/PLAN.md](docs/PLAN.md).
 | Particle Swarm Optimization (local-best, with restarts) | Signal-guided victim search | ✅ |
 | Consensus auction (simplified CBBA, one task per drone) | Assigning drones to victims | ✅ |
 | Gossip (OR / max / newest merges) | Spreading confirmations, readings and bids | ✅ |
-| PSO route planning | Multi-drone paths over terrain and threats | 📋 Phase 7 |
+| PSO route planning (waypoints + departure delay) | Multi-drone paths over terrain and threats | ✅ |
+| Prioritised planning with space-time conflict costs | Deconflicting the swarm's routes | ✅ |
+| Hybrid PSO seeded with a grid search | Reliable, legal, deconflicted routes | ✅ |
+| Douglas–Peucker simplification | Turning grid paths into a few waypoints | ✅ |
+| Pure-pursuit path following | Flying the planned routes | ✅ |
 | MAPPO (multi-agent PPO) | Learned policies for every behaviour | 📋 Phase 8 |
 
 ---
@@ -1156,6 +1348,10 @@ Full details are in [docs/PLAN.md](docs/PLAN.md).
 - J. Desai, J. Ostrowski, V. Kumar, *Modeling and Control of Formations of Nonholonomic Mobile Robots* (leader-follower), IEEE TRA 2001
 - H. Kuhn, *The Hungarian Method for the Assignment Problem*, Naval Research Logistics 1955
 - J. Kennedy & R. Eberhart, *Particle Swarm Optimization*, ICNN 1995
+- Y. Shi & R. Eberhart, *A Modified Particle Swarm Optimizer* (decreasing inertia weight), IEEE ICEC 1998
+- V. Roberge, M. Tarbouchi, G. Labonté, *Comparison of Parallel Genetic Algorithm and Particle Swarm Optimization for Real-Time UAV Path Planning*, IEEE TII 2013
+- M. Erdmann & T. Lozano-Pérez, *On Multiple Moving Objects* (prioritised planning), Algorithmica 1987
+- D. Douglas & T. Peucker, *Algorithms for the Reduction of the Number of Points Required to Represent a Digitized Line*, Cartographica 1973
 - B. Yamauchi, *A Frontier-Based Approach for Autonomous Exploration*, CIRA 1997
 - J. Cortés et al., *Coverage Control for Mobile Sensing Networks*, IEEE TRA 2004
 - H.-L. Choi et al., *Consensus-Based Decentralized Auctions (CBBA)*, IEEE TRO 2009
