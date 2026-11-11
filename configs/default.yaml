@@ -76,6 +76,20 @@ planning:
   clearance_cells: 2.0
   lookahead: 12.0         # m along the path for the steering target
 
+formation:
+  enabled: false          # true: leader-follower formation flying
+  shape: v                # line | v | circle | box | column
+  spacing: 5.0            # m between neighbouring slots
+  speed: 3.5              # leader speed (followers need spare speed to catch up)
+  gain: 0.8               # slot-tracking gain (1/s)
+  adaptive: true          # collapse to a column for narrow passages, restore after
+  squeeze_lookahead: 18.0 # m of the leader's route checked for passage width
+  squeeze_margin: 2.0     # m of extra width needed on each side
+  restore_delay: 2.0      # s the passage must stay wide before restoring the shape
+  leader_timeout: 3.0     # s: leader info older than this is ignored
+  heading_tau: 1.5        # s: smoothing of the formation heading
+  slowdown_error: 4.0     # m: leader slows when followers are this far off-slot
+
 render:
   window_width: 1200
   window_height: 760

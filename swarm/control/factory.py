@@ -12,6 +12,7 @@ from swarm.config import Config
 from swarm.control.base import Controller
 from swarm.control.boids import BoidsController
 from swarm.control.orca import OrcaSafetyLayer
+from swarm.formation.controller import FormationController
 
 METHODS = ("none", "apf", "orca", "hybrid")
 
@@ -20,8 +21,11 @@ def build_controller(cfg: Config) -> Controller:
     method = cfg.avoidance.method
     if method not in METHODS:
         raise ValueError(f"Unknown avoidance method '{method}'. Choose from {METHODS}")
-    boids = BoidsController(cfg.boids, cfg.drones, cfg.avoidance,
-                            use_apf=method in ("apf", "hybrid"))
+    use_apf = method in ("apf", "hybrid")
+    if cfg.formation.enabled:
+        boids = FormationController(cfg.boids, cfg.drones, cfg.avoidance, cfg.formation, use_apf)
+    else:
+        boids = BoidsController(cfg.boids, cfg.drones, cfg.avoidance, use_apf=use_apf)
     if method in ("orca", "hybrid"):
         return OrcaSafetyLayer(boids, cfg.drones, cfg.avoidance)
     return boids

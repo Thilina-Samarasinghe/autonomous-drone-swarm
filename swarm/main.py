@@ -6,6 +6,7 @@
   python -m swarm.main --scenario survey --packet-loss 0.3
   python -m swarm.main --headless --scenario survey --no-share --out outputs/noshare
   python -m swarm.main --scenario maze --plan
+  python -m swarm.main --scenario corridor --formation v
   python -m swarm.main --headless --steps 3000 --out outputs/run1
 """
 
@@ -18,6 +19,7 @@ from pathlib import Path
 
 from swarm.config import load_config
 from swarm.control.factory import METHODS
+from swarm.formation.shapes import SHAPES
 from swarm.planning.planner import ALGORITHMS
 from swarm.sim.scenarios import SCENARIOS
 from swarm.sim.engine import Recorder, Simulation
@@ -36,6 +38,8 @@ def parse_args(argv=None):
     p.add_argument("--comm-range", type=float, help="radio range in metres")
     p.add_argument("--no-share", action="store_true", help="drones do not share maps")
     p.add_argument("--no-relay", action="store_true", help="single-hop radio (no forwarding)")
+    p.add_argument("--formation", choices=SHAPES, help="fly in formation with this shape")
+    p.add_argument("--no-squeeze", action="store_true", help="formation never collapses to a column for gaps")
     p.add_argument("--plan", action="store_true", help="enable path planning on each drone's map")
     p.add_argument("--planner", choices=ALGORITHMS, help="planning algorithm (implies --plan)")
     p.add_argument("--headless", action="store_true", help="run without a window")
@@ -70,6 +74,10 @@ def main(argv=None) -> None:
         comms["relay"] = False
     if comms:
         overrides["comms"] = comms
+    if args.formation:
+        overrides["formation"] = {"enabled": True, "shape": args.formation}
+        if args.no_squeeze:
+            overrides["formation"]["adaptive"] = False
     if args.plan or args.planner:
         overrides["planning"] = {"enabled": True}
         if args.planner:
@@ -142,6 +150,16 @@ def main(argv=None) -> None:
         "messages_dropped": last.dropped,
         "kbytes_sent": round(last.kbytes_sent, 1),
     })
+    if sim.formation is not None:
+        fs = sim.formation.stats
+        summary.update({
+            "formation": cfg.formation.shape,
+            "formation_error_mean_m": round(fs.mean_error, 3),
+            "formation_in_shape_pct": round(100 * fs.in_shape_fraction, 1),
+            "formation_squeezes": fs.squeezes,
+            "leader_arrived_s": (round(sim.time_leader_arrived, 2)
+                                 if sim.time_leader_arrived is not None else None),
+        })
     if sim.planner is not None:
         ps = sim.planner.stats
         summary.update({

@@ -85,12 +85,11 @@ class BoidsController:
         steer[~has] = 0.0
         return clamp_norm(steer, self.d.max_accel)
 
-    def compute(self, state: SwarmState, ctx: StepContext) -> np.ndarray:
+    def _separation(self, state: SwarmState, ctx: StepContext) -> np.ndarray:
         n = state.n
         pos, vel = state.pos, state.vel
         nb = ctx.neighbors
-
-        # --- separation (anticipatory) ---
+        # anticipatory separation
         # Each drone also looks LOOKAHEAD seconds ahead using the relative
         # velocity, and reacts to whichever is closer: now or predicted.
         # This handles the compression that happens when a flock turns.
@@ -117,7 +116,19 @@ class BoidsController:
         contact = 2 * self.d.radius
         span = max(self.d.separation_radius - contact, 1e-6)
         urgency = np.sqrt(np.clip((self.d.separation_radius - d_eff) / span, 0.0, 1.0))
-        separation = self._steer(sep_vec, vel, self.d.max_speed) * urgency[:, None]
+        return self._steer(sep_vec, vel, self.d.max_speed) * urgency[:, None]
+
+
+    def _boundary(self, state: SwarmState, ctx: StepContext) -> np.ndarray:
+        push = ctx.world.boundary_push(state.pos)
+        return self._steer(push, state.vel, self.d.max_speed) * norms(push)[:, None].clip(0, 1)
+
+    def compute(self, state: SwarmState, ctx: StepContext) -> np.ndarray:
+        n = state.n
+        pos, vel = state.pos, state.vel
+        nb = ctx.neighbors
+
+        separation = self._separation(state, ctx)
 
         # --- alignment & cohesion (all perceived neighbours) ---
         counts = np.bincount(nb.i, minlength=n).astype(float)
@@ -142,9 +153,7 @@ class BoidsController:
         # Speed keeping: hold cruise speed along the current heading.
         cruise = self._steer(vel, vel, self.d.cruise_speed)
 
-        # --- boundary ---
-        push = ctx.world.boundary_push(pos)
-        boundary = self._steer(push, vel, self.d.max_speed) * norms(push)[:, None].clip(0, 1)
+        boundary = self._boundary(state, ctx)
 
         # --- goal (arrive: slow down inside 10 m) ---
         goal = np.zeros((n, 2))

@@ -1,9 +1,9 @@
 # Autonomous Drone Swarm Simulation
 
-> 🚧 **Work in progress.** Phases 0–4 (simulation core, boids flocking,
+> 🚧 **Work in progress.** Phases 0–5 (simulation core, boids flocking,
 > obstacle avoidance with lidar + ORCA, radio communication with shared
-> mapping, path planning on each drone's own map) are built. Formation flying,
-> search-and-rescue and reinforcement learning are **still being built**.
+> mapping, path planning on each drone's own map, formation flying) are built.
+> Search-and-rescue and reinforcement learning are **still being built**.
 > See [Roadmap](#roadmap) below.
 
 A 2D simulator for a swarm of **20–50 autonomous drones**. Every drone makes its
@@ -58,9 +58,9 @@ intelligence**, not one central AI controlling every drone.
 | 1 | Boids flocking + real-time 2D viewer + headless runner with plots | ✅ Done |
 | 2 | Obstacles, lidar sensing, APF + ORCA collision avoidance, scenarios, benchmark | ✅ Done |
 | 3 | Radio network, per-drone occupancy maps, multi-hop map sharing, benchmark | ✅ Done |
-| 4 | Path planning (A* and cost field) on each drone's own map, replanning, maze, benchmark | ✅ Done (under review) |
-| 5 | Formation flying | 🔜 Next |
-| 6 | Cooperative search and rescue (PSO, coverage, task allocation) | 📋 Planned |
+| 4 | Path planning (A* and cost field) on each drone's own map, replanning, maze, benchmark | ✅ Done |
+| 5 | Formation flying: 5 shapes, Hungarian slot assignment, leader trail, squeezing through gaps, benchmark | ✅ Done (under review) |
+| 6 | Cooperative search and rescue (PSO, coverage, task allocation) | 🔜 Next |
 | 7 | Terrain cost and threat zones, PSO multi-drone path planner | 📋 Planned |
 | 8 | Multi-agent reinforcement learning (MAPPO) for **all** behaviours | 📋 Planned |
 | 9 | Benchmarks, robustness experiments, demo video | 📋 Planned |
@@ -123,6 +123,20 @@ intelligence**, not one central AI controlling every drone.
 - **`maze` scenario** (Phase 4): an S-shaped maze with a dead-end trap where flying straight at the goal fails.
 - **Planning benchmark** (Phase 4): no planning vs own-map planning vs
   shared-map planning vs A\*.
+- **Formation flying** (Phase 5): leader-follower with 5 shapes (`line`,
+  `v`, `circle`, `box`, `column`) that scale to 50 drones with ranks,
+  nested chevrons and rings. Followers learn the leader's position *and
+  velocity* over the radio, with latency, and extrapolate.
+- **Optimal slot assignment** (Phase 5): the Hungarian algorithm gives each
+  drone a slot so that a shape change moves the swarm the least total distance.
+- **Leader breadcrumb trail** (Phase 5): a column places drones along the
+  leader's actual flown path, so it bends around corners. A follower whose own
+  map shows a wall between it and its slot follows the trail around the wall.
+- **Squeezing through gaps** (Phase 5): the leader measures the passage width
+  along its route on its own map, switches to a column when the shape won't
+  fit, and restores it when there's room again.
+- **Formation benchmark** (Phase 5): every shape in the open, V and line
+  through the corridor (squeeze on/off), forest, and the maze with planning.
 - **Fast neighbour search**: KD-tree, roughly N log N cost.
 - **Real-time Pygame viewer**: neighbour links, trails, perception circles,
   live stats panel, behaviour weights tunable while running, add or remove drones.
@@ -190,6 +204,15 @@ python -m swarm.main --scenario maze --plan
 python -m swarm.main --scenario maze --planner astar
 python -m swarm.main --headless --scenario maze --plan --no-share --out outputs/maze_ownmap
 
+# Formation flying (Phase 5)
+python -m swarm.main --formation v
+python -m swarm.main --scenario corridor --formation v --drones 20
+python -m swarm.main --scenario maze --formation v --plan --drones 20
+python -m swarm.main --headless --scenario corridor --formation line --no-squeeze --out outputs/line_nosq
+
+# Benchmark formations (writes outputs/benchmarks/formation.*)
+python -m experiments.benchmark_formation                       # 20 drones x 3 seeds
+
 # Benchmark planning settings in the maze (writes outputs/benchmarks/planning.*)
 python -m experiments.benchmark_planning                        # 30 drones x 3 seeds
 
@@ -217,6 +240,8 @@ python -m swarm.main --config configs/my_experiment.yaml
 | `--no-relay` | off | Single-hop radio: no forwarding of others' information |
 | `--plan` | off | Each drone plans routes on its own map |
 | `--planner` | from config (`field`) | `field` or `astar` (implies `--plan`) |
+| `--formation` | off | `line`, `v`, `circle`, `box` or `column` |
+| `--no-squeeze` | off | Formation never collapses to a column for gaps |
 | `--headless` | off | Run without a window |
 | `--steps` | from config (3000) | Steps for a headless run (1 step = 0.05 s) |
 | `--out` | `outputs/latest` | Output folder for headless results |
@@ -228,7 +253,7 @@ A headless run writes:
 | `trajectories.png` | Every drone's path (■ start, ● end) |
 | `metrics.png` | Min separation, polarization, mean speed and groups over time |
 | `comms_mapping.png` | Map coverage (team / average / worst drone), accuracy, radio groups and info age over time |
-| `summary.json` | Collisions, obstacle hits, clearance, arrivals, alignment, map coverage and accuracy, time to 50% coverage, messages delivered / dropped, traffic, plans / ms per plan / blocked replans, run speed |
+| `summary.json` | Collisions, obstacle hits, clearance, arrivals, alignment, map coverage and accuracy, time to 50% coverage, messages delivered / dropped, traffic, plans / ms per plan / blocked replans, formation error / time in shape / squeezes / leader arrival, run speed |
 
 ---
 
@@ -240,6 +265,7 @@ A headless run writes:
 | `.` | Single step (while paused) |
 | `1` … `6` | Scenario: open / forest / corridor / random / survey / maze |
 | `K` | Path planning on / off (yellow line = selected drone's path, dot = its steering target) |
+| `F` | Formation: off → line → V → circle → box → column (pink ring = leader, purple squares = slots, yellow squares = followers on the trail, purple line = leader's trail) |
 | `M` | Cycle avoidance method: none → apf → orca → hybrid |
 | `V` | Toggle lidar beams (red = hit) |
 | Left click | Set a shared goal point |
@@ -327,6 +353,17 @@ metres and seconds. Unknown keys raise an error, so typos are caught early.
 | | `inflation_cost` | 8.0 | Cost of cells within body radius of an obstacle |
 | | `clearance_cost` / `clearance_cells` | 2.0 / 2.0 | Extra cost near obstacles (keeps paths centred) |
 | | `lookahead` | 12 | Metres along the path to look for the steering target |
+| `formation` | `enabled` | false | Leader-follower formation flying |
+| | `shape` | v | `line` / `v` / `circle` / `box` / `column` |
+| | `spacing` | 5.0 | Metres between neighbouring slots |
+| | `speed` | 3.5 | Leader speed (slower than cruise so followers can catch up) |
+| | `gain` | 0.8 | Slot-tracking gain (1/s) |
+| | `adaptive` | true | Collapse to a column for narrow passages |
+| | `squeeze_lookahead` / `squeeze_margin` | 18 / 2.0 | Metres of route checked, extra width needed per side |
+| | `restore_delay` | 2.0 | Seconds the passage must stay wide before restoring |
+| | `leader_timeout` | 3.0 | Leader information older than this is ignored (s) |
+| | `heading_tau` | 1.5 | Smoothing of the formation heading (s) |
+| | `slowdown_error` | 4.0 | Leader slows when followers are this far off-slot (m) |
 | `render` | `window_width` × `window_height` | 1200 × 760 | |
 | | `fps` | 60 | |
 | | `trail_length` | 40 | Frames of trail per drone |
@@ -348,7 +385,8 @@ each step (dt = 0.05 s):
   6. metrics     = separation, collisions, hits, clearance, arrivals, alignment
   7. mapping     = every 0.1 s each drone folds its lidar scan into its own map
   8. radio       = every 0.25 s each drone broadcasts; deliveries arrive after latency
-  (planning, if on, runs before step 3 and turns the goal into per-drone waypoints)
+  (planning, if on, runs before step 3 and turns the goal into per-drone waypoints;
+   formation, if on, then turns the leader's waypoint into a slot for every follower)
 ```
 
 ### Controller interface
@@ -469,6 +507,43 @@ triggers an immediate replan.
 can see in a straight line on its own map. This turns the staircase grid
 path into smooth flight without a separate smoothing step.
 
+### Formation flying (Phase 5)
+
+```
+ leader:    goal / planner waypoint / patrol loop --> fly at formation speed (slower if followers lag)
+ follower:  leader pos + vel from radio (extrapolated) --> slot = leader + rotate(offset, heading)
+            v_desired = v_leader + gain * (slot - position)  --> separation, walls, ORCA as before
+```
+
+**Shapes.** Each shape is a list of slot offsets in the leader's frame
+(forward = heading). For big swarms they grow sensibly: `line` adds ranks
+of 11, `v` nests a new chevron behind the first (5 per arm), `circle` adds
+rings, `box` is a square grid. Every slot is at least `spacing` (5 m) from
+every other.
+
+**Assignment.** When the shape changes, the leader solves a linear assignment
+(Hungarian algorithm, SciPy) between followers and slots, minimising the total
+distance flown. A drone that's already close to a slot keeps it.
+
+**Leader trail.** The leader records a breadcrumb every metre it flies. This
+path is known to be flyable, so it serves two purposes:
+- in a `column`, follower *j* holds the point *j × 5 m* back along the
+  trail. The column follows the leader's exact route around corners.
+- a follower whose own map shows a wall between it and its slot follows the
+  trail instead. It targets the newest breadcrumb it can see, but always at least
+  3 m further along than where it is, and rejoins its slot on the far side.
+
+**Squeezing.** The leader measures the passage along its next 18 m of route:
+2 × the smallest distance from the route to a known obstacle on its map. If
+the shape (plus 2 m each side) doesn't fit, everyone switches to a column. The
+shape is restored 2 s after the passage is wide again; drones still in the
+gap use the trail to come through.
+
+**What it does not model.** The leader's trail and shape changes reach
+followers instantly; in reality they would ride on the radio messages (the
+leader's *position and velocity* do go over the radio, with latency and loss).
+The leader is fixed (drone 0); leader failure and re-election come in Phase 9.
+
 Lessons from development (found by tests and benchmarks):
 
 - Drones spawned at full speed in random directions collided before they
@@ -502,6 +577,19 @@ Lessons from development (found by tests and benchmarks):
 - *Phase 4:* the first path-extraction code could step diagonally between two
   blocked cells, which the search itself forbids. Extraction now uses exactly
   the search's edges; a test checks every step of every path.
+- *Phase 5:* in the maze, followers piled up against walls trying to reach
+  slots on the other side. The first fix (follow the drone ahead) failed
+  because that drone was stuck too. Following the leader's breadcrumb trail fixed it.
+- *Phase 5:* the first gap detector used the lidar cone ahead and mistook a
+  wall *in front* for a narrow gap, so the formation flipped between V and column
+  11 times in the maze. Measuring the passage along the planned route on the
+  leader's map fixed it (1 switch).
+- *Phase 5:* followers beside a gap got stuck targeting "the newest trail point
+  I can see", which was the one they were standing on, because the wall's
+  corner cell hid the rest. Now they always move at least 3 m along the trail.
+- *Phase 5:* a rule to restore the shape "once every follower has passed the
+  gap" deadlocked when the leader parked less than a column-length past the
+  gap. A simple 2 s delay plus the trail fallback works better.
 
 ---
 
@@ -525,6 +613,10 @@ Lessons from development (found by tests and benchmarks):
 | `teammates_known` / `info_age` | How many teammates each drone knows about, and how old that information is (s) | |
 | `delivered` / `dropped` / `kbytes_sent` | Radio traffic | |
 | `plans` / `plan_ms_mean` / `blocked_replans` | Planner activity and cost | |
+| `formation_error_mean` | Average distance of followers from their slots (m) | low |
+| `formation_in_shape` | Share of time the average slot error is below 2.5 m | high |
+| `formation_squeezes` | Times the formation collapsed to a column for a gap | |
+| `leader_arrived` | When the leader reached the goal (a formation is wider than the goal circle) | |
 
 Planned metrics for later phases: victims found, time to find,
 messages sent, path length, formation error, energy use.
@@ -587,12 +679,12 @@ Reproduce with `python -m experiments.benchmark_comms`.
 
 | Setting | Average drone's map at 30 s | Time to 50% | Time to 80% | Time to 90% | Final: average / worst drone | Map accuracy | Traffic |
 |---|---|---|---|---|---|---|---|
-| no sharing | 17% | 119 s (2 of 3 runs) | never | never | 46% / 31% | 99.8% | 120 kB/s |
-| single-hop, 0% loss | 54% | 36 s | 62 s | 69 s | 94% / 58% | 99.9% | 63 kB/s |
-| **multi-hop, 0% loss** | **85%** | **3 s** | **20 s** | **49 s** | 95% / 90% | 99.8% | 186 kB/s |
-| multi-hop, 20% loss | 84% | 4 s | 24 s | 51 s | 95% / 89% | 99.9% | 186 kB/s |
-| multi-hop, 50% loss | 81% | 4 s | 40 s | 57 s | 95% / 86% | 99.9% | 186 kB/s |
-| multi-hop, 80% loss | 72% | 16 s | 44 s | 61 s | 94% / 70% | 99.9% | 186 kB/s |
+| no sharing | 17% | 119 s (2 of 3 runs) | never | never | 46% / 31% | 99.8% | 199 kB/s |
+| single-hop, 0% loss | 54% | 36 s | 62 s | 69 s | 94% / 58% | 99.9% | 64 kB/s |
+| **multi-hop, 0% loss** | **85%** | **3 s** | **20 s** | **49 s** | 95% / 90% | 99.8% | 264 kB/s |
+| multi-hop, 20% loss | 84% | 4 s | 24 s | 51 s | 95% / 89% | 99.9% | 264 kB/s |
+| multi-hop, 50% loss | 81% | 4 s | 40 s | 57 s | 95% / 86% | 99.9% | 264 kB/s |
+| multi-hop, 80% loss | 72% | 16 s | 44 s | 61 s | 94% / 70% | 99.9% | 265 kB/s |
 
 All 18 runs: 0 drone collisions, 0 obstacle hits.
 
@@ -604,9 +696,11 @@ What the numbers show:
   the same information arrives by many paths and anti-entropy repairs gaps.
   Only at 80% loss does it slow down noticeably, and every setting still ends
   above 94%.
-- **Traffic** is about 3.7 kB/s per drone with multi-hop sharing (≈ 30 kbit/s),
+- **Traffic** is about 5.3 kB/s per drone with multi-hop sharing (≈ 42 kbit/s),
   within reach of common low-power drone radios. "No sharing" still sends
-  beacon tables, which is why it isn't zero.
+  beacon tables, which is why it isn't zero. (Re-measured in Phase 5, when
+  beacons gained the sender's velocity: 20 bytes per entry instead of 12.
+  Coverage results were unchanged.)
 
 ### Phase 4: planning benchmark
 
@@ -629,6 +723,46 @@ What the numbers show:
   drones discover a wall, the drones behind replan before they reach it.
 - **A\* and the cost field give the same result** (same arrival time; tests
   prove equal path costs), but the cost field is about 5× cheaper per plan.
+
+### Phase 5: formation benchmark
+
+20 drones, 3 seeds per row. *Open* has no goal: the leader flies a
+rectangular patrol loop for 120 s, including four 90° turns. "Left behind"
+means a follower more than 20 m from its slot (or from its point on the
+leader's trail, in a column) at the end.
+Reproduce with `python -m experiments.benchmark_formation`.
+
+| Case | Mean slot error | Time in shape (< 2.5 m) | Squeezes | Leader reached goal | Left behind | Collisions | Obstacle hits |
+|---|---|---|---|---|---|---|---|
+| open / line | 5.2 m | 62% | 0 | n/a (patrol) | 0 | 0 | 0 |
+| open / v | 4.2 m | 69% | 0 | n/a (patrol) | 0 | 0 | 0 |
+| open / circle | 4.8 m | 59% | 0 | n/a (patrol) | 0 | 0 | 0 |
+| open / box | 3.9 m | 68% | 0 | n/a (patrol) | 0 | 0 | 0 |
+| corridor / free flocking | n/a | n/a | 0 | 33 s | 0 | 0 | 0 |
+| corridor / v, squeeze on | 5.3 m | 66% | 1 | 74 s | 0 | 0 | 0 |
+| corridor / v, squeeze off | 3.5 m | 67% | 0 | 72 s | 0 | 0 | 0 |
+| corridor / line, squeeze on | 6.6 m | 61% | 1 | 77 s | 0 | 0 | 0 |
+| forest / v | 5.5 m | 66% | 1 | 70 s | 0 | 0 | 0 |
+| maze / v + planning | 4.1 m | 61% | 1.3 | 178 s | 0.3 | 0 | 0 |
+
+All 30 runs: 0 drone collisions, 0 obstacle hits.
+
+What the numbers show:
+- **Formations hold.** In straight flight followers sit within ~0.1–0.7 m of
+  their slots. The averages above include assembling from random starts and
+  the patrol's 90° turns, where a rigid shape must swing round.
+- **Every formation gets through every obstacle course**: a 14 m gap, a pillar
+  forest and the maze, with nobody left behind except one drone in one maze run.
+- **Squeezing is not essential here**: with it off, the V still gets through
+  the corridor gap (the trail fallback carries the blocked wing through) and
+  keeps a lower average error. Squeezing gives an orderly single-file
+  passage instead.
+- **The price of keeping shape is speed**: free flocking reaches the goal in
+  33 s, a formation in ~72 s. The leader flies at 3.5 m/s instead of 5 m/s and
+  waits for stragglers.
+- **The maze stays a column all the way**: a 20-drone V needs 45 m and the
+  maze sections are ~46 m, just short of the 47 m needed to restore. That's the
+  intended behaviour.
 
 ---
 
@@ -655,6 +789,10 @@ autonomous-drone-swarm/
 │   ├── planning/
 │   │   ├── grid.py           cost map, A*, backward-Dijkstra cost field, path extraction
 │   │   └── planner.py        per-drone replanning and string-pulling path following
+│   ├── formation/
+│   │   ├── shapes.py         slot offsets for line / v / circle / box / column
+│   │   ├── manager.py        leader, Hungarian assignment, trail, squeezing, slot targets
+│   │   └── controller.py     slot-tracking controller (reuses boids safety terms)
 │   ├── sim/
 │   │   ├── world.py          arena, walls, obstacles
 │   │   ├── obstacles.py      circle/box geometry: distance, raycast, collision
@@ -673,24 +811,26 @@ autonomous-drone-swarm/
 ├── experiments/
 │   ├── benchmark_avoidance.py   method x scenario x seed comparison
 │   ├── benchmark_comms.py       sharing / relay / packet-loss comparison
-│   └── benchmark_planning.py    planning on/off, own vs shared map, A* vs field
+│   ├── benchmark_planning.py    planning on/off, own vs shared map, A* vs field
+│   └── benchmark_formation.py   shapes, squeezing, obstacle courses
 ├── tests/
 │   ├── test_core.py          Phase 0-1 tests
 │   ├── test_phase2.py        Phase 2 tests
 │   ├── test_phase3.py        Phase 3 tests
-│   └── test_phase4.py        Phase 4 tests
+│   ├── test_phase4.py        Phase 4 tests
+│   └── test_phase5.py        Phase 5 tests
 ├── requirements.txt
 └── pytest.ini
 ```
 
-Planned additions: `swarm/formation/`, `swarm/missions/` and `swarm/rl/`.
+Planned additions: `swarm/missions/` and `swarm/rl/`.
 
 ---
 
 ## Testing
 
 ```bash
-python -m pytest            # 79 tests, ~1.5 min
+python -m pytest            # 121 tests, ~3 min
 python -m pytest -v         # verbose
 ```
 
@@ -733,6 +873,18 @@ The tests cover:
   that avoids it; steering targets never cross a known obstacle
 - *Phase 4:* end to end, in the maze 15 drones without planning all get stuck,
   while with planning ≥ 14 arrive, with 0 collisions and 0 hits; CLI and viewer work
+- *Phase 5:* every shape at every size has exactly N slots, the leader at the
+  origin and ≥ 5 m spacing; the frame rotates with heading; Hungarian
+  assignment puts drones back on the slots they already occupy
+- *Phase 5:* trail points follow an L-shaped flown path around its corner and
+  extend straight back past its start; per-follower errors are measured
+  against slots or trail points; passage width matches a known corridor;
+  line-of-sight detects walls; beacons carry velocity
+- *Phase 5:* end to end, a V holds its shape in open flight; a V squeezes
+  through the corridor gap and re-forms with nobody left behind; with
+  squeezing off, the trail fallback still gets everyone through; followers
+  that lose the leader fall back to flocking; shape switching, CLI and viewer
+  key all work
 
 ---
 
@@ -747,8 +899,8 @@ Full details are in [docs/PLAN.md](docs/PLAN.md).
 | 2 | Obstacles and avoidance | Obstacles, lidar, APF, ORCA safety layer, hybrid, forest / corridor / random scenarios, benchmark | ✅ |
 | 3 | Communication | Radio with range / loss / latency / bandwidth, beacon tables, per-drone occupancy maps, multi-hop sharing, benchmark | ✅ |
 | 4 | Path planning | Cost map, A\*, backward-Dijkstra cost field, optimistic replanning, string-pulling path following, maze, benchmark | ✅ |
-| 5 | Formation flying | Leader-follower, virtual structure, line / V / circle switching, passing through gaps | 🔜 |
-| 6 | Search and rescue | Area partitioning, frontier exploration, PSO victim search, CBBA task allocation, battery | 📋 |
+| 5 | Formation flying | Leader-follower with 5 shapes, Hungarian slot assignment, leader trail, squeezing through gaps, benchmark | ✅ |
+| 6 | Search and rescue | Area partitioning, frontier exploration, PSO victim search, CBBA task allocation, battery | 🔜 |
 | 7 | Terrain and threats | Heightmap cost, threat zones, PSO multi-drone route planner | 📋 |
 | 8 | Reinforcement learning | PettingZoo env, shared-parameter MAPPO, curriculum learning; policies for avoidance, flocking, formation and search | 📋 |
 | 9 | Experiments and demo | Scaling, communication-loss and drone-failure tests, RL vs. classical, demo video | 📋 |
@@ -771,7 +923,10 @@ Full details are in [docs/PLAN.md](docs/PLAN.md).
 | Backward Dijkstra cost-to-go field (the quantity D\* Lite maintains) | Fast per-drone planning and re-attachment | ✅ |
 | Line-of-sight string pulling | Smooth path following | ✅ |
 | Incremental D\* Lite | Re-using previous searches | 📋 |
-| Leader-follower, virtual structure, consensus | Formation control | 📋 Phase 5 |
+| Leader-follower slot tracking (feed-forward + proportional) | Formation keeping | ✅ |
+| Hungarian algorithm (linear assignment) | Optimal slot assignment on shape changes | ✅ |
+| Breadcrumb trail following | Columns around corners, recovering blocked followers | ✅ |
+| Distance transform along the planned route | Passage-width estimate for squeezing | ✅ |
 | Frontier exploration, Voronoi coverage | Area search | 📋 Phase 6 |
 | Particle Swarm Optimization | Victim search, multi-drone route planning | 📋 Phases 6–7 |
 | CBBA / auctions | Task allocation | 📋 Phase 6 |
@@ -822,6 +977,8 @@ Full details are in [docs/PLAN.md](docs/PLAN.md).
 - E. Dijkstra, *A Note on Two Problems in Connexion with Graphs*, Numerische Mathematik 1959
 - S. Koenig & M. Likhachev, *D\* Lite*, AAAI 2002
 - W. Ren & R. Beard, *Distributed Consensus in Multi-Vehicle Cooperative Control*, 2008
+- J. Desai, J. Ostrowski, V. Kumar, *Modeling and Control of Formations of Nonholonomic Mobile Robots* (leader-follower), IEEE TRA 2001
+- H. Kuhn, *The Hungarian Method for the Assignment Problem*, Naval Research Logistics 1955
 - J. Kennedy & R. Eberhart, *Particle Swarm Optimization*, ICNN 1995
 - B. Yamauchi, *A Frontier-Based Approach for Autonomous Exploration*, CIRA 1997
 - J. Cortés et al., *Coverage Control for Mobile Sensing Networks*, IEEE TRA 2004

@@ -29,7 +29,7 @@ from swarm.config import CommsConfig
 from swarm.mapping.occupancy import OccupancyMaps
 
 HEADER_BYTES = 16
-BEACON_BYTES = 12      # x, y, timestamp as float32
+BEACON_BYTES = 20      # x, y, vx, vy, timestamp as float32
 CELL_BYTES = 3         # uint16 index + int8 value
 
 
@@ -40,6 +40,7 @@ class Broadcast:
     deliver_step: int
     receivers: np.ndarray       # receivers whose copy was NOT lost
     table: np.ndarray           # (N, 3) x, y, time
+    vtable: np.ndarray          # (N, 2) vx, vy at that time
     cells: np.ndarray           # (K,) flat cell indices
     values: np.ndarray          # (K,) log-odds
 
@@ -67,15 +68,18 @@ class CommsNetwork:
         self.links = np.empty((0, 2), dtype=int)          # (K, 2) undirected pairs in range
         self.recent_drops = np.empty((0, 2), dtype=int)   # (D, 2) sender, receiver at last broadcast
         self.table = np.full((self.n, self.n, 3), np.nan) # drone i's belief about drone j
+        self.vtable = np.zeros((self.n, self.n, 2))       # ... and its velocity at that time
         self.interval_steps = max(1, round(self.cfg.broadcast_interval / self.dt))
         self.latency_steps = max(0, round(self.cfg.latency / self.dt))
 
     # ----------------------------------------------------------------- step
     def step(self, step_count: int, time: float, pos: np.ndarray,
-             maps: OccupancyMaps | None) -> None:
+             maps: OccupancyMaps | None, vel: np.ndarray | None = None) -> None:
         idx = np.arange(self.n)
         self.table[idx, idx, 0:2] = pos
         self.table[idx, idx, 2] = time
+        if vel is not None:
+            self.vtable[idx, idx] = vel
         if self.n >= 2:
             self.links = cKDTree(pos).query_pairs(self.cfg.range, output_type="ndarray")
         else:
@@ -107,12 +111,13 @@ class CommsNetwork:
             else:
                 cells, vals = no_cells, no_vals
             table = self.table[s].copy() if self.cfg.relay else self._own_row_only(s)
+            vtable = self.vtable[s].copy()
             self.stats.broadcasts += 1
             self.stats.bytes_sent += (HEADER_BYTES + CELL_BYTES * len(cells)
                                       + BEACON_BYTES * (n if self.cfg.relay else 1))
             ok = receivers[(senders == s) & ~lost]
             if len(ok):
-                self.queue.append(Broadcast(int(s), deliver, ok, table, cells, vals))
+                self.queue.append(Broadcast(int(s), deliver, ok, table, vtable, cells, vals))
 
     def _own_row_only(self, s: int) -> np.ndarray:
         t = np.full((self.n, 3), np.nan)
@@ -140,6 +145,8 @@ class CommsNetwork:
             times = np.nan_to_num(tables[:, :, 2], nan=-np.inf)
             best = times.argmax(axis=0)
             self.table[r] = tables[best, np.arange(self.n)]
+            vtables = np.stack([b.vtable for b in msgs] + [self.vtable[r]])
+            self.vtable[r] = vtables[best, np.arange(self.n)]
             if maps is not None:
                 cells = np.concatenate([b.cells for b in msgs])
                 if len(cells):

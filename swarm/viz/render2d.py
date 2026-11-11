@@ -4,6 +4,7 @@ Controls
   SPACE pause / resume     .  single step (while paused)
   1-6  scenario: open/forest/corridor/random/survey/maze
   K  path planning on/off (yellow = selected drone's path)
+  F  formation: off > line > v > circle > box > column
   M  cycle avoidance: none > apf > orca > hybrid
   L  links: radio > sensing > off
   G  map overlay: selected drone > team > off
@@ -24,6 +25,7 @@ import numpy as np
 import pygame
 
 from swarm.control.factory import METHODS
+from swarm.formation.shapes import SHAPES
 from swarm.mathutil import norms
 from swarm.sim.engine import Simulation
 from swarm.sim.scenarios import SCENARIOS
@@ -41,6 +43,9 @@ DROP = (235, 70, 70)
 SELECT = (255, 255, 255)
 GHOST = (255, 255, 255)
 PATH = (250, 215, 70)
+SLOT = (200, 140, 255)
+LEADER = (255, 90, 200)
+TRAIL_L = (120, 80, 140)
 OBSTACLE = (120, 128, 145)
 OBSTACLE_EDGE = (170, 178, 195)
 BEAM = (38, 44, 58)
@@ -64,7 +69,7 @@ class Viewer:
         self.sim = sim
         rc = sim.cfg.render
         pygame.init()
-        pygame.display.set_caption("Autonomous Drone Swarm - Phase 4: Path planning")
+        pygame.display.set_caption("Autonomous Drone Swarm - Phase 5: Formation flying")
         self.screen = pygame.display.set_mode((rc.window_width, rc.window_height))
         self.clock = pygame.time.Clock()
         self.font = pygame.font.SysFont("consolas", 15)
@@ -140,6 +145,10 @@ class Viewer:
         elif k == pygame.K_m:
             cur = self.sim.cfg.avoidance.method
             self.sim.set_avoidance(METHODS[(METHODS.index(cur) + 1) % len(METHODS)])
+        elif k == pygame.K_f:
+            cycle = (None,) + SHAPES
+            cur = self.sim.formation.desired_shape if self.sim.formation is not None else None
+            self.sim.set_formation(cycle[(cycle.index(cur) + 1) % len(cycle)])
         elif k == pygame.K_k:
             self.sim.set_planning(not self.sim.cfg.planning.enabled)
         elif k in (pygame.K_1, pygame.K_2, pygame.K_3, pygame.K_4, pygame.K_5, pygame.K_6):
@@ -276,6 +285,22 @@ class Viewer:
             pygame.draw.circle(self.screen, GOAL, g, 8, 2)
             pygame.draw.circle(self.screen, GOAL, g, 3)
 
+        # formation: leader trail, follower slots, leader marker
+        fm = sim.formation
+        if fm is not None and sim.state.n:
+            if len(fm.trail) > 1:
+                pygame.draw.lines(self.screen, TRAIL_L, False,
+                                  self.to_screen(np.array(fm.trail[-300:])).tolist(), 1)
+            ft = getattr(sim, "last_formation_targets", None)
+            if ft is not None and len(ft.slot) == sim.state.n:
+                for k in range(sim.state.n):
+                    if k == ft.leader or np.isnan(ft.slot[k, 0]):
+                        continue
+                    sp = self.to_screen(ft.slot[k])
+                    col = PATH if fm.following_trail[k] else SLOT
+                    pygame.draw.rect(self.screen, col, (sp[0] - 3, sp[1] - 3, 6, 6), 1)
+            pygame.draw.circle(self.screen, LEADER, pos_s[fm.leader], size + 4, 2)
+
         # selected drone: planned path + steering target
         if sim.planner is not None and sim.state.n:
             k = min(self.selected, sim.state.n - 1)
@@ -308,11 +333,12 @@ class Viewer:
         x0 = self.screen.get_width() - HUD_W
         pygame.draw.rect(self.screen, (12, 15, 22), (x0, 0, HUD_W, self.screen.get_height()))
         lines = [
-            ("PHASE 4 - PATH PLANNING", None),
+            ("PHASE 5 - FORMATIONS", None),
             ("", None),
             (f"scenario  {sim.cfg.scenario.name:>11s}", (150, 200, 255)),
             (f"avoidance {sim.cfg.avoidance.method:>11s}", (150, 200, 255)),
             (f"planning  {(sim.cfg.planning.algorithm if sim.planner else 'off'):>11s}", (150, 200, 255)),
+            (f"formation {(sim.formation.active_shape if sim.formation else 'off'):>11s}", (150, 200, 255)),
             ("", None),
             (f"time {m.time:7.1f} s   drones {m.n:3d}", None),
             (f"fps  {self.clock.get_fps():7.1f}     speed {self.steps_per_frame:2d}x", None),
@@ -322,9 +348,7 @@ class Viewer:
             (f"obst. hits now/total {m.obstacle_hits:3d}/{sim.total_obstacle_hits:<4d}", BAD if m.obstacle_hits else None),
             (f"clearance    {m.min_clearance:8.2f} m", BAD if m.min_clearance < 0 else None),
             (f"arrived      {m.arrived:5d}/{m.n:<3d}", None),
-            (f"mean speed   {m.mean_speed:8.2f} m/s", None),
-            (f"local polar. {m.local_polarization:8.2f}", None),
-            (f"groups       {m.groups:8d}", None),
+            (f"speed {m.mean_speed:4.1f} m/s  groups {m.groups:3d}", None),
             (f"weights s/a/c {w.separation_weight:.1f}/{w.alignment_weight:.1f}/{w.cohesion_weight:.1f}", None),
             ("", None),
         ]
@@ -338,15 +362,20 @@ class Viewer:
             lines += [
                 ("COMMS & MAP", (150, 200, 255)),
                 (f"sharing  {'on' if cfgc.share_maps else 'OFF':>4s} loss {cfgc.packet_loss:4.0%}", None),
-                (f"radio links  {im.comm_links:8d}", None),
-                (f"radio groups {im.comm_groups:8d}", None),
+                (f"radio links {im.comm_links:5d} groups {im.comm_groups:3d}", None),
                 (f"dropped      {drop_pct:7.1f}%", BAD if drop_pct > 0 else None),
                 (f"traffic      {im.kbytes_sent / max(sim.time, 1e-9):6.1f} kB/s", None),
-                (f"map drone #{k:<3d}{sel_cov:7.0%}", None),
-                (f"map average  {im.map_coverage_mean:8.0%}", None),
-                (f"map team     {im.map_coverage_team:8.0%}", None),
+                (f"map #{k:<3d}{sel_cov:4.0%} avg {im.map_coverage_mean:4.0%} team {im.map_coverage_team:4.0%}", None),
                 (f"map accuracy {im.map_accuracy:8.1%}", None),
                 (f"info age     {im.info_age:7.1f} s", None),
+            ]
+        if sim.formation is not None:
+            fs = sim.formation.stats
+            fw = sim.formation.free_width
+            lines += [
+                (f"slot error   {fs.last_error:7.2f} m", BAD if fs.last_error > 5 else None),
+                (f"in shape     {fs.in_shape_fraction:8.0%}", None),
+                (f"passage {('open' if fw == float('inf') else f'{fw:4.0f} m'):>6s} sq {fs.squeezes:3d}", None),
             ]
         if sim.planner is not None:
             ps = sim.planner.stats

@@ -13,6 +13,8 @@ from swarm.control.base import Controller, StepContext
 from swarm.comms.network import CommsNetwork
 from swarm.control.factory import build_controller
 from swarm.mapping.occupancy import GroundTruth, OccupancyMaps
+from swarm.formation.manager import FormationManager
+from swarm.formation.shapes import SHAPES
 from swarm.planning.planner import SwarmPlanner
 from swarm.metrics import Metrics, compute_metrics
 from swarm.sim.dynamics import integrate
@@ -63,6 +65,7 @@ class Simulation:
         self.total_collisions = 0
         self.total_obstacle_hits = 0
         self.time_to_arrive_90: float | None = None
+        self.time_leader_arrived: float | None = None   # formation runs: drone 0 reached the goal
         self._init_info_systems()
         self.neighbors: NeighborPairs
         self.scan: Scan
@@ -81,6 +84,11 @@ class Simulation:
         self.comms = (CommsNetwork(n, self.cfg.comms, self.cfg.sim.dt, comms_rng)
                       if self.cfg.comms.enabled else None)
         self._map_every = max(1, round(self.cfg.mapping.update_interval / self.cfg.sim.dt))
+        self.formation = None
+        if self.cfg.formation.enabled:
+            if self.cfg.formation.shape not in SHAPES:
+                raise ValueError(f"Unknown formation shape '{self.cfg.formation.shape}'. Choose from {SHAPES}")
+            self.formation = FormationManager(n, self.cfg.formation, self.cfg.sim.dt, self.world.size)
         self.planner = None
         if self.cfg.planning.enabled:
             if self.maps is None:
@@ -98,6 +106,21 @@ class Simulation:
                                         self.cfg.avoidance.safety_margin)
         else:
             self.planner = None
+
+    def set_formation(self, shape: str | None) -> None:
+        """Fly in formation `shape`, or flock freely with None (keeps the swarm state)."""
+        if shape is None:
+            self.cfg.formation.enabled = False
+            self.formation = None
+        elif self.formation is not None:
+            self.cfg.formation.shape = shape
+            self.formation.set_shape(shape)
+        else:
+            self.cfg.formation.enabled = True
+            self.cfg.formation.shape = shape
+            self.formation = FormationManager(self.state.n, self.cfg.formation, self.cfg.sim.dt,
+                                              self.world.size)
+        self.controller = self._custom_controller or build_controller(self.cfg)
 
     def set_avoidance(self, method: str) -> None:
         """Switch avoidance method on the fly (keeps the current swarm state)."""
@@ -139,6 +162,13 @@ class Simulation:
                                           self.cfg.scenario.goal_radius)
         ctx = StepContext(self.world, self.neighbors, self.goal, self.cfg.sim.dt,
                           self.scan, self.detections, targets=targets)
+        self.last_formation_targets = None
+        if self.formation is not None:
+            ctx.extras["formation"] = self.last_formation_targets = self.formation.update(
+                self.time, self.state.pos, self.state.vel, self.scan, self.goal, targets,
+                self.comms, d.perception_radius, self.maps,
+                self.planner.paths if self.planner is not None else None,
+                self.planner.progress if self.planner is not None else None)
         accel = self.controller.compute(self.state, ctx)
         _, hit = integrate(self.state, accel, self.cfg.sim.dt, d.max_speed, d.max_accel,
                            self.world, d.radius)
@@ -151,10 +181,13 @@ class Simulation:
         if self.maps is not None and self.step_count % self._map_every == 0:
             self.maps.integrate_scan(self.state.pos, self.scan)
         if self.comms is not None:
-            self.comms.step(self.step_count, self.time, self.state.pos, self.maps)
+            self.comms.step(self.step_count, self.time, self.state.pos, self.maps, self.state.vel)
         if (self.time_to_arrive_90 is None and self.goal is not None
                 and self.metrics.arrived >= 0.9 * self.state.n):
             self.time_to_arrive_90 = self.time
+        if (self.time_leader_arrived is None and self.goal is not None and self.state.n
+                and np.linalg.norm(self.state.pos[0] - self.goal) < self.cfg.scenario.goal_radius):
+            self.time_leader_arrived = self.time
         return self.metrics
 
     def info_metrics(self) -> InfoMetrics:

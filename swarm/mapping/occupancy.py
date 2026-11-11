@@ -160,6 +160,19 @@ class OccupancyMaps:
         pick = np.abs(self.L).argmax(axis=0)
         return self.L[pick, np.arange(self.num_cells)]
 
+    def segments_clear(self, ks: np.ndarray, p: np.ndarray, q: np.ndarray) -> np.ndarray:
+        """For each i: is the straight segment p[i] -> q[i] free of cells that
+        drone ks[i] believes are occupied?  Unknown counts as free.  (M,) bool."""
+        if len(ks) == 0:
+            return np.zeros(0, dtype=bool)
+        length = np.linalg.norm(q - p, axis=1)
+        samples = max(2, int(np.ceil(length.max() / (self.cell * 0.5))) + 1)
+        t = np.linspace(0.0, 1.0, samples)[None, :, None]
+        pts = p[:, None] + (q - p)[:, None] * t                      # (M, S, 2)
+        idx, inside = self.cell_of(pts)
+        occ = self.L[ks[:, None], np.clip(idx, 0, self.num_cells - 1)] >= self.cfg.known_threshold
+        return ~(occ & inside).any(axis=1)
+
     def grid(self, values: np.ndarray) -> np.ndarray:
         """Reshape a flat (C,) map to (gh, gw) with row 0 at y = 0."""
         return values.reshape(self.gh, self.gw)

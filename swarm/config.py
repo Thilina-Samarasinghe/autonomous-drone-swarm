@@ -107,6 +107,22 @@ class PlanningConfig:
 
 
 @dataclass
+class FormationConfig:
+    enabled: bool = False
+    shape: str = "v"                  # line | v | circle | box | column
+    spacing: float = 5.0              # metres between neighbouring slots
+    speed: float = 3.5                # leader speed (slower than cruise so followers can catch up)
+    gain: float = 0.8                 # slot-tracking gain (1/s)
+    adaptive: bool = True             # collapse to a column for gaps, restore afterwards
+    squeeze_lookahead: float = 18.0   # how far ahead the leader checks the free width (m)
+    squeeze_margin: float = 2.0       # extra width required on each side (m)
+    restore_delay: float = 2.0        # passage must stay wide this long before restoring (s)
+    leader_timeout: float = 3.0       # leader info older than this is ignored (s)
+    heading_tau: float = 1.5          # smoothing of the formation heading (s)
+    slowdown_error: float = 4.0       # leader slows when mean slot error exceeds this (m)
+
+
+@dataclass
 class RenderConfig:
     window_width: int = 1200
     window_height: int = 760
@@ -127,6 +143,7 @@ class Config:
     mapping: MappingConfig = field(default_factory=MappingConfig)
     comms: CommsConfig = field(default_factory=CommsConfig)
     planning: PlanningConfig = field(default_factory=PlanningConfig)
+    formation: FormationConfig = field(default_factory=FormationConfig)
     render: RenderConfig = field(default_factory=RenderConfig)
 
     def to_dict(self) -> dict[str, Any]:

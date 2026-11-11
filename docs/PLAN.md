@@ -15,8 +15,8 @@ so a learned policy is a drop-in replacement for a hand-written one.
 | 1 | Boids | Flocking with 20–50 drones, 0 collisions, Pygame viewer ✅ |
 | 2 | Obstacles & avoidance | Circle/box obstacles, 36-beam lidar, APF, ORCA safety layer, hybrid; forest / corridor / random scenarios; benchmark script ✅ |
 | 3 | Communication | Radio (range, loss, latency, bandwidth), beacon tables, per-drone log-odds occupancy maps, multi-hop gossip sharing with anti-entropy, survey scenario, comms benchmark ✅ |
-| 4 | Path planning | Cost map from each drone's own map, A* + backward-Dijkstra cost field, optimistic replanning on obstacle changes, string-pulling path following, maze scenario, planning benchmark ✅ (built, awaiting review) |
-| 5 | Formation | Leader-follower + virtual structure, line/V/circle switching, squeezing through gaps |
+| 4 | Path planning | Cost map from each drone's own map, A* + backward-Dijkstra cost field, optimistic replanning on obstacle changes, string-pulling path following, maze scenario, planning benchmark ✅ |
+| 5 | Formation | Leader-follower with line / V / circle / box / column, Hungarian slot assignment, radio-based leader tracking, leader breadcrumb trail, squeezing through gaps via route passage width, formation benchmark ✅ (built, awaiting review) |
 | 6 | Search & rescue | Voronoi / auction area split, frontier exploration, PSO on victim signal, CBBA task allocation |
 | 7 | Terrain & threats | Heightmap cost, threat zones, PSO multi-UAV path planner |
 | 8 | Multi-agent RL | PettingZoo env; shared-parameter MAPPO (CTDE) per behaviour: avoidance, flocking, formation, search; curriculum learning |
