@@ -65,7 +65,7 @@ class AvoidanceConfig:
 
 @dataclass
 class ScenarioConfig:
-    name: str = "open"                # open | forest | corridor | random | survey | maze
+    name: str = "open"                # open | forest | corridor | random | survey | maze | rescue
     goal_radius: float = 15.0         # drones inside this radius count as arrived
     num_obstacles: int = 25           # used by the random scenario
 
@@ -123,6 +123,36 @@ class FormationConfig:
 
 
 @dataclass
+class MissionConfig:
+    enabled: bool = True              # runs only in scenarios that have victims (rescue)
+    victims: int = 8
+    base_x: float = 20.0              # base station / charging pad (m)
+    base_y: float = 20.0
+    charge_radius: float = 8.0
+    use_planner: bool = True          # navigate with the Phase 4 planner (on each drone's map)
+    explore: str = "voronoi"          # random | frontier | voronoi
+    seek: str = "pso"                 # none (camera only) | pso (signal-guided search)
+    max_seekers: int = 3              # drones allowed to chase one victim (auction)
+    signal_range: float = 45.0        # victims' phones can be heard this far (m)
+    signal_noise: float = 0.01        # std-dev of each signal reading
+    detect_radius: float = 4.0        # camera confirms a victim this close (m)
+    explore_speed: float = 5.0
+    retarget_interval: float = 2.0    # s between exploration-target updates
+    edge_margin: float = 6.0          # frontiers closer than this to the arena edge are ignored
+    seek_timeout: float = 60.0        # give up on a victim after this long (s)
+    pso_inertia: float = 0.6
+    pso_cognitive: float = 1.2        # pull toward the drone's own best reading
+    pso_social: float = 1.6           # pull toward the best reading its neighbours shared
+    pso_max_speed: float = 5.0
+    pso_jitter: float = 1.0           # random exploration term (m/s)
+    battery_capacity: float = 1.0
+    drain_hover: float = 0.0025       # battery per second while hovering
+    drain_speed: float = 0.0001       # extra battery per second per (m/s)^2
+    charge_rate: float = 0.04         # battery per second on the pad
+    reserve: float = 0.08             # battery kept in reserve when deciding to return
+
+
+@dataclass
 class RenderConfig:
     window_width: int = 1200
     window_height: int = 760
@@ -144,6 +174,7 @@ class Config:
     comms: CommsConfig = field(default_factory=CommsConfig)
     planning: PlanningConfig = field(default_factory=PlanningConfig)
     formation: FormationConfig = field(default_factory=FormationConfig)
+    mission: MissionConfig = field(default_factory=MissionConfig)
     render: RenderConfig = field(default_factory=RenderConfig)
 
     def to_dict(self) -> dict[str, Any]:

@@ -7,6 +7,7 @@
   python -m swarm.main --headless --scenario survey --no-share --out outputs/noshare
   python -m swarm.main --scenario maze --plan
   python -m swarm.main --scenario corridor --formation v
+  python -m swarm.main --scenario rescue --drones 20
   python -m swarm.main --headless --steps 3000 --out outputs/run1
 """
 
@@ -40,6 +41,10 @@ def parse_args(argv=None):
     p.add_argument("--no-relay", action="store_true", help="single-hop radio (no forwarding)")
     p.add_argument("--formation", choices=SHAPES, help="fly in formation with this shape")
     p.add_argument("--no-squeeze", action="store_true", help="formation never collapses to a column for gaps")
+    p.add_argument("--explore", choices=("random", "frontier", "voronoi"), help="rescue: exploration strategy")
+    p.add_argument("--seek", choices=("none", "pso"), help="rescue: victim search (none = camera only)")
+    p.add_argument("--victims", type=int, help="rescue: number of victims")
+    p.add_argument("--no-radio", action="store_true", help="switch the radio off entirely")
     p.add_argument("--plan", action="store_true", help="enable path planning on each drone's map")
     p.add_argument("--planner", choices=ALGORITHMS, help="planning algorithm (implies --plan)")
     p.add_argument("--headless", action="store_true", help="run without a window")
@@ -74,6 +79,17 @@ def main(argv=None) -> None:
         comms["relay"] = False
     if comms:
         overrides["comms"] = comms
+    mission = {}
+    if args.explore:
+        mission["explore"] = args.explore
+    if args.seek:
+        mission["seek"] = args.seek
+    if args.victims is not None:
+        mission["victims"] = args.victims
+    if mission:
+        overrides["mission"] = mission
+    if args.no_radio:
+        overrides.setdefault("comms", {})["enabled"] = False
     if args.formation:
         overrides["formation"] = {"enabled": True, "shape": args.formation}
         if args.no_squeeze:
@@ -150,6 +166,21 @@ def main(argv=None) -> None:
         "messages_dropped": last.dropped,
         "kbytes_sent": round(last.kbytes_sent, 1),
     })
+    if sim.mission is not None:
+        ms = sim.mission.stats
+        summary.update({
+            "explore": cfg.mission.explore,
+            "seek": cfg.mission.seek,
+            "victims": int(sim.mission.V),
+            "victims_found": ms.found,
+            "victims_reported": ms.reported,
+            "victim_found_times_s": [None if np.isnan(t) else round(float(t), 1) for t in ms.found_time],
+            "all_reported_s": None if np.isnan(ms.complete_time) else round(ms.complete_time, 1),
+            "drones_lost": ms.lost,
+            "returns_to_base": ms.returns,
+            "stuck_recoveries": ms.stuck,
+            "distance_flown_m": round(ms.distance, 0),
+        })
     if sim.formation is not None:
         fs = sim.formation.stats
         summary.update({

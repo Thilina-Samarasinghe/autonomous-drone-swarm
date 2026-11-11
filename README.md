@@ -1,9 +1,10 @@
 # Autonomous Drone Swarm Simulation
 
-> 🚧 **Work in progress.** Phases 0–5 (simulation core, boids flocking,
+> 🚧 **Work in progress.** Phases 0–6 (simulation core, boids flocking,
 > obstacle avoidance with lidar + ORCA, radio communication with shared
-> mapping, path planning on each drone's own map, formation flying) are built.
-> Search-and-rescue and reinforcement learning are **still being built**.
+> mapping, path planning on each drone's own map, formation flying,
+> cooperative search and rescue) are built. Terrain and threat zones,
+> reinforcement learning and the final experiments are **still being built**.
 > See [Roadmap](#roadmap) below.
 
 A 2D simulator for a swarm of **20–50 autonomous drones**. Every drone makes its
@@ -59,9 +60,9 @@ intelligence**, not one central AI controlling every drone.
 | 2 | Obstacles, lidar sensing, APF + ORCA collision avoidance, scenarios, benchmark | ✅ Done |
 | 3 | Radio network, per-drone occupancy maps, multi-hop map sharing, benchmark | ✅ Done |
 | 4 | Path planning (A* and cost field) on each drone's own map, replanning, maze, benchmark | ✅ Done |
-| 5 | Formation flying: 5 shapes, Hungarian slot assignment, leader trail, squeezing through gaps, benchmark | ✅ Done (under review) |
-| 6 | Cooperative search and rescue (PSO, coverage, task allocation) | 🔜 Next |
-| 7 | Terrain cost and threat zones, PSO multi-drone path planner | 📋 Planned |
+| 5 | Formation flying: 5 shapes, Hungarian slot assignment, leader trail, squeezing through gaps, benchmark | ✅ Done |
+| 6 | Search and rescue: frontier + Voronoi exploration, PSO victim search, auction task allocation, batteries, benchmark | ✅ Done (under review) |
+| 7 | Terrain cost and threat zones, PSO multi-drone path planner | 🔜 Next |
 | 8 | Multi-agent reinforcement learning (MAPPO) for **all** behaviours | 📋 Planned |
 | 9 | Benchmarks, robustness experiments, demo video | 📋 Planned |
 
@@ -113,7 +114,7 @@ intelligence**, not one central AI controlling every drone.
   - **cost field** (default): a backward Dijkstra search from the goal (SciPy, in C), the
     quantity D\* Lite maintains. One search gives the best route from *every*
     cell, so a drone that gets pushed off its path re-attaches with a lookup.
-    It finds paths exactly as short as A\* (verified by tests) and is about 5× faster.
+    It finds paths exactly as short as A\* (verified by tests) and is about 6× faster.
 - **Optimistic replanning** (Phase 4): unknown space is assumed passable;
   drones replan when a cell on their path turns out to be a wall, when their
   map's obstacle layout changes, and every 5 s.
@@ -137,6 +138,23 @@ intelligence**, not one central AI controlling every drone.
   fit, and restores it when there's room again.
 - **Formation benchmark** (Phase 5): every shape in the open, V and line
   through the corridor (squeeze on/off), forest, and the maze with planning.
+- **Search-and-rescue mission** (Phase 6): the `rescue` scenario hides 8
+  victims among obstacles. Each drone runs its own state machine
+  (explore → seek → return → charge) using only its own map, sensors and radio.
+- **Exploration** (Phase 6): frontier-based (fly to the edge of the unknown on
+  my own map), optionally with a dynamic **Voronoi partition** (only take
+  frontiers closer to me than to any teammate I know of).
+- **Victim search with Particle Swarm Optimization** (Phase 6): victims'
+  phones broadcast a noisy signal with an ID. Seekers are PSO particles pulled
+  toward their own best reading and the best reading neighbours shared by radio.
+- **Task allocation by auction** (Phase 6): at most 3 drones chase each victim,
+  and the closest bidders win (bids spread over the radio).
+- **Batteries and a charging base** (Phase 6): drones fly home in time
+  (1.5× distance plus a reserve), recharge and go back to work.
+- **Reporting** (Phase 6): confirmations spread drone-to-drone and reach the base
+  station when any drone that knows is within radio range.
+- **Rescue benchmark** (Phase 6): 6 strategies, from random search to the full
+  system, plus the full system with the radio off.
 - **Fast neighbour search**: KD-tree, roughly N log N cost.
 - **Real-time Pygame viewer**: neighbour links, trails, perception circles,
   live stats panel, behaviour weights tunable while running, add or remove drones.
@@ -149,6 +167,7 @@ intelligence**, not one central AI controlling every drone.
 
 - Moving (dynamic) obstacles
 - Incremental D\* Lite (re-using the previous search instead of a full recompute)
+- Signals blocked by obstacles; victims that move; charging-pad queueing
 - Leader-follower and virtual-structure formations with shape switching
 - Search and rescue: Voronoi area split, frontier exploration, PSO victim search,
   CBBA/auction task allocation, battery and return-to-base
@@ -204,6 +223,15 @@ python -m swarm.main --scenario maze --plan
 python -m swarm.main --scenario maze --planner astar
 python -m swarm.main --headless --scenario maze --plan --no-share --out outputs/maze_ownmap
 
+# Search and rescue (Phase 6)
+python -m swarm.main --scenario rescue --drones 20
+python -m swarm.main --scenario rescue --explore frontier --seek none
+python -m swarm.main --headless --scenario rescue --drones 20 --steps 8000 --out outputs/rescue
+python -m swarm.main --headless --scenario rescue --no-radio --out outputs/rescue_noradio
+
+# Benchmark search strategies (writes outputs/benchmarks/rescue.*)
+python -m experiments.benchmark_rescue                          # 20 drones x 3 seeds x 400 s
+
 # Formation flying (Phase 5)
 python -m swarm.main --formation v
 python -m swarm.main --scenario corridor --formation v --drones 20
@@ -232,7 +260,7 @@ python -m swarm.main --config configs/my_experiment.yaml
 | `--config` | `configs/default.yaml` | YAML configuration file |
 | `--drones` | from config (30) | Number of drones |
 | `--seed` | from config (42) | Random seed |
-| `--scenario` | from config (`open`) | `open`, `forest`, `corridor`, `random`, `survey`, `maze` |
+| `--scenario` | from config (`open`) | `open`, `forest`, `corridor`, `random`, `survey`, `maze`, `rescue` |
 | `--avoidance` | from config (`orca`) | `none`, `apf`, `orca`, `hybrid` |
 | `--packet-loss` | from config (0) | Radio packet loss probability, 0–1 |
 | `--comm-range` | from config (30) | Radio range in metres |
@@ -242,6 +270,10 @@ python -m swarm.main --config configs/my_experiment.yaml
 | `--planner` | from config (`field`) | `field` or `astar` (implies `--plan`) |
 | `--formation` | off | `line`, `v`, `circle`, `box` or `column` |
 | `--no-squeeze` | off | Formation never collapses to a column for gaps |
+| `--explore` | from config (`voronoi`) | Rescue: `random`, `frontier` or `voronoi` |
+| `--seek` | from config (`pso`) | Rescue: `pso` or `none` (camera only) |
+| `--victims` | from config (8) | Rescue: number of victims |
+| `--no-radio` | off | Switch the radio off entirely |
 | `--headless` | off | Run without a window |
 | `--steps` | from config (3000) | Steps for a headless run (1 step = 0.05 s) |
 | `--out` | `outputs/latest` | Output folder for headless results |
@@ -253,7 +285,7 @@ A headless run writes:
 | `trajectories.png` | Every drone's path (■ start, ● end) |
 | `metrics.png` | Min separation, polarization, mean speed and groups over time |
 | `comms_mapping.png` | Map coverage (team / average / worst drone), accuracy, radio groups and info age over time |
-| `summary.json` | Collisions, obstacle hits, clearance, arrivals, alignment, map coverage and accuracy, time to 50% coverage, messages delivered / dropped, traffic, plans / ms per plan / blocked replans, formation error / time in shape / squeezes / leader arrival, run speed |
+| `summary.json` | Collisions, obstacle hits, clearance, arrivals, alignment, map coverage and accuracy, time to 50% coverage, messages delivered / dropped, traffic, plans / ms per plan / blocked replans, formation error / time in shape / squeezes / leader arrival, victims found / reported and when, drones lost, returns to base, run speed |
 
 ---
 
@@ -263,7 +295,7 @@ A headless run writes:
 |---|---|
 | `SPACE` | Pause / resume |
 | `.` | Single step (while paused) |
-| `1` … `6` | Scenario: open / forest / corridor / random / survey / maze |
+| `1` … `7` | Scenario: open / forest / corridor / random / survey / maze / rescue |
 | `K` | Path planning on / off (yellow line = selected drone's path, dot = its steering target) |
 | `F` | Formation: off → line → V → circle → box → column (pink ring = leader, purple squares = slots, yellow squares = followers on the trail, purple line = leader's trail) |
 | `M` | Cycle avoidance method: none → apf → orca → hybrid |
@@ -288,6 +320,10 @@ A headless run writes:
 
 Drone colour shows speed: blue is slow, cyan is cruising, yellow is fast.
 The dashed red circle is the goal area; the panel shows how many drones arrived.
+In the rescue scenario, each drone has a dot showing its mode: cyan explore, orange
+seek, yellow return, white charging, red dead. Victims are marked ✕: grey =
+undiscovered, orange = someone hears it, green = found, ringed = reported to the
+base (blue square).
 In the map overlay, green cells are known free and orange cells known occupied.
 The big circle around the selected drone is its radio range.
 
@@ -364,6 +400,21 @@ metres and seconds. Unknown keys raise an error, so typos are caught early.
 | | `leader_timeout` | 3.0 | Leader information older than this is ignored (s) |
 | | `heading_tau` | 1.5 | Smoothing of the formation heading (s) |
 | | `slowdown_error` | 4.0 | Leader slows when followers are this far off-slot (m) |
+| `mission` | `enabled` | true | Run the rescue mission (only in scenarios with victims) |
+| | `victims` | 8 | Number of victims |
+| | `base_x` / `base_y` / `charge_radius` | 20 / 20 / 8 | Base station and charging pad |
+| | `use_planner` | true | Navigate with the path planner |
+| | `explore` | voronoi | `random` / `frontier` / `voronoi` |
+| | `seek` | pso | `pso` or `none` (camera only) |
+| | `max_seekers` | 3 | Drones allowed to chase one victim |
+| | `signal_range` / `signal_noise` | 45 / 0.01 | Victim signal range (m) and noise |
+| | `detect_radius` | 4 | Camera confirmation distance (m) |
+| | `explore_speed` / `retarget_interval` | 5.0 / 2.0 | m/s, seconds between target updates |
+| | `seek_timeout` | 60 | Give up on a victim after this long (s) |
+| | `pso_inertia` / `pso_cognitive` / `pso_social` | 0.6 / 1.2 / 1.6 | PSO coefficients |
+| | `pso_max_speed` / `pso_jitter` | 5.0 / 1.0 | PSO speed cap and exploration noise |
+| | `battery_capacity` / `drain_hover` / `drain_speed` | 1.0 / 0.0025 / 0.0001 | ~400 s hovering, ~200 s at 5 m/s |
+| | `charge_rate` / `reserve` | 0.04 / 0.08 | 25 s to full; reserve kept for the trip home |
 | `render` | `window_width` × `window_height` | 1200 × 760 | |
 | | `fps` | 60 | |
 | | `trail_length` | 40 | Frames of trail per drone |
@@ -492,7 +543,7 @@ moves may not cut between two blocked cells.
   heuristic, which never overestimates, so the path is optimal. It's written in
   plain Python to show the algorithm, at ~35 ms per plan.
 - **Cost field** (default) runs Dijkstra backwards from the goal using SciPy's
-  C implementation, at ~7 ms per plan. The result is the cost-to-go from *every*
+  C implementation, at ~6 ms per plan. The result is the cost-to-go from *every*
   cell. That's the quantity D\* Lite maintains, and it means a drone pushed off
   course just looks up the new best direction. Paths are exactly as short as
   A\*'s.
@@ -507,7 +558,16 @@ triggers an immediate replan.
 can see in a straight line on its own map. This turns the staircase grid
 path into smooth flight without a separate smoothing step.
 
-### Formation flying (Phase 5)
+### Search and rescue (Phase 6)
+python -m swarm.main --scenario rescue --drones 20
+python -m swarm.main --scenario rescue --explore frontier --seek none
+python -m swarm.main --headless --scenario rescue --drones 20 --steps 8000 --out outputs/rescue
+python -m swarm.main --headless --scenario rescue --no-radio --out outputs/rescue_noradio
+
+# Benchmark search strategies (writes outputs/benchmarks/rescue.*)
+python -m experiments.benchmark_rescue                          # 20 drones x 3 seeds x 400 s
+
+# Formation flying (Phase 5)
 
 ```
  leader:    goal / planner waypoint / patrol loop --> fly at formation speed (slower if followers lag)
@@ -543,6 +603,48 @@ gap use the trail to come through.
 followers instantly; in reality they would ride on the radio messages (the
 leader's *position and velocity* do go over the radio, with latency and loss).
 The leader is fixed (drone 0); leader failure and re-election come in Phase 9.
+
+### Search and rescue (Phase 6)
+
+```
+            hears a victim & wins the auction                 victim confirmed / lost auction / timeout
+ EXPLORE ---------------------------------------> SEEK ------------------------------------------------> EXPLORE
+    |  battery = trip home + reserve                |
+    +-------------------> RETURN --> CHARGE --------+--> EXPLORE (full)            battery empty --> DEAD
+```
+
+**Exploring.** A *frontier* is a known-free cell on the drone's own map
+next to unknown space. Every 2 s an exploring drone picks the nearest
+frontier. With `voronoi`, it only considers frontiers closer to itself than
+to any teammate in its radio beacon table, which splits the area between
+drones without any central planner. Unreachable targets get blacklisted.
+
+**Victim signals.** Each victim's phone broadcasts an ID. Signal strength is
+1 / (1 + (d / 10 m)²) plus noise (σ = 0.01): about 0.5 at 10 m and 0.05 at
+45 m, where it fades into the noise. A victim is *confirmed* only by camera,
+within 4 m.
+
+**PSO seeking.** Seekers are particles. Four times a second:
+v ← 0.6 v + 1.2 r₁ (p_best − x) + 1.6 r₂ (g_best − x) + noise.
+*p_best* is where this drone measured the strongest signal; *g_best* is the
+strongest reading any teammate shared over the radio. Two additions make it
+work with only 3 particles and noisy signals: the noise term scales with the
+distance the best reading implies (explore widely when far, fine-tune when
+close), and if *g_best* hasn't improved for 6 s each particle gets a random
+kick (a PSO restart).
+
+**Auction.** A drone wanting a victim bids its distance to the best-known
+reading. Bids spread by radio; a drone keeps seeking only while it's among the
+3 lowest fresh bids it knows. Only drones that hear the victim, or are within
+signal range of its best reading, may bid.
+
+**Batteries.** Drain = 0.0025/s hovering + 0.0001/s per (m/s)². A drone
+returns once its battery covers only 1.5× the straight-line trip home plus an
+8% reserve, then charges at 4%/s.
+
+**Safety net.** A navigating drone that stays within 2 m of one spot for 8 s
+is "stuck": an explorer drops its target; a returning drone backs off toward
+open space for 3 s and tries again.
 
 Lessons from development (found by tests and benchmarks):
 
@@ -590,6 +692,20 @@ Lessons from development (found by tests and benchmarks):
 - *Phase 5:* a rule to restore the shape "once every follower has passed the
   gap" deadlocked when the leader parked less than a column-length past the
   gap. A simple 2 s delay plus the trail fallback works better.
+- *Phase 6:* two drones ran out of battery although they turned home in time.
+  They were pinned between an obstacle and the arena edge, because the soft
+  "stay off the edge" push outranked "fly to target". Mission drones now rank
+  their target first; a stuck detector is the safety net.
+- *Phase 6:* the first stuck detector ("not getting closer to the target")
+  fired ~200 times per run, falsely: targets change every 2 s and planned
+  routes often start by moving away. "Hasn't moved 2 m in 8 s" fires 0–3 times.
+- *Phase 6:* PSO first found only 2 of 4 victims. Drones 100 m away joined
+  searches they couldn't hear, and with weak, noisy signals the particles
+  stalled. Restricting who may join, distance-scaled exploration noise and
+  restart kicks fixed it (4 of 4 on every seed tried).
+- *Phase 6:* the viewer froze when the selected drone had no waypoint:
+  pygame loops forever when asked to draw at NaN coordinates. Fixed, with a
+  regression test that runs the draw in a subprocess with a timeout.
 
 ---
 
@@ -617,8 +733,12 @@ Lessons from development (found by tests and benchmarks):
 | `formation_in_shape` | Share of time the average slot error is below 2.5 m | high |
 | `formation_squeezes` | Times the formation collapsed to a column for a gap | |
 | `leader_arrived` | When the leader reached the goal (a formation is wider than the goal circle) | |
+| `victims_found` / `victims_reported` | Victims confirmed by camera / known at the base | all |
+| `victim_found_times` / `all_reported` | When each victim was found; when the base knew them all | lower is better |
+| `drones_lost` | Drones whose battery ran out | 0 |
+| `returns_to_base` / `stuck_recoveries` | Recharging trips; times the stuck detector intervened | |
 
-Planned metrics for later phases: victims found, time to find,
+Planned metrics for later phases:
 messages sent, path length, formation error, energy use.
 
 ---
@@ -709,20 +829,20 @@ Reproduce with `python -m experiments.benchmark_planning`.
 
 | Setting | Arrived | Time for 90% to arrive | Drone collisions | Obstacle hits | ms per plan | Sim speed |
 |---|---|---|---|---|---|---|
-| no planning (straight at goal) | **0%** | never | 0 | 0 | n/a | 74 steps/s |
-| plan, own map only | 100% | 148 s | 0 | 0 | 7.0 | 57 steps/s |
-| **plan + shared maps** | **100%** | **107 s** | 0 | 0 | 7.1 | 44 steps/s |
-| A\* + shared maps | 100% | 107 s | 0 | 0 | 34.2 | 27 steps/s |
+| no planning (straight at goal) | **0%** | never | 0 | 0 | n/a | 104 steps/s |
+| plan, own map only | 100% | 150 s | 0 | 0 | 5.3 | 71 steps/s |
+| **plan + shared maps** | **100%** | **107 s** | 0 | 0 | 5.6 | 52 steps/s |
+| A\* + shared maps | 100% | 107 s | 0 | 0 | 36.9 | 24 steps/s |
 
 What the numbers show:
 - **Without planning the swarm never escapes the first wall.** Boids + ORCA
   head straight for the goal and get trapped in the local minimum.
 - **Planning solves the maze every time**, with no collisions or hits, even
   though every drone starts knowing nothing about the maze.
-- **Shared maps make the swarm 28% faster** (107 s vs 148 s): when the front
+- **Shared maps make the swarm 29% faster** (107 s vs 150 s): when the front
   drones discover a wall, the drones behind replan before they reach it.
 - **A\* and the cost field give the same result** (same arrival time; tests
-  prove equal path costs), but the cost field is about 5× cheaper per plan.
+  prove equal path costs), but the cost field is about 6× cheaper per plan.
 
 ### Phase 5: formation benchmark
 
@@ -764,6 +884,40 @@ What the numbers show:
   maze sections are ~46 m, just short of the 47 m needed to restore. That's the
   intended behaviour.
 
+### Phase 6: search-and-rescue benchmark
+
+`rescue` scenario: 20 drones start at the base; 8 victims are hidden among 30
+obstacles; 3 seeds per row; 400 s missions with batteries that force every
+drone home at least once. Mean time to find counts an unfound victim as found
+at 400 s (a lower bound). Reproduce with `python -m experiments.benchmark_rescue`.
+
+| Strategy | Victims found | Mean time to find | All 8 found | All reported to base | Map coverage | Drones lost |
+|---|---|---|---|---|---|---|
+| random / camera only | 3.7 / 8 | 259 s | never | never | 58% | 0 |
+| frontier / camera only | 7.0 / 8 | 105 s | 1 of 3 runs | 1 of 3 runs | 96% | 0 |
+| voronoi / camera only | 7.3 / 8 | 82 s | 1 of 3 runs | 1 of 3 runs | 96% | 0 |
+| frontier / PSO | **8 / 8** | 86 s | 156 s | 220 s | 95% | 0 |
+| **voronoi / PSO** (full system) | **8 / 8** | **80 s** | 159 s | 219 s | 96% | 0 |
+| voronoi / PSO, **no radio** | 3.3 / 8 | 312 s | never | never | 44% | 0 |
+
+All 18 missions: 0 drones lost, 0 collisions, 0 obstacle hits.
+
+What the numbers show:
+- **Coordinated exploration is worth 2×**: frontier exploration finds about
+  twice as many victims as random search, 4× faster on average.
+- **Signal-guided PSO is what finds the *last* victims**: camera-only
+  strategies actually find the first ~6 victims slightly *faster* (they don't
+  stop to chase signals), but they plateau at ~7 of 8. Mapping 96% of the
+  arena with a 20 m lidar is not the same as flying within 4 m of every spot
+  with a camera. With PSO the swarm finds all 8 in every run.
+- **Voronoi partitioning helps a little**: 80 s vs 86 s mean time with PSO,
+  82 s vs 105 s camera only. Small next to the other effects, with 3 seeds.
+- **The radio is the single most important component**: switching it off
+  drops the full system from 8 to 3.3 victims. Drones can no longer split the
+  area, share where signals are, or report anything until they fly home.
+- **Batteries were never a problem**: every drone went home and recharged,
+  and none were lost.
+
 ---
 
 ## Project structure
@@ -789,6 +943,10 @@ autonomous-drone-swarm/
 │   ├── planning/
 │   │   ├── grid.py           cost map, A*, backward-Dijkstra cost field, path extraction
 │   │   └── planner.py        per-drone replanning and string-pulling path following
+│   ├── mission/
+│   │   ├── victims.py        victims and their noisy radio signal
+│   │   ├── manager.py        state machine, exploration, PSO, auction, batteries, gossip
+│   │   └── controller.py     velocity-tracking controller for mission drones
 │   ├── formation/
 │   │   ├── shapes.py         slot offsets for line / v / circle / box / column
 │   │   ├── manager.py        leader, Hungarian assignment, trail, squeezing, slot targets
@@ -796,7 +954,7 @@ autonomous-drone-swarm/
 │   ├── sim/
 │   │   ├── world.py          arena, walls, obstacles
 │   │   ├── obstacles.py      circle/box geometry: distance, raycast, collision
-│   │   ├── scenarios.py      open / forest / corridor / random / survey / maze layouts
+│   │   ├── scenarios.py      open / forest / corridor / random / survey / maze / rescue
 │   │   ├── dynamics.py       point-mass integration with limits
 │   │   ├── neighbors.py      KD-tree neighbour queries
 │   │   └── engine.py         simulation loop, recorder
@@ -812,25 +970,27 @@ autonomous-drone-swarm/
 │   ├── benchmark_avoidance.py   method x scenario x seed comparison
 │   ├── benchmark_comms.py       sharing / relay / packet-loss comparison
 │   ├── benchmark_planning.py    planning on/off, own vs shared map, A* vs field
-│   └── benchmark_formation.py   shapes, squeezing, obstacle courses
+│   ├── benchmark_formation.py   shapes, squeezing, obstacle courses
+│   └── benchmark_rescue.py      search strategies, with and without radio
 ├── tests/
 │   ├── test_core.py          Phase 0-1 tests
 │   ├── test_phase2.py        Phase 2 tests
 │   ├── test_phase3.py        Phase 3 tests
 │   ├── test_phase4.py        Phase 4 tests
-│   └── test_phase5.py        Phase 5 tests
+│   ├── test_phase5.py        Phase 5 tests
+│   └── test_phase6.py        Phase 6 tests
 ├── requirements.txt
 └── pytest.ini
 ```
 
-Planned additions: `swarm/missions/` and `swarm/rl/`.
+Planned additions: `swarm/terrain/` and `swarm/rl/`.
 
 ---
 
 ## Testing
 
 ```bash
-python -m pytest            # 121 tests, ~3 min
+python -m pytest            # 138 tests, ~3 min
 python -m pytest -v         # verbose
 ```
 
@@ -885,6 +1045,19 @@ The tests cover:
   squeezing off, the trail fallback still gets everyone through; followers
   that lose the leader fall back to flocking; shape switching, CLI and viewer
   key all work
+- *Phase 6:* signal strength falls off with distance, stops at range and is
+  noisy; the rescue layout keeps victims clear of obstacles and the base
+- *Phase 6:* gossip merges confirmations (OR), best readings (max, never
+  overwritten by weaker ones) and bids (newest); dead drones don't gossip; the
+  auction keeps exactly the 3 lowest fresh bidders
+- *Phase 6:* a drone returns when its battery reaches the trip-home threshold,
+  charges to full and resumes; an empty battery means dead
+- *Phase 6:* frontiers lie on the border of explored space; with Voronoi a
+  drone takes the frontier on its own side; the planner handles different
+  goals per drone (and "no goal")
+- *Phase 6:* end to end, 12 drones find and report ≥ 3 of 4 victims with none
+  lost and 0 collisions; without radio only drones at the base report; the
+  viewer no longer hangs on NaN; CLI flags work
 
 ---
 
@@ -900,8 +1073,8 @@ Full details are in [docs/PLAN.md](docs/PLAN.md).
 | 3 | Communication | Radio with range / loss / latency / bandwidth, beacon tables, per-drone occupancy maps, multi-hop sharing, benchmark | ✅ |
 | 4 | Path planning | Cost map, A\*, backward-Dijkstra cost field, optimistic replanning, string-pulling path following, maze, benchmark | ✅ |
 | 5 | Formation flying | Leader-follower with 5 shapes, Hungarian slot assignment, leader trail, squeezing through gaps, benchmark | ✅ |
-| 6 | Search and rescue | Area partitioning, frontier exploration, PSO victim search, CBBA task allocation, battery | 🔜 |
-| 7 | Terrain and threats | Heightmap cost, threat zones, PSO multi-drone route planner | 📋 |
+| 6 | Search and rescue | Frontier + Voronoi exploration, PSO victim search, auction task allocation, batteries and charging, radio reporting, benchmark | ✅ |
+| 7 | Terrain and threats | Heightmap cost, threat zones, PSO multi-drone route planner | 🔜 |
 | 8 | Reinforcement learning | PettingZoo env, shared-parameter MAPPO, curriculum learning; policies for avoidance, flocking, formation and search | 📋 |
 | 9 | Experiments and demo | Scaling, communication-loss and drone-failure tests, RL vs. classical, demo video | 📋 |
 
@@ -927,9 +1100,12 @@ Full details are in [docs/PLAN.md](docs/PLAN.md).
 | Hungarian algorithm (linear assignment) | Optimal slot assignment on shape changes | ✅ |
 | Breadcrumb trail following | Columns around corners, recovering blocked followers | ✅ |
 | Distance transform along the planned route | Passage-width estimate for squeezing | ✅ |
-| Frontier exploration, Voronoi coverage | Area search | 📋 Phase 6 |
-| Particle Swarm Optimization | Victim search, multi-drone route planning | 📋 Phases 6–7 |
-| CBBA / auctions | Task allocation | 📋 Phase 6 |
+| Frontier-based exploration | Area search on each drone's own map | ✅ |
+| Dynamic Voronoi partitioning | Splitting the search area between drones | ✅ |
+| Particle Swarm Optimization (local-best, with restarts) | Signal-guided victim search | ✅ |
+| Consensus auction (simplified CBBA, one task per drone) | Assigning drones to victims | ✅ |
+| Gossip (OR / max / newest merges) | Spreading confirmations, readings and bids | ✅ |
+| PSO route planning | Multi-drone paths over terrain and threats | 📋 Phase 7 |
 | MAPPO (multi-agent PPO) | Learned policies for every behaviour | 📋 Phase 8 |
 
 ---

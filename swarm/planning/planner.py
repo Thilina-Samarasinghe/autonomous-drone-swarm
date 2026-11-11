@@ -66,6 +66,7 @@ class SwarmPlanner:
         self.next_plan = np.arange(n) % self.interval
         self.next_refresh = self.next_plan.copy()
         self.plan_rev = np.full(n, -1, dtype=np.int64)
+        self.plan_goal = np.full((n, 2), np.nan)                   # goal each path was planned to
         self.paths: list[np.ndarray | None] = [None] * n          # (L, 2) world waypoints
         self.path_cells: list[np.ndarray | None] = [None] * n     # (L,) flat cell indices
         self.next_ptr: list[np.ndarray | None] = [None] * n       # cached field pointers
@@ -115,6 +116,7 @@ class SwarmPlanner:
         self.stats.plan_seconds += time.perf_counter() - t0
         self.unsafe[k] = (cost >= self.cfg.inflation_cost).reshape(-1)
         self.plan_rev[k] = maps.occ_revision[k]
+        self.plan_goal[k] = goal
         if not cells:
             self.stats.failed += 1
         self._set_path(k, cells)
@@ -135,25 +137,32 @@ class SwarmPlanner:
     # ---------------------------------------------------------------- update
     def update(self, step: int, pos: np.ndarray, goal: np.ndarray | None,
                maps: OccupancyMaps, goal_radius: float) -> np.ndarray | None:
-        """Plan / replan as needed and return each drone's steering target (N, 2)."""
+        """Plan / replan as needed and return each drone's steering target (N, 2).
+
+        `goal` is one shared goal (2,) or one goal per drone (N, 2); a NaN row
+        means that drone has no goal (its target is NaN too).
+        """
         if goal is None:
             self.carrots = None
             return None
-        dist_goal = np.linalg.norm(pos - goal[None], axis=1)
-        active = dist_goal >= goal_radius * 0.5        # drones near the goal just fly in
+        goals = np.broadcast_to(np.asarray(goal, dtype=float), (self.n, 2))
+        has_goal = ~np.isnan(goals[:, 0])
+        dist_goal = np.where(has_goal, np.linalg.norm(pos - np.nan_to_num(goals), axis=1), 0.0)
+        active = has_goal & (dist_goal >= goal_radius * 0.5)   # drones near their goal just fly in
         check_blocked = step % 5 == 0
         for k in np.flatnonzero(active):
-            if step >= self.next_plan[k] and (maps.occ_revision[k] != self.plan_rev[k]
-                                              or step >= self.next_refresh[k]
-                                              or self.paths[k] is None):
-                self.plan(k, pos[k], goal, maps)
+            moved = not (np.linalg.norm(goals[k] - self.plan_goal[k]) <= 2 * self.cell)  # NaN -> moved
+            if moved or (step >= self.next_plan[k] and (maps.occ_revision[k] != self.plan_rev[k]
+                                                          or step >= self.next_refresh[k]
+                                                          or self.paths[k] is None)):
+                self.plan(k, pos[k], goals[k], maps)
                 self.next_plan[k] = step + self.interval
                 self.next_refresh[k] = step + self.refresh
             elif check_blocked and self._blocked(k, maps.L[k]):
                 self.stats.blocked_replans += 1
-                self.plan(k, pos[k], goal, maps)
+                self.plan(k, pos[k], goals[k], maps)
                 self.next_plan[k] = step + self.interval
-        self.carrots = self._carrots(pos, goal, active, maps)
+        self.carrots = self._carrots(pos, goals, active, maps)
         return self.carrots
 
     # --------------------------------------------------------------- carrots
@@ -168,8 +177,8 @@ class SwarmPlanner:
         self._padded, self._lens = padded, lens
         self._dirty_paths = False
 
-    def _carrots(self, pos, goal, active, maps) -> np.ndarray:
-        out = np.repeat(goal[None], self.n, axis=0)
+    def _carrots(self, pos, goals, active, maps) -> np.ndarray:
+        out = np.array(goals, dtype=float)
         if self._dirty_paths:
             self._pad()
         has = active & (self._lens > 0)
@@ -191,7 +200,7 @@ class SwarmPlanner:
         strayed = d.min(axis=1) > STRAY_CELLS * self.cell
         if strayed.any():
             for k in ks[strayed]:
-                self._reattach(int(k), pos[k], goal, maps)
+                self._reattach(int(k), pos[k], goals[k], maps)
             self._pad()
             P, lens = self._padded[ks], self._lens[ks]
             last = lens - 1

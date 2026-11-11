@@ -14,6 +14,7 @@ from swarm.comms.network import CommsNetwork
 from swarm.control.factory import build_controller
 from swarm.mapping.occupancy import GroundTruth, OccupancyMaps
 from swarm.formation.manager import FormationManager
+from swarm.mission.manager import RescueMission
 from swarm.formation.shapes import SHAPES
 from swarm.planning.planner import SwarmPlanner
 from swarm.metrics import Metrics, compute_metrics
@@ -52,10 +53,16 @@ class Simulation:
         self.rng = np.random.default_rng(self.cfg.sim.seed if seed is None else seed)
         base = World.from_config(self.cfg.world)
         sc = self.cfg.scenario
-        self.scenario: Scenario = build_scenario(sc.name, base.size, self.rng, sc.num_obstacles)
+        mc = self.cfg.mission
+        self.scenario: Scenario = build_scenario(sc.name, base.size, self.rng, sc.num_obstacles,
+                                                 mc.victims, (mc.base_x, mc.base_y))
         self.world = World.from_config(self.cfg.world, self.scenario.obstacles)
         self.goal: np.ndarray | None = None if self.scenario.goal is None else self.scenario.goal.copy()
-        self.controller: Controller = self._custom_controller or build_controller(self.cfg)
+        # the rescue mission runs in scenarios that contain victims
+        self.mission_active = (mc.enabled and self.scenario.victims is not None
+                               and len(self.scenario.victims) > 0)
+        self.controller: Controller = self._custom_controller or build_controller(
+            self.cfg, mission=self.mission_active)
 
         d = self.cfg.drones
         self.state = SwarmState.spawn(d.count, self.world, self.rng, d.spawn_spacing,
@@ -85,12 +92,19 @@ class Simulation:
                       if self.cfg.comms.enabled else None)
         self._map_every = max(1, round(self.cfg.mapping.update_interval / self.cfg.sim.dt))
         self.formation = None
-        if self.cfg.formation.enabled:
+        if self.cfg.formation.enabled and not self.mission_active:
             if self.cfg.formation.shape not in SHAPES:
                 raise ValueError(f"Unknown formation shape '{self.cfg.formation.shape}'. Choose from {SHAPES}")
             self.formation = FormationManager(n, self.cfg.formation, self.cfg.sim.dt, self.world.size)
+        self.mission = None
+        if self.mission_active:
+            self.mission = RescueMission(n, self.scenario.victims, self.scenario.base, self.cfg.mission,
+                                         self.world.size, self.cfg.sim.dt, self.cfg.comms.range,
+                                         np.random.default_rng([self.cfg.sim.seed, 11]),
+                                         edge_margin=self.world.boundary_margin + 2.0)
         self.planner = None
-        if self.cfg.planning.enabled:
+        wants_planner = self.cfg.planning.enabled or (self.mission_active and self.cfg.mission.use_planner)
+        if wants_planner:
             if self.maps is None:
                 raise ValueError("planning needs mapping.enabled = true (drones plan on their own maps)")
             self.planner = SwarmPlanner(n, self.maps, self.cfg.planning, self.cfg.mapping,
@@ -120,12 +134,12 @@ class Simulation:
             self.cfg.formation.shape = shape
             self.formation = FormationManager(self.state.n, self.cfg.formation, self.cfg.sim.dt,
                                               self.world.size)
-        self.controller = self._custom_controller or build_controller(self.cfg)
+        self.controller = self._custom_controller or build_controller(self.cfg, mission=self.mission_active)
 
     def set_avoidance(self, method: str) -> None:
         """Switch avoidance method on the fly (keeps the current swarm state)."""
         self.cfg.avoidance.method = method
-        self.controller = build_controller(self.cfg)
+        self.controller = build_controller(self.cfg, mission=self.mission_active)
 
     def add_drones(self, k: int) -> None:
         d = self.cfg.drones
@@ -157,11 +171,25 @@ class Simulation:
     def step(self) -> Metrics:
         d = self.cfg.drones
         targets = None
-        if self.planner is not None:
+        if self.mission is not None:
+            self.mission.update(self.step_count, self.time, self.state.pos, self.state.vel,
+                                self.maps, self.comms)
+            goals = self.mission.nav_goals()
+            if self.planner is not None:
+                targets = self.planner.update(self.step_count, self.state.pos, goals, self.maps, 4.0)
+                # a target the drone's own map shows no route to: pick another one
+                for k in np.flatnonzero(~np.isnan(goals[:, 0])):
+                    if (self.planner.paths[k] is None
+                            and np.linalg.norm(self.planner.plan_goal[k] - goals[k]) < 1e-6):
+                        self.mission.unreachable(k)
+        elif self.planner is not None:
             targets = self.planner.update(self.step_count, self.state.pos, self.goal, self.maps,
                                           self.cfg.scenario.goal_radius)
         ctx = StepContext(self.world, self.neighbors, self.goal, self.cfg.sim.dt,
                           self.scan, self.detections, targets=targets)
+        if self.mission is not None:
+            ctx.extras["mission"] = self.mission.desired_velocity(self.step_count, self.state.pos,
+                                                                  targets, self.time)
         self.last_formation_targets = None
         if self.formation is not None:
             ctx.extras["formation"] = self.last_formation_targets = self.formation.update(

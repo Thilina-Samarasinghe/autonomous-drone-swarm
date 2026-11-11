@@ -14,7 +14,7 @@ import numpy as np
 
 from swarm.sim.obstacles import Obstacles
 
-SCENARIOS = ("open", "forest", "corridor", "random", "survey", "maze")
+SCENARIOS = ("open", "forest", "corridor", "random", "survey", "maze", "rescue")
 
 
 @dataclass
@@ -23,10 +23,13 @@ class Scenario:
     obstacles: Obstacles
     spawn_region: tuple[float, float, float, float] | None   # x0, y0, x1, y1
     goal: np.ndarray | None
+    victims: np.ndarray | None = None                          # (V, 2) rescue scenario only
+    base: np.ndarray | None = None                             # (2,) rescue base station
 
 
 def build_scenario(name: str, world_size: np.ndarray, rng: np.random.Generator,
-                   num_obstacles: int = 25) -> Scenario:
+                   num_obstacles: int = 25, num_victims: int = 8,
+                   base: tuple[float, float] = (20.0, 20.0)) -> Scenario:
     w, h = float(world_size[0]), float(world_size[1])
     left_spawn = (15.0, h / 2 - 25, 45.0, h / 2 + 25)
     right_goal = np.array([w - 22.0, h / 2])
@@ -66,6 +69,40 @@ def build_scenario(name: str, world_size: np.ndarray, rng: np.random.Generator,
         spawn = (8.0, 8.0, 44.0, 50.0)
         goal = np.array([176.0, 20.0])
         return Scenario(name, Obstacles(circles=circles, boxes=boxes), spawn, goal)
+
+    if name == "rescue":
+        # obstacles everywhere except around the base; victims hidden among them
+        b = np.array(base, dtype=float)
+        circles, boxes, placed = [], [], []
+        tries = 0
+        while len(placed) < max(num_obstacles, 30) and tries < 8000:
+            tries += 1
+            x, y = rng.uniform(15.0, w - 12.0), rng.uniform(8.0, h - 8.0)
+            if np.hypot(x - b[0], y - b[1]) < 30.0:
+                continue
+            if rng.random() < 0.6:
+                r = rng.uniform(1.5, 4.5)
+                shape, bound = ("c", (x, y, r)), r
+            else:
+                hw, hh = rng.uniform(1.5, 7.0), rng.uniform(1.5, 7.0)
+                shape, bound = ("b", (x - hw, y - hh, x + hw, y + hh)), float(np.hypot(hw, hh))
+            if any(np.hypot(x - px, y - py) < bound + pb + 6.0 for px, py, pb in placed):
+                continue
+            placed.append((x, y, bound))
+            (circles if shape[0] == "c" else boxes).append(shape[1])
+        obstacles = Obstacles(circles=circles, boxes=boxes)
+        victims = []
+        tries = 0
+        while len(victims) < num_victims and tries < 20000:
+            tries += 1
+            v = rng.uniform((12.0, 10.0), (w - 10.0, h - 10.0))
+            if np.hypot(*(v - b)) < 35.0 or any(np.hypot(*(v - q)) < 15.0 for q in victims):
+                continue
+            if obstacles.signed_distance(v[None])[0][0] < 3.0:
+                continue
+            victims.append(v)
+        spawn = (b[0] - 12.0, b[1] - 12.0, b[0] + 14.0, b[1] + 14.0)
+        return Scenario(name, obstacles, spawn, None, np.array(victims), b)
 
     if name in ("random", "survey"):
         if name == "survey":

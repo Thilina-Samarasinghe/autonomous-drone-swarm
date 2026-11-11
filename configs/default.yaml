@@ -42,7 +42,7 @@ avoidance:
   safety_margin: 0.3
 
 scenario:
-  name: open              # open | forest | corridor | random | survey | maze
+  name: open              # open | forest | corridor | random | survey | maze | rescue
   goal_radius: 15.0
   num_obstacles: 25       # random scenario only
 
@@ -89,6 +89,34 @@ formation:
   leader_timeout: 3.0     # s: leader info older than this is ignored
   heading_tau: 1.5        # s: smoothing of the formation heading
   slowdown_error: 4.0     # m: leader slows when followers are this far off-slot
+
+mission:                  # search and rescue (runs in the rescue scenario)
+  enabled: true
+  victims: 8
+  base_x: 20.0            # base station / charging pad
+  base_y: 20.0
+  charge_radius: 8.0
+  use_planner: true       # navigate with the path planner on each drone's map
+  explore: voronoi        # random | frontier | voronoi
+  seek: pso               # none (camera only) | pso
+  max_seekers: 3          # drones per victim (auction)
+  signal_range: 45.0      # victims' phones heard this far (m)
+  signal_noise: 0.01
+  detect_radius: 4.0      # camera confirms a victim this close (m)
+  explore_speed: 5.0
+  retarget_interval: 2.0
+  edge_margin: 6.0        # (raised to the arena's soft-wall zone automatically)
+  seek_timeout: 60.0
+  pso_inertia: 0.6
+  pso_cognitive: 1.2
+  pso_social: 1.6
+  pso_max_speed: 5.0
+  pso_jitter: 1.0
+  battery_capacity: 1.0
+  drain_hover: 0.0025     # per second hovering (400 s endurance)
+  drain_speed: 0.0001     # extra per second per (m/s)^2 (~200 s at 5 m/s)
+  charge_rate: 0.04       # per second on the pad (25 s to full)
+  reserve: 0.08
 
 render:
   window_width: 1200

@@ -2,7 +2,7 @@
 
 Controls
   SPACE pause / resume     .  single step (while paused)
-  1-6  scenario: open/forest/corridor/random/survey/maze
+  1-7  scenario: open/forest/corridor/random/survey/maze/rescue
   K  path planning on/off (yellow = selected drone's path)
   F  formation: off > line > v > circle > box > column
   M  cycle avoidance: none > apf > orca > hybrid
@@ -26,6 +26,7 @@ import pygame
 
 from swarm.control.factory import METHODS
 from swarm.formation.shapes import SHAPES
+from swarm.mission.manager import MODE_NAMES as MODE_LABELS
 from swarm.mathutil import norms
 from swarm.sim.engine import Simulation
 from swarm.sim.scenarios import SCENARIOS
@@ -46,6 +47,12 @@ PATH = (250, 215, 70)
 SLOT = (200, 140, 255)
 LEADER = (255, 90, 200)
 TRAIL_L = (120, 80, 140)
+# rescue mission: drone colour by mode, victim colour by status
+MODE_COLORS = [(70, 200, 230), (255, 150, 50), (250, 220, 70), (240, 240, 240), (200, 50, 50)]
+VICTIM_UNKNOWN = (110, 110, 120)
+VICTIM_HEARD = (255, 150, 50)
+VICTIM_FOUND = (120, 230, 120)
+BASE = (90, 160, 255)
 OBSTACLE = (120, 128, 145)
 OBSTACLE_EDGE = (170, 178, 195)
 BEAM = (38, 44, 58)
@@ -69,7 +76,7 @@ class Viewer:
         self.sim = sim
         rc = sim.cfg.render
         pygame.init()
-        pygame.display.set_caption("Autonomous Drone Swarm - Phase 5: Formation flying")
+        pygame.display.set_caption("Autonomous Drone Swarm - Phase 6: Search and rescue")
         self.screen = pygame.display.set_mode((rc.window_width, rc.window_height))
         self.clock = pygame.time.Clock()
         self.font = pygame.font.SysFont("consolas", 15)
@@ -151,7 +158,7 @@ class Viewer:
             self.sim.set_formation(cycle[(cycle.index(cur) + 1) % len(cycle)])
         elif k == pygame.K_k:
             self.sim.set_planning(not self.sim.cfg.planning.enabled)
-        elif k in (pygame.K_1, pygame.K_2, pygame.K_3, pygame.K_4, pygame.K_5, pygame.K_6):
+        elif k in (pygame.K_1, pygame.K_2, pygame.K_3, pygame.K_4, pygame.K_5, pygame.K_6, pygame.K_7):
             self.sim.cfg.scenario.name = SCENARIOS[k - pygame.K_1]
             self.sim.reset()
             self.trails.clear()
@@ -279,11 +286,42 @@ class Viewer:
             tri = [p + fwd * size, p - fwd * size * 0.6 + side * size * 0.55,
                    p - fwd * size * 0.6 - side * size * 0.55]
             pygame.draw.polygon(self.screen, _speed_color(s, d.max_speed), tri)
+        if sim.mission is not None:
+            for p, mo in zip(pos_s, sim.mission.mode):
+                pygame.draw.circle(self.screen, MODE_COLORS[mo], p, size * 0.55)
 
         if sim.goal is not None:
             g = self.to_screen(sim.goal)
             pygame.draw.circle(self.screen, GOAL, g, 8, 2)
             pygame.draw.circle(self.screen, GOAL, g, 3)
+
+        # rescue: base, victims, selected drone's target
+        ms = sim.mission
+        if ms is not None:
+            b = self.to_screen(ms.base)
+            pygame.draw.circle(self.screen, BASE, b, sim.cfg.mission.charge_radius * self.scale, 1)
+            pygame.draw.rect(self.screen, BASE, (b[0] - 6, b[1] - 6, 12, 12), 2)
+            heard_any = (ms.last_reading > 0).any(axis=0)
+            for v, vp in enumerate(ms.field.pos):
+                c = self.to_screen(vp)
+                if not np.isnan(ms.stats.found_time[v]):
+                    col = VICTIM_FOUND
+                elif heard_any[v]:
+                    col = VICTIM_HEARD
+                else:
+                    col = VICTIM_UNKNOWN
+                pygame.draw.line(self.screen, col, c - 5, c + 5, 2)
+                pygame.draw.line(self.screen, col, (c[0] - 5, c[1] + 5), (c[0] + 5, c[1] - 5), 2)
+                if ms.base_known[v]:
+                    pygame.draw.circle(self.screen, col, c, 8, 1)
+            if sim.state.n:
+                k = min(self.selected, sim.state.n - 1)
+                t = ms.target[k]
+                if ms.mode[k] in (0, 2) and not np.isnan(t[0]):
+                    pygame.draw.line(self.screen, MODE_COLORS[ms.mode[k]], pos_s[k], self.to_screen(t), 1)
+                if ms.mode[k] == 1:
+                    v = ms.seek_v[k]
+                    pygame.draw.circle(self.screen, VICTIM_HEARD, self.to_screen(ms.gbest_pos[k, v]), 5, 1)
 
         # formation: leader trail, follower slots, leader marker
         fm = sim.formation
@@ -307,7 +345,9 @@ class Viewer:
             path = sim.planner.paths[k] if k < sim.planner.n else None
             if path is not None and len(path) > 1:
                 pygame.draw.lines(self.screen, PATH, False, self.to_screen(path).tolist(), 2)
-            if sim.planner.carrots is not None and k < len(sim.planner.carrots):
+            # (a drone with no goal has a NaN target: pygame hangs on NaN coordinates)
+            if (sim.planner.carrots is not None and k < len(sim.planner.carrots)
+                    and np.isfinite(sim.planner.carrots[k]).all()):
                 c = self.to_screen(sim.planner.carrots[k])
                 pygame.draw.line(self.screen, PATH, pos_s[k], c, 1)
                 pygame.draw.circle(self.screen, PATH, c, 4)
@@ -333,7 +373,7 @@ class Viewer:
         x0 = self.screen.get_width() - HUD_W
         pygame.draw.rect(self.screen, (12, 15, 22), (x0, 0, HUD_W, self.screen.get_height()))
         lines = [
-            ("PHASE 5 - FORMATIONS", None),
+            ("PHASE 6 - SEARCH & RESCUE", None),
             ("", None),
             (f"scenario  {sim.cfg.scenario.name:>11s}", (150, 200, 255)),
             (f"avoidance {sim.cfg.avoidance.method:>11s}", (150, 200, 255)),
@@ -346,10 +386,8 @@ class Viewer:
             (f"min sep      {m.min_separation:8.2f} m", BAD if m.collisions else None),
             (f"collisions now/total {m.collisions:3d}/{sim.total_collisions:<4d}", BAD if m.collisions else None),
             (f"obst. hits now/total {m.obstacle_hits:3d}/{sim.total_obstacle_hits:<4d}", BAD if m.obstacle_hits else None),
-            (f"clearance    {m.min_clearance:8.2f} m", BAD if m.min_clearance < 0 else None),
-            (f"arrived      {m.arrived:5d}/{m.n:<3d}", None),
+            (f"clearance {m.min_clearance:5.2f} m  arrived {m.arrived:3d}", BAD if m.min_clearance < 0 else None),
             (f"speed {m.mean_speed:4.1f} m/s  groups {m.groups:3d}", None),
-            (f"weights s/a/c {w.separation_weight:.1f}/{w.alignment_weight:.1f}/{w.cohesion_weight:.1f}", None),
             ("", None),
         ]
         im = sim.info_metrics() if (sim.maps is not None or sim.comms is not None) else None
@@ -368,6 +406,17 @@ class Viewer:
                 (f"map #{k:<3d}{sel_cov:4.0%} avg {im.map_coverage_mean:4.0%} team {im.map_coverage_team:4.0%}", None),
                 (f"map accuracy {im.map_accuracy:8.1%}", None),
                 (f"info age     {im.info_age:7.1f} s", None),
+            ]
+        if sim.mission is not None:
+            ms = sim.mission
+            k = min(self.selected, max(sim.state.n - 1, 0))
+            counts = [int((ms.mode == i).sum()) for i in range(5)]
+            lines += [
+                ("RESCUE", (150, 200, 255)),
+                (f"victims found {ms.stats.found}/{ms.V}  rep. {ms.stats.reported}", None),
+                (f"exp {counts[0]} seek {counts[1]} ret {counts[2]} chg {counts[3]}", None),
+                (f"lost drones {ms.stats.lost:3d}  returns {ms.stats.returns:3d}", BAD if ms.stats.lost else None),
+                (f"drone #{k}: {MODE_LABELS[ms.mode[k]]:7s} bat {ms.battery[k]:4.0%}", None),
             ]
         if sim.formation is not None:
             fs = sim.formation.stats

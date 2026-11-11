@@ -69,6 +69,9 @@ class CommsNetwork:
         self.recent_drops = np.empty((0, 2), dtype=int)   # (D, 2) sender, receiver at last broadcast
         self.table = np.full((self.n, self.n, 3), np.nan) # drone i's belief about drone j
         self.vtable = np.zeros((self.n, self.n, 2))       # ... and its velocity at that time
+        # (sender, receiver) of every message delivered on the latest step; other
+        # modules (e.g. the rescue mission) piggy-back their data on these links
+        self.deliveries = np.empty((0, 2), dtype=int)
         self.interval_steps = max(1, round(self.cfg.broadcast_interval / self.dt))
         self.latency_steps = max(0, round(self.cfg.latency / self.dt))
 
@@ -125,6 +128,7 @@ class CommsNetwork:
         return t
 
     def _deliver(self, step_count: int, maps: OccupancyMaps | None) -> None:
+        self.deliveries = np.empty((0, 2), dtype=int)
         if not self.queue:
             return
         ready = [b for b in self.queue if b.deliver_step <= step_count]
@@ -133,10 +137,14 @@ class CommsNetwork:
         self.queue = [b for b in self.queue if b.deliver_step > step_count]
 
         inbox: dict[int, list[Broadcast]] = {}
+        pairs = []
         for b in ready:
             for r in b.receivers.tolist():
                 if r < self.n and b.sender < self.n:
                     inbox.setdefault(r, []).append(b)
+                    pairs.append((b.sender, r))
+        if pairs:
+            self.deliveries = np.array(pairs, dtype=int)
 
         for r, msgs in inbox.items():
             self.stats.delivered += len(msgs)

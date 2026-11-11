@@ -16,8 +16,8 @@ so a learned policy is a drop-in replacement for a hand-written one.
 | 2 | Obstacles & avoidance | Circle/box obstacles, 36-beam lidar, APF, ORCA safety layer, hybrid; forest / corridor / random scenarios; benchmark script ✅ |
 | 3 | Communication | Radio (range, loss, latency, bandwidth), beacon tables, per-drone log-odds occupancy maps, multi-hop gossip sharing with anti-entropy, survey scenario, comms benchmark ✅ |
 | 4 | Path planning | Cost map from each drone's own map, A* + backward-Dijkstra cost field, optimistic replanning on obstacle changes, string-pulling path following, maze scenario, planning benchmark ✅ |
-| 5 | Formation | Leader-follower with line / V / circle / box / column, Hungarian slot assignment, radio-based leader tracking, leader breadcrumb trail, squeezing through gaps via route passage width, formation benchmark ✅ (built, awaiting review) |
-| 6 | Search & rescue | Voronoi / auction area split, frontier exploration, PSO on victim signal, CBBA task allocation |
+| 5 | Formation | Leader-follower with line / V / circle / box / column, Hungarian slot assignment, radio-based leader tracking, leader breadcrumb trail, squeezing through gaps via route passage width, formation benchmark ✅ |
+| 6 | Search & rescue | Rescue scenario with 8 victims and a charging base; per-drone state machine; frontier exploration with dynamic Voronoi partitioning; PSO victim search on noisy signals; consensus auction (max 3 seekers per victim); batteries and recharging; gossip of confirmations and readings; rescue benchmark ✅ (built, awaiting review) |
 | 7 | Terrain & threats | Heightmap cost, threat zones, PSO multi-UAV path planner |
 | 8 | Multi-agent RL | PettingZoo env; shared-parameter MAPPO (CTDE) per behaviour: avoidance, flocking, formation, search; curriculum learning |
 | 9 | Experiments | Scaling 20→50, comm loss, drone failure, RL vs classical, demo video |
