@@ -1,4 +1,4 @@
-# Phase 1 - Boids flocking. Units: metres, seconds.
+# Units: metres, seconds.
 sim:
   dt: 0.05
   seed: 42
@@ -26,6 +26,25 @@ boids:
   cohesion_weight: 0.8
   boundary_weight: 3.0
   goal_weight: 1.2
+
+sensor:
+  num_rays: 36            # lidar beams over 360 degrees
+  range: 20.0
+
+avoidance:
+  method: orca            # none | apf | orca | hybrid  (orca: best in benchmark)
+  apf_weight: 1.5
+  apf_influence: 8.0
+  orca_time_horizon: 2.0
+  orca_obstacle_horizon: 1.5
+  orca_neighbor_dist: 15.0
+  orca_max_neighbors: 10
+  safety_margin: 0.3
+
+scenario:
+  name: open              # open | forest | corridor | random
+  goal_radius: 15.0
+  num_obstacles: 25       # random scenario only
 
 render:
   window_width: 1200

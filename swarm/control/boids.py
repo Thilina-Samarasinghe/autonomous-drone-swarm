@@ -7,6 +7,7 @@ Each drone only uses neighbours inside its own perception radius:
   * cohesion   - steer toward the local centre of mass
   * boundary   - steer back inside the arena near the walls
   * goal       - optional shared target point (arrive behaviour)
+  * obstacle   - (optional) artificial potential field from lidar detections
 Steering = desired_velocity - current_velocity, clamped to max_accel.
 """
 
@@ -17,7 +18,7 @@ from dataclasses import dataclass
 import numpy as np
 
 from swarm.agents.state import SwarmState
-from swarm.config import BoidsConfig, DroneConfig
+from swarm.config import AvoidanceConfig, BoidsConfig, DroneConfig
 from swarm.control.base import StepContext
 from swarm.mathutil import clamp_norm, norms, safe_normalize
 
@@ -29,15 +30,53 @@ class BoidsTerms:
     cohesion: np.ndarray
     boundary: np.ndarray
     goal: np.ndarray
+    obstacle: np.ndarray
 
 
 class BoidsController:
     LOOKAHEAD = 0.6  # seconds of relative-motion prediction for separation
 
-    def __init__(self, weights: BoidsConfig, drone: DroneConfig):
+    def __init__(self, weights: BoidsConfig, drone: DroneConfig,
+                 avoidance: AvoidanceConfig | None = None, use_apf: bool = False):
         self.w = weights
         self.d = drone
+        self.avoid = avoidance or AvoidanceConfig()
+        self.use_apf = use_apf
         self.last_terms: BoidsTerms | None = None
+
+    def _obstacle_term(self, state: SwarmState, ctx: StepContext) -> np.ndarray:
+        """Artificial potential field (Khatib 1986) built from lidar detections.
+
+        Each detected obstacle point within `apf_influence` pushes the drone
+        away with strength (1/d - 1/d0). A tangential component steers the
+        drone *around* obstacles it is flying into, which reduces the classic
+        APF problem of stopping dead in front of an obstacle.
+        """
+        n = state.n
+        out = np.zeros((n, 2))
+        det = ctx.detections
+        if not self.use_apf or det is None or len(det.i) == 0:
+            return out
+        d0 = self.avoid.apf_influence
+        det = det.within(d0)
+        if len(det.i) == 0:
+            return out
+        r = self.d.radius
+        # repulsive force: 0 at the influence edge, max_accel at contact,
+        # growing quadratically so distant obstacles barely matter
+        closeness = np.clip((d0 - det.dist) / (d0 - r), 0.0, 1.0)
+        strength = self.d.max_accel * closeness ** 2
+        away = -det.dir
+        vel = state.vel[det.i]
+        # tangent: perpendicular to `away`, on the side the drone is already moving;
+        # only applied when flying *toward* the obstacle
+        tangent = np.stack([-away[:, 1], away[:, 0]], 1)
+        side = np.sign((tangent * vel).sum(1))
+        side[side == 0] = 1.0
+        facing = np.clip((vel * det.dir).sum(1) / max(self.d.cruise_speed, 1e-9), 0.0, 1.0)
+        push = (away + tangent * (side * facing)[:, None]) * strength[:, None]
+        np.add.at(out, det.i, push)
+        return clamp_norm(out, self.d.max_accel)
 
     def _steer(self, desired_dir: np.ndarray, vel: np.ndarray, speed: float) -> np.ndarray:
         """Reynolds steering toward `desired_dir` at `speed`; zero where no desire."""
@@ -116,7 +155,9 @@ class BoidsController:
             desired = safe_normalize(to_goal) * speed[:, None]
             goal = clamp_norm(desired - vel, self.d.max_accel)
 
-        self.last_terms = BoidsTerms(separation, alignment, cohesion, boundary, goal)
+        obstacle = self._obstacle_term(state, ctx)
+
+        self.last_terms = BoidsTerms(separation, alignment, cohesion, boundary, goal, obstacle)
 
         # Prioritised acceleration allocation (Reynolds 1999): safety-critical
         # requests are served first; lower-priority ones only get the budget
@@ -124,6 +165,7 @@ class BoidsController:
         w = self.w
         requests = [
             w.separation_weight * separation,
+            self.avoid.apf_weight * obstacle,
             w.boundary_weight * boundary,
             w.goal_weight * goal,
             w.alignment_weight * alignment + w.cohesion_weight * cohesion,

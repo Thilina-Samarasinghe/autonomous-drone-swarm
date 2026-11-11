@@ -46,6 +46,31 @@ class BoidsConfig:
 
 
 @dataclass
+class SensorConfig:
+    num_rays: int = 36        # lidar beams spread over 360 degrees
+    range: float = 20.0       # metres
+
+
+@dataclass
+class AvoidanceConfig:
+    method: str = "orca"              # none | apf | orca | hybrid
+    apf_weight: float = 1.5           # potential-field obstacle repulsion weight
+    apf_influence: float = 8.0        # obstacles closer than this repel (m)
+    orca_time_horizon: float = 2.0    # look-ahead for drone-drone constraints (s)
+    orca_obstacle_horizon: float = 1.5  # look-ahead for obstacle constraints (s)
+    orca_neighbor_dist: float = 15.0
+    orca_max_neighbors: int = 10
+    safety_margin: float = 0.3        # extra clearance added to the body radius (m)
+
+
+@dataclass
+class ScenarioConfig:
+    name: str = "open"                # open | forest | corridor | random
+    goal_radius: float = 15.0         # drones inside this radius count as arrived
+    num_obstacles: int = 25           # used by the random scenario
+
+
+@dataclass
 class RenderConfig:
     window_width: int = 1200
     window_height: int = 760
@@ -60,6 +85,9 @@ class Config:
     world: WorldConfig = field(default_factory=WorldConfig)
     drones: DroneConfig = field(default_factory=DroneConfig)
     boids: BoidsConfig = field(default_factory=BoidsConfig)
+    sensor: SensorConfig = field(default_factory=SensorConfig)
+    avoidance: AvoidanceConfig = field(default_factory=AvoidanceConfig)
+    scenario: ScenarioConfig = field(default_factory=ScenarioConfig)
     render: RenderConfig = field(default_factory=RenderConfig)
 
     def to_dict(self) -> dict[str, Any]:

@@ -1,9 +1,9 @@
 # Autonomous Drone Swarm Simulation
 
-> 🚧 **Work in progress.** Phases 0–1 (simulation core + boids flocking) are
-> complete. Obstacle avoidance, communication, path planning, formation flying,
-> search-and-rescue and reinforcement learning are **still being built**. See
-> [Roadmap](#roadmap) below.
+> 🚧 **Work in progress.** Phases 0–2 (simulation core, boids flocking,
+> obstacle avoidance with lidar + ORCA) are built. Communication, path planning,
+> formation flying, search-and-rescue and reinforcement learning are **still
+> being built**. See [Roadmap](#roadmap) below.
 
 A 2D simulator for a swarm of **20–50 autonomous drones**. Every drone makes its
 own decisions using only what it can sense around itself, and cooperative
@@ -55,8 +55,8 @@ intelligence**, not one central AI controlling every drone.
 |---|---|---|
 | 0 | Project setup: config system, seeded fixed-timestep engine, metrics, tests | ✅ Done |
 | 1 | Boids flocking + real-time 2D viewer + headless runner with plots | ✅ Done |
-| 2 | Obstacles, range sensors, ORCA collision avoidance | 🔜 Next |
-| 3 | Communication network and shared map | 📋 Planned |
+| 2 | Obstacles, lidar sensing, APF + ORCA collision avoidance, scenarios, benchmark | ✅ Done (under review) |
+| 3 | Communication network and shared map | 🔜 Next |
 | 4 | A* / D* Lite path planning | 📋 Planned |
 | 5 | Formation flying | 📋 Planned |
 | 6 | Cooperative search and rescue (PSO, coverage, task allocation) | 📋 Planned |
@@ -78,6 +78,20 @@ intelligence**, not one central AI controlling every drone.
   - *urgency-scaled separation*: gentle far away, full braking near contact
 - **Wall avoidance**: soft steering near the arena edge plus hard walls.
 - **Shared goal**: click anywhere in the viewer and the swarm flies there.
+- **Obstacles** (Phase 2): circles and boxes with exact signed-distance and
+  ray-intersection geometry, plus hard physics (drones can't pass through).
+- **Onboard lidar** (Phase 2): 36 beams, 20 m range. Drones know about
+  obstacles *only* through their own scan; the nearest point of each
+  obstacle is extracted from the scan's local minima.
+- **Four avoidance methods**, switchable live (Phase 2):
+  - `none`: flocking only (baseline)
+  - `apf`: artificial potential field from lidar
+  - `orca`: Optimal Reciprocal Collision Avoidance safety layer (RVO2 solver port), **default**
+  - `hybrid`: APF steering + ORCA safety layer
+- **Scenarios** (Phase 2): `open`, `forest` (pillar grid), `corridor`
+  (wall with one 14 m gap), `random` (seeded mix of circles and boxes).
+- **Avoidance benchmark** (Phase 2): every method × scenario × seed in parallel,
+  writing a CSV and a markdown results table.
 - **Fast neighbour search**: KD-tree, roughly N log N cost.
 - **Real-time Pygame viewer**: neighbour links, trails, perception circles,
   live stats panel, behaviour weights tunable while running, add or remove drones.
@@ -88,9 +102,8 @@ intelligence**, not one central AI controlling every drone.
 
 ### 🚧 Still being built / planned
 
-- Circle and polygon obstacles; maze and forest scenarios
-- Ray-cast range sensors and a local occupancy map per drone
-- ORCA (velocity-obstacle) safety layer with formal collision prevention
+- Local occupancy map per drone built from lidar; maze scenario
+- Moving (dynamic) obstacles
 - Range-limited messaging with packet loss and latency; live communication-graph view
 - Map sharing and merging between drones
 - A*, Theta*, D* Lite path planning with path smoothing
@@ -133,6 +146,15 @@ python -m swarm.main --drones 50 --seed 7
 # Headless run: no window, writes plots and a summary
 python -m swarm.main --headless --drones 50 --steps 3000 --out outputs/run1
 
+# Obstacle scenarios and avoidance methods (Phase 2)
+python -m swarm.main --scenario forest --drones 50
+python -m swarm.main --scenario corridor --avoidance orca
+python -m swarm.main --headless --scenario random --avoidance apf --out outputs/apf_random
+
+# Benchmark every avoidance method on every scenario (writes outputs/benchmarks/)
+python -m experiments.benchmark_avoidance                       # 50 drones x 5 seeds
+python -m experiments.benchmark_avoidance --drones 30 --seeds 3 --steps 1500   # quicker
+
 # Use your own config file
 python -m swarm.main --config configs/my_experiment.yaml
 ```
@@ -142,6 +164,8 @@ python -m swarm.main --config configs/my_experiment.yaml
 | `--config` | `configs/default.yaml` | YAML configuration file |
 | `--drones` | from config (30) | Number of drones |
 | `--seed` | from config (42) | Random seed |
+| `--scenario` | from config (`open`) | `open`, `forest`, `corridor`, `random` |
+| `--avoidance` | from config (`orca`) | `none`, `apf`, `orca`, `hybrid` |
 | `--headless` | off | Run without a window |
 | `--steps` | from config (3000) | Steps for a headless run (1 step = 0.05 s) |
 | `--out` | `outputs/latest` | Output folder for headless results |
@@ -152,7 +176,7 @@ A headless run writes:
 |---|---|
 | `trajectories.png` | Every drone's path (■ start, ● end) |
 | `metrics.png` | Min separation, polarization, mean speed and groups over time |
-| `summary.json` | Collisions, closest approach, alignment, groups, run speed |
+| `summary.json` | Collisions, obstacle hits, closest approach, clearance, arrivals, time for 90% to arrive, alignment, run speed |
 
 ---
 
@@ -162,6 +186,9 @@ A headless run writes:
 |---|---|
 | `SPACE` | Pause / resume |
 | `.` | Single step (while paused) |
+| `1` `2` `3` `4` | Scenario: open / forest / corridor / random |
+| `M` | Cycle avoidance method: none → apf → orca → hybrid |
+| `V` | Toggle lidar beams (red = hit) |
 | Left click | Set a shared goal point |
 | Right click | Clear the goal |
 | `L` | Toggle neighbour links |
@@ -177,6 +204,7 @@ A headless run writes:
 | `ESC` | Quit |
 
 Drone colour shows speed: blue is slow, cyan is cruising, yellow is fast.
+The dashed red circle is the goal area; the panel shows how many drones arrived.
 
 ---
 
@@ -206,6 +234,19 @@ metres and seconds. Unknown keys raise an error, so typos are caught early.
 | | `cohesion_weight` | 0.8 | |
 | | `boundary_weight` | 3.0 | |
 | | `goal_weight` | 1.2 | |
+| `sensor` | `num_rays` | 36 | Lidar beams over 360° |
+| | `range` | 20 | Lidar range (m) |
+| `avoidance` | `method` | orca | `none` / `apf` / `orca` / `hybrid` |
+| | `apf_weight` | 1.5 | Potential-field strength |
+| | `apf_influence` | 8 | Obstacles closer than this repel (m) |
+| | `orca_time_horizon` | 2.0 | Look-ahead for drone–drone constraints (s) |
+| | `orca_obstacle_horizon` | 1.5 | Look-ahead for obstacle constraints (s) |
+| | `orca_neighbor_dist` | 15 | Drones considered by ORCA (m) |
+| | `orca_max_neighbors` | 10 | Max drones per ORCA problem |
+| | `safety_margin` | 0.3 | Extra clearance added to the body radius (m) |
+| `scenario` | `name` | open | `open` / `forest` / `corridor` / `random` |
+| | `goal_radius` | 15 | Drones inside count as arrived (m) |
+| | `num_obstacles` | 25 | Random scenario only |
 | `render` | `window_width` × `window_height` | 1200 × 760 | |
 | | `fps` | 60 | |
 | | `trail_length` | 40 | Frames of trail per drone |
@@ -220,10 +261,11 @@ metres and seconds. Unknown keys raise an error, so typos are caught early.
 ```
 each step (dt = 0.05 s):
   1. neighbours  = KD-tree query within perception radius
-  2. accel       = controller.compute(state, context)    # each drone: local info only
-  3. dynamics    = clamp accel -> update velocity -> clamp speed -> update position
-  4. walls       = clamp position, cancel outward velocity
-  5. metrics     = separation, collisions, alignment, groups
+  2. lidar       = 36 beams per drone -> nearest obstacle points
+  3. accel       = controller.compute(state, context)    # each drone: local info only
+  4. dynamics    = clamp accel -> update velocity -> clamp speed -> update position
+  5. physics     = walls + obstacles push drones out (counted as a hit)
+  6. metrics     = separation, collisions, hits, clearance, arrivals, alignment
 ```
 
 ### Controller interface
@@ -252,6 +294,39 @@ budget that is left after the rules above it (Reynolds 1999):
 | 4 | Alignment + cohesion | Match neighbours' heading, drift toward the local centre |
 | 5 | Cruise | Hold the preferred speed |
 
+### Obstacle avoidance (Phase 2)
+
+```
+  boids (+ APF obstacle force)  --a_nominal-->  ORCA safety layer  --a_safe-->  dynamics
+                                                      ^
+              neighbours' positions & velocities -----+
+              lidar nearest-obstacle points ----------+
+```
+
+**APF (artificial potential field).** Each obstacle point the lidar sees
+within 8 m pushes the drone away. The push grows quadratically as the gap
+shrinks, so distant pillars barely matter. A sideways component makes drones
+slide *around* obstacles they're flying into instead of stopping dead. APF is
+cheap and smooth but gives **no guarantee**: in a crowd it must trade drone
+separation against obstacle clearance, and it can't do both.
+
+**ORCA (Optimal Reciprocal Collision Avoidance).** Each drone turns the
+boids output into a preferred velocity, then builds half-plane constraints
+on its own next velocity:
+- one per nearby drone: "don't collide within 2 s", with each drone taking
+  half the effort (reciprocal), so no communication is needed
+- one per lidar obstacle point: "approach no faster than gap / 1.5 s", with full
+  effort because obstacles don't move
+
+A small 2D linear program (a port of the RVO2 library solver) picks the
+allowed velocity closest to the preferred one. If the constraints can't all
+be met, it picks the velocity that violates them least.
+
+**Hybrid.** APF steering with ORCA as the safety layer. It is just as safe
+as ORCA, but the benchmark showed the extra APF push only slows the swarm
+down (15–30% longer to reach the goal) without adding clearance, so **ORCA
+alone is the default**.
+
 Lessons from development (found by tests and benchmarks):
 
 - Drones spawned at full speed in random directions collided before they
@@ -259,6 +334,15 @@ Lessons from development (found by tests and benchmarks):
 - A "desired minus current velocity" cohesion rule acted as a brake and
   halved flock speed, so it was replaced with a pure pull toward the centre.
 - Flocks piled up when turning at walls. Anticipatory separation fixed this.
+- *Phase 2:* drones stopped in front of the corridor gap. The cause was a
+  raycast bug: a beam parallel to a box edge but outside the box was reported
+  as a hit, so drones "saw" a wall inside the gap. Fixed and covered by a test.
+- *Phase 2:* the first APF version used "steer away at full speed", which
+  braked drones even when passing beside a pillar, so they never reached the
+  goal. It was replaced with a true distance-based force.
+- *Phase 2:* raycasting every beam against every obstacle took half the step
+  time. Testing only obstacles within sensor range made it about 3× faster
+  with identical results (verified against brute force).
 
 ---
 
@@ -272,6 +356,10 @@ Lessons from development (found by tests and benchmarks):
 | `polarization` | Global heading alignment, 0 (random) to 1 (all the same) | High when there is one flock |
 | `local_polarization` | How aligned each drone is with its own neighbours | > 0.9 for a healthy flock |
 | `groups` | Connected components of the perception graph | 1 = one swarm |
+| `obstacle_hits` | Drones touching an obstacle this step | 0 |
+| `min_clearance` | Smallest gap between a drone's body and an obstacle (m) | > 0 |
+| `arrived` | Drones inside the goal radius | all |
+| `time_to_90pct_arrived` | Seconds until 90% of the swarm reached the goal | lower is better |
 
 Planned metrics for later phases: coverage %, victims found, time to find,
 messages sent, path length, formation error, energy use.
@@ -290,6 +378,42 @@ Phase 1, 3000 steps (150 s simulated) per run, 5 seeds per swarm size:
 
 ~500 steps/s is about **25× real time** on an Intel i5-8365U laptop with no GPU.
 
+### Phase 2: avoidance benchmark
+
+50 drones, 5 seeds per row, 2400 steps (120 s simulated) per run. Drones
+start on the left and must reach the goal on the right.
+Reproduce with `python -m experiments.benchmark_avoidance`.
+
+| Scenario | Method | Runs with no contact at all | Drone collisions (avg) | Obstacle hits (avg) | Min clearance (m) | Arrived | Time for 90% to arrive (s) |
+|---|---|---|---|---|---|---|---|
+| forest | none | 0/5 | 4.2 | 2688 | touching | 98% | 36.0 |
+| forest | apf | 0/5 | 0 | 929 | touching | 99% | 51.9 |
+| forest | **orca** | **5/5** | **0** | **0** | 0.30 | 98% | **44.6** |
+| forest | hybrid | 5/5 | 0 | 0 | 0.32 | 98% | 61.0 |
+| corridor | none | 0/5 | 0 | 4616 | touching | 99% | 51.1 |
+| corridor | apf | 0/5 | 0 | 454 | touching | 98% | 53.4 |
+| corridor | **orca** | **5/5** | **0** | **0** | 0.28 | 98% | **54.8** |
+| corridor | hybrid | 5/5 | 0 | 0 | 0.30 | 99% | 57.6 |
+| random | none | 0/5 | 0 | 5306 | touching | 96% | 41.3 |
+| random | apf | 0/5 | 0 | 794 | touching | 99% | 47.8 |
+| random | **orca** | **5/5** | **0** | **0** | 0.28 | 96% | **46.1** |
+| random | hybrid | 5/5 | 0 | 0 | 0.30 | 97% | 53.7 |
+
+Hits and collisions are counted in drone-steps (one touch lasting 5 steps
+counts as 5).
+
+What the numbers show:
+- **none** is fastest only because hard physics lets drones scrape along
+  obstacles, with thousands of contacts.
+- **apf** cuts contacts by 80–90% but never reaches zero: in a crowd, neighbours
+  push drones into obstacles. This is the classic weakness of potential fields.
+- **orca** gives zero contacts in all 15 runs and is the fastest safe method.
+  It keeps exactly the 0.3 m safety margin it is configured for.
+- **hybrid** is equally safe but slower. The minimum clearance is the same
+  because ORCA, not APF, decides the closest approaches.
+- 96–99% arrival rather than 100%: the last 1–2 drones are usually squeezed
+  out of the crowded goal circle, not stuck.
+
 ---
 
 ## Project structure
@@ -306,33 +430,41 @@ autonomous-drone-swarm/
 │   ├── mathutil.py           vectorised 2D vector helpers
 │   ├── metrics.py            swarm metrics
 │   ├── agents/
-│   │   └── state.py          swarm state (positions, velocities, ids), spawning
+│   │   ├── state.py          swarm state (positions, velocities, ids), spawning
+│   │   └── sensors.py        lidar range sensor, nearest-obstacle detections
 │   ├── sim/
-│   │   ├── world.py          arena and walls (obstacles in Phase 2)
+│   │   ├── world.py          arena, walls, obstacles
+│   │   ├── obstacles.py      circle/box geometry: distance, raycast, collision
+│   │   ├── scenarios.py      open / forest / corridor / random layouts
 │   │   ├── dynamics.py       point-mass integration with limits
 │   │   ├── neighbors.py      KD-tree neighbour queries
 │   │   └── engine.py         simulation loop, recorder
 │   ├── control/
 │   │   ├── base.py           Controller interface, StepContext
-│   │   └── boids.py          boids controller
+│   │   ├── boids.py          boids controller (+ APF obstacle term)
+│   │   ├── orca.py           ORCA safety layer and 2D LP solver
+│   │   └── factory.py        builds none / apf / orca / hybrid stacks
 │   └── viz/
 │       ├── render2d.py       Pygame real-time viewer
 │       └── plots.py          Matplotlib trajectory and metric plots
+├── experiments/
+│   └── benchmark_avoidance.py   method x scenario x seed comparison
 ├── tests/
-│   └── test_core.py          pytest suite
+│   ├── test_core.py          Phase 0-1 tests
+│   └── test_phase2.py        Phase 2 tests
 ├── requirements.txt
 └── pytest.ini
 ```
 
-Planned additions: `swarm/comms/`, `swarm/planning/`, `swarm/missions/`,
-`swarm/rl/` and `experiments/`.
+Planned additions: `swarm/comms/`, `swarm/planning/`, `swarm/missions/` and
+`swarm/rl/`.
 
 ---
 
 ## Testing
 
 ```bash
-python -m pytest            # 15 tests, ~8 s
+python -m pytest            # 36 tests, ~35 s
 python -m pytest -v         # verbose
 ```
 
@@ -346,6 +478,15 @@ The tests cover:
   flying, every drone stays in bounds
 - adding and removing drones
 - an offscreen viewer smoke test
+- *Phase 2:* signed distance and raycasting against known answers and a
+  brute-force reference, plus a regression test for the parallel-beam bug
+- *Phase 2:* lidar nearest-point detection, the APF direction, and the LP solver
+  (unconstrained and constrained cases)
+- *Phase 2:* ORCA: two drones flying head-on never touch; a drone aimed at a
+  wall stops before it
+- *Phase 2:* every scenario has an obstacle-free spawn area and goal
+- *Phase 2:* end to end, 30 drones cross the forest and the corridor with 0 collisions,
+  0 obstacle hits and ≥ 90% arrived; the CLI headless run and viewer key handling also work
 
 ---
 
@@ -357,8 +498,8 @@ Full details are in [docs/PLAN.md](docs/PLAN.md).
 |---|---|---|---|
 | 0 | Setup | Config, engine, metrics, tests | ✅ |
 | 1 | Boids | Flocking with 20–50 drones, viewer, plots | ✅ |
-| 2 | Obstacles and avoidance | Obstacles, ray-cast sensors, APF then ORCA safety layer, forest and corridor scenarios | 🔜 |
-| 3 | Communication | Range-limited broadcast, packet loss and latency, comm-graph view, shared occupancy map | 📋 |
+| 2 | Obstacles and avoidance | Obstacles, lidar, APF, ORCA safety layer, hybrid, forest / corridor / random scenarios, benchmark | ✅ |
+| 3 | Communication | Range-limited broadcast, packet loss and latency, comm-graph view, shared occupancy map | 🔜 |
 | 4 | Path planning | Occupancy grid, A*, Theta*, D* Lite replanning, path smoothing, maze scenario | 📋 |
 | 5 | Formation flying | Leader-follower, virtual structure, line / V / circle switching, passing through gaps | 📋 |
 | 6 | Search and rescue | Area partitioning, frontier exploration, PSO victim search, CBBA task allocation, battery | 📋 |
@@ -375,8 +516,9 @@ Full details are in [docs/PLAN.md](docs/PLAN.md).
 | Boids (Reynolds) | Flocking | ✅ |
 | Prioritised acceleration allocation | Combining behaviours safely | ✅ |
 | KD-tree neighbour search | Fast local sensing | ✅ |
-| Artificial potential fields | Baseline obstacle avoidance | 📋 Phase 2 |
-| ORCA / velocity obstacles | Guaranteed drone-to-drone collision prevention | 📋 Phase 2 |
+| Ray casting (circle + slab intersection) | Lidar simulation | ✅ |
+| Artificial potential fields | Obstacle avoidance baseline | ✅ |
+| ORCA / velocity obstacles + 2D linear programming | Drone–drone and drone–obstacle collision prevention | ✅ |
 | A*, Theta*, D* Lite | Path planning and replanning | 📋 Phase 4 |
 | Leader-follower, virtual structure, consensus | Formation control | 📋 Phase 5 |
 | Frontier exploration, Voronoi coverage | Area search | 📋 Phase 6 |
@@ -420,7 +562,9 @@ Full details are in [docs/PLAN.md](docs/PLAN.md).
 - C. Reynolds, *Flocks, Herds, and Schools: A Distributed Behavioral Model*, SIGGRAPH 1987
 - C. Reynolds, *Steering Behaviors for Autonomous Characters*, GDC 1999
 - R. Olfati-Saber, *Flocking for Multi-Agent Dynamic Systems*, IEEE TAC 2006
+- O. Khatib, *Real-Time Obstacle Avoidance for Manipulators and Mobile Robots* (potential fields), IJRR 1986
 - J. van den Berg et al., *Reciprocal n-Body Collision Avoidance (ORCA)*, ISRR 2011
+- RVO2 Library (reference ORCA implementation), UNC Chapel Hill
 - S. Koenig & M. Likhachev, *D\* Lite*, AAAI 2002
 - W. Ren & R. Beard, *Distributed Consensus in Multi-Vehicle Cooperative Control*, 2008
 - J. Kennedy & R. Eberhart, *Particle Swarm Optimization*, ICNN 1995

@@ -2,10 +2,13 @@
 
 Controls
   SPACE pause / resume     .  single step (while paused)
-  L  neighbour links        C  perception circles     T  trails
+  1-4  scenario: open / forest / corridor / random
+  M  cycle avoidance: none > apf > orca > hybrid
+  L  neighbour links        C  perception circles
+  T  trails                 V  lidar beams
   LMB set shared goal       RMB clear goal
   + / -  add / remove 5 drones
-  Q/A separation  W/S alignment  E/D cohesion  (weight +/- 0.1)
+  Q/A separation  W/S alignment  E/D cohesion  (+/- 0.1)
   [ / ]  slower / faster sim    R reset    H help    ESC quit
 """
 
@@ -16,8 +19,10 @@ from collections import deque
 import numpy as np
 import pygame
 
+from swarm.control.factory import METHODS
 from swarm.mathutil import norms
 from swarm.sim.engine import Simulation
+from swarm.sim.scenarios import SCENARIOS
 
 BG = (16, 20, 28)
 ARENA = (24, 30, 42)
@@ -27,6 +32,11 @@ TRAIL = (90, 110, 150)
 TEXT = (220, 226, 235)
 GOAL = (230, 70, 70)
 RADIUS = (70, 90, 120)
+OBSTACLE = (120, 128, 145)
+OBSTACLE_EDGE = (170, 178, 195)
+BEAM = (38, 44, 58)
+BEAM_HIT = (240, 110, 90)
+BAD = (250, 120, 120)
 HUD_W = 260
 
 
@@ -45,7 +55,7 @@ class Viewer:
         self.sim = sim
         rc = sim.cfg.render
         pygame.init()
-        pygame.display.set_caption("Autonomous Drone Swarm - Phase 1: Boids")
+        pygame.display.set_caption("Autonomous Drone Swarm - Phase 2: Obstacle avoidance")
         self.screen = pygame.display.set_mode((rc.window_width, rc.window_height))
         self.clock = pygame.time.Clock()
         self.font = pygame.font.SysFont("consolas", 15)
@@ -63,6 +73,7 @@ class Viewer:
         self.show_circles = False
         self.show_trails = True
         self.show_help = False
+        self.show_beams = False
         self.steps_per_frame = max(1, rc.steps_per_frame)
         self.trails: deque[np.ndarray] = deque(maxlen=rc.trail_length)
 
@@ -100,6 +111,15 @@ class Viewer:
             self.show_links = not self.show_links
         elif k == pygame.K_c:
             self.show_circles = not self.show_circles
+        elif k == pygame.K_v:
+            self.show_beams = not self.show_beams
+        elif k == pygame.K_m:
+            cur = self.sim.cfg.avoidance.method
+            self.sim.set_avoidance(METHODS[(METHODS.index(cur) + 1) % len(METHODS)])
+        elif k in (pygame.K_1, pygame.K_2, pygame.K_3, pygame.K_4):
+            self.sim.cfg.scenario.name = SCENARIOS[k - pygame.K_1]
+            self.sim.reset()
+            self.trails.clear()
         elif k == pygame.K_t:
             self.show_trails = not self.show_trails
             self.trails.clear()
@@ -147,6 +167,20 @@ class Viewer:
         m = w.boundary_margin * self.scale
         pygame.draw.rect(self.screen, MARGIN, rect.inflate(-2 * m, -2 * m), 1)
         pygame.draw.rect(self.screen, MARGIN, rect, 2)
+        for cx, cy, r in w.obstacles.circles:
+            c = self.to_screen(np.array([cx, cy]))
+            pygame.draw.circle(self.screen, OBSTACLE, c, r * self.scale)
+            pygame.draw.circle(self.screen, OBSTACLE_EDGE, c, r * self.scale, 1)
+        for x0, y0, x1, y1 in w.obstacles.boxes:
+            tl_o = self.to_screen(np.array([x0, y1]))
+            br_o = self.to_screen(np.array([x1, y0]))
+            box = pygame.Rect(*tl_o, *(br_o - tl_o))
+            pygame.draw.rect(self.screen, OBSTACLE, box)
+            pygame.draw.rect(self.screen, OBSTACLE_EDGE, box, 1)
+        if self.sim.goal is not None:
+            g = self.to_screen(self.sim.goal)
+            pygame.draw.circle(self.screen, (90, 50, 55), g,
+                               self.sim.cfg.scenario.goal_radius * self.scale, 1)
 
     def _draw_swarm(self) -> None:
         sim = self.sim
@@ -161,6 +195,16 @@ class Viewer:
         if self.show_links:
             for a, b in sim.neighbors.undirected():
                 pygame.draw.line(self.screen, LINK, pos_s[a], pos_s[b], 1)
+
+        if self.show_beams:
+            scan = sim.scan
+            ends = sim.state.pos[:, None, :] + scan.dirs[None] * scan.dist[:, :, None]
+            ends_s = self.to_screen(ends)
+            hits = scan.hits
+            for k in range(len(pos_s)):
+                for r in range(ends_s.shape[1]):
+                    col = BEAM_HIT if hits[k, r] else BEAM
+                    pygame.draw.line(self.screen, col, pos_s[k], ends_s[k, r], 1)
 
         if self.show_circles:
             r = int(d.perception_radius * self.scale)
@@ -187,18 +231,24 @@ class Viewer:
         x0 = self.screen.get_width() - HUD_W
         pygame.draw.rect(self.screen, (12, 15, 22), (x0, 0, HUD_W, self.screen.get_height()))
         lines = [
-            ("PHASE 1 - BOIDS", None),
+            ("PHASE 2 - AVOIDANCE", None),
+            ("", None),
+            (f"scenario  {sim.cfg.scenario.name:>11s}", (150, 200, 255)),
+            (f"avoidance {sim.cfg.avoidance.method:>11s}", (150, 200, 255)),
             ("", None),
             (f"time         {m.time:8.1f} s", None),
             (f"drones       {m.n:8d}", None),
             (f"fps          {self.clock.get_fps():8.1f}", None),
             (f"sim speed    {self.steps_per_frame:7d}x", None),
             ("", None),
-            (f"min sep      {m.min_separation:8.2f} m", (250, 120, 120) if m.collisions else None),
-            (f"collisions   {m.collisions:8d}", (250, 120, 120) if m.collisions else None),
+            (f"min sep      {m.min_separation:8.2f} m", BAD if m.collisions else None),
+            (f"collisions   {m.collisions:8d}", BAD if m.collisions else None),
             (f"total coll.  {sim.total_collisions:8d}", None),
+            (f"obst. hits   {m.obstacle_hits:8d}", BAD if m.obstacle_hits else None),
+            (f"total hits   {sim.total_obstacle_hits:8d}", None),
+            (f"clearance    {m.min_clearance:8.2f} m", BAD if m.min_clearance < 0 else None),
+            (f"arrived      {m.arrived:5d}/{m.n:<3d}", None),
             (f"mean speed   {m.mean_speed:8.2f} m/s", None),
-            (f"polarization {m.polarization:8.2f}", None),
             (f"local polar. {m.local_polarization:8.2f}", None),
             (f"groups       {m.groups:8d}", None),
             ("", None),
@@ -209,15 +259,17 @@ class Viewer:
             ("PAUSED" if self.paused else "running", (250, 210, 60) if self.paused else (120, 220, 140)),
             ("H = help", (140, 150, 170)),
         ]
-        y = 16
+        y = 12
+        if self.show_help:   # help replaces the stats so it always fits
+            self.screen.blit(self.font.render("CONTROLS  (H to close)", True, TEXT), (x0 + 14, y))
+            y += 28
+            for line in (__doc__ or "").strip().splitlines()[3:]:
+                self.screen.blit(self.small.render(line.strip(), True, (170, 180, 200)), (x0 + 10, y))
+                y += 18
+            return
         for text, color in lines:
             self.screen.blit(self.font.render(text, True, color or TEXT), (x0 + 14, y))
-            y += 20
-        if self.show_help:
-            y += 10
-            for line in (__doc__ or "").strip().splitlines()[2:]:
-                self.screen.blit(self.small.render(line.strip(), True, (160, 170, 190)), (x0 + 10, y))
-                y += 17
+            y += 19
 
     # ------------------------------------------------------------------ main
     def run(self, max_frames: int | None = None) -> None:

@@ -1,12 +1,13 @@
-"""The 2D environment. Phase 1: rectangular arena. Obstacles arrive in Phase 2."""
+"""The 2D environment: a rectangular arena plus static obstacles."""
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 import numpy as np
 
 from swarm.config import WorldConfig
+from swarm.sim.obstacles import Obstacles
 
 
 @dataclass
@@ -14,10 +15,11 @@ class World:
     width: float
     height: float
     boundary_margin: float
+    obstacles: Obstacles = field(default_factory=Obstacles)
 
     @classmethod
-    def from_config(cls, cfg: WorldConfig) -> "World":
-        return cls(cfg.width, cfg.height, cfg.boundary_margin)
+    def from_config(cls, cfg: WorldConfig, obstacles: Obstacles | None = None) -> "World":
+        return cls(cfg.width, cfg.height, cfg.boundary_margin, obstacles or Obstacles())
 
     @property
     def size(self) -> np.ndarray:
@@ -33,8 +35,8 @@ class World:
         high = np.clip((pos - (self.size - m)) / m, 0.0, 1.0)
         return low - high
 
-    def enforce_bounds(self, pos: np.ndarray, vel: np.ndarray, radius: float) -> None:
-        """Hard walls (in place): clamp position and cancel outward velocity."""
+    def enforce_bounds(self, pos: np.ndarray, vel: np.ndarray, radius: float) -> np.ndarray:
+        """Hard walls and obstacles (in place). Returns the obstacle-hit mask (N,)."""
         lo = radius
         hi = self.size - radius
         below = pos < lo
@@ -42,3 +44,4 @@ class World:
         pos[:] = np.clip(pos, lo, hi)
         vel[below & (vel < 0)] = 0.0
         vel[above & (vel > 0)] = 0.0
+        return self.obstacles.resolve(pos, vel, radius)

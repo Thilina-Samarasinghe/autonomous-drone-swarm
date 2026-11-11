@@ -17,10 +17,13 @@ def integrate(
     max_accel: float,
     world: World,
     radius: float,
-) -> np.ndarray:
-    """Advance the state in place. Returns the acceleration actually applied."""
+) -> tuple[np.ndarray, np.ndarray]:
+    """Advance the state in place.
+
+    Returns (applied acceleration (N, 2), obstacle-hit mask (N,)).
+    """
     a = clamp_norm(accel, max_accel)
     state.vel = clamp_norm(state.vel + a * dt, max_speed)
     state.pos = state.pos + state.vel * dt
-    world.enforce_bounds(state.pos, state.vel, radius)
-    return a
+    hit = world.enforce_bounds(state.pos, state.vel, radius)
+    return a, hit

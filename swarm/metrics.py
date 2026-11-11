@@ -12,6 +12,7 @@ from scipy.spatial import cKDTree
 from swarm.agents.state import SwarmState
 from swarm.mathutil import norms, safe_normalize
 from swarm.sim.neighbors import NeighborPairs
+from swarm.sim.world import World
 
 
 @dataclass
@@ -19,20 +20,42 @@ class Metrics:
     time: float
     n: int
     min_separation: float   # closest centre-to-centre distance (m)
-    collisions: int         # pairs currently overlapping (dist < 2*radius)
+    collisions: int         # drone pairs currently overlapping (dist < 2*radius)
     mean_speed: float
     polarization: float     # global: 0 = random headings, 1 = everyone aligned
     local_polarization: float  # mean alignment of each drone with its neighbours
     groups: int             # connected components of the perception graph
+    obstacle_hits: int = 0  # drones that touched an obstacle this step
+    min_clearance: float = float("inf")  # closest drone-surface to obstacle-surface gap (m)
+    arrived: int = 0        # drones inside the goal radius
 
     def as_dict(self) -> dict:
         return asdict(self)
 
 
-def compute_metrics(state: SwarmState, neighbors: NeighborPairs, radius: float, time: float) -> Metrics:
+def compute_metrics(
+    state: SwarmState,
+    neighbors: NeighborPairs,
+    radius: float,
+    time: float,
+    world: World | None = None,
+    goal: np.ndarray | None = None,
+    goal_radius: float = 15.0,
+    obstacle_hits: int = 0,
+) -> Metrics:
     n = state.n
+    clearance = float("inf")
+    arrived = 0
+    if n and world is not None and world.obstacles.count:
+        sd, _ = world.obstacles.signed_distance(state.pos)
+        clearance = float(sd.min() - radius)
+    if n and goal is not None:
+        arrived = int((norms(state.pos - goal[None]) < goal_radius).sum())
+
     if n < 2:
-        return Metrics(time, n, float("inf"), 0, float(norms(state.vel).mean()) if n else 0.0, 1.0, 1.0, n)
+        speed = float(norms(state.vel).mean()) if n else 0.0
+        return Metrics(time, n, float("inf"), 0, speed, 1.0, 1.0, n,
+                       obstacle_hits, clearance, arrived)
 
     tree = cKDTree(state.pos)
     d, _ = tree.query(state.pos, k=2)
@@ -51,4 +74,4 @@ def compute_metrics(state: SwarmState, neighbors: NeighborPairs, radius: float, 
     groups, _ = connected_components(graph, directed=False)
 
     return Metrics(time, n, min_sep, collisions, float(speeds.mean()), polarization,
-                   local_polarization, int(groups))
+                   local_polarization, int(groups), obstacle_hits, clearance, arrived)

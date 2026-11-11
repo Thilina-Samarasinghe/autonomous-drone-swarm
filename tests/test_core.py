@@ -44,7 +44,7 @@ def test_integrate_respects_limits():
     s = SwarmState(np.full((3, 2), 50.0), np.zeros((3, 2)), np.arange(3))
     huge = np.full((3, 2), 1e6)
     for _ in range(200):
-        a = integrate(s, huge, 0.05, max_speed=8.0, max_accel=6.0, world=world, radius=0.5)
+        a, _ = integrate(s, huge, 0.05, max_speed=8.0, max_accel=6.0, world=world, radius=0.5)
         assert (norms(a) <= 6.0 + 1e-9).all()
         assert (norms(s.vel) <= 8.0 + 1e-9).all()
     assert ((s.pos >= 0.5) & (s.pos <= 99.5)).all()

@@ -13,6 +13,7 @@ from typing import Protocol
 
 import numpy as np
 
+from swarm.agents.sensors import Detections, Scan
 from swarm.agents.state import SwarmState
 from swarm.sim.neighbors import NeighborPairs
 from swarm.sim.world import World
@@ -24,6 +25,9 @@ class StepContext:
     world: World
     neighbors: NeighborPairs            # pairs within perception radius
     goal: np.ndarray | None = None      # optional (2,) shared target point
+    dt: float = 0.05
+    scan: Scan | None = None            # each drone's lidar scan
+    detections: Detections | None = None  # nearest obstacle points from the scan
     extras: dict = field(default_factory=dict)
 
 
