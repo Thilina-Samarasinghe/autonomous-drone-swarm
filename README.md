@@ -1,17 +1,46 @@
 # Autonomous Drone Swarm Simulation
 
-> 🚧 **Work in progress.** Phases 0–8 (simulation core, boids flocking,
-> obstacle avoidance with lidar + ORCA, radio communication with shared
-> mapping, path planning on each drone's own map, formation flying,
-> cooperative search and rescue, multi-drone route planning over terrain and
-> threats, reinforcement learning) are built. The final robustness
-> experiments are **still being built**. See [Roadmap](#roadmap) below.
+> ✅ **All 10 phases complete**: simulation core, boids flocking, obstacle
+> avoidance with lidar + ORCA, radio communication with shared mapping, path
+> planning on each drone's own map, formation flying, cooperative search and
+> rescue, multi-drone route planning over terrain and threats, reinforcement
+> learning, and robustness experiments with fault injection. Ideas for further
+> work are listed under [Features](#features).
 
 A 2D simulator for a swarm of **20–50 autonomous drones**. Every drone makes its
 own decisions using only what it can sense around itself, and cooperative
 behaviour such as flocking, formations and shared search emerges from those
 local decisions. The project shows **distributed decision-making and collective
 intelligence**, not one central AI controlling every drone.
+
+## Demo
+
+Recorded with `python -m experiments.make_demo` (the real simulator,
+rendered offscreen). Full-size versions: run the command, they go to
+`outputs/demo/`.
+
+| | |
+|---|---|
+| ![Flocking](docs/demo/01_flocking.gif) **Boids flocking**: 30 drones, neighbour links shown | ![Avoidance](docs/demo/02_avoidance.gif) **Pillar forest**: 40 drones, lidar + ORCA, 0 collisions |
+| ![Shared mapping](docs/demo/03_shared_mapping.gif) **Shared mapping**: radio links (red = lost packets) and the team's map growing | ![Maze](docs/demo/04_maze_planning.gif) **Maze**: each drone plans on its *own* map and replans when it finds walls |
+| ![Formation](docs/demo/05_formation_gap.gif) **V formation**: collapses into a column for a 14 m gap, then re-forms | ![Leader failure](docs/demo/06_leader_failure.gif) **Leader failure**: the leader and 4 drones fail; a new leader takes over |
+| ![Rescue](docs/demo/07_search_rescue.gif) **Search and rescue**: explore, PSO signal search, recharge; 8/8 victims | ![Terrain](docs/demo/08_terrain_routes.gif) **Terrain**: hybrid-PSO routes around threat zones and peaks |
+
+## Results at a glance
+
+Each line is a measured result (several seeds, see the phase sections for details).
+
+| Phase | Headline result |
+|---|---|
+| 1 Flocking | 50 drones flock with **0 collisions**, local alignment 0.97 |
+| 2 Avoidance | ORCA: **0 collisions and 0 obstacle hits in all 15 runs**; potential fields alone never reach 0 |
+| 3 Communication | With multi-hop map sharing each drone knows **85% of the arena after 30 s, vs 17%** alone; still 81% at 50% packet loss |
+| 4 Path planning | Flying straight at the goal: **0% escape the maze**; planning: **100%**; shared maps **29% faster** |
+| 5 Formations | V / line / box / circle hold to ~0.1–0.7 m in straight flight; through a 14 m gap, a pillar forest and the maze with **nobody left behind** |
+| 6 Search and rescue | Full system finds **8/8 victims in every run**; random search 3.7/8; radio off 3.3/8; **0 drones lost** |
+| 7 Terrain | Hybrid PSO routes: **0 s in lethal zones** and **4–5× fewer close encounters** than grid routes |
+| 8 Reinforcement learning | Learned navigation + ORCA is **~25% faster** than boids + ORCA; on their own, learned policies **are not as safe** as the hand-written ones at 20 drones |
+| 9 Robustness | **0 collisions in all 68 stress runs**; rescue finds 8/8 even with **90% packet loss** or **half the swarm failing**; a failed leader is replaced automatically |
 
 ---
 
@@ -34,6 +63,8 @@ intelligence**, not one central AI controlling every drone.
 15. [Hardware and design decisions](#hardware-and-design-decisions)
 16. [Development workflow](#development-workflow)
 17. [References](#references)
+
+(The Demo and Results at a glance sections are above this list.)
 
 ---
 
@@ -63,8 +94,8 @@ intelligence**, not one central AI controlling every drone.
 | 5 | Formation flying: 5 shapes, Hungarian slot assignment, leader trail, squeezing through gaps, benchmark | ✅ Done |
 | 6 | Search and rescue: frontier + Voronoi exploration, PSO victim search, auction task allocation, batteries, benchmark | ✅ Done |
 | 7 | Terrain and threat zones, PSO / hybrid multi-drone route planner with departure delays, benchmark | ✅ Done |
-| 8 | Reinforcement learning: shared-policy PPO with a centralised critic, 4 behaviours trained on CPU, benchmark vs hand-written | ✅ Done (under review) |
-| 9 | Benchmarks, robustness experiments, demo video | 🔜 Next |
+| 8 | Reinforcement learning: shared-policy PPO with a centralised critic, 4 behaviours trained on CPU, benchmark vs hand-written | ✅ Done |
+| 9 | Fault injection, robustness experiments (scaling, radio, failures, sensors), demo GIFs | ✅ Done |
 
 ---
 
@@ -179,6 +210,17 @@ intelligence**, not one central AI controlling every drone.
 - **Plug-in deployment** (Phase 8): `--policy models/<task>.pt` flies a trained
   policy in any scenario, optionally wrapped in ORCA (`--rl-orca`).
 - **Learned-vs-hand-written benchmark** (Phase 8): every behaviour with 20 drones.
+- **Fault injection** (Phase 9): drones can fail mid-flight (scheduled by time
+  and fraction, or `sim.fail(ids)`). A failed drone lands where it is and goes
+  silent: it's no longer sensed by others, its radio and map stop, and it's
+  removed from its mission and formation. **A failed formation leader is
+  replaced** by the lowest surviving id, and the shape is resized for the
+  survivors. Lidar can be made noisy or lose beams.
+- **Robustness experiments** (Phase 9): scaling (10–50 drones), radio
+  degradation (0–90% packet loss, 15–50 m range), drone failures (25–50% of
+  the swarm, the leader) and sensor faults, one factor at a time.
+- **Demo** (Phase 9): animated GIFs of every major behaviour, rendered by the
+  real viewer offscreen.
 - **Fast neighbour search**: KD-tree, roughly N log N cost.
 - **Real-time Pygame viewer**: neighbour links, trails, perception circles,
   live stats panel, behaviour weights tunable while running, add or remove drones.
@@ -187,11 +229,14 @@ intelligence**, not one central AI controlling every drone.
 - **Reproducible**: the same seed always gives the same run.
 - **Test suite**: 15 pytest tests.
 
-### 🚧 Still being built / planned
+### Possible future work
 
 - Moving (dynamic) obstacles
 - Incremental D\* Lite (re-using the previous search instead of a full recompute)
 - Signals blocked by obstacles; victims that move; charging-pad queueing
+  (1 battery death occurred in 2 runs with 30 and with 50 drones, likely pad congestion)
+- Formations of 50+ drones (the V broke up in the 50-drone corridor test)
+- Distributed leader election by consensus (today: lowest surviving id, known to all)
 - 3D flight (altitude as a real dimension rather than a terrain cost)
 - RL policies that match the hand-written controllers at 20 drones (needs far
   more training than a CPU laptop gives; see the Phase 8 results)
@@ -249,6 +294,13 @@ python -m swarm.main --headless --scenario survey --no-relay --out outputs/singl
 python -m swarm.main --scenario maze --plan
 python -m swarm.main --scenario maze --planner astar
 python -m swarm.main --headless --scenario maze --plan --no-share --out outputs/maze_ownmap
+
+# Robustness and demo (Phase 9)
+python -m swarm.main --formation v --drones 16 --headless --out outputs/leaderfail   # see faults in YAML
+python -m experiments.robustness                                # 68 stress runs (~15 min, all cores)
+python -m experiments.robustness --suites failures,radio --seeds 3
+python -m experiments.make_demo                                 # GIFs -> outputs/demo/
+python -m experiments.make_demo --only rescue,terrain
 
 # Reinforcement learning (Phase 8)
 python -m experiments.train_rl                                  # train all 4 behaviours (~25 min, 4 cores)
@@ -320,6 +372,8 @@ python -m swarm.main --config configs/my_experiment.yaml
 | `--route-planner` | from config (`hybrid`) | Terrain: `hybrid`, `pso`, `grid` or `straight` |
 | `--policy` | off | Fly a trained policy, e.g. `models/navigate.pt` |
 | `--rl-orca` | off | Wrap the trained policy in the ORCA safety layer |
+| `--fail-time` / `--fail-fraction` / `--fail-leader` | off | Fail drones at a time (s), what fraction, and whether the leader too |
+| `--lidar-noise` / `--lidar-dropout` | 0 | Lidar noise std (m) / probability a beam is lost |
 | `--headless` | off | Run without a window |
 | `--steps` | from config (3000) | Steps for a headless run (1 step = 0.05 s) |
 | `--out` | `outputs/latest` | Output folder for headless results |
@@ -377,6 +431,8 @@ drone's planned route is drawn in its own colour from its start (square) to its
 goal (circle).
 In the map overlay, green cells are known free and orange cells known occupied.
 The big circle around the selected drone is its radio range.
+Failed drones are drawn as red ✕ and counted in red in the panel, with the new
+leader's number after a leader failure.
 
 ---
 
@@ -474,6 +530,8 @@ metres and seconds. Unknown keys raise an error, so typos are caught early.
 | | `speed` / `separation` | 5.0 / 6.0 | Used to deconflict routes in time |
 | | `w_length` / `w_threat` / `w_climb` / `w_turn` / `w_conflict` / `w_delay` | 1 / 40 / 0.5 / 60 / 50 / 2.5 | Cost weights |
 | | `max_delay` / `lane` | 15 / 8 | Longest departure wait (s); straight leg out of start / into goal (m) |
+| `faults` | `fail_time` / `fail_fraction` / `fail_leader` | -1 / 0 / false | Drone failures (time −1 = never) |
+| | `lidar_noise` / `lidar_dropout` | 0 / 0 | Degraded lidar |
 | `rl` | `policy` | "" | Path to a trained policy (empty = hand-written controllers) |
 | | `orca` | false | Wrap the learned policy in ORCA |
 | `render` | `window_width` × `window_height` | 1200 × 760 | |
@@ -619,32 +677,7 @@ triggers an immediate replan.
 can see in a straight line on its own map. This turns the staircase grid
 path into smooth flight without a separate smoothing step.
 
-### Reinforcement learning (Phase 8)
-python -m experiments.train_rl                                  # train all 4 behaviours (~25 min, 4 cores)
-python -m experiments.train_rl --init models --drones 20 --samples 800000   # curriculum stage 2
-python -m swarm.main --scenario forest --policy models/stage1_8drones/navigate.pt --rl-orca
-python -m swarm.main --scenario open --drones 8 --policy models/flock.pt
-python -m experiments.benchmark_rl                              # learned vs hand-written, 20 drones
-
-# Terrain and threat zones (Phase 7)
-python -m swarm.main --scenario terrain --drones 12
-python -m swarm.main --scenario terrain --drones 12 --route-planner grid
-python -m swarm.main --headless --scenario terrain --drones 12 --steps 2400 --out outputs/terrain
-
-# Benchmark route planners (writes outputs/benchmarks/terrain.*)
-python -m experiments.benchmark_terrain                         # 6/12/30 drones x 3 seeds
-python -m experiments.benchmark_terrain --sizes 12 --seeds 2    # quicker
-
-# Search and rescue (Phase 6)
-python -m swarm.main --scenario rescue --drones 20
-python -m swarm.main --scenario rescue --explore frontier --seek none
-python -m swarm.main --headless --scenario rescue --drones 20 --steps 8000 --out outputs/rescue
-python -m swarm.main --headless --scenario rescue --no-radio --out outputs/rescue_noradio
-
-# Benchmark search strategies (writes outputs/benchmarks/rescue.*)
-python -m experiments.benchmark_rescue                          # 20 drones x 3 seeds x 400 s
-
-# Formation flying (Phase 5)
+### Formation flying (Phase 5)
 
 ```
  leader:    goal / planner waypoint / patrol loop --> fly at formation speed (slower if followers lag)
@@ -681,23 +714,7 @@ followers instantly; in reality they would ride on the radio messages (the
 leader's *position and velocity* do go over the radio, with latency and loss).
 The leader is fixed (drone 0); leader failure and re-election come in Phase 9.
 
-### Reinforcement learning (Phase 8)
-python -m experiments.train_rl                                  # train all 4 behaviours (~25 min, 4 cores)
-python -m experiments.train_rl --init models --drones 20 --samples 800000   # curriculum stage 2
-python -m swarm.main --scenario forest --policy models/stage1_8drones/navigate.pt --rl-orca
-python -m swarm.main --scenario open --drones 8 --policy models/flock.pt
-python -m experiments.benchmark_rl                              # learned vs hand-written, 20 drones
-
-# Terrain and threat zones (Phase 7)
-python -m swarm.main --scenario terrain --drones 12
-python -m swarm.main --scenario terrain --drones 12 --route-planner grid
-python -m swarm.main --headless --scenario terrain --drones 12 --steps 2400 --out outputs/terrain
-
-# Benchmark route planners (writes outputs/benchmarks/terrain.*)
-python -m experiments.benchmark_terrain                         # 6/12/30 drones x 3 seeds
-python -m experiments.benchmark_terrain --sizes 12 --seeds 2    # quicker
-
-# Search and rescue (Phase 6)
+### Search and rescue (Phase 6)
 
 ```
             hears a victim & wins the auction                 victim confirmed / lost auction / timeout
@@ -739,14 +756,7 @@ returns once its battery covers only 1.5× the straight-line trip home plus an
 is "stuck": an explorer drops its target; a returning drone backs off toward
 open space for 3 s and tries again.
 
-### Reinforcement learning (Phase 8)
-python -m experiments.train_rl                                  # train all 4 behaviours (~25 min, 4 cores)
-python -m experiments.train_rl --init models --drones 20 --samples 800000   # curriculum stage 2
-python -m swarm.main --scenario forest --policy models/stage1_8drones/navigate.pt --rl-orca
-python -m swarm.main --scenario open --drones 8 --policy models/flock.pt
-python -m experiments.benchmark_rl                              # learned vs hand-written, 20 drones
-
-# Terrain and threat zones (Phase 7)
+### Terrain and threat zones (Phase 7)
 
 ```
  starts, goals, terrain ──> plan every route before take-off (one drone at a time)
@@ -827,6 +837,25 @@ per behaviour:
 **Curriculum:** stage 1 trains with 8 drones (navigation starts with 4).
 Stage 2 continues every policy with 20 drones; for navigation, half the
 episodes give every drone the same goal.
+
+### Fault injection and robustness (Phase 9)
+
+**Failing a drone** (`Simulation.fail(ids)`, or scheduled with
+`faults.fail_time` / `fail_fraction` / `fail_leader`): the drone lands where
+it is (position frozen, velocity zero) and from then on:
+- other drones no longer sense it (it's on the ground)
+- its radio is silent (no links, no relaying) and its map stops updating
+- the rescue mission marks it dead; the metrics count the flying swarm only
+- the formation drops it. If it was the **leader**, the lowest surviving id
+  takes over, starts a new trail, and every follower gets a slot in a shape
+  resized for the survivors (Hungarian assignment again)
+
+**Degraded lidar** (`faults.lidar_noise`, `lidar_dropout`): Gaussian noise on
+every range reading, and a chance that each beam returns nothing. The noisy
+scan feeds everything downstream: detections, ORCA, APF and the maps.
+
+**Experiments** change one thing at a time from the defaults (20 drones,
+ORCA on, radio on). Rescue missions run 300 s; navigation and formation 120 s.
 
 Lessons from development (found by tests and benchmarks):
 
@@ -921,6 +950,13 @@ Lessons from development (found by tests and benchmarks):
   matched boids: 0 collisions, alignment 0.99) but fell apart at 20, where the
   swarm is much denser. A second curriculum stage at 20 drones helped flocking
   during training, but made navigation worse (see the results).
+- *Phase 9:* the first demo GIFs were 44 MB: every frame had its own dithered
+  palette, which GIF compression handles badly. One shared palette (sampled
+  across the whole run) and no dithering cut that to 13 MB at full size and
+  4 MB for the half-size README copies.
+- *Phase 9:* after drone failures, the radio-group count jumped, because every
+  landed drone counted as an isolated group of one. Failed drones are now
+  excluded.
 
 ---
 
@@ -956,6 +992,7 @@ Lessons from development (found by tests and benchmarks):
 | `close_encounter_pair_s` | Terrain: seconds that pairs of drones spent closer than 6 m en route | low |
 | `flown_threat` / `flown_lethal_s` / `flown_above_ceiling_s` | Terrain: what the drones actually flew through | low / 0 / 0 |
 | `policy` / `policy_with_orca` | Which trained policy flew, and whether ORCA wrapped it | |
+| `alive` | Drones still flying (after failures) | |
 
 Planned metrics for later phases:
 messages sent, path length, formation error, energy use.
@@ -1233,6 +1270,77 @@ What the numbers show:
   and probably a neighbour-count-independent network (e.g. a graph network);
   a free Colab or Kaggle GPU would be the practical next step.
 
+### Phase 9: robustness experiments
+
+One factor changed at a time from the defaults (20 drones, ORCA, radio on);
+2 seeds per row; rescue 300 s, navigation and formation 120 s.
+Reproduce with `python -m experiments.robustness`.
+
+![Robustness](docs/robustness.png)
+
+**Scaling**
+
+| Drones | Forest navigation: 90% arrived by | V through corridor: time in shape / left behind | Rescue: victims found / all reported by | Sim speed (rescue) |
+|---|---|---|---|---|
+| 10 | 37 s | 87% / 0 | 7.0 / 225 s (1 of 2 runs) | 58 steps/s |
+| 20 | 40 s | 64% / 0 | **8.0** / 216 s | 31 steps/s |
+| 30 | 42 s | 49% / 0 | **8.0** / 223 s | 23 steps/s |
+| 50 | 45 s | **2% / 21.5** | **8.0** / 205 s | 13 steps/s |
+
+**Radio degradation**
+
+| Setting | Rescue: victims found / all reported by | V formation: mean slot error / time in shape |
+|---|---|---|
+| 0% packet loss | 8.0 / 216 s | 4.1 m / 69% |
+| 30% loss | 8.0 / 222 s | 4.0 m / 70% |
+| 60% loss | 8.0 / 214 s | 4.3 m / 66% |
+| 90% loss | **8.0** / 228 s | **18.0 m / 37%** |
+| 15 m radio range | 8.0 / 226 s | |
+| 50 m radio range | 8.0 / **162 s** | |
+
+**Drone failures**
+
+| Case | Result |
+|---|---|
+| Rescue, 25% of drones fail at 60 s | **8/8** found and reported (205 s), 15 drones flying |
+| Rescue, 50% fail at 60 s | **8/8** found and reported (240 s vs 216 s), 10 drones flying |
+| V formation, leader + 25% fail at 20 s | **1 re-election**, time in shape 60% (vs 69% without failures), nobody left behind |
+| Forest navigation, 30% fail at 10 s | 100% of the survivors arrive, 0 collisions |
+
+**Sensor faults** (forest navigation)
+
+| Lidar | 90% arrived by | Obstacle hits | Drone collisions |
+|---|---|---|---|
+| perfect | 40 s | 0 | 0 |
+| noise σ = 0.5 m | 46 s | 0 | 0 |
+| noise σ = 1 m | 49 s | **45** | 0 |
+| noise σ = 2 m | 49 s | **436** | 0 |
+| 30% beams lost | 43 s | 0 | 0 |
+| 60% beams lost | 46 s | 0 | 0 |
+
+**0 drone collisions in all 68 runs.**
+
+What the numbers show:
+- **Navigation and rescue scale to 50 drones.** Rescue saturates at 20
+  drones (8/8); more drones only make it slightly faster. The simulator slows
+  to ~13 steps/s with 50 rescue drones (still about 0.65× real time on a laptop).
+- **Big formations don't scale here**: a 50-drone V through the corridor
+  falls apart (a 245 m column can't re-form within 120 s). Up to 30 drones works.
+- **The rescue mission barely notices radio problems**: all 8 victims are
+  found even at 90% packet loss or with a 15 m range, because messages
+  are repeated and relayed. A longer range helps (all reported 54 s sooner).
+- **The formation needs its radio**: followers beyond sensing range track the
+  leader via radio beacons. Up to 60% loss is fine; at 90% the mean slot
+  error quadruples.
+- **The swarm survives losing half its drones**: the rescue still finds and
+  reports every victim, only 24 s later. A formation that loses its leader
+  elects a new one and re-forms.
+- **Noisy range readings are worse than missing ones**: losing 60% of lidar
+  beams is harmless (the remaining beams still see the pillars), but 1 m of
+  noise makes pillars look closer or farther than they are, and drones hit
+  them. Drone-to-drone safety is unaffected because drones sense each other
+  directly, not through the lidar.
+
 ---
 
 ## Project structure
@@ -1241,8 +1349,6 @@ What the numbers show:
 autonomous-drone-swarm/
 ├── configs/
 │   └── default.yaml          all tunable parameters
-├── docs/
-│   └── PLAN.md               detailed roadmap and reading list
 ├── swarm/
 │   ├── main.py               command-line entry point
 │   ├── config.py             typed YAML config loader
@@ -1299,7 +1405,13 @@ autonomous-drone-swarm/
 │   ├── benchmark_rescue.py      search strategies, with and without radio
 │   ├── benchmark_terrain.py     route planners at 6 / 12 / 30 drones
 │   ├── train_rl.py              train the 4 policies in parallel (curriculum)
-│   └── benchmark_rl.py          learned vs hand-written, 20 drones
+│   ├── benchmark_rl.py          learned vs hand-written, 20 drones
+│   ├── robustness.py            scaling / radio / failure / sensor stress tests
+│   └── make_demo.py             demo GIFs from the real viewer
+├── docs/
+│   ├── PLAN.md               roadmap
+│   ├── robustness.png        Phase 9 summary plot
+│   └── demo/                 half-size demo GIFs used in this README (~4 MB)
 ├── models/                   trained policies (stage 2) + logs and learning curves
 │   └── stage1_8drones/       stage-1 policies (8 drones), best for navigation
 ├── tests/
@@ -1310,19 +1422,20 @@ autonomous-drone-swarm/
 │   ├── test_phase5.py        Phase 5 tests
 │   ├── test_phase6.py        Phase 6 tests
 │   ├── test_phase7.py        Phase 7 tests
-│   └── test_phase8.py        Phase 8 tests
+│   ├── test_phase8.py        Phase 8 tests
+│   └── test_phase9.py        Phase 9 tests
 ├── requirements.txt
 └── pytest.ini
 ```
 
-Planned addition: `experiments/robustness.py` (Phase 9).
+
 
 ---
 
 ## Testing
 
 ```bash
-python -m pytest            # 176 tests, ~4 min
+python -m pytest            # 188 tests, ~4 min
 python -m pytest -v         # verbose
 ```
 
@@ -1412,6 +1525,13 @@ The tests cover:
   clearly learns a trivial toy task
 - *Phase 8:* every policy flies inside the normal simulator; with ORCA a policy
   never collides; the `--policy` / `--rl-orca` CLI flags work
+- *Phase 9:* failed drones land, stay put, vanish from sensing, radio and
+  metrics, and their maps freeze; scheduled failures hit the right number of
+  drones (sparing the leader unless asked); a formation re-elects its leader,
+  resizes its shape and re-forms; rescue marks failed drones dead
+- *Phase 9:* lidar noise and dropout change the scan, and "no faults"
+  changes nothing; the viewer draws failed drones; a demo GIF is written; a
+  robustness case runs end to end
 
 ---
 
@@ -1430,7 +1550,7 @@ Full details are in [docs/PLAN.md](docs/PLAN.md).
 | 6 | Search and rescue | Frontier + Voronoi exploration, PSO victim search, auction task allocation, batteries and charging, radio reporting, benchmark | ✅ |
 | 7 | Terrain and threats | Hills and no-fly peaks, threat zones, shared route cost with time conflicts, PSO / hybrid / grid planners, departure delays, benchmark | ✅ |
 | 8 | Reinforcement learning | Shared-policy PPO with centralised critic, 4 behaviours, 2-stage curriculum, deployment as a controller, benchmark vs hand-written | ✅ |
-| 9 | Experiments and demo | Scaling, communication-loss and drone-failure tests, demo video | 🔜 |
+| 9 | Experiments and demo | Fault injection, leader re-election, scaling / radio / failure / sensor experiments, demo GIFs | ✅ |
 
 ---
 

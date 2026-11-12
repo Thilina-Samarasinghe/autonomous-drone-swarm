@@ -184,6 +184,15 @@ class RLConfig:
 
 
 @dataclass
+class FaultConfig:
+    fail_time: float = -1.0           # s: when drones fail (-1 = never)
+    fail_fraction: float = 0.0        # fraction of the swarm that fails then (random drones)
+    fail_leader: bool = False         # also fail drone 0 (the formation leader) at fail_time
+    lidar_noise: float = 0.0          # std-dev of lidar range noise (m)
+    lidar_dropout: float = 0.0        # probability a lidar beam returns nothing
+
+
+@dataclass
 class RenderConfig:
     window_width: int = 1200
     window_height: int = 760
@@ -208,6 +217,7 @@ class Config:
     mission: MissionConfig = field(default_factory=MissionConfig)
     terrain: TerrainConfig = field(default_factory=TerrainConfig)
     rl: RLConfig = field(default_factory=RLConfig)
+    faults: FaultConfig = field(default_factory=FaultConfig)
     render: RenderConfig = field(default_factory=RenderConfig)
 
     def to_dict(self) -> dict[str, Any]:

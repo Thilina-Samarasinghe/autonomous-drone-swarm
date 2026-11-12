@@ -80,7 +80,7 @@ class Viewer:
         self.sim = sim
         rc = sim.cfg.render
         pygame.init()
-        pygame.display.set_caption("Autonomous Drone Swarm - Phase 8: Learned policies")
+        pygame.display.set_caption("Autonomous Drone Swarm")
         self.screen = pygame.display.set_mode((rc.window_width, rc.window_height))
         self.clock = pygame.time.Clock()
         self.font = pygame.font.SysFont("consolas", 15)
@@ -330,6 +330,9 @@ class Viewer:
             tri = [p + fwd * size, p - fwd * size * 0.6 + side * size * 0.55,
                    p - fwd * size * 0.6 - side * size * 0.55]
             pygame.draw.polygon(self.screen, _speed_color(s, d.max_speed), tri)
+        for p in pos_s[~sim.alive]:
+            pygame.draw.line(self.screen, (230, 60, 60), p - 5, p + 5, 2)
+            pygame.draw.line(self.screen, (230, 60, 60), (p[0] - 5, p[1] + 5), (p[0] + 5, p[1] - 5), 2)
         if sim.mission is not None:
             for p, mo in zip(pos_s, sim.mission.mode):
                 pygame.draw.circle(self.screen, MODE_COLORS[mo], p, size * 0.55)
@@ -426,7 +429,7 @@ class Viewer:
         x0 = self.screen.get_width() - HUD_W
         pygame.draw.rect(self.screen, (12, 15, 22), (x0, 0, HUD_W, self.screen.get_height()))
         lines = [
-            ("PHASE 8 - LEARNED POLICIES", None),
+            ("AUTONOMOUS DRONE SWARM", None),
             ("", None),
             (f"scenario  {sim.cfg.scenario.name:>11s}", (150, 200, 255)),
             (f"avoidance {sim.cfg.avoidance.method:>11s}", (150, 200, 255)),
@@ -436,6 +439,9 @@ class Viewer:
             (f"formation {(sim.formation.active_shape if sim.formation else 'off'):>11s}", (150, 200, 255)),
             ("", None),
             (f"time {m.time:7.1f} s   drones {m.n:3d}", None),
+            *([(f"FAILED {int((~sim.alive).sum()):2d}"
+                + (f"  leader now #{sim.formation.leader}" if sim.formation is not None and sim.formation.reelections else ""),
+                BAD)] if not sim.alive.all() else []),
             (f"fps  {self.clock.get_fps():7.1f}     speed {self.steps_per_frame:2d}x", None),
             ("", None),
             (f"min sep      {m.min_separation:8.2f} m", BAD if m.collisions else None),

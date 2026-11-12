@@ -142,6 +142,13 @@ rl:                       # fly a trained policy instead of the hand-written con
   policy: ""              # e.g. models/navigate.pt  (train with: python -m experiments.train_rl)
   orca: false             # wrap the policy in the ORCA safety layer
 
+faults:                   # fault injection (Phase 9)
+  fail_time: -1.0         # s when drones fail (-1 = never)
+  fail_fraction: 0.0      # fraction of the swarm that fails then
+  fail_leader: false      # also fail drone 0 (the formation leader)
+  lidar_noise: 0.0        # lidar range noise std (m)
+  lidar_dropout: 0.0      # probability a lidar beam is lost
+
 render:
   window_width: 1200
   window_height: 760

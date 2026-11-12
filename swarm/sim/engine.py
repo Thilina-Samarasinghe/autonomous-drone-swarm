@@ -104,6 +104,11 @@ class Simulation:
         self.comms = (CommsNetwork(n, self.cfg.comms, self.cfg.sim.dt, comms_rng)
                       if self.cfg.comms.enabled else None)
         self._map_every = max(1, round(self.cfg.mapping.update_interval / self.cfg.sim.dt))
+        # fault injection (Phase 9): failed drones land and go silent
+        self.alive = np.ones(n, dtype=bool)
+        self.failed_at: float | None = None
+        self._dead_pos = np.zeros((n, 2))
+        self._fault_rng = np.random.default_rng([self.cfg.sim.seed, 17])
         self.follower = None
         if self.route_plan is not None and n == len(self.route_plan.routes):
             self.follower = RouteFollower(self.route_plan.routes, self.terrain, self.cfg.terrain.speed,
@@ -196,15 +201,80 @@ class Simulation:
     def _refresh(self, obstacle_hits: int) -> None:
         d = self.cfg.drones
         self.neighbors = neighbor_pairs(self.state.pos, d.perception_radius)
+        alive = getattr(self, "alive", None)
+        if alive is not None and not alive.all() and len(self.neighbors.i):
+            # landed drones are not sensed as neighbours (they are on the ground)
+            keep = alive[self.neighbors.i] & alive[self.neighbors.j]
+            nb = self.neighbors
+            self.neighbors = type(nb)(nb.i[keep], nb.j[keep], nb.diff[keep], nb.dist[keep])
         self.scan = self.sensor.scan(self.state.pos, self.world)
+        self._degrade_lidar()
         self.detections = self.scan.closest_points()
-        self.metrics = compute_metrics(
-            self.state, self.neighbors, d.radius, self.time, self.world,
-            self.goal, self.cfg.scenario.goal_radius, obstacle_hits)
+        if alive is not None and not alive.all():
+            # metrics describe the flying swarm only
+            idx = np.flatnonzero(alive)
+            remap = -np.ones(self.state.n, dtype=int)
+            remap[idx] = np.arange(len(idx))
+            nb = self.neighbors
+            sub_nb = type(nb)(remap[nb.i], remap[nb.j], nb.diff, nb.dist)
+            sub = SwarmState(self.state.pos[idx], self.state.vel[idx], self.state.ids[idx])
+            self.metrics = compute_metrics(sub, sub_nb, d.radius, self.time, self.world,
+                                           self.goal, self.cfg.scenario.goal_radius, obstacle_hits)
+        else:
+            self.metrics = compute_metrics(
+                self.state, self.neighbors, d.radius, self.time, self.world,
+                self.goal, self.cfg.scenario.goal_radius, obstacle_hits)
+
+    def _degrade_lidar(self) -> None:
+        f = self.cfg.faults
+        if f.lidar_noise <= 0 and f.lidar_dropout <= 0:
+            return
+        rng = getattr(self, "_fault_rng", None) or np.random.default_rng(0)
+        dist = self.scan.dist
+        hit = dist < self.scan.max_range - 1e-9
+        if f.lidar_noise > 0:
+            noisy = dist + rng.normal(0.0, f.lidar_noise, dist.shape)
+            dist = np.where(hit, np.clip(noisy, 0.0, self.scan.max_range - 1e-6), dist)
+        if f.lidar_dropout > 0:
+            dist = np.where(rng.random(dist.shape) < f.lidar_dropout, self.scan.max_range, dist)
+        self.scan.dist = dist
+
+    def fail(self, ids) -> None:
+        """Drones `ids` fail: they land where they are and go silent (no sensing,
+        radio, avoidance or mission role). A failed formation leader is replaced."""
+        ids = np.atleast_1d(np.asarray(ids, dtype=int))
+        ids = ids[self.alive[ids]]
+        if len(ids) == 0:
+            return
+        self.alive[ids] = False
+        self._dead_pos[ids] = self.state.pos[ids]
+        self.state.vel[ids] = 0.0
+        if self.mission is not None:
+            from swarm.mission.manager import DEAD
+            self.mission.mode[ids] = DEAD
+        if self.formation is not None:
+            self.formation.set_alive(self.alive)
+        self._refresh(obstacle_hits=0)
+
+    def _scheduled_faults(self) -> None:
+        f = self.cfg.faults
+        if f.fail_time < 0 or self.failed_at is not None or self.time < f.fail_time:
+            return
+        self.failed_at = self.time
+        n = self.state.n
+        candidates = np.flatnonzero(self.alive)
+        if not f.fail_leader:
+            candidates = candidates[candidates != 0]
+        k = int(round(f.fail_fraction * n))
+        ids = list(self._fault_rng.choice(candidates, size=min(k, len(candidates)), replace=False))
+        if f.fail_leader:
+            ids.append(0)
+        self.fail(ids)
 
     # ------------------------------------------------------------------- loop
     def step(self) -> Metrics:
         d = self.cfg.drones
+        self._scheduled_faults()
         targets = None
         if self.mission is not None:
             self.mission.update(self.step_count, self.time, self.state.pos, self.state.vel,
@@ -235,8 +305,15 @@ class Simulation:
                 self.planner.paths if self.planner is not None else None,
                 self.planner.progress if self.planner is not None else None)
         accel = self.controller.compute(self.state, ctx)
+        dead = ~self.alive
+        if dead.any():
+            accel[dead] = 0.0
         _, hit = integrate(self.state, accel, self.cfg.sim.dt, d.max_speed, d.max_accel,
                            self.world, d.radius)
+        if dead.any():                                  # landed: they stay put
+            self.state.pos[dead] = self._dead_pos[dead]
+            self.state.vel[dead] = 0.0
+            hit &= ~dead
 
         self.time += self.cfg.sim.dt
         self.step_count += 1
@@ -244,13 +321,18 @@ class Simulation:
         self.total_collisions += self.metrics.collisions
         self.total_obstacle_hits += self.metrics.obstacle_hits
         if self.maps is not None and self.step_count % self._map_every == 0:
+            if dead.any():                              # a landed drone's map stops changing
+                frozen = (self.maps.L[dead].copy(), self.maps.dirty[dead].copy())
             self.maps.integrate_scan(self.state.pos, self.scan)
+            if dead.any():
+                self.maps.L[dead], self.maps.dirty[dead] = frozen
         if self.comms is not None:
-            self.comms.step(self.step_count, self.time, self.state.pos, self.maps, self.state.vel)
+            self.comms.step(self.step_count, self.time, self.state.pos, self.maps, self.state.vel,
+                            self.alive)
         if self.follower is not None:
             self.follower.record(self.time, self.state.pos, self.state.vel, self.cfg.sim.dt)
         if (self.time_to_arrive_90 is None and self.goal is not None
-                and self.metrics.arrived >= 0.9 * self.state.n):
+                and self.metrics.arrived >= 0.9 * int(self.alive.sum())):
             self.time_to_arrive_90 = self.time
         if (self.time_leader_arrived is None and self.goal is not None and self.state.n
                 and np.linalg.norm(self.state.pos[0] - self.goal) < self.cfg.scenario.goal_radius):

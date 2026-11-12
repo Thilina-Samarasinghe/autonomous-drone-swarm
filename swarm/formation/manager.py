@@ -89,6 +89,8 @@ class FormationManager:
         self.dt = dt
         self.n = n
         self.leader = 0
+        self.alive = np.ones(n, dtype=bool)            # failed drones are excluded
+        self.reelections = 0
         self.desired_shape = cfg.shape
         self.active_shape = cfg.shape
         self.offsets = slot_offsets(self.active_shape, n, cfg.spacing)
@@ -112,14 +114,24 @@ class FormationManager:
         if not self.squeezed:
             self._activate(shape)
 
+    def set_alive(self, alive: np.ndarray) -> None:
+        """Some drones failed: drop them, re-elect the leader if needed (lowest
+        surviving id) and re-assign the slots of a shape sized for the survivors."""
+        self.alive = np.asarray(alive, dtype=bool).copy()
+        if not self.alive[self.leader] and self.alive.any():
+            self.leader = int(np.flatnonzero(self.alive)[0])
+            self.reelections += 1
+            self.trail.clear()                         # the new leader starts a new trail
+        self._activate(self.active_shape)
+
     def _activate(self, shape: str) -> None:
         self.active_shape = shape
-        self.offsets = slot_offsets(shape, self.n, self.cfg.spacing)
+        self.offsets = slot_offsets(shape, int(self.alive.sum()), self.cfg.spacing)
         self.need_assign = True
 
     def _assign(self, pos: np.ndarray, origin: np.ndarray) -> None:
         """Hungarian assignment of followers to slots (minimum total distance)."""
-        followers = np.array([k for k in range(self.n) if k != self.leader])
+        followers = np.array([k for k in range(self.n) if k != self.leader and self.alive[k]], dtype=int)
         self.assign = np.zeros(self.n, dtype=int)
         self.assign[self.leader] = 0
         if len(followers):
@@ -228,7 +240,7 @@ class FormationManager:
         est_pos, est_vel, fresh = self._estimates(time, pos, vel, comms, perception_radius, L)
         R = np.array([[math.cos(self.heading), -math.sin(self.heading)],
                       [math.sin(self.heading), math.cos(self.heading)]])
-        followers = np.array([k for k in range(n) if k != L], dtype=int)
+        followers = np.array([k for k in range(n) if k != L and self.alive[k]], dtype=int)
 
         self._record_trail(pos[L])
         self.following_trail[:] = False
@@ -336,7 +348,7 @@ class FormationManager:
         """Distance of every follower from where it should be (TRUE positions):
         its formation slot, or its point on the leader's trail in a column. (N-1,)"""
         n, L = self.n, self.leader
-        mask = np.arange(n) != L
+        mask = (np.arange(n) != L) & self.alive
         if n < 2 or self.heading is None:
             return np.zeros(int(mask.sum()))
         if self.active_shape == "column" and len(self.trail):
@@ -357,6 +369,7 @@ class FormationManager:
         L = self.leader
         known = ~np.isnan(beliefs[:, 0])
         known[L] = False
+        known &= self.alive
         if not known.any() or self.active_shape == "column":
             return 0.0                     # a column follows the trail; don't stall the leader
         ideal = self._ideal_slots(beliefs[L], R)

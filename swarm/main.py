@@ -10,6 +10,7 @@
   python -m swarm.main --scenario rescue --drones 20
   python -m swarm.main --scenario terrain --drones 12 --route-planner hybrid
   python -m swarm.main --scenario random --policy models/navigate.pt
+  python -m swarm.main --formation v --fail-time 15 --fail-fraction 0.25 --fail-leader
   python -m swarm.main --headless --steps 3000 --out outputs/run1
 """
 
@@ -51,6 +52,11 @@ def parse_args(argv=None):
                    help="terrain: route planner")
     p.add_argument("--policy", help="fly a trained policy, e.g. models/navigate.pt")
     p.add_argument("--rl-orca", action="store_true", help="wrap the trained policy in the ORCA safety layer")
+    p.add_argument("--fail-time", type=float, help="seconds into the run when drones fail")
+    p.add_argument("--fail-fraction", type=float, help="fraction of drones that fail (0..1)")
+    p.add_argument("--fail-leader", action="store_true", help="also fail drone 0 (the formation leader)")
+    p.add_argument("--lidar-noise", type=float, help="lidar range noise std (m)")
+    p.add_argument("--lidar-dropout", type=float, help="probability a lidar beam is lost (0..1)")
     p.add_argument("--plan", action="store_true", help="enable path planning on each drone's map")
     p.add_argument("--planner", choices=ALGORITHMS, help="planning algorithm (implies --plan)")
     p.add_argument("--headless", action="store_true", help="run without a window")
@@ -94,6 +100,13 @@ def main(argv=None) -> None:
         mission["victims"] = args.victims
     if mission:
         overrides["mission"] = mission
+    faults = {k: v for k, v in (("fail_time", args.fail_time), ("fail_fraction", args.fail_fraction),
+                                ("lidar_noise", args.lidar_noise), ("lidar_dropout", args.lidar_dropout))
+              if v is not None}
+    if args.fail_leader:
+        faults["fail_leader"] = True
+    if faults:
+        overrides["faults"] = faults
     if args.policy:
         overrides["rl"] = {"policy": args.policy, "orca": bool(args.rl_orca)}
     if args.route_planner:
@@ -145,6 +158,7 @@ def main(argv=None) -> None:
         "scenario": cfg.scenario.name,
         "avoidance": cfg.avoidance.method,
         "policy": cfg.rl.policy or None,
+        "drones_failed": int((~sim.alive).sum()),
         "policy_with_orca": cfg.rl.orca if cfg.rl.policy else None,
         "drones": cfg.drones.count,
         "steps": cfg.sim.steps,

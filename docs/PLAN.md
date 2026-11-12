@@ -19,8 +19,8 @@ so a learned policy is a drop-in replacement for a hand-written one.
 | 5 | Formation | Leader-follower with line / V / circle / box / column, Hungarian slot assignment, radio-based leader tracking, leader breadcrumb trail, squeezing through gaps via route passage width, formation benchmark ✅ |
 | 6 | Search & rescue | Rescue scenario with 8 victims and a charging base; per-drone state machine; frontier exploration with dynamic Voronoi partitioning; PSO victim search on noisy signals; consensus auction (max 3 seekers per victim); batteries and recharging; gossip of confirmations and readings; rescue benchmark ✅ |
 | 7 | Terrain & threats | Gaussian-hill terrain with no-fly peaks, threat zones with lethal cores, shared route cost (length, threat, climb, turns, forbidden, space-time conflicts, delay), PSO over waypoints + departure delay, hybrid PSO seeded by grid search, grid and straight baselines, route following, terrain benchmark ✅ |
-| 8 | Multi-agent RL | Shared-policy PPO with centralised critic (MAPPO-style) on the real simulator; local 55-number observation incl. geofence; desired-velocity actions; navigate / flock / formation / search rewards; 2-stage curriculum (8 then 20 drones); deployment via --policy (optionally wrapped in ORCA); benchmark vs hand-written ✅ (built, awaiting review) |
-| 9 | Experiments | Scaling 20→50, comm loss, drone failure, RL vs classical, demo video |
+| 8 | Multi-agent RL | Shared-policy PPO with centralised critic (MAPPO-style) on the real simulator; local 55-number observation incl. geofence; desired-velocity actions; navigate / flock / formation / search rewards; 2-stage curriculum (8 then 20 drones); deployment via --policy (optionally wrapped in ORCA); benchmark vs hand-written ✅ |
+| 9 | Experiments | Fault injection (drone failures, leader re-election, lidar noise/dropout); robustness suites: scaling 10-50 drones, packet loss 0-90%, radio range, 25-50% drone failures, sensor faults; demo GIFs of every behaviour ✅ |
 
 ## RL on this hardware
 

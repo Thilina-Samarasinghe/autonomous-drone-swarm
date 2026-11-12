@@ -77,7 +77,9 @@ class CommsNetwork:
 
     # ----------------------------------------------------------------- step
     def step(self, step_count: int, time: float, pos: np.ndarray,
-             maps: OccupancyMaps | None, vel: np.ndarray | None = None) -> None:
+             maps: OccupancyMaps | None, vel: np.ndarray | None = None,
+             alive: np.ndarray | None = None) -> None:
+        self.alive = alive
         idx = np.arange(self.n)
         self.table[idx, idx, 0:2] = pos
         self.table[idx, idx, 2] = time
@@ -85,6 +87,8 @@ class CommsNetwork:
             self.vtable[idx, idx] = vel
         if self.n >= 2:
             self.links = cKDTree(pos).query_pairs(self.cfg.range, output_type="ndarray")
+            if alive is not None and len(self.links):
+                self.links = self.links[alive[self.links[:, 0]] & alive[self.links[:, 1]]]
         else:
             self.links = np.empty((0, 2), dtype=int)
         if step_count % self.interval_steps == 0:
@@ -166,11 +170,13 @@ class CommsNetwork:
         """Connected components of the communication graph."""
         if self.n == 0:
             return 0
+        alive = getattr(self, "alive", None)
+        silent = 0 if alive is None else int((~alive).sum())     # failed drones are not a group
         if len(self.links) == 0:
-            return self.n
+            return self.n - silent
         g = coo_matrix((np.ones(len(self.links)), (self.links[:, 0], self.links[:, 1])),
                        shape=(self.n, self.n))
-        return int(connected_components(g, directed=False)[0])
+        return int(connected_components(g, directed=False)[0]) - silent
 
     def knowledge(self, time: float) -> tuple[float, float]:
         """(fraction of teammates each drone knows about, mean age of that info in s)."""
