@@ -53,6 +53,11 @@ rendered offscreen). Full-size versions: run the command, they go to
   avoid peaks (grey) and lethal cores (red); some drones wait a few seconds
   before take-off so they never meet another drone at a crossing.
 
+**📄 Research guide (PDF):** [docs/Autonomous_Drone_Swarm_Research_Guide.pdf](docs/Autonomous_Drone_Swarm_Research_Guide.pdf)
+covers the research areas and theories behind the project (with equations), the technologies,
+lessons learned, and the path from this simulation to real drones and real-world applications,
+with 41 references.
+
 ## Results at a glance
 
 Each line is a measured result (several seeds, see the phase sections for details).
@@ -444,6 +449,7 @@ python -m experiments.robustness --suites failures,radio --seeds 3
 python -m experiments.make_demo                                 # GIFs -> outputs/demo/
 python -m experiments.make_demo --only rescue,terrain
 python -m experiments.make_figures                              # README figures from the benchmark CSVs
+python -m experiments.make_research_guide                       # research guide PDF -> docs/
 
 # Reinforcement learning (Phase 8)
 python -m experiments.train_rl                                  # train all 4 behaviours (~25 min, 4 cores)
@@ -1551,10 +1557,12 @@ autonomous-drone-swarm/
 │   ├── benchmark_rl.py          learned vs hand-written, 20 drones
 │   ├── robustness.py            scaling / radio / failure / sensor stress tests
 │   ├── make_figures.py          key result figures -> docs/figures/
+│   ├── make_research_guide.py   research guide PDF -> docs/
 │   └── make_demo.py             demo GIFs from the real viewer
 ├── docs/
 │   ├── PLAN.md               roadmap
 │   ├── figures/              key result figures used in this README
+│   ├── Autonomous_Drone_Swarm_Research_Guide.pdf   research areas, theories, sim-to-real, references
 │   └── demo/                 half-size demo GIFs used in this README (~4 MB)
 ├── models/                   trained policies (stage 2) + logs and learning curves
 │   └── stage1_8drones/       stage-1 policies (8 drones), best for navigation

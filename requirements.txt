@@ -6,3 +6,6 @@ pygame-ce>=2.5
 pytest>=8.0
 # Phase 8 (RL) - CPU build is enough for this project:
 # torch>=2.2  (pip install torch --index-url https://download.pytorch.org/whl/cpu)
+# Research guide PDF only (python -m experiments.make_research_guide):
+reportlab>=4.0
+pypdfium2>=4.0

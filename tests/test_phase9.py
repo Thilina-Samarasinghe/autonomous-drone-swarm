@@ -147,3 +147,14 @@ def test_make_figures_skips_missing_data(tmp_path, monkeypatch):
     make_figures.main()
     made = sorted(p.name for p in (tmp_path / "figs").iterdir())
     assert made == ["terrain.png"]                 # route maps need no benchmark data
+
+
+def test_research_guide_pdf_builds(tmp_path):
+    pdfium = pytest.importorskip("pypdfium2")
+    pytest.importorskip("reportlab")
+    from experiments import make_research_guide
+    path = make_research_guide.build(tmp_path / "guide.pdf")
+    pdf = pdfium.PdfDocument(str(path))
+    assert len(pdf) >= 15
+    text = "".join(pdf[i].get_textpage().get_text_range() for i in range(3))
+    assert "Research map" in text and "From simulation to the real world" in text
