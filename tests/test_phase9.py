@@ -137,3 +137,13 @@ def test_cli_fault_flags(tmp_path):
           "--fail-fraction", "0.25", "--fail-leader", "--lidar-noise", "0.2", "--out", str(tmp_path)])
     s = json.loads((tmp_path / "summary.json").read_text())
     assert s["drones_failed"] == 3                                     # 2 random + the leader
+
+
+def test_make_figures_skips_missing_data(tmp_path, monkeypatch):
+    """Without benchmark CSVs the figure script still runs (and only draws what it can)."""
+    from experiments import make_figures
+    monkeypatch.setattr(make_figures, "BENCH", tmp_path / "no_data")
+    monkeypatch.setattr(make_figures, "OUT", tmp_path / "figs")
+    make_figures.main()
+    made = sorted(p.name for p in (tmp_path / "figs").iterdir())
+    assert made == ["terrain.png"]                 # route maps need no benchmark data

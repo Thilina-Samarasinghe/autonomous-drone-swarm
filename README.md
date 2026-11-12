@@ -26,6 +26,33 @@ rendered offscreen). Full-size versions: run the command, they go to
 | ![Formation](docs/demo/05_formation_gap.gif) **V formation**: collapses into a column for a 14 m gap, then re-forms | ![Leader failure](docs/demo/06_leader_failure.gif) **Leader failure**: the leader and 4 drones fail; a new leader takes over |
 | ![Rescue](docs/demo/07_search_rescue.gif) **Search and rescue**: explore, PSO signal search, recharge; 8/8 victims | ![Terrain](docs/demo/08_terrain_routes.gif) **Terrain**: hybrid-PSO routes around threat zones and peaks |
 
+**What to watch for in each clip**
+
+- **Flocking**: drones start scattered with random headings. Within seconds,
+  local groups align and merge into one flock, and nobody touches anybody.
+  Every drone only reacts to neighbours within 15 m (the cyan links).
+- **Pillar forest**: the swarm squeezes between pillars without slowing to
+  a crawl. ORCA picks, for every drone, the closest safe velocity to the one
+  it wants.
+- **Shared mapping**: green is what the *team* knows. It grows much faster
+  than any single drone could explore, because drones relay map pieces
+  through each other (multi-hop). Red lines are lost radio packets; it still works.
+- **Maze**: the yellow line is one drone's plan on its *own* map. It plans
+  straight through unexplored space, then bends the moment it (or a
+  teammate, by radio) discovers a wall.
+- **Formation through a gap**: the V notices the gap is too narrow,
+  becomes a single-file column that follows the leader's exact path, and
+  re-forms on the other side.
+- **Leader failure**: the leader (pink ring) and 4 others fail and drop
+  (red ✕). The lowest surviving id takes over, the V is resized for 11 drones,
+  and everyone re-forms behind the new leader.
+- **Search and rescue**: dot colours are modes (cyan explore, orange seek,
+  yellow return to charge, white charging). Victims turn from grey to found,
+  and get a ring once the base has been told.
+- **Terrain**: each coloured line is one drone's pre-planned route. They
+  avoid peaks (grey) and lethal cores (red); some drones wait a few seconds
+  before take-off so they never meet another drone at a crossing.
+
 ## Results at a glance
 
 Each line is a measured result (several seeds, see the phase sections for details).
@@ -41,6 +68,121 @@ Each line is a measured result (several seeds, see the phase sections for detail
 | 7 Terrain | Hybrid PSO routes: **0 s in lethal zones** and **4–5× fewer close encounters** than grid routes |
 | 8 Reinforcement learning | Learned navigation + ORCA is **~25% faster** than boids + ORCA; on their own, learned policies **are not as safe** as the hand-written ones at 20 drones |
 | 9 Robustness | **0 collisions in all 68 stress runs**; rescue finds 8/8 even with **90% packet loss** or **half the swarm failing**; a failed leader is replaced automatically |
+
+## Key results in pictures
+
+The seven figures below carry the main findings. Every number comes from
+the benchmark scripts in `experiments/` (several random seeds each); the
+figures are rebuilt with `python -m experiments.make_figures`.
+
+### 1. Only ORCA keeps every drone off every obstacle (Phase 2)
+
+![Avoidance benchmark](docs/figures/avoidance.png)
+
+**Setup:** 50 drones fly from the left of the arena to a goal on the right,
+through a pillar forest, a wall with one 14 m gap, and a random obstacle field.
+Each drone knows about obstacles only through its own 36-beam lidar.
+
+**How to read it:** left is total obstacle contact on a log scale (a bar at
+"0" means not a single touch in 5 runs); right is how long the swarm took.
+
+**Takeaway:** without avoidance, drones only get through by scraping along
+obstacles (~2,700–5,300 contacts). Potential fields (`apf`) cut that by
+80–90% but can never reach zero: in a crowd, neighbours push drones into
+pillars. **ORCA reaches exactly zero in every scenario and is the fastest
+safe method**, so it's the default. Adding potential fields on top
+(`hybrid`) is just as safe, but slower.
+
+### 2. Sharing maps by radio: each drone knows 5× more (Phase 3)
+
+![Map coverage over time](docs/figures/comms_coverage.png)
+
+**Setup:** 50 drones scattered over an arena full of obstacles, each building
+its *own* map from its own lidar. The curves differ only in what the radio does.
+
+**How to read it:** the y-axis is the share of the arena the *average* drone
+has in its own map.
+
+**Takeaway:** alone, a drone knows 17% after 30 s. Sharing with direct
+neighbours (single-hop) reaches 54%. **Relaying through the swarm (multi-hop)
+reaches 85%**, and still 81% with half of all packets lost. Information
+reaches drones that never came anywhere near the area. This is the
+"collective intelligence" in numbers.
+
+### 3. In a maze, flying straight at the goal fails; planning on a shared map wins (Phase 4)
+
+![Planning benchmark](docs/figures/planning.png)
+
+**Setup:** 30 drones must cross an S-shaped maze with a dead-end trap. They
+start knowing nothing about it; each plans only on its own map.
+
+**Takeaway:** reactive flight alone (boids + ORCA) is trapped by the first
+wall: **0% escape**. With planning, **100%** get through. When drones also
+share maps, the ones behind replan around walls the leaders just discovered,
+and the swarm finishes **29% sooner**. A\* and the faster cost-field planner
+find exactly equally short paths (tests check this).
+
+### 4. Search and rescue: exploring finds most victims, signal search finds the last ones (Phase 6)
+
+![Victims found over time](docs/figures/rescue.png)
+
+**Setup:** 20 drones, 8 victims hidden among 30 obstacles, 400 s, batteries
+that force every drone home to recharge. Each line is one search strategy.
+
+**How to read it:** victims found over time, averaged over 3 runs.
+
+**Takeaway:** random search stalls at ~3.7 victims. Systematic exploration
+of the unknown (frontiers) finds ~7. **Only the signal-guided particle swarm
+(PSO) finds all 8, in every run.** Mapping an area with a 20 m lidar
+isn't the same as passing within 4 m of every spot with a camera. With the
+radio off (brown), the same algorithms find only 3.3: drones can no longer
+split the area or share where signals are.
+
+### 5. Planning in space *and time*: 4–5× fewer near misses (Phase 7)
+
+![Terrain routes](docs/figures/terrain.png)
+
+**Setup:** each drone flies from its own start (left) to its own goal
+(right, shuffled so routes must cross) over hills, no-fly peaks and threat
+zones. Routes are planned before take-off, then flown with ORCA on.
+
+**How to read it:** left, the grid planner's routes: safe, but all funnel
+through the same cheapest corridors. Middle, hybrid PSO: same terrain, routes
+spread out, some drones wait before take-off, **0 planned conflicts**. Right,
+how long pairs of drones actually flew closer than 6 m.
+
+**Takeaway:** hybrid PSO routes never enter a lethal zone and cut close
+encounters **4–5× at every swarm size**, so the swarm relies far less on
+last-second avoidance. Straight lines (grey) fly straight through lethal zones.
+
+### 6. Learned vs hand-written: RL is fast, ORCA keeps it safe (Phase 8)
+
+![RL vs hand-written navigation](docs/figures/rl.png)
+
+**Setup:** a small neural network shared by every drone, trained with PPO on
+a laptop CPU (8 drones, ~25 min), then flown by 20 drones through obstacle
+fields, against the hand-written controllers.
+
+**Takeaway:** the learned policy reaches the goal fastest (24 s vs 38 s), but
+on its own it collides thousands of times: it learned "go" far better
+than "don't touch". **Wrapped in ORCA, it stays ~25% faster than the
+hand-written stack with almost no contact.** For flocking, formations and
+search, the learned policies did *not* beat the hand-written ones at 20
+drones (details in the Phase 8 section).
+
+### 7. Graceful degradation (Phase 9)
+
+![Robustness](docs/figures/robustness.png)
+
+**Setup:** one thing changed at a time from the defaults: swarm size,
+radio packet loss, lidar noise.
+
+**Takeaway:** search and rescue finds all 8 victims from 20 to 50 drones
+and **even with 90% of radio packets lost**. Formations need their radio:
+they hold up to 60% loss, then fall apart. Lidar noise has a clear threshold:
+harmless at 0.5 m, then drones start hitting pillars. Drones never hit
+*each other*, because they sense each other directly. Not shown: with
+**half the rescue swarm failing mid-mission**, all 8 victims are still found.
 
 ---
 
@@ -301,6 +443,7 @@ python -m experiments.robustness                                # 68 stress runs
 python -m experiments.robustness --suites failures,radio --seeds 3
 python -m experiments.make_demo                                 # GIFs -> outputs/demo/
 python -m experiments.make_demo --only rescue,terrain
+python -m experiments.make_figures                              # README figures from the benchmark CSVs
 
 # Reinforcement learning (Phase 8)
 python -m experiments.train_rl                                  # train all 4 behaviours (~25 min, 4 cores)
@@ -1276,7 +1419,7 @@ One factor changed at a time from the defaults (20 drones, ORCA, radio on);
 2 seeds per row; rescue 300 s, navigation and formation 120 s.
 Reproduce with `python -m experiments.robustness`.
 
-![Robustness](docs/robustness.png)
+![Robustness](docs/figures/robustness.png)
 
 **Scaling**
 
@@ -1407,10 +1550,11 @@ autonomous-drone-swarm/
 │   ├── train_rl.py              train the 4 policies in parallel (curriculum)
 │   ├── benchmark_rl.py          learned vs hand-written, 20 drones
 │   ├── robustness.py            scaling / radio / failure / sensor stress tests
+│   ├── make_figures.py          key result figures -> docs/figures/
 │   └── make_demo.py             demo GIFs from the real viewer
 ├── docs/
 │   ├── PLAN.md               roadmap
-│   ├── robustness.png        Phase 9 summary plot
+│   ├── figures/              key result figures used in this README
 │   └── demo/                 half-size demo GIFs used in this README (~4 MB)
 ├── models/                   trained policies (stage 2) + logs and learning curves
 │   └── stage1_8drones/       stage-1 policies (8 drones), best for navigation
@@ -1435,7 +1579,7 @@ autonomous-drone-swarm/
 ## Testing
 
 ```bash
-python -m pytest            # 188 tests, ~4 min
+python -m pytest            # 189 tests, ~4 min
 python -m pytest -v         # verbose
 ```
 
